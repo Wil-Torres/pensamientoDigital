@@ -1,0 +1,71 @@
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
+  <app-header></app-header>
+
+  <app-sidebar></app-sidebar>
+  <!-- ============================================================== -->
+  <!-- Page wrapper  -->
+  <!-- ============================================================== -->
+  <div class="page-wrapper">
+
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+      <app-breadcrumbs></app-breadcrumbs>
+      <div class="row container">
+        <div class="col-10">
+          <!-- ============================================================== -->
+          <!-- Start Page Content -->
+          <!-- ============================================================== -->
+          <router-outlet></router-outlet>
+
+          <!-- ============================================================== -->
+          <!-- End PAge Content -->
+          <!-- ============================================================== -->
+        </div>
+        <div class="col-2">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <bs-datepicker-inline [bsValue]="bsInlineValue"></bs-datepicker-inline>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Pendientes</h5>
+              <p class="card-text">Contenido de Pendientes.</p>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Avisos</h5>
+              <p class="card-text">Contenido de Avisos.</p>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Anuncios</h5>
+              <p class="card-text">Contenido de Anuncios.</p>
+            </div>
+          </div>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Hoy</h5>
+              <p class="card-text">Actividades del Dia.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Fin Container fluid  -->
+    <!-- ============================================================== -->
+  </div>
+  <!-- ============================================================== -->
+  <!-- fin Page wrapper  -->
+  <!-- ============================================================== -->
+
+
+</div>

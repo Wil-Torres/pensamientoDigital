@@ -1,0 +1,71 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <app-encabezado-pagina optNew='nueva-marca'></app-encabezado-pagina>
+    <app-busqueda-lista></app-busqueda-lista>
+    <div class="container">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="table-responsive gt-tabla-content">
+            <table class="table table-striped gt-tabla-header"></table>
+            <table class="table table-striped gt-tabla" gt-tabla>
+              <thead>
+                <tr>
+                  <th class="gt-wdt100 text-center">Fecha</th>
+                  <th class="gt-wdt200">Tipo de Documento</th>
+                  <th class="gt-wdt150 text-center">Documento</th>
+                  <th class="gt-wdt100 text-center">Estado</th>
+                  <th class="gt-wdt75 text-center">Código</th>
+                  <th>Proveedor</th>
+                  <th class="gt-wdt125 titulo-der">Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-toggle="tooltip" data-html="true" (click)="edicion()">
+                  <td class="text-center">{{'objeto.fecha'}}</td>
+                  <td>{{'objeto.tipoDocumento'}}</td>
+                  <td>{{'objeto.documento'}}</td>
+                  <td class="text-center">
+                    <span></span>
+                  </td>
+                  <td class="text-center">{{'objeto.proveedorId'}}</td>
+                  <td>{{'objeto.proveedor'}}</td>
+                  <td class="valor-moneda">{{'(objeto.valor+objeto.iva) | number : 2'}}</td>
+                </tr>
+                <tr data-toggle="tooltip" data-html="true">
+                  <td class="text-center">{{'objeto.fecha'}}</td>
+                  <td>{{'objeto.tipoDocumento'}}</td>
+                  <td>{{'objeto.documento'}}</td>
+                  <td class="text-center">
+                    <span></span>
+                  </td>
+                  <td class="text-center">{{'objeto.proveedorId'}}</td>
+                  <td>{{'objeto.proveedor'}}</td>
+                  <td class="valor-moneda">{{'(objeto.valor+objeto.iva) | number : 2'}}</td>
+                </tr>
+                <tr data-toggle="tooltip" data-html="true">
+                  <td class="text-center">{{'objeto.fecha'}}</td>
+                  <td>{{'objeto.tipoDocumento'}}</td>
+                  <td>{{'objeto.documento'}}</td>
+                  <td class="text-center">
+                    <span></span>
+                  </td>
+                  <td class="text-center">{{'objeto.proveedorId'}}</td>
+                  <td>{{'objeto.proveedor'}}</td>
+                  <td class="valor-moneda">{{'(objeto.valor+objeto.iva) | number : 2'}}</td>
+                </tr>
+                <tr data-toggle="tooltip" data-html="true">
+                  <td class="text-center">{{'objeto.fecha'}}</td>
+                  <td>{{'objeto.tipoDocumento'}}</td>
+                  <td>{{'objeto.documento'}}</td>
+                  <td class="text-center">
+                    <span></span>
+                  </td>
+                  <td class="text-center">{{'objeto.proveedorId'}}</td>
+                  <td>{{'objeto.proveedor'}}</td>
+                  <td class="valor-moneda">{{'(objeto.valor+objeto.iva) | number : 2'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <app-paginacion></app-paginacion>
+      </div>
+  </div>

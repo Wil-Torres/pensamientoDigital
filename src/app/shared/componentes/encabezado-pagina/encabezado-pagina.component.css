@@ -1,0 +1,25 @@
+.gt-titulos-vista span.btns.pull-right {
+    left: -15px;
+}
+
+.gt-titulos-vista span.btns {
+    position: relative;
+    top: -70px;
+}
+.mr-1 {
+    margin-right: .25rem!important;
+}
+.gt-titulos-vista {
+    height: 100px;
+}
+
+.gt-titulos-vista h1, .gt-titulos-vista h2, .gt-titulos-vista h3, .gt-titulos-vista h4, .gt-titulos-vista h5, .gt-titulos-vista h6 {
+    color: #337ab7;
+}
+.titulo {
+    color: #333;
+}
+.titulo {
+    text-align: center;
+    font-weight: bolder;
+}

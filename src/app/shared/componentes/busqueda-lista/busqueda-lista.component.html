@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12"> Buscar por:
+      <div class="radio-inline active pl-0">
+        <label class="radio-inline pl-1">
+          <input type="radio" name="filtro" id="filtro"> {{'titulo filtro'}}
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row py-3">
+    <div ng-if="!bsd.rango" class="col-md-12 col-xs-12">
+      <div class="input-group gt-margen gt-busqueda-flex" ng-switch="bsd.lista !== undefined">
+        <input ng-switch-when="false" ng-type="bsd.tipo" class="form-control gt-busqueda-item" ng-model="bsd.data" id="busqueda-lista"
+          ng-keypress="buscarAlPulsar($event)" ng-if="!bsd.rango" autofocus>
+        <span class="input-group-btn gt-busqueda-item">
+          <button type="button" class="btn btn-default" ng-click="limpiar()" data-toggle="tooltip" title="Limpiar" tabindex="-1">
+            <i class="fa fa-refresh"></i>
+          </button>
+          <button type="button" class="btn btn-primary" ng-click="buscar()" data-toggle="tooltip" title="Buscar">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
