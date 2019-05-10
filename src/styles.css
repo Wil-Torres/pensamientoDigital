@@ -63,4 +63,7 @@
 .bs-datepicker-container {
     padding: 6px;
 }
-
+.modal-header {
+    background-color: #1e88e5 !important;
+    color: #FFFFFF;
+}
