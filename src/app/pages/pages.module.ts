@@ -11,6 +11,15 @@ import { FormsModule } from "@angular/forms";
 import { TiendaComponent } from './configuracion/tienda/tienda.component';
 import { CommonModule } from "@angular/common";
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import { ClasesModule } from "./principal/clases/clases.module";
+import { BienvenidaModule } from "./principal/bienvenida/bienvenida.module";
+import { CatalogoModule } from "./principal/catalogo/catalogo.module";
+import { GruposModule } from "./principal/grupos/grupos.module";
+import { NoticiasModule } from "./principal/noticias/noticias.module";
+import { PanelModule } from "./principal/panel-control/panel.module";
+import { RecursosModule } from "./principal/recursos/recursos.module";
+import { UsuariosModule } from "./principal/usuarios/usuarios.module";
+import { CalendarioModule } from "./principal/calendario/calendario.module";
 
 @NgModule({
     declarations: [
@@ -32,6 +41,15 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
     ],
     imports: [
         SharedModule,
+        ClasesModule,
+        BienvenidaModule,
+        CalendarioModule,
+        CatalogoModule,
+        GruposModule,
+        NoticiasModule,
+        PanelModule,
+        RecursosModule,
+        UsuariosModule,      
         PAGES_ROUTES,
         FormsModule,
         CommonModule,

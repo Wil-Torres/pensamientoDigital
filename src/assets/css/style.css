@@ -841,7 +841,7 @@ sidebar navigation
     margin-top: 6px; }
   .sidebar-nav > ul > li > a.active {
     font-weight: 400;
-    background: #ffffff;
+    /*background: #ffffff;*/
     color: #26c6da; }
   .sidebar-nav > ul > li {
     margin-bottom: 5px; }
@@ -938,14 +938,7 @@ When click on sidebar toggler and also for tablet
     background: transparent; }
   .mini-sidebar .sidebar-nav #sidebarnav > li > a {
     padding: 12px 24px;
-    width: 90px; }
-  .mini-sidebar .sidebar-nav #sidebarnav > li:hover > a {
-    width: 290px;
-    background: #edf0f5; }
-    .mini-sidebar .sidebar-nav #sidebarnav > li:hover > a .hide-menu {
-      display: inline; }
-    .mini-sidebar .sidebar-nav #sidebarnav > li:hover > a .label {
-      display: none; } }
+    width: 90px; }}
 
 @media (max-width: 767px) {
   .mini-sidebar .left-sidebar {

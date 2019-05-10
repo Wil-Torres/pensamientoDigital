@@ -8,8 +8,10 @@
     <nav class="sidebar-nav">
       <ul id="sidebarnav">
         <li class="user-profile">
-          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><img src="../assets/images/users/profile.png"
-              alt="user" /><span class="hide-menu">Nombre Usuario </span></a>
+          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+            <img src="../assets/images/users/profile.png" alt="user" />
+            <span class="hide-menu">Nombre Usuario </span>
+          </a>
           <ul aria-expanded="false" class="collapse">
             <li><a href="javascript:void()">Mi Perfil </a></li>
             <li><a href="javascript:void()">Mi Balance</a></li>
@@ -20,16 +22,18 @@
         </li>
         <li class="nav-devider"></li>
         <li class="nav-small-cap">PERSONAL</li>
-        <li *ngFor="let menu of srvSb.menu" class="text-center" style="width:95px; margin: 0 -10px">
-          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false" style="padding: 10px 0 7px !important;">
+
+        <li class="user-profile" *ngFor="let menu of srvSb.menu">
+          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false" 
+          routerLinkActive="active" [routerLink]="[menu.url]">
             <i class={{menu.icono}}>
                 <div style="font-size: 13px !important;">{{menu.titulo}}</div>
+
             </i>
-            <span class="hide-menu">{{menu.titulo}} <span class="label label-rouded label-themecolor pull-right">{{menu.submenu.length}}</span></span>
           </a>
-          <ul aria-expanded="false" class="collapse" *ngFor="let submenu of menu.submenu">
+          <!--ul aria-expanded="false" class="collapse" *ngFor="let submenu of menu.submenu">
             <li><a routerLinkActive="active" [routerLink]="[submenu.url]">{{submenu.titulo}} </a></li>
-          </ul>
+          </ul-->
         </li>
       </ul>
     </nav>

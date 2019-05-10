@@ -60,3 +60,7 @@
     font-weight: 400;
 }
 
+.bs-datepicker-container {
+    padding: 6px;
+}
+
