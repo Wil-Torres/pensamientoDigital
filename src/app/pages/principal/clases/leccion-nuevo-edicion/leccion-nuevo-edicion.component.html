@@ -1,0 +1,136 @@
+<p>
+  leccion-nuevo-edicion works!
+</p>
+<form>
+  <div class="row">
+    <div class="col-md-2 col-sm-2 col-xs-4">
+      <div class="form-group">
+        <label for="codigo">Código</label>
+        <input type="number" class="form-control" id="codigo">
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="form-group">
+        <label for="nombreCurso">Nombre de Curso</label>
+        <input type="text" class="form-control" id="nombreCurso">
+      </div>
+    </div>
+    <div class="col-md-1 col-sm-1 col-xs-6">
+      <div class="form-group">
+        <label for="cursoAvance">Avance</label>
+        <input type="number" class="form-control" id="cursoAvance">
+      </div>
+    </div>
+    <div class="col-md-1 col-sm-1 col-xs-6">
+      <div class="form-group">
+        <label for="cursoEstado">Estado</label>
+        <input type="number" class="form-control" id="cursoEstado">
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-3 col-xs-12">
+      <div class="form-group">
+        <label for="cursoImagen">Imagen</label>
+        <input type="file" class="form-control" id="cursoImagen">
+      </div>
+    </div>
+    <!-- SEGUNDA FILA -->
+    <div class="col-md-2 col-sm-2 col-xs-12">
+      <div class="form-group">
+        <label for="cursoCategoria">Categoria</label>
+        <select name="cursos" class="form-control" id="cursosId">
+          <option value="">-- Sin Seleccionar --</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-2 col-xs-12">
+      <div class="form-group">
+        <label for="fechaInicio">Fecha Inicio</label>
+        <input type="date" class="form-control" id="fechaInicio">
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-2 col-xs-12">
+      <div class="form-group">
+        <label for="fechaFin">Fecha Fin</label>
+        <input type="Date" class="form-control" id="fechaFin">
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-12">
+      <div class="form-group">
+        <label for="cursoIdioma">Idioma</label>
+        <select name="idiomas" class="form-control" id="idiomasId">
+          <option value=""> -- Sin Seleccionar --</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-2 col-sm-2 col-xs-6">
+      <div class="form-group">
+        <label for="cursoCreditos">Creditos</label>
+        <input type="number" class="form-control" id="cursoCreditos">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="contenido-tab" data-toggle="tab" href="#contenido" role="tab"
+            aria-controls="contenido" aria-selected="true">Sub Temas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="secciones-tab" data-toggle="tab" href="#secciones" role="tab"
+            aria-controls="secciones" aria-selected="false">Secciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="test-tab" data-toggle="tab" href="#test" role="tab" aria-controls="test"
+            aria-selected="false">Test</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="discuciones-tab" data-toggle="tab" href="#discuciones" role="tab"
+            aria-controls="discuciones" aria-selected="false">Discuciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="equipo-tab" data-toggle="tab" href="#equipo" role="tab" aria-controls="equipo"
+            aria-selected="false">Equipo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="biblioteca-tab" data-toggle="tab" href="#biblioteca" role="tab"
+            aria-controls="biblioteca" aria-selected="false">Biblioteca</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="encuesta-tab" data-toggle="tab" href="#encuesta" role="tab" aria-controls="encuesta"
+            aria-selected="false">Encuestas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="archivos-tab" data-toggle="tab" href="#archivos" role="tab" aria-controls="archivos"
+            aria-selected="false">Archivos</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="contenido" role="tabpanel" aria-labelledby="contenido-tab">
+          <app-contenido></app-contenido>
+        </div>
+        <div class="tab-pane fade" id="secciones" role="tabpanel" aria-labelledby="secciones-tab">
+          <app-secciones></app-secciones>
+        </div>
+        <div class="tab-pane fade" id="test" role="tabpanel" aria-labelledby="test-tab">
+          <app-test></app-test>
+        </div>
+        <div class="tab-pane fade" id="discuciones" role="tabpanel" aria-labelledby="discuciones-tab">
+          <app-discuciones></app-discuciones>
+        </div>
+        <div class="tab-pane fade" id="equipo" role="tabpanel" aria-labelledby="equipo-tab">
+          <app-equipos></app-equipos>
+        </div>
+        <div class="tab-pane fade" id="biblioteca" role="tabpanel" aria-labelledby="biblioteca-tab">
+          <app-biblioteca></app-biblioteca>
+        </div>
+        <div class="tab-pane fade" id="encuesta" role="tabpanel" aria-labelledby="encuesta-tab">
+          <app-encuesta></app-encuesta>
+        </div>
+        <div class="tab-pane fade" id="archivos" role="tabpanel" aria-labelledby="archivos-tab">
+          <app-archivos></app-archivos>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

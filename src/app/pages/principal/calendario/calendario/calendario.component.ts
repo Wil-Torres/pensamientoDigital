@@ -182,12 +182,8 @@ export class CalendarioComponent implements OnInit {
       this.events = [
         ...this.events, event
       ]
-      this.modalRef.hide();
     }
-    if (action === 'Edited'){
-      this.modalRef.hide();
-    }
-
+    this.modalRef.hide();
   }
 
 }
