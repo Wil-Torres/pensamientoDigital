@@ -12,13 +12,17 @@ import { EquiposComponent } from './componentes-leccion/equipos/equipos.componen
 import { BibliotecaComponent } from './componentes-leccion/biblioteca/biblioteca.component';
 import { EncuestaComponent } from './componentes-leccion/encuesta/encuesta.component';
 import { ArchivosComponent } from './componentes-leccion/archivos/archivos.component';
+import { EmbedVideo } from 'ngx-embed-video';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [ListaClasesComponent, ClaseComponent, LeccionNuevoEdicionComponent, ContenidoComponent, SeccionesComponent, TestComponent, DiscucionesComponent, EquiposComponent, BibliotecaComponent, EncuestaComponent, ArchivosComponent],
   exports: [ListaClasesComponent],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    EmbedVideo.forRoot(),
+    HttpClientModule
   ]
 })
 export class ClasesModule { }

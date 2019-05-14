@@ -1,3 +1,27 @@
-<p>
-  equipos works!
-</p>
+<div class="row">
+  <div class="col-md-2 col-sm-2 col-3">
+    <ul class="list-group">
+      <h6>GRUPOS: </h6>
+      <li class="list-group-item" *ngFor="let item of grupo; let i = index" (click)="seleccionarDetalle(item.integrantes)">{{item.grupo}}</li>
+    </ul>
+  </div>
+  <div class="col-md-10 col-sm-10 col-9">
+    <table class="table table-striped">
+      <thead class="bg-primary text-light">
+        <tr>
+          <th class="gt-wd-25">Clave</th>
+          <th>Estudiante</th>
+          <th class="gt-wd-75">Punteo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of detalleGrupo">
+          <td>{{item.clave}}</td>
+          <td>{{item.nombre}}</td>
+          <td><input type="number" class="form-control gt-wd-75" name="punteo" id="punteo" [(ngModel)]="item.punteo"></td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+</div>

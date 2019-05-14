@@ -26,7 +26,7 @@ const pagesRoutes: Routes = [
             /* Clases */
             {path: 'clases/lista-clases', component: ListaClasesComponent, data:{titulo: 'Clases'}},
             {path: 'clases/lecciones', component: ClaseComponent, data:{titulo: 'Lecciónes'}},
-            {path: 'clases/leccion', component: LeccionNuevoEdicionComponent, data:{titulo: 'Lección'}},
+            {path: 'clases/leccion/:id', component: LeccionNuevoEdicionComponent, data:{titulo: 'Lección'}},
 
 
             /* Grupos */

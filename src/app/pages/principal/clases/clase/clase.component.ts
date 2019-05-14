@@ -29,7 +29,7 @@ export class ClaseComponent implements OnInit {
       {
         id: 1,
         imagen: '../../../../../assets/images/Nueva carpeta/descarga.svg',
-        titulo: 'INTRODUCCION AL CURSO',
+        titulo: 'JAVASCRIPT ASINCRONO',
         fechaInicio: '14/01/2018',
         fechaFin: '31/01/2018',
         descripcion: 'Bienvenida al curso, asignación de lugares. Introducción a la computadora y sus componentes.',
@@ -45,7 +45,7 @@ export class ClaseComponent implements OnInit {
       {
         id: 2,
         imagen: '../../../../../assets/images/Nueva carpeta/descarga.svg',
-        titulo: 'INTRODUCCION AL CURSO 2',
+        titulo: 'INTRODUCING PROMISES',
         fechaInicio: '14/01/2018',
         fechaFin: '31/01/2018',
         descripcion: 'Bienvenida al curso, asignación de lugares. Introducción a la computadora y sus componentes.',
@@ -223,7 +223,7 @@ export class ClaseComponent implements OnInit {
   }
 
   mostrarLeccion(){
-    this.router.navigate(['/clases/leccion']);
+    this.router.navigate(['/clases/leccion/', 1]);
   }
 
 }

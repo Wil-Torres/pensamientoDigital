@@ -56,7 +56,7 @@ export class ListaClasesComponent implements OnInit {
 
   objInit() {
     this.objeto = [
-      { id: 1, seleccion: false, clase: 'Computación 2do Basico', catedra: 'Computación', grado: '2do', estudiantes: 29 },
+      { id: 1, seleccion: false, clase: 'Javascript With Promises', catedra: 'Programación', grado: '2do', estudiantes: 29 },
       { id: 2, seleccion: false, clase: 'Computación 1do Primaria', catedra: 'Computación', grado: '8do', estudiantes: 14 },
       { id: 3, seleccion: true, clase: 'Computación 2do primaria', catedra: 'Computación', grado: '4do', estudiantes: 15 },
       { id: 4, seleccion: false, clase: 'Computación 3do primaria', catedra: 'Computación', grado: '1do', estudiantes: 12 },
