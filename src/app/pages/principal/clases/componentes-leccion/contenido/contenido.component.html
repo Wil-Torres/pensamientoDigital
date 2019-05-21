@@ -10,35 +10,35 @@
   <div class="col-md-2 col-sm-2 col-3">
     <div class="form-group">
       <label for="codigoSubTema" class="font-weight-bold">Código</label>
-      <input type="number" class="form-control" id="codigoSubTema" [(ngModel)]="detalle.codigoSubTema"
+      <input type="number" class="form-control form-control-sm gt-spinner-off" id="codigoSubTema" [(ngModel)]="detalle.codigoSubTema"
         [ngModelOptions]="{standalone: true}">
     </div>
   </div>
   <div class="col-md-3 col-sm-3 col-9">
     <div class="form-group">
       <label for="descripcion" class="font-weight-bold">Descripción</label>
-      <input type="text" class="form-control" id="descripcion" [(ngModel)]="detalle.descripcion"
+      <input type="text" class="form-control form-control-sm" id="descripcion" [(ngModel)]="detalle.descripcion"
         [ngModelOptions]="{standalone: true}">
     </div>
   </div>
   <div class="col-md-3 col-sm-3 col-6">
     <div class="form-group">
       <label for="videoUrl" class="font-weight-bold">Video Url</label>
-      <input type="text" class="form-control" id="videoUrl" [(ngModel)]="detalle.videoUrl"
+      <input type="text" class="form-control form-control-sm" id="videoUrl" [(ngModel)]="detalle.videoUrl"
         [ngModelOptions]="{standalone: true}">
     </div>
   </div>
   <div class="col-md-4 col-sm-4 col-6">
     <div class="form-group">
       <label for="documento" class="font-weight-bold">Documento</label>
-      <input type="file" class="form-control" id="documento" [(ngModel)]="detalle.documento"
+      <input type="file" class="form-control form-control-sm" id="documento" [(ngModel)]="detalle.documento"
         [ngModelOptions]="{standalone: true}" placeholder="Upload file" accept=".pdf,.doc,.docx">
     </div>
   </div>
 </div>
 <div class="row">
   <div class="table-responsive">
-    <table class="table table-striped">
+    <table class="table table-striped table-sm">
       <thead class="bg-primary text-light">
         <tr>
           <th>Código</th>

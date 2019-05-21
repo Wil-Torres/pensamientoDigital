@@ -14,9 +14,15 @@ import { EncuestaComponent } from './componentes-leccion/encuesta/encuesta.compo
 import { ArchivosComponent } from './componentes-leccion/archivos/archivos.component';
 import { EmbedVideo } from 'ngx-embed-video';
 import { HttpClientModule } from '@angular/common/http';
+import { TareasComponent } from './componentes-leccion/tareas/tareas.component';
 
 @NgModule({
-  declarations: [ListaClasesComponent, ClaseComponent, LeccionNuevoEdicionComponent, ContenidoComponent, SeccionesComponent, TestComponent, DiscucionesComponent, EquiposComponent, BibliotecaComponent, EncuestaComponent, ArchivosComponent],
+  declarations: [
+    ListaClasesComponent, ClaseComponent, LeccionNuevoEdicionComponent, 
+    ContenidoComponent, SeccionesComponent, TestComponent, DiscucionesComponent, 
+    EquiposComponent, BibliotecaComponent, EncuestaComponent, ArchivosComponent, 
+    TareasComponent,
+  ],
   exports: [ListaClasesComponent],
   imports: [
     CommonModule,

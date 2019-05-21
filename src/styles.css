@@ -67,3 +67,29 @@
     background-color: #1e88e5 !important;
     color: #FFFFFF;
 }
+
+input[type=number].gt-spinner-off::-webkit-inner-spin-button, 
+input[type=number].gt-spinner-off::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=number].spinner-off::-webkit-inner-spin-button, 
+input[type=number].spinner-off::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=date].gt-spinner-off::-webkit-inner-spin-button, 
+input[type=date].gt-spinner-off::-webkit-outer-spin-button,
+input[type=date].gt-dropdown-off::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+  margin: 0; 
+}
+input[type=date].spinner-off::-webkit-inner-spin-button, 
+input[type=date].spinner-off::-webkit-outer-spin-button,
+input[type=date].gt-dropdown-off::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+  margin: 0; 
+}

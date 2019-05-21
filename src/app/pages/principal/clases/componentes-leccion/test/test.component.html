@@ -1,3 +1,46 @@
-<p>
-  test works!
-</p>
+<div class="row">
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-secondary">Asignar</button>
+    <button type="button" class="btn btn-secondary">Deshacer</button>
+    <button type="button" class="btn btn-info">Editar</button>
+    <button type="button" class="btn btn-danger">Eliminar</button>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead class="bg-primary text-light">
+        <tr>
+          <th class="gt-wd-25"></th>
+          <th>Tarea</th>
+          <th class="gt-wd-100 text-center">Comenzar</th>
+          <th class="gt-wd-100 text-center">Fecha Limite</th>
+          <th class="gt-wd-100 text-center">Asignado</th>
+          <th class="gt-wd-100 text-center">Maxima puntuacion individual</th>
+          <th class="gt-wd-100 text-center">% del total</th>
+          <th class="gt-wd-100 text-center">Calificar / Enviado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of trabajos">
+          <td><input type="checkbox" class="form-check-*" [(ngModel)]="item.seleccionar" [id]="item.trabajoId">
+            <label class="form-check-label" [for]="item.trabajoId"></label>
+          </td>
+          <td>{{item.tarea}}</td>
+          <td class="text-center">{{item.comenzar}}</td>
+          <td class="text-center">{{item.fechaLimite}}</td>
+          <td class="text-center">
+            <input type="checkbox" class="form-check-*" [(ngModel)]="item.asignado" disabled>
+            <label class="form-check-label"></label>
+
+          </td>
+          <td class="text-right">{{item.puntuacionMaxima}}</td>
+          <td class="text-right">{{item.porcentaje}}</td>
+          <td class="text-right">{{item.calificacion}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
