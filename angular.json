@@ -26,10 +26,13 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "./node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/summernote/dist/summernote-lite.css",
               "src/styles.css"
             ],
             "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              
+              "node_modules/summernote/dist/summernote-lite.js"
             ]
           },
           "configurations": {
@@ -87,10 +90,13 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "./node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/summernote/dist/summernote-lite.css",
               "src/styles.css"
             ],
             "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              
+              "node_modules/summernote/dist/summernote-lite.js"
             ],
             "assets": [
               "src/favicon.ico",

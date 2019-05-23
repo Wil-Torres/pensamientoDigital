@@ -15,6 +15,7 @@ import { ArchivosComponent } from './componentes-leccion/archivos/archivos.compo
 import { EmbedVideo } from 'ngx-embed-video';
 import { HttpClientModule } from '@angular/common/http';
 import { TareasComponent } from './componentes-leccion/tareas/tareas.component';
+import { NgxSummernoteModule } from 'ngx-summernote'
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { TareasComponent } from './componentes-leccion/tareas/tareas.component';
     CommonModule,
     FormsModule,
     EmbedVideo.forRoot(),
+    NgxSummernoteModule.forRoot(),
     HttpClientModule
   ]
 })
