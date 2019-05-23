@@ -1,3 +1,52 @@
-<p>
-  encuesta works!
-</p>
+<div class="row">
+  <div class="table-responsive">
+    <table class="table table-fixed table-sm">
+      <thead class="bg-primary text-light">
+        <tr>
+          <th class="gt-wd-25"></th>
+          <th class="gt-wd-250">Estudiante</th>
+          <th class="gt-wd-25"><i class="fa fa-circle"></i></th>
+          <th class="gt-wd-25"><i class="fa fa-minus-circle"></i></th>
+          <th class="gt-wd-25"><i class="fa fa-exclamation-triangle"></i></th>
+          <th class="gt-wd-25"><i class="fa fa-times-circle"></i></th>
+          <th class="gt-wd-75">100/100</th>
+          <th class="gt-wd-75">100/100</th>
+          <th class="gt-wd-75">100/100</th>
+          <th class="gt-wd-75">100/100</th>
+          <th class="gt-wd-75">100/100</th>
+          <th class="gt-wd-75">100/100</th>
+          <th class="gt-wd-75">100/100</th>
+          <th class="gt-wd-75">100/100</th>
+          <th class="gt-wd-75">100/100</th>
+          <th class="gt-wd-75">100/100</th>
+          <th class="gt-wd-75">100/100</th>
+          <th class="gt-wd-75">100/100</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nota of notas">
+          <td></td>
+          <td>{{nota.estudiante}}</td>
+          <td class="gt-wd-25">{{nota.noEntregado}}</td>
+          <td class="gt-wd-25">{{nota.incompleto}}</td>
+          <td class="gt-wd-25">{{nota.ausente}}</td>
+          <td class="gt-wd-25">{{nota.justificado}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota1}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota2}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota3}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota5}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota6}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota7}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota8}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota9}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota10}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota11}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota12}}</td>
+          <td class="text-right gt-wd-75">{{nota.nota13}}</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+</div>

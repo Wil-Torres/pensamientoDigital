@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { $$, $ } from 'protractor';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { BsModalRef } from 'ngx-bootstrap';
+declare var $;
 
 @Component({
   selector: 'app-tareas',
@@ -15,8 +18,13 @@ import { $$, $ } from 'protractor';
   `]
 })
 export class TareasComponent implements OnInit {
-
-  constructor() { }
+  form: FormGroup;
+  prueba: any = '<p>Hola que tal</p><p>qw</p><p>qwe</p>'
+  constructor( private sanitizer: DomSanitizer, public modalRef: BsModalRef) {
+    this.form = new FormGroup({
+      html: new FormControl('<p>Hola que tal</p><p>qw</p><p>qwe</p>')
+    });
+   }
 
   ngOnInit() { }
   
@@ -33,23 +41,36 @@ export class TareasComponent implements OnInit {
     height: '200px',
     uploadImagePath: '/api/upload',
     toolbar: [
-      ['misc', ['codeview', 'undo', 'redo', 'codeBlock']],
-      ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+      ['font', ['bold', 'italic', 'underline', 'clear']],
       ['fontsize', ['fontname', 'fontsize', 'color']],
-      ['para', ['style0', 'ul', 'ol', 'paragraph', 'height']],
-      ['insert', ['table', 'picture', 'link', 'video', 'hr']],
-      ['customButtons', ['testBtn']]
-    ],
-    codemirror: { // codemirror options
-      theme: 'monokai'
-    },
-    buttons: {
-    }
+      ['para', ['style0', 'ul', 'ol', 'paragraph']],
+      ['insert', ['table', 'picture', 'link', 'video', 'hr', 'div']]
+    ]
   };
+
+  editorDisabled = false;
+
+  get sanitizedHtml() {
+    return this.sanitizer.bypassSecurityTrustHtml(this.form.get('html').value);
+  }
+
+  
 
   imprimir () {
     console.log('hola')
     console.log(this.config);
+    $('#summernote').summernote('code', null);
   }
 
+  enableEditor() {
+    this.editorDisabled = false;
+  }
+
+  disableEditor() {
+    this.editorDisabled = true;
+  }
+
+  onBlur() {
+    console.log('Blur');
+  }
 }

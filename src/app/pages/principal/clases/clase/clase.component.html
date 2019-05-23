@@ -7,8 +7,8 @@
         <p class="card-text">{{leccion.descripcion}}</p>
         <div>
           <div class="float-left">
-            <input type="checkbox" class="form-check-input" [id]="leccion.id">
-            <label class="form-check-label" [for]="leccion.id"></label>
+            <input type="checkbox" class="form-check-input" [id]="'leccion' + leccion.id">
+            <label class="form-check-label" [for]="'leccion' + leccion.id"></label>
           </div>
           <div class="float-right">
             {{leccion.secciones.length}} Secciones

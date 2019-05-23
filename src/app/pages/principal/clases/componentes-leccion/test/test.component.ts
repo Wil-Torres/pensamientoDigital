@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { TareasComponent } from '../tareas/tareas.component';
 
 @Component({
   selector: 'app-test',
@@ -6,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class TestComponent implements OnInit {
-
+  modalRef: BsModalRef | null;
   private _trabajos: any[] = [];
   public get trabajos(): any[] {
     return this._trabajos;
@@ -16,7 +18,7 @@ export class TestComponent implements OnInit {
   }
 
 
-  constructor() { }
+  constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
     this.objInit()
@@ -37,6 +39,10 @@ export class TestComponent implements OnInit {
         fechaLimite: '21/05/2019', asignado: false, puntuacionMaxima: 100, porcentaje: 8.3, calificacion: 27
       },
     ]
+  }
+  agregarTarea() {
+    this.modalRef = this.modalService.show(TareasComponent, { class: 'modal-lg' });
+
   }
 
 }

@@ -17,6 +17,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { TareasComponent } from './componentes-leccion/tareas/tareas.component';
 import { NgxSummernoteModule } from 'ngx-summernote'
 
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     ListaClasesComponent, ClaseComponent, LeccionNuevoEdicionComponent, 
@@ -30,7 +34,12 @@ import { NgxSummernoteModule } from 'ngx-summernote'
     FormsModule,
     EmbedVideo.forRoot(),
     NgxSummernoteModule.forRoot(),
+    HttpClientModule,
+
+    BrowserModule,
+    ReactiveFormsModule,
     HttpClientModule
-  ]
+  ],
+  entryComponents:[TareasComponent]
 })
 export class ClasesModule { }
