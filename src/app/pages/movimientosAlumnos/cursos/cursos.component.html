@@ -1,0 +1,61 @@
+<p>
+  cursos works!
+</p>
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary" (click)="mostrar(1)">Video</button>
+  <button type="button" class="btn btn-secondary" (click)="mostrar(2)">URL</button>
+  <button type="button" class="btn btn-secondary" (click)="mostrar(3)">PDF</button>
+  <button type="button" class="btn btn-secondary" (click)="mostrar(0)">imagen</button>
+</div>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <form class="form" ng-submit="seleccionar()" novalidate>
+    <div class="row">
+      <!--div class="col-md-3 col-sm-6">
+        <ul class="list-group" ng-repeat="obj in objeto.contenido">{{obj.codigoContenido}} - {{obj.nombreContenido}}
+          <li class="list-group-item" ng-repeat="subObj in obj.subTemas"
+            ng-click="reproducir(subObj.videoUrlContenido, subObj)">{{subObj.nombreContenido}}
+            <span class="badge badge-primary badge-pill">14</span>
+          </li>
+          <li class="list-group-item" ng-if="obj.documento" ng-click="mostrarDoctofn(obj.documento)">Soporte
+            <span class="badge badge-primary badge-pill">
+              <i class="fa fa-book"></i>
+            </span>
+          </li>
+          <li class="list-group-item" ng-if="obj.evaluacion" ng-click="mostrarTest(obj.evaluacion, $index)">Evaluacion
+            de {{obj.nombreContenido}}
+            <span class="badge badge-primary badge-pill">
+              <i class="fa fa-edit"></i>
+            </span>
+          </li>
+        </ul>
+      </div-->
+      <div class="col-md-12 col-sm-6">
+        <nav class="nav nav-pills nav-fill">
+          <a class="nav-item nav-link"><button class="btn btn-default navbar-btn">
+              <span class="icon fa fa-chevron-left" aria-hidden="true">
+                <span class="">Anterior</span>
+              </span>
+            </button></a>
+          <a class="nav-item nav-link" (click)="mostrar(3)">
+            <i class="fa fa-book"></i>
+          </a>
+          <a class="nav-item nav-link" (click)="mostrar(1)">
+            <i class="fa fa-youtube"></i>
+          </a>
+          <a class="nav-item nav-link disabled" tabindex="-1" aria-disabled="true">
+            <button class="btn btn-default navbar-btn">
+              <span class="">Siguiente</span>
+              <span class="icon fa fa-chevron-right" aria-hidden="true"></span>
+            </button>
+          </a>
+        </nav>
+
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe id="recuadro" class="embed-responsive-item" allowfullscreen></iframe>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>

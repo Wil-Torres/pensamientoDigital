@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 import { ListaClasesComponent } from './lista-clases/lista-clases.component';
 import { ClaseComponent } from './clase/clase.component';
-import { FormsModule } from '@angular/forms';
 import { LeccionNuevoEdicionComponent } from './leccion-nuevo-edicion/leccion-nuevo-edicion.component';
 import { ContenidoComponent } from './componentes-leccion/contenido/contenido.component';
 import { SeccionesComponent } from './componentes-leccion/secciones/secciones.component';
@@ -16,9 +19,6 @@ import { EmbedVideo } from 'ngx-embed-video';
 import { HttpClientModule } from '@angular/common/http';
 import { TareasComponent } from './componentes-leccion/tareas/tareas.component';
 import { NgxSummernoteModule } from 'ngx-summernote'
-
-import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({

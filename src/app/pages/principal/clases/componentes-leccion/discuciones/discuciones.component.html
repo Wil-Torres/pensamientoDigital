@@ -1,3 +1,37 @@
-<p>
-  discuciones works!
-</p>
+<div class="accordion" id="accordionExample">
+  <div class="card " *ngFor="let item of discuciones; let i = index">
+    <div class="card-header text-white bg-info">
+      <button class="btn text-white bg-info" type="button" data-toggle="collapse" [attr.data-target]="item.refTarget"
+        aria-expanded="true" aria-controls="collapseOne">
+        {{item.asunto}}
+      </button>
+    </div>
+    <div [id]="item.refNombre" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <div class="card" *ngFor="let subItem of item.discusion; let j = index">
+          <div class="row no-gutters">
+            <div class="col-md-1">
+              <img src="../../../../../../assets/images/Nueva carpeta/descarga.svg" class="card-img rounded-circle"
+                style="width: 70px;">
+              {{subItem.usuario}}
+            </div>
+            <div class="card-body" style="padding: 0">
+              <p class="card-text">{{subItem.comentario}}</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Escribe Mensaje" aria-label="Escribe Mensaje"
+              aria-describedby="basic-addon2" [(ngModel)]="envioMsn">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2" (click)="enviarMensaje(i)"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

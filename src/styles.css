@@ -104,3 +104,7 @@ input[type=date].gt-dropdown-off::-webkit-calendar-picker-indicator {
   -webkit-appearance: none;
   margin: 0; 
 }
+
+.noVisible{
+    visibility: hidden !important;
+  }

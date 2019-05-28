@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BsModalRef } from 'ngx-bootstrap';
 declare var $;
@@ -18,24 +18,58 @@ declare var $;
   `]
 })
 export class TareasComponent implements OnInit {
+  private _forma: FormGroup;
+  edicion: any;
+
+  private _tarea: EventEmitter<any>;
+  public get tarea(): EventEmitter<any> {
+    return this._tarea;
+  }
+  public set tarea(v: EventEmitter<any>) {
+    this._tarea = v;
+  }
+
+  public get forma(): FormGroup {
+    return this._forma;
+  }
+  public set forma(v: FormGroup) {
+    this._forma = v;
+  }
+
   form: FormGroup;
   prueba: any = '<p>Hola que tal</p><p>qw</p><p>qwe</p>'
-  constructor( private sanitizer: DomSanitizer, public modalRef: BsModalRef) {
-    this.form = new FormGroup({
+  constructor(private sanitizer: DomSanitizer, public modalRef: BsModalRef, private builder: FormBuilder) {
+    this.tarea = new EventEmitter<any>();
+    this.objInit()
+    /*this.form = new FormGroup({
       html: new FormControl('<p>Hola que tal</p><p>qw</p><p>qwe</p>')
-    });
-   }
+    });*/
+  }
 
-  ngOnInit() { }
-  
-  private _content : any;
-  public get content() : any {
-    return this._content;
+  ngOnInit() {
+    if (this.edicion) {
+      if (this.edicion.tareaTitulo.length > 0) {
+        this.forma.patchValue(this.edicion, { emitEvent: false });
+      }
+    } else {
+      this.objInit()
+    }
   }
-  public set content(v : any) {
-    this._content = v;
+
+  objInit() {
+    this._forma = this.builder.group({
+      tareaTitulo: [null, [Validators.required]],
+      puntajeMaximo: [null, [Validators.required]],
+      intervaloMaximo: [null, [Validators.required]],
+      tareaCategoria: [null, [Validators.required]],
+      calificacionTarea: [null, [Validators.required]],
+      fechaInicioTarea: [null, [Validators.required]],
+      fechaFinTarea: [null, [Validators.required]],
+      leccion: [null, [Validators.required]],
+      escalaCalificacion: [null, [Validators.required]],
+      descripcionTarea: new FormControl(),
+    })
   }
-  
 
   config: any = {
     height: '200px',
@@ -54,14 +88,6 @@ export class TareasComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(this.form.get('html').value);
   }
 
-  
-
-  imprimir () {
-    console.log('hola')
-    console.log(this.config);
-    $('#summernote').summernote('code', null);
-  }
-
   enableEditor() {
     this.editorDisabled = false;
   }
@@ -69,8 +95,17 @@ export class TareasComponent implements OnInit {
   disableEditor() {
     this.editorDisabled = true;
   }
-
   onBlur() {
     console.log('Blur');
   }
+  guardarTarea(tarea: any) {
+    this.tarea.emit({ tarea: this.forma.getRawValue() });
+    this.modalRef.hide();
+  }
+  cancelar(tarea: any) {
+    this.modalRef.hide();
+  }
+
+
+
 }

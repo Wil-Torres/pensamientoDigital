@@ -1,16 +1,17 @@
 <div class="modal-header">
-  <h4 class="modal-title pull-left">Agregar Nueva area</h4>
+  <h4 class="modal-title pull-left">Agregar Nueva Tarea</h4>
   <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <form>
+  <form novalidate (ngSubmit)="guardarTarea()" [formGroup]="forma">
     <div class="row">
       <div class="col-12">
         <div class="form-group">
           <label for="tareaTitulo">Titulo de tarea</label>
-          <input type="text" class="form-control form-control-sm" id="tareaTitulo">
+          <input type="text" class="form-control form-control-sm" id="tareaTitulo" formControlName="tareaTitulo">
+          <div [hidden]="forma.get('tareaTitulo').valid">Required</div>
         </div>
       </div>
     </div>
@@ -18,41 +19,49 @@
       <div class="col-3">
         <div class="form-group">
           <label for="puntajeMaximo">Puntaje Màximo</label>
-          <input type="text" class="form-control form-control-sm" id="puntajeMaximo">
+          <input type="text" class="form-control form-control-sm" id="puntajeMaximo" formControlName="puntajeMaximo">
+          <div [hidden]="forma.get('puntajeMaximo').valid">Required</div>
         </div>
         <div class="form-group">
           <label for="intervaloMaximo">Intervalo Máx</label>
-          <input type="text" class="form-control form-control-sm" id="intervaloMaximo">
+          <input type="text" class="form-control form-control-sm" id="intervaloMaximo" formControlName="intervaloMaximo">
+          <div [hidden]="forma.get('intervaloMaximo').valid">Required</div>
         </div>
       </div>
       <div class="col-3 bordes-tarea">
         <div class="form-group">
           <label for="tareaCategoria">Categoria</label>
-          <input type="text" class="form-control form-control-sm" id="tareaCategoria">
+          <input type="text" class="form-control form-control-sm" id="tareaCategoria" formControlName="tareaCategoria">
+          <div [hidden]="forma.get('tareaCategoria').valid">Required</div>
         </div>
         <div class="form-group">
           <label for="calificacionTarea">Calificación</label>
-          <input type="text" class="form-control form-control-sm" id="calificacionTarea">
+          <input type="text" class="form-control form-control-sm" id="calificacionTarea" formControlName="calificacionTarea">
+          <div [hidden]="forma.get('calificacionTarea').valid">Required</div>
         </div>
       </div>
       <div class="col-3 bordes-tarea">
         <div class="form-group">
           <label for="fechaInicioTarea">Comenzar </label>
-          <input type="text" class="form-control form-control-sm" id="fechaInicioTarea">
+          <input type="text" class="form-control form-control-sm" id="fechaInicioTarea" formControlName="fechaInicioTarea">
+          <div [hidden]="forma.get('fechaInicioTarea').valid">Required</div>
         </div>
         <div class="form-group">
           <label for="fechaFinTarea">Finaliza</label>
-          <input type="text" class="form-control form-control-sm" id="fechaFinTarea">
+          <input type="text" class="form-control form-control-sm" id="fechaFinTarea" formControlName="fechaFinTarea">
+          <div [hidden]="forma.get('fechaFinTarea').valid">Required</div>
         </div>
       </div>
       <div class="col-3 bordes-tarea">
         <div class="form-group">
           <label for="leccion">Lección </label>
-          <input type="text" class="form-control form-control-sm" id="leccion">
+          <input type="text" class="form-control form-control-sm" id="leccion" formControlName="leccion">
+          <div [hidden]="forma.get('leccion').valid">Required</div>
         </div>
         <div class="form-group">
           <label for="escalaCalificacion">Escala de Calificación</label>
-          <input type="text" class="form-control form-control-sm" id="escalaCalificacion">
+          <input type="text" class="form-control form-control-sm" id="escalaCalificacion" formControlName="escalaCalificacion">
+          <div [hidden]="forma.get('escalaCalificacion').valid">Required</div>
         </div>
       </div>
     </div>
@@ -62,13 +71,25 @@
           <button (click)="enableEditor()" [disabled]="!editorDisabled">Enable</button>
           <button (click)="disableEditor()" [disabled]="editorDisabled">Disable</button>
         </div>
-        <div [formGroup]="form">
-          <div formControlName="html" [ngxSummernote]="config" [ngxSummernoteDisabled]="editorDisabled"
+        <div>
+          <div formControlName="descripcionTarea" [ngxSummernote]="config" [ngxSummernoteDisabled]="editorDisabled"
             (blur)="onBlur()">
           </div>
         </div>
       </div>
     </div>
+    <div class="row justify-content-end">
+      <div class="col-3">
+        <button class="btn btn-outline-secondary btn-sm btn-block text-uppercase btn-rounded" type="button"
+          (click)="cancelar()">Cancelar</button>
+      </div>
+      <div class="col-3">
+        <button class="btn btn-primary btn-sm btn-block text-uppercase btn-rounded" type="submit"
+        [disabled]="!forma.valid">Agregar</button>
+      </div>
+    </div>
+
+
 
 
   </form>

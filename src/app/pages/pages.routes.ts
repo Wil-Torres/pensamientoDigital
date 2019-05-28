@@ -14,6 +14,8 @@ import { ListaUsuariosComponent } from "./principal/usuarios/lista-usuarios/list
 import { CalendarioComponent } from "./principal/calendario/calendario/calendario.component";
 import { ClaseComponent } from "./principal/clases/clase/clase.component";
 import { LeccionNuevoEdicionComponent } from "./principal/clases/leccion-nuevo-edicion/leccion-nuevo-edicion.component";
+import { ListaCursosComponent } from "./movimientosAlumnos/lista-cursos/lista-cursos.component";
+import { CursosComponent } from "./movimientosAlumnos/cursos/cursos.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -27,6 +29,10 @@ const pagesRoutes: Routes = [
             {path: 'clases/lista-clases', component: ListaClasesComponent, data:{titulo: 'Clases'}},
             {path: 'clases/lecciones', component: ClaseComponent, data:{titulo: 'Lecciónes'}},
             {path: 'clases/leccion/:id', component: LeccionNuevoEdicionComponent, data:{titulo: 'Lección'}},
+
+            /* Alumnos */
+            {path: 'cursos/lista-cursos', component: ListaCursosComponent, data:{titulo: 'Lista Cursos asignados'}},
+            {path: 'cursos', component: CursosComponent, data:{titulo: 'Curso'}},
 
 
             /* Grupos */

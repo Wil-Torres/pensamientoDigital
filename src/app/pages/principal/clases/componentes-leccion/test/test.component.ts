@@ -9,6 +9,7 @@ import { TareasComponent } from '../tareas/tareas.component';
 })
 export class TestComponent implements OnInit {
   modalRef: BsModalRef | null;
+  seleccion: any;
   private _trabajos: any[] = [];
   public get trabajos(): any[] {
     return this._trabajos;
@@ -27,22 +28,64 @@ export class TestComponent implements OnInit {
   objInit() {
     this.trabajos = [
       {
-        trabajoId: 1, tarea: 'Quiz de 5 y 6 unidad', comenzar: '20/05/2019', seleccionar: true,
-        fechaLimite: '21/05/2019', asignado: true, puntuacionMaxima: 100, porcentaje: 8.3, calificacion: 27
+        trabajoId: 1, tareaTitulo: 'Quiz de 5 y 6 unidad', fechaInicioTarea: '20/05/2019', seleccionar: true,
+        fechaFinTarea: '21/05/2019', asignado: true, puntajeMaximo: 100, intervaloMaximo: 8.3, calificacionTarea: 27
       },
       {
-        trabajoId: 2, tarea: 'Parcial 2da Unidad', comenzar: '20/05/2019',seleccionar: false,
-        fechaLimite: '27/05/2019', asignado: true, puntuacionMaxima: 100, porcentaje: 8.3, calificacion: 27
+        trabajoId: 2, tareaTitulo: 'Parcial 2da Unidad', fechaInicioTarea: '20/05/2019', seleccionar: false,
+        fechaFinTarea: '27/05/2019', asignado: true, puntajeMaximo: 100, intervaloMaximo: 8.3, calificacionTarea: 27
       },
       {
-        trabajoId: 3, tarea: 'Presentacion de Trabajo', comenzar: '22/05/2019',seleccionar: true,
-        fechaLimite: '21/05/2019', asignado: false, puntuacionMaxima: 100, porcentaje: 8.3, calificacion: 27
+        trabajoId: 3, tareaTitulo: 'Presentacion de Trabajo', fechaInicioTarea: '22/05/2019', seleccionar: true,
+        fechaFinTarea: '21/05/2019', asignado: false, puntajeMaximo: 100, intervaloMaximo: 8.3, calificacionTarea: 27
       },
     ]
   }
   agregarTarea() {
     this.modalRef = this.modalService.show(TareasComponent, { class: 'modal-lg' });
-
+    let tareaTemp = this.modalRef.content.tarea.subscribe((tarea: any) => {
+      console.log(tarea)
+      this.trabajos.push(tarea.tarea)
+      tareaTemp.unsubscribe();
+    })
   }
+
+  editarTarea() {
+    if (this.seleccion) {
+      const opciones = {
+        initialState: {
+          edicion: this.seleccion
+        },
+        class: 'modal-lg'
+      };
+      this.modalRef = this.modalService.show(TareasComponent, opciones);
+      let tareaTemp = this.modalRef.content.tarea.subscribe((tarea: any) => {
+        console.log(tarea)
+        this.trabajos.push(tarea.tarea)
+        tareaTemp.unsubscribe();
+      })
+    } else {
+      return
+    }
+  }
+
+  borrarTarea() {
+    if (this.seleccion) {
+      let x = this.trabajos.find(elem => {
+        return elem.tareaTitulo === this.seleccion.tareaTitulo
+      })
+      if (x) {
+        this._trabajos.splice(x, 1)
+      }
+    } else {
+      return
+    }
+  }
+
+  deshacerSeleccion() {
+    this.seleccion = null
+  }
+
+
 
 }
