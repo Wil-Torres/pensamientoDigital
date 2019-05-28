@@ -11,26 +11,17 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
   <form class="form" ng-submit="seleccionar()" novalidate>
     <div class="row">
-      <!--div class="col-md-3 col-sm-6">
-        <ul class="list-group" ng-repeat="obj in objeto.contenido">{{obj.codigoContenido}} - {{obj.nombreContenido}}
-          <li class="list-group-item" ng-repeat="subObj in obj.subTemas"
-            ng-click="reproducir(subObj.videoUrlContenido, subObj)">{{subObj.nombreContenido}}
-            <span class="badge badge-primary badge-pill">14</span>
-          </li>
-          <li class="list-group-item" ng-if="obj.documento" ng-click="mostrarDoctofn(obj.documento)">Soporte
-            <span class="badge badge-primary badge-pill">
-              <i class="fa fa-book"></i>
-            </span>
-          </li>
-          <li class="list-group-item" ng-if="obj.evaluacion" ng-click="mostrarTest(obj.evaluacion, $index)">Evaluacion
-            de {{obj.nombreContenido}}
-            <span class="badge badge-primary badge-pill">
-              <i class="fa fa-edit"></i>
-            </span>
-          </li>
+      <div class="col-md-3 col-sm-6">
+        <!--ul class="list-group" *ngFor="let obj of objeto.contenido" data-toggle="collapse" aria-expanded="false" [attr.aria-controls]="obj.refNombre" [attr.data-target]="obj.refTarget"> {{obj.codigoContenido}} - {{obj.nombreContenido}}
+          <li class="list-group-item collapse multi-collapse" *ngFor="let subObj of obj.subTemas" [id]="obj.refNombre">{{subObj.nombreContenido}}</li>
+        </ul-->
+        <ul class="list-group" *ngFor="let obj of objeto.contenido"> {{obj.codigoContenido}} -
+          {{obj.nombreContenido}}
+          <li class="list-group-item" *ngFor="let subObj of obj.subTemas" [id]="obj.refNombre">
+            {{subObj.nombreContenido}}</li>
         </ul>
-      </div-->
-      <div class="col-md-12 col-sm-6">
+      </div>
+      <div class="col-md-9 col-sm-6">
         <nav class="nav nav-pills nav-fill">
           <a class="nav-item nav-link"><button class="btn btn-default navbar-btn">
               <span class="icon fa fa-chevron-left" aria-hidden="true">

@@ -22,6 +22,8 @@ import { UsuariosModule } from "./principal/usuarios/usuarios.module";
 import { CalendarioModule } from "./principal/calendario/calendario.module";
 import { ListaCursosComponent } from './movimientosAlumnos/lista-cursos/lista-cursos.component';
 import { CursosComponent } from './movimientosAlumnos/cursos/cursos.component';
+import { CalificacionesComponent } from './movimientosAlumnos/calificaciones/calificaciones.component';
+import { HistorialComponent } from './movimientosAlumnos/historial/historial.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +36,8 @@ import { CursosComponent } from './movimientosAlumnos/cursos/cursos.component';
         TiendaComponent,
         ListaCursosComponent,
         CursosComponent,
+        CalificacionesComponent,
+        HistorialComponent,
     ],
     exports: [
         HomeComponent,

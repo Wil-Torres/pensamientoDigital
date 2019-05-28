@@ -16,6 +16,8 @@ import { ClaseComponent } from "./principal/clases/clase/clase.component";
 import { LeccionNuevoEdicionComponent } from "./principal/clases/leccion-nuevo-edicion/leccion-nuevo-edicion.component";
 import { ListaCursosComponent } from "./movimientosAlumnos/lista-cursos/lista-cursos.component";
 import { CursosComponent } from "./movimientosAlumnos/cursos/cursos.component";
+import { CalificacionesComponent } from "./movimientosAlumnos/calificaciones/calificaciones.component";
+import { HistorialComponent } from "./movimientosAlumnos/historial/historial.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -31,8 +33,12 @@ const pagesRoutes: Routes = [
             {path: 'clases/leccion/:id', component: LeccionNuevoEdicionComponent, data:{titulo: 'Lección'}},
 
             /* Alumnos */
-            {path: 'cursos/lista-cursos', component: ListaCursosComponent, data:{titulo: 'Lista Cursos asignados'}},
-            {path: 'cursos', component: CursosComponent, data:{titulo: 'Curso'}},
+            {path: 'cursos/all-cursos', component: ListaCursosComponent, data:{titulo: 'Todos los Cursos'}},
+            {path: 'alumno/mis-cursos', component: ListaCursosComponent, data:{titulo: 'Lista Cursos asignados'}},
+            {path: 'alumno/cursos', component: CursosComponent, data:{titulo: 'Curso'}},
+            {path: 'alumno/calificaciones', component: CalificacionesComponent, data:{titulo: 'Calificaciones'}},
+            {path: 'alumno/historial', component: HistorialComponent, data:{titulo: 'Historial'}},
+            
 
 
             /* Grupos */

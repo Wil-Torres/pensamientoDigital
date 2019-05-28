@@ -11,7 +11,7 @@
         <!-- Logo icon --><b>
           <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
           <!-- Dark Logo icon -->
-          <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" style="height: 70px;"/>
+          <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" style="height: 70px;" />
           <!-- Light Logo icon -->
           <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" style="height: 70px;" />
         </b>
@@ -20,7 +20,8 @@
           <!-- dark Logo text -->
           <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" style="height: 70px;" />
           <!-- Light Logo text -->
-          <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" style="height: 70px;" /></span> </a>
+          <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" style="height: 70px;" /></span>
+      </a>
     </div>
     <!-- ============================================================== -->
     <!-- End Logo -->
@@ -31,10 +32,10 @@
       <!-- ============================================================== -->
       <ul class="navbar-nav mr-auto">
         <!-- This is  -->
-        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i
-              class="ti-menu"></i></a> </li>
-        <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i
-              class="ti-menu"></i></a> </li>
+        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark"
+            href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+        <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark"
+            href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
         <li class="nav-item hidden-sm-down"></li>
       </ul>
       <!-- ============================================================== -->
@@ -44,18 +45,66 @@
         <!-- ============================================================== -->
         <!-- Search -->
         <!-- ============================================================== -->
-        <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i
-              class="ti-search"></i></a>
+        <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark"
+            href="javascript:void(0)"><i class="ti-search"></i></a>
           <form class="app-search">
-            <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i class="ti-close"></i></a>
-            </form>
+            <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i
+                class="ti-close"></i></a>
+          </form>
         </li>
+
+        <!-- ============================================================== -->
+        <!-- BEGIN OPCIONES ALUMNOS -->
+        <!-- ============================================================== -->
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="mdi mdi-book-multiple"></i>
+            <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+          </a>
+          <div class="dropdown-menu mailbox dropdown-menu-right animated fadeIn" aria-labelledby="2">
+            <ul>
+              <li>
+                <div class="message-center">
+                  <!-- Message -->
+                  <a routerLinkActive="active" routerLink="/alumno/mis-cursos">
+                    <div class="mail-contnet">
+                      <span class="mail-desc">Mis Cursos</span>
+                    </div>
+                  </a>
+                  <a routerLinkActive="active" routerLink="/cursos/all-cursos">
+                    <div class="mail-contnet">
+                      <span class="mail-desc">Buscar Cursos</span>
+                    </div>
+                  </a>
+                  <a routerLinkActive="active" routerLink="/alumno/calificaciones">
+                    <div class="mail-contnet">
+                      <span class="mail-desc">Mis Notas</span>
+                    </div>
+                  </a>
+                  <a routerLinkActive="active" routerLink="/alumno/historial">
+                    <div class="mail-contnet">
+                      <span class="mail-desc">Historial de Compras</span>
+                    </div>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- ============================================================== -->
+        <!-- END OPCIONES ALUMNOS  -->
+        <!-- ============================================================== -->
+
+
         <!-- ============================================================== -->
         <!-- Messages -->
         <!-- ============================================================== -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="mdi mdi-email"></i>
+          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="mdi mdi-email"></i>
             <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
           </a>
           <div class="dropdown-menu mailbox dropdown-menu-right animated fadeIn" aria-labelledby="2">
@@ -67,41 +116,51 @@
                 <div class="message-center">
                   <!-- Message -->
                   <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/1.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span>
-                      </div>
+                    <div class="user-img"> <img src="assets/images/users/1.jpg" alt="user" class="img-circle"> <span
+                        class="profile-status online pull-right"></span>
+                    </div>
                     <div class="mail-contnet">
                       <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30
-                        AM</span> </div>
+                        AM</span>
+                    </div>
                   </a>
                   <!-- Message -->
                   <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span>
-                      </div>
+                    <div class="user-img"> <img src="assets/images/users/2.jpg" alt="user" class="img-circle"> <span
+                        class="profile-status busy pull-right"></span>
+                    </div>
                     <div class="mail-contnet">
-                      <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10
-                        AM</span> </div>
+                      <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span
+                        class="time">9:10
+                        AM</span>
+                    </div>
                   </a>
                   <!-- Message -->
                   <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/3.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span>
-                      </div>
+                    <div class="user-img"> <img src="assets/images/users/3.jpg" alt="user" class="img-circle"> <span
+                        class="profile-status away pull-right"></span>
+                    </div>
                     <div class="mail-contnet">
-                      <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
-                      </div>
+                      <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08
+                        AM</span>
+                    </div>
                   </a>
                   <!-- Message -->
                   <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span>
-                      </div>
+                    <div class="user-img"> <img src="assets/images/users/4.jpg" alt="user" class="img-circle"> <span
+                        class="profile-status offline pull-right"></span>
+                    </div>
                     <div class="mail-contnet">
                       <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02
-                        AM</span> </div>
+                        AM</span>
+                    </div>
                   </a>
                 </div>
               </li>
               <li>
-                <a class="nav-link text-center" href="javascript:void(0);"> <strong>Ver todos los correos</strong> <i class="fa fa-angle-right"></i>
-                  </a>
+                <a class="nav-link text-center" href="javascript:void(0);"> <strong>Ver todos los correos</strong> <i
+                    class="fa fa-angle-right"></i>
+                </a>
               </li>
             </ul>
           </div>
@@ -113,8 +172,9 @@
         <!-- Notificaciones -->
         <!-- ============================================================== -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="mdi mdi-bell"></i>
+          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="3" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="mdi mdi-bell"></i>
             <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
           </a>
           <div class="dropdown-menu mailbox dropdown-menu-right animated fadeIn" aria-labelledby="3">
@@ -126,41 +186,51 @@
                 <div class="message-center">
                   <!-- Message -->
                   <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/1.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span>
-                      </div>
+                    <div class="user-img"> <img src="assets/images/users/1.jpg" alt="user" class="img-circle"> <span
+                        class="profile-status online pull-right"></span>
+                    </div>
                     <div class="mail-contnet">
                       <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30
-                        AM</span> </div>
+                        AM</span>
+                    </div>
                   </a>
                   <!-- Message -->
                   <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span>
-                      </div>
+                    <div class="user-img"> <img src="assets/images/users/2.jpg" alt="user" class="img-circle"> <span
+                        class="profile-status busy pull-right"></span>
+                    </div>
                     <div class="mail-contnet">
-                      <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10
-                        AM</span> </div>
+                      <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span
+                        class="time">9:10
+                        AM</span>
+                    </div>
                   </a>
                   <!-- Message -->
                   <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/3.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span>
-                      </div>
+                    <div class="user-img"> <img src="assets/images/users/3.jpg" alt="user" class="img-circle"> <span
+                        class="profile-status away pull-right"></span>
+                    </div>
                     <div class="mail-contnet">
-                      <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
-                      </div>
+                      <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08
+                        AM</span>
+                    </div>
                   </a>
                   <!-- Message -->
                   <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span>
-                      </div>
+                    <div class="user-img"> <img src="assets/images/users/4.jpg" alt="user" class="img-circle"> <span
+                        class="profile-status offline pull-right"></span>
+                    </div>
                     <div class="mail-contnet">
                       <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02
-                        AM</span> </div>
+                        AM</span>
+                    </div>
                   </a>
                 </div>
               </li>
               <li>
-                <a class="nav-link text-center" href="javascript:void(0);"> <strong>Ver todos los avisos</strong> <i class="fa fa-angle-right"></i>
-                  </a>
+                <a class="nav-link text-center" href="javascript:void(0);"> <strong>Ver todos los avisos</strong> <i
+                    class="fa fa-angle-right"></i>
+                </a>
               </li>
             </ul>
           </div>
@@ -172,33 +242,39 @@
         <!-- calendar -->
         <!-- ============================================================== -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle waves-effect waves-dark" routerLinkActive="active" routerLink="/calendario">
-          <i class="mdi mdi-calendar"></i></a>
+          <a class="nav-link dropdown-toggle waves-effect waves-dark" routerLinkActive="active"
+            routerLink="/calendario">
+            <i class="mdi mdi-calendar"></i></a>
         </li>
         <!-- ============================================================== -->
         <!-- trash -->
         <!-- ============================================================== -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-trash"></i></a>
+          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-trash"></i></a>
         </li>
         <!-- ============================================================== -->
         <!-- Language -->
         <!-- ============================================================== -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="flag-icon flag-icon-us"></i></a>
-          <div class="dropdown-menu dropdown-menu-right animated fadeIn"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i>
-              India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item"
-              href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i>
+          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="flag-icon flag-icon-us"></i></a>
+          <div class="dropdown-menu dropdown-menu-right animated fadeIn"> <a class="dropdown-item" href="#"><i
+                class="flag-icon flag-icon-in"></i>
+              India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a
+              class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item"
+              href="#"><i class="flag-icon flag-icon-de"></i>
               Dutch</a> </div>
         </li>
         <!-- ============================================================== -->
         <!-- Profile -->
         <!-- ============================================================== -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-              src="assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
+          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"><img src="assets/images/users/1.jpg" alt="user"
+              class="profile-pic" /></a>
           <div class="dropdown-menu dropdown-menu-right animated fadeIn">
             <ul class="dropdown-user">
               <li>
@@ -206,8 +282,10 @@
                   <div class="u-img"><img src="assets/images/users/1.jpg" alt="user"></div>
                   <div class="u-text">
                     <h4>Steave Jobs</h4>
-                    <p class="text-muted">varun@gmail.com</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">Ver
-                      Perfil</a></div>
+                    <p class="text-muted">varun@gmail.com</p><a href="pages-profile.html"
+                      class="btn btn-rounded btn-danger btn-sm">Ver
+                      Perfil</a>
+                  </div>
                 </div>
               </li>
               <li role="separator" class="divider"></li>

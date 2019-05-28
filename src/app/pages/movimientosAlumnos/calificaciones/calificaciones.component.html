@@ -1,0 +1,42 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="gt-wd-25">Orden</th>
+      <th>PUNTAJE DE APRENDIZAJE</th>
+      <th class="gt-wd-75  text-center">1er Bimestre</th>
+      <th class="gt-wd-75  text-center">2do Bimestre</th>
+      <th class="gt-wd-75  text-center">3er Bimestre</th>
+      <th class="gt-wd-75  text-center">4to Bimestre</th>
+      <th class="gt-wd-75  text-center">Resultado Final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let nota of objeto.aprendizaje; let i = index"
+    [ngClass]="{ 'table-danger' : nota.notaFinal <= 60, 'table-warning': ((nota.notaFinal >= 61) && (nota.notaFinal <= 70))}">
+      <td>{{i + 1}}</td>
+      <td>{{nota.materia}}</td>
+      <td class="text-right">{{nota.bimestre1}}</td>
+      <td class="text-right">{{nota.bimestre2}}</td>
+      <td class="text-right">{{nota.bimestre3}}</td>
+      <td class="text-right">{{nota.bimestre4}}</td>
+      <td class="text-right">{{nota.notaFinal}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th>ASPECTO AFECTIVO</th>
+      <th colspan="5"></th>
+    </tr>
+    <tr *ngFor="let aspecto of objeto.afectivo; let i = index"
+    [ngClass]="{ 'table-danger' : aspecto.notaFinal <= 60, 'table-warning': ((aspecto.notaFinal >= 61) && (aspecto.notaFinal <= 70))}">
+      <td>{{i + 1}}</td>
+      <td>{{aspecto.aspecto}}</td>
+      <td class="text-right">{{aspecto.bimestre1}}</td>
+      <td class="text-right">{{aspecto.bimestre2}}</td>
+      <td class="text-right">{{aspecto.bimestre3}}</td>
+      <td class="text-right">{{aspecto.bimestre4}}</td>
+      <td class="text-right">{{aspecto.notaFinal}}</td>
+    </tr>
+  </tfoot>
+</table>
