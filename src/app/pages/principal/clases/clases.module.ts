@@ -19,6 +19,12 @@ import { EmbedVideo } from 'ngx-embed-video';
 import { HttpClientModule } from '@angular/common/http';
 import { TareasComponent } from './componentes-leccion/tareas/tareas.component';
 import { NgxSummernoteModule } from 'ngx-summernote'
+import { ServiceModule } from 'src/app/services/service.module';
+import { ListaCursosComponent } from '../../movimientosAlumnos/lista-cursos/lista-cursos.component';
+import { CursosComponent } from '../../movimientosAlumnos/cursos/cursos.component';
+import { CalificacionesComponent } from '../../movimientosAlumnos/calificaciones/calificaciones.component';
+import { HistorialComponent } from '../../movimientosAlumnos/historial/historial.component';
+import { TrabajosComponent } from '../../movimientosAlumnos/trabajos/trabajos.component';
 
 
 @NgModule({
@@ -26,7 +32,8 @@ import { NgxSummernoteModule } from 'ngx-summernote'
     ListaClasesComponent, ClaseComponent, LeccionNuevoEdicionComponent, 
     ContenidoComponent, SeccionesComponent, TestComponent, DiscucionesComponent, 
     EquiposComponent, BibliotecaComponent, EncuestaComponent, ArchivosComponent, 
-    TareasComponent,
+    TareasComponent,  ListaCursosComponent, CursosComponent, CalificacionesComponent,
+    HistorialComponent, TrabajosComponent,
   ],
   exports: [ListaClasesComponent],
   imports: [
@@ -38,7 +45,8 @@ import { NgxSummernoteModule } from 'ngx-summernote'
 
     BrowserModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ServiceModule
   ],
   entryComponents:[TareasComponent]
 })

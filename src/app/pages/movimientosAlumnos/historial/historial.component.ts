@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlumnoService } from '../alumno.service';
 
 @Component({
   selector: 'app-historial',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistorialComponent implements OnInit {
 
-  constructor() { }
+  constructor(private alumno: AlumnoService) {
+    alumno.inicializar();
+  }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.alumno.destruir();
   }
 
 }

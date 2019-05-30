@@ -20,10 +20,6 @@ import { PanelModule } from "./principal/panel-control/panel.module";
 import { RecursosModule } from "./principal/recursos/recursos.module";
 import { UsuariosModule } from "./principal/usuarios/usuarios.module";
 import { CalendarioModule } from "./principal/calendario/calendario.module";
-import { ListaCursosComponent } from './movimientosAlumnos/lista-cursos/lista-cursos.component';
-import { CursosComponent } from './movimientosAlumnos/cursos/cursos.component';
-import { CalificacionesComponent } from './movimientosAlumnos/calificaciones/calificaciones.component';
-import { HistorialComponent } from './movimientosAlumnos/historial/historial.component';
 
 @NgModule({
     declarations: [
@@ -33,11 +29,7 @@ import { HistorialComponent } from './movimientosAlumnos/historial/historial.com
         MarcaListaComponent,
         MarcaNuevoComponent,
         MarcaEdicionComponent,
-        TiendaComponent,
-        ListaCursosComponent,
-        CursosComponent,
-        CalificacionesComponent,
-        HistorialComponent,
+        TiendaComponent
     ],
     exports: [
         HomeComponent,

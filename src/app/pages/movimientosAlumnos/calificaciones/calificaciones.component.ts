@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlumnoService } from '../alumno.service';
 
 @Component({
   selector: 'app-calificaciones',
@@ -16,7 +17,13 @@ export class CalificacionesComponent implements OnInit {
   }
 
 
-  constructor() { }
+  constructor(private alumno: AlumnoService) {
+    alumno.inicializar();
+  }
+
+  ngOnDestroy() {
+    this.alumno.destruir();
+  }
 
   ngOnInit() {
     this.initObj();

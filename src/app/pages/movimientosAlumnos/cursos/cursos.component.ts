@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
+import { SidebarService } from 'src/app/services/service.index';
+import { AlumnoService } from '../alumno.service';
 
 @Component({
   selector: 'app-cursos',
@@ -11,31 +13,18 @@ export class CursosComponent implements OnInit {
   objeto: any = {}
 
 
-  constructor(@Inject(DOCUMENT) private _document) {
-
+  constructor(@Inject(DOCUMENT) private _document, private alumno: AlumnoService) {
+    alumno.inicializar();
   }
 
   ngOnInit() {
     this.initObj();
-    let selectores: any = document.getElementsByClassName('selector');
-    let panelCentral: any = document.getElementById('panelCentral');
-    panelCentral.classList.remove('col-md-10');
-    panelCentral.classList.add('col-md-12');
-    let panelDerecho: any = document.getElementById('panelDerecho');
-    panelDerecho.classList.add('noVisible');
-    //panelDerecho.parentNode.removeChild(panelDerecho);
+    
 
   }
 
   ngOnDestroy() {
-    let panelDerecho: any = document.getElementById('panelDerecho');
-    panelDerecho.classList.remove('noVisible');
-
-    let panelCentral: any = document.getElementById('panelCentral');
-    panelCentral.classList.remove('col-md-12');
-    panelCentral.classList.add('col-md-10');
-
-
+    this.alumno.destruir();
   }
 
   mostrar(item: number) {
@@ -106,6 +95,8 @@ export class CursosComponent implements OnInit {
       nombreCurso: "Javascript Avanzado", 
       $id: "-Ld9_yln2z7iF78EPqqr", 
     }
+
+    
   }
 
 }

@@ -18,6 +18,7 @@ import { ListaCursosComponent } from "./movimientosAlumnos/lista-cursos/lista-cu
 import { CursosComponent } from "./movimientosAlumnos/cursos/cursos.component";
 import { CalificacionesComponent } from "./movimientosAlumnos/calificaciones/calificaciones.component";
 import { HistorialComponent } from "./movimientosAlumnos/historial/historial.component";
+import { TrabajosComponent } from "./movimientosAlumnos/trabajos/trabajos.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -37,6 +38,7 @@ const pagesRoutes: Routes = [
             {path: 'alumno/mis-cursos', component: ListaCursosComponent, data:{titulo: 'Lista Cursos asignados'}},
             {path: 'alumno/cursos', component: CursosComponent, data:{titulo: 'Curso'}},
             {path: 'alumno/calificaciones', component: CalificacionesComponent, data:{titulo: 'Calificaciones'}},
+            {path: 'alumno/tareas', component: TrabajosComponent, data:{titulo: 'Tareas'}},
             {path: 'alumno/historial', component: HistorialComponent, data:{titulo: 'Historial'}},
             
 
