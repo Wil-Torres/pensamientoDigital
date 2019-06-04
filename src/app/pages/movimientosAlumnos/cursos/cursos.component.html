@@ -1,22 +1,32 @@
-<p>
-  cursos works!
-</p>
-<div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary" (click)="mostrar(1)">Video</button>
-  <button type="button" class="btn btn-secondary" (click)="mostrar(2)">URL</button>
-  <button type="button" class="btn btn-secondary" (click)="mostrar(3)">PDF</button>
-  <button type="button" class="btn btn-secondary" (click)="mostrar(0)">imagen</button>
-</div>
-
 <div class="col-md-12 col-sm-12 col-xs-12">
   <form class="form" ng-submit="seleccionar()" novalidate>
+    <div class="row page-titles">
+      <div class="col-md-7 align-self-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="javascript:void(0)">{{'Curso'}}</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="javascript:void(0)">{{objeto.nombreCurso}}</a>
+          </li>
+          <li class="breadcrumb-item">{{objeto.contenido[1].nombreContenido}}</li>
+          <li class="breadcrumb-item active">{{objeto.contenido[1].subTemas[0].nombreContenido}}</li>
+        </ol>
+      </div>
+      <div>
+        <button
+          class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
+            class="ti-settings text-white"></i></button>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-3 col-sm-6">
         <!--ul class="list-group" *ngFor="let obj of objeto.contenido" data-toggle="collapse" aria-expanded="false" [attr.aria-controls]="obj.refNombre" [attr.data-target]="obj.refTarget"> {{obj.codigoContenido}} - {{obj.nombreContenido}}
           <li class="list-group-item collapse multi-collapse" *ngFor="let subObj of obj.subTemas" [id]="obj.refNombre">{{subObj.nombreContenido}}</li>
         </ul-->
-        <ul class="list-group" *ngFor="let obj of objeto.contenido"> {{obj.codigoContenido}} -
-          {{obj.nombreContenido}}
+        <ul class="list-group" *ngFor="let obj of objeto.contenido"> <span class="font-weight-bold"><i
+              class="fa fa-bookmark-o text-info font-weight-bold"></i> {{obj.codigoContenido}} -
+            {{obj.nombreContenido}}</span>
           <li class="list-group-item" *ngFor="let subObj of obj.subTemas" [id]="obj.refNombre">
             {{subObj.nombreContenido}}</li>
         </ul>
@@ -32,7 +42,7 @@
             <i class="fa fa-book"></i>
           </a>
           <a class="nav-item nav-link" (click)="mostrar(1)">
-            <i class="fa fa-youtube"></i>
+            <i class="fa fa-film"></i>
           </a>
           <a class="nav-item nav-link disabled" tabindex="-1" aria-disabled="true">
             <button class="btn btn-default navbar-btn">
@@ -41,11 +51,9 @@
             </button>
           </a>
         </nav>
-
         <div class="embed-responsive embed-responsive-16by9">
           <iframe id="recuadro" class="embed-responsive-item" allowfullscreen></iframe>
         </div>
-
       </div>
     </div>
   </form>

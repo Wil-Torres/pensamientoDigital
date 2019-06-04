@@ -58,6 +58,7 @@ export class TareasComponent implements OnInit {
 
   objInit() {
     this._forma = this.builder.group({
+      id: null,
       tareaTitulo: [null, [Validators.required]],
       puntajeMaximo: [null, [Validators.required]],
       intervaloMaximo: [null, [Validators.required]],

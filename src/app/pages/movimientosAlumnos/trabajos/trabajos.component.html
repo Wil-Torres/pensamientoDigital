@@ -1,3 +1,12 @@
 <form novalidate [formGroup]="forma">
+  <div class="input-group mb-3">
+    <div class="custom-file">
+      <input type="file" class="custom-file-input" id="enviarTarea">
+      <label class="custom-file-label" for="enviarTarea" aria-describedby="enviandoTarea">Seleccionar archivo</label>
+    </div>
+    <div class="input-group-append">
+      <span class="input-group-text bg-success text-light" id="enviandoTarea">Enviar Tarea</span>
+    </div>
+  </div>
   <div [ngxSummernoteView]="forma.get('descripcionTarea').value"></div>
 </form>
