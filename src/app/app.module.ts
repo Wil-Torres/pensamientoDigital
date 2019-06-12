@@ -15,8 +15,6 @@ import { ServiceModule } from './services/service.module';
 import { CommonModule } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +29,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     CommonModule,
     ReactiveFormsModule,
     ServiceModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

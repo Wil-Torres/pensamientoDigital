@@ -19,6 +19,7 @@ import { CursosComponent } from "./movimientosAlumnos/cursos/cursos.component";
 import { CalificacionesComponent } from "./movimientosAlumnos/calificaciones/calificaciones.component";
 import { HistorialComponent } from "./movimientosAlumnos/historial/historial.component";
 import { TrabajosComponent } from "./movimientosAlumnos/trabajos/trabajos.component";
+import { AuthGuard } from "../services/autenticacion/auth.guard";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -29,9 +30,9 @@ const pagesRoutes: Routes = [
             {path: 'configuracion', component: TiendaComponent, data:{titulo: 'Configuración Tienda'}},
 
             /* Clases */
-            {path: 'clases/lista-clases', component: ListaClasesComponent, data:{titulo: 'Clases'}},
-            {path: 'clases/lecciones', component: ClaseComponent, data:{titulo: 'Lecciónes'}},
-            {path: 'clases/leccion/:id', component: LeccionNuevoEdicionComponent, data:{titulo: 'Lección'}},
+            {path: 'clases/lista-clases', component: ListaClasesComponent, data:{titulo: 'Clases'}, canActivate: [AuthGuard]},
+            {path: 'clases/lecciones', component: ClaseComponent, data:{titulo: 'Lecciónes'}, canActivate: [AuthGuard]},
+            {path: 'clases/leccion/:id', component: LeccionNuevoEdicionComponent, data:{titulo: 'Lección'}, canActivate: [AuthGuard]},
 
             /* Alumnos */
             {path: 'cursos/all-cursos', component: ListaCursosComponent, data:{titulo: 'Todos los Cursos'}},
