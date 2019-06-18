@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit {
 
   cerrarSesion() {
     this.auth.signOut().then(resp => {
-      console.log(resp)
       this.router.navigate(['/login']);
     }).catch(err => {
       console.log(err);

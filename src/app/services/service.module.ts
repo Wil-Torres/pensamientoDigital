@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SettingsService, SharedService, SidebarService, AuthService } from "./service.index";
+import { SettingsService, SharedService, SidebarService, AuthService, PostService } from "./service.index";
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -20,7 +20,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     SettingsService,
     SharedService,
     SidebarService,
-    AuthService
+    AuthService,
+    PostService
 
   ]
 })

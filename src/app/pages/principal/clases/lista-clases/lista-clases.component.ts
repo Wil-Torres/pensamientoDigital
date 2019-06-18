@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PostService } from 'src/app/services/service.index';
 
 @Component({
   selector: 'app-lista-clases',
@@ -33,6 +34,15 @@ import { Router } from '@angular/router';
       </div>
     </div>
 
+Hola
+    <div *ngFor="let item of posts">
+      <h1>{{item.title}}</h1>
+      <p>{{item.contect}}</p>
+      <button class="btn btn-danger"  (click)="postServices.deletePost(item.$key)">Delete Post</button>
+      <button class="btn btn-primary" *ngIf="postServices.canEdit" (click)="postServices.editPost(item, item)">Edit Post</button>
+
+    </div>
+
   `,
   styles: []
 })
@@ -40,6 +50,7 @@ export class ListaClasesComponent implements OnInit {
 
 
   private _objeto: any[] = [];
+  posts: {};
   public get objeto(): any[] {
     return this._objeto;
   }
@@ -48,7 +59,12 @@ export class ListaClasesComponent implements OnInit {
   }
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private postServices: PostService) {
+    postServices.getPosts().subscribe(resp => {
+      this.posts = resp;
+
+    })
+   }
 
   ngOnInit() {
     this.objInit();
