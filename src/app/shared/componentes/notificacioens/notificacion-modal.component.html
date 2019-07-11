@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Notificación</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="row">
+      <div class="col"><b>De:</b></div>
+      <div class="col-11"><a class="puntero">{{notificacion?.usuario?.displayName}}</a></div>
+    </div>
+    <div class="row">
+      <div class="col"><b>Asunto:</b></div>
+      <div class="col-11">{{notificacion.title}}</div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-12">{{notificacion.mensaje}}</div>
+    </div>
+    <!--div class="row justify-content-end">
+      <div class="col-6">
+        <button class="btn btn-outline-secondary btn-sm btn-block text-uppercase btn-rounded" type="button"
+          (click)="cancelar()">Cancelar</button>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-primary btn-sm btn-block text-uppercase btn-rounded" type="submit"
+          [disabled]="!forma.valid">Agregar</button>
+      </div>
+    </div-->
+  </form>
+</div>

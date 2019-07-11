@@ -1,0 +1,45 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Agregar lección</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form novalidate (ngSubmit)="guardar()" [formGroup]="forma">
+    <div class="row">
+      <div class="col-12" gtRequerido>
+        <div class="form-group">
+          <label for="titulo">Titulo</label>
+          <input type="text" class="form-control form-control-sm" id="titulo" id="name" formControlName="titulo" required>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+          <textarea class="form-control form-control-sm" id="descripcion" id="name" formControlName="descripcion"></textarea>
+        </div>
+      </div>
+      <div class="col-6" gtRequerido>
+        <div class="form-group" >
+          <label for="fechaInicio">Inicia</label>
+          <input type="text" class="form-control form-control-sm" id="fechaInicio" name="fechaInicio" formControlName="fechaInicio" required>
+        </div>
+      </div>
+      <div class="col-6" gtRequerido>
+        <div class="form-group">
+          <label for="fechaFin">Finaliza</label>
+          <input type="text" class="form-control form-control-sm" id="fechaFin" name="fechaFin" formControlName="fechaFin" required>
+        </div>
+      </div>
+    </div>
+    <div class="row"><br></div>
+    <div class="row justify-content-end">
+      <div class="col-6">
+        <button class="btn btn-outline-secondary btn-sm btn-block text-uppercase btn-rounded" type="button" (click)="cancelar()">Cancelar</button>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-primary btn-sm btn-block text-uppercase btn-rounded" type="submit">Agregar</button>
+      </div>
+    </div>
+  </form>
+</div>

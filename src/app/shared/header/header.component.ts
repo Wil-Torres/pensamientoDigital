@@ -3,6 +3,9 @@ import { AuthService } from 'src/app/services/service.index';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/interfaces/Login';
 import { Router } from '@angular/router';
+import { NotificacionesService } from 'src/app/services/shared/notificaciones.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { NotificacionModalComponent } from '../componentes/notificacioens/notificacion-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +14,19 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   usuarioTemp: User;
-  constructor(private auth: AuthService, private router: Router) {
-    this.auth.user.subscribe(resp => { this.usuarioTemp = resp;})
+  avisos: any;
+  modalRef: BsModalRef | null;
+  
+  constructor(private modalService: BsModalService, private auth: AuthService, 
+    private router: Router, private notificacion: NotificacionesService) {
+    this.auth.user.subscribe(resp => { 
+      this.usuarioTemp = resp;
+      this.notificacion.obtenerNotificaiones(this.usuarioTemp.uid).subscribe(resp => {
+        this.avisos = resp; 
+        console.log(resp)
+      });
+    })
+    
   }
 
   ngOnInit() {
@@ -25,6 +39,17 @@ export class HeaderComponent implements OnInit {
     }).catch(err => {
       console.log(err);
     });
+  }
+
+  verNotificacion(id:string) {
+    console.log(id)
+    const initialState = { notificacionId: id};
+    this.modalRef = this.modalService.show(NotificacionModalComponent, { class: 'modal-lg', initialState });
+  }
+
+  verTodasNotificaciones () {
+    console.log('resp')
+    this.router.navigate(['/avisos']);
   }
 
 }

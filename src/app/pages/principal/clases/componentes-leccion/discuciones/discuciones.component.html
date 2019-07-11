@@ -1,3 +1,12 @@
+<div class="row">
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-secondary" (click)="agregarDicusion()">Añadir</button>
+    <button type="button" class="btn btn-secondary" (click)="deshacerSeleccion()">Deshacer</button>
+    <button type="button" class="btn btn-info" (click)="editarTarea()">Editar</button>
+    <button type="button" class="btn btn-danger" (click)="borrarTarea()">Eliminar</button>
+  </div>
+</div>
+<br>
 <div class="accordion" id="accordionExample">
   <div class="card " *ngFor="let item of discuciones; let i = index">
     <div class="card-header text-white bg-info">
@@ -11,9 +20,9 @@
         <div class="card" *ngFor="let subItem of item.discusion; let j = index">
           <div class="row no-gutters">
             <div class="col-md-1">
-              <img src="../../../../../../assets/images/Nueva carpeta/descarga.svg" class="card-img rounded-circle"
-                style="width: 70px;">
-              {{subItem.usuario}}
+              <img [src]="subItem.usuario.photoURL" class="card-img rounded-circle"
+                style="width: 30px;">
+              {{subItem.usuario.displayName}}
             </div>
             <div class="card-body" style="padding: 0">
               <p class="card-text">{{subItem.comentario}}</p>
@@ -26,7 +35,8 @@
             <input type="text" class="form-control" placeholder="Escribe Mensaje" aria-label="Escribe Mensaje"
               aria-describedby="basic-addon2" [(ngModel)]="envioMsn">
             <div class="input-group-append">
-              <span class="input-group-text" id="basic-addon2" (click)="enviarMensaje(i)"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
+              <span class="input-group-text" id="basic-addon2" (click)="enviarMensaje(item)"><i class="fa fa-paper-plane"
+                  aria-hidden="true"></i></span>
             </div>
           </div>
         </div>

@@ -4,10 +4,7 @@ import { PagesComponent } from "./pages.component";
 import { SharedModule } from "../shared/shared.module";
 import { PAGES_ROUTES } from "./pages.routes";
 import { AccountSettingComponent } from './account-setting/account-setting.component';
-import { MarcaListaComponent } from './mantenimiento/marca/marca-lista.component';
-import { MarcaNuevoComponent } from './mantenimiento/marca/marca-nuevo.component';
-import { MarcaEdicionComponent } from './mantenimiento/marca/marca-edicion.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TiendaComponent } from './configuracion/tienda/tienda.component';
 import { CommonModule } from "@angular/common";
 import { BsDatepickerModule } from 'ngx-bootstrap';
@@ -20,27 +17,36 @@ import { PanelModule } from "./principal/panel-control/panel.module";
 import { RecursosModule } from "./principal/recursos/recursos.module";
 import { UsuariosModule } from "./principal/usuarios/usuarios.module";
 import { CalendarioModule } from "./principal/calendario/calendario.module";
+import { AlumnosComponent } from './mantenimiento/alumnos/alumnos.component';
+import { EncargadoAlumnoComponent } from './mantenimiento/encargado-alumno/encargado-alumno.component';
+import { ProfesoresComponent } from './mantenimiento/profesores/profesores.component';
+import { GradosComponent } from './mantenimiento/grados/grados.component';
+import { CarrerasComponent } from './mantenimiento/carreras/carreras.component';
+import { SeccionesComponent } from './mantenimiento/secciones/secciones.component';
+import { CiclosComponent } from './mantenimiento/ciclos/ciclos.component';
 
 @NgModule({
     declarations: [
         HomeComponent,
         PagesComponent,
         AccountSettingComponent,
-        MarcaListaComponent,
-        MarcaNuevoComponent,
-        MarcaEdicionComponent,
-        TiendaComponent
+        TiendaComponent,
+        AlumnosComponent,
+        EncargadoAlumnoComponent,
+        ProfesoresComponent,
+        GradosComponent,
+        CarrerasComponent,
+        SeccionesComponent,
+        CiclosComponent
     ],
     exports: [
         HomeComponent,
         PagesComponent,
         AccountSettingComponent,
-        MarcaListaComponent,
-        MarcaNuevoComponent,
-        MarcaEdicionComponent
     ],
     imports: [
         SharedModule,
+        ReactiveFormsModule,
         ClasesModule,
         BienvenidaModule,
         CalendarioModule,

@@ -20,6 +20,8 @@ import { CalificacionesComponent } from "./movimientosAlumnos/calificaciones/cal
 import { HistorialComponent } from "./movimientosAlumnos/historial/historial.component";
 import { TrabajosComponent } from "./movimientosAlumnos/trabajos/trabajos.component";
 import { AuthGuard } from "../services/autenticacion/auth.guard";
+import { NotificacionListaComponent } from "../shared/componentes/notificacioens/notificacion-lista.component";
+import { AlumnosComponent } from "./mantenimiento/alumnos/alumnos.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -28,19 +30,22 @@ const pagesRoutes: Routes = [
             {path: 'home', component: HomeComponent, data:{titulo: 'Home'}},
             {path: 'account-settings', component: AccountSettingComponent, data:{titulo: 'Account Settings'}},
             {path: 'configuracion', component: TiendaComponent, data:{titulo: 'Configuración Tienda'}},
+            {path: 'avisos', component: NotificacionListaComponent, data:{titulo: 'Avisos'}},
 
             /* Clases */
             {path: 'clases/lista-clases', component: ListaClasesComponent, data:{titulo: 'Clases'}, canActivate: [AuthGuard]},
-            {path: 'clases/lecciones', component: ClaseComponent, data:{titulo: 'Lecciónes'}, canActivate: [AuthGuard]},
-            {path: 'clases/leccion/:id', component: LeccionNuevoEdicionComponent, data:{titulo: 'Lección'}, canActivate: [AuthGuard]},
+            {path: 'clase/:id/lecciones', component: ClaseComponent, data:{titulo: 'Lecciónes'}, canActivate: [AuthGuard]},
+            {path: 'clase/:curso/leccion/:id', component: LeccionNuevoEdicionComponent, data:{titulo: 'Lección'}, canActivate: [AuthGuard]},
 
             /* Alumnos */
+            {path: 'alumno', component: AlumnosComponent, data:{titulo: 'Mantenimiento Alumnos'}},
             {path: 'cursos/all-cursos', component: ListaCursosComponent, data:{titulo: 'Todos los Cursos'}},
             {path: 'alumno/mis-cursos', component: ListaCursosComponent, data:{titulo: 'Lista Cursos asignados'}},
             {path: 'alumno/cursos', component: CursosComponent, data:{titulo: 'Curso'}},
             {path: 'alumno/calificaciones', component: CalificacionesComponent, data:{titulo: 'Calificaciones'}},
             {path: 'alumno/tareas', component: TrabajosComponent, data:{titulo: 'Tareas'}},
             {path: 'alumno/historial', component: HistorialComponent, data:{titulo: 'Historial'}},
+
             
 
 

@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Agregar Nueva Discución</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form novalidate (ngSubmit)="guardar()" [formGroup]="forma">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="asunto">Tema de Discución</label>
+            <input type="text" class="form-control form-control-sm" id="asunto" formControlName="asunto" (change)="alCambiar()">
+            <div [hidden]="forma.get('asunto').valid">Required</div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-6">
+          <button class="btn btn-outline-secondary btn-sm btn-block text-uppercase btn-rounded" type="button"
+            (click)="cancelar()">Cancelar</button>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-primary btn-sm btn-block text-uppercase btn-rounded" type="submit"
+          [disabled]="!forma.valid">Agregar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

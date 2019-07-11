@@ -1,12 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+export interface ListaCursos {
+  $key: string;
+  cantidadEstudiantes: number;
+  grado: string;
+  id: String; 
+  seleccion: boolean; 
+  clase: String;
+  catedra: String;
+  lecciones: any;
+}
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/service.index';
+import { ClasesService } from '../clases.service';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { DOCUMENT } from '@angular/platform-browser';
+import swal from 'sweetalert';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal-nueva-clase.component';
 
 @Component({
   selector: 'app-lista-clases',
   template: `
 
     <div class="col-md-12 col-sm-12 col-xs-12">
+    <button class="btn btn-primary bt-sm float-right" (click)="nuevo()"><i class="fa fa-plus"></i></button>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
@@ -32,6 +52,7 @@ import { PostService } from 'src/app/services/service.index';
           </tbody>
         </table>
       </div>
+      <app-paginacion (paginacion)="buscar($event.offset, $event.limit)" [totalItems]="numeroRegistros"></app-paginacion>
     </div>
 
 Hola
@@ -42,14 +63,33 @@ Hola
       <button class="btn btn-primary" *ngIf="postServices.canEdit" (click)="postServices.editPost(item, item)">Edit Post</button>
 
     </div>
+    <div class="row justify-content-md-center">
+      <div class="">
+        <button class="btn btn-primary" (click)="verArchivo()">view</button>
+        <app-file-upload [path]="path" [obj1]="objetos" (obj)="objetos"></app-file-upload>
+      </div>
+    </div>
 
   `,
   styles: []
 })
 export class ListaClasesComponent implements OnInit {
 
+  task: AngularFireUploadTask;
+  porcentaje: Observable<number>;
+  snapshot: Observable<any>;
+  productos: Observable<any>;
+  downloadURL: Observable<string>;
+  isHovering: boolean;
+  arrayDownload: any = [];
 
+  imagenSubir: File;
+  imagenTemp: string;
+
+  path = 'imagenes';
+  objetos:any = {};
   private _objeto: any[] = [];
+  modalRef: BsModalRef | null;
   posts: {};
   public get objeto(): any[] {
     return this._objeto;
@@ -59,15 +99,20 @@ export class ListaClasesComponent implements OnInit {
   }
 
 
-  constructor(private router: Router, private postServices: PostService) {
+  constructor(private router: Router, private postServices: PostService, private srvCurso: ClasesService,
+    private storage: AngularFireStorage,
+    private afs: AngularFirestore, 
+    private modalService: BsModalService,
+    @Inject(DOCUMENT) private _document) {
     postServices.getPosts().subscribe(resp => {
       this.posts = resp;
 
     })
-   }
+  }
 
   ngOnInit() {
     this.objInit();
+    this.buscar();
   }
 
   objInit() {
@@ -88,8 +133,92 @@ export class ListaClasesComponent implements OnInit {
     ]
   }
   edicion(item: any) {
-    this.router.navigate(['/clases/lecciones']);
+    this.router.navigate(['/clase/' + item+ '/lecciones/']);
+  }
 
+  nuevo(){
+    this.modalRef = this.modalService.show(ModalNuevaClaseComponent, { class: 'modal-lg' });
+    let claseTemp = this.modalRef.content.clase.subscribe((clase: any) => {
+      console.log(clase)
+      claseTemp.unsubscribe();
+    });
+  }
+
+  buscar(offset: number = 0, limit: number = 10) {
+    this.srvCurso.getCursos(offset, limit).then(( resp ) => {
+      resp.subscribe(( res ) => {
+        let x = [];
+        res.forEach((elem: ListaCursos) => {
+          x.push({
+            $key: elem.$key,
+            cantidadEstudiantes: elem.cantidadEstudiantes,
+            grado: elem.grado,
+            id: elem.$key,
+            seleccion: false,
+            clase: elem.clase,
+            catedra: elem.catedra,
+            lecciones: elem.lecciones
+          })
+        })
+        this.objeto = x;
+      });
+    }).catch(err => {
+      console.log(err.FirebaseError);
+    })
+
+  }
+  verArchivo() {
+    console.log(this.objetos)
+    console.log(this.objetos)
+    const file = this.objetos.img.target.files[0];
+
+    /*if (this.objeto.ancho !== 500 && this.objeto.alto !== 750) {
+      swal('Ocurrio un problema','Tamaño de imagen no permitido' , 'error');
+      return;
+    }*/
+    if (file.type.split('/')[0] !== 'image') {
+      console.error('unsupported file type :( ');
+      return;
+    }
+    const path = `imagenes/${new Date().getTime()}_${file.name}`;
+    const customMetadata = { app: 'Mi portafolio' };
+    const fileRef = this.storage.ref(path);
+    this.task = this.storage.upload(path, file, { customMetadata })
+    this.task.then(res => {
+      fileRef.getDownloadURL().toPromise().then(resp => {
+        this.afs.collection('galeria').add(
+          {
+            path,
+            codigo: 1,
+            nombre: 'this.objetos.nombre',
+            descripcion: 'this.objetos.descripcion',
+            precio: 125,
+            descuento: 0,
+            alto: this.objetos.alto,
+            ancho: this.objetos.ancho,
+            url: resp
+          }
+        ).then((galeria: any) => {
+          galeria.update({ id: galeria.id }).then(actualizado => {
+            this.objetos = {};
+            swal('Agregar Galeria', 'Se ha creado la galeria  ' + this.objetos.nombre, 'success').then(() => {
+              this.router.navigate(['/lista-galeria']);
+            });
+            
+          })
+        })
+      });
+    });
+    this.porcentaje = this.task.percentageChanges();
+    this.snapshot = this.task.snapshotChanges().pipe(
+      finalize(async () => {
+        fileRef.getDownloadURL().toPromise().then(url => {
+          this.arrayDownload.push(url);
+        });
+        return this.downloadURL = fileRef.getDownloadURL()
+      })
+    );
+    
   }
 
 }

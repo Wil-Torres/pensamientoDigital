@@ -8,6 +8,14 @@ import { CommonModule } from "@angular/common";
 import { EncabezadoPaginaComponent } from './componentes/encabezado-pagina/encabezado-pagina.component';
 import { PaginacionComponent } from './componentes/paginacion/paginacion.component';
 import { BusquedaListaComponent } from './componentes/busqueda-lista/busqueda-lista.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { PaginationModule } from "ngx-bootstrap";
+import { FileUploadComponent } from './componentes/file-upload/file-upload.component';
+import { ModalUploadComponent } from './componentes/modal-upload/modal-upload.component';
+import { UploadDirective } from "../directivas/upload.directive";
+import { RequeridoDirective } from "../directivas/requerido.directive";
+import { NotificacionModalComponent } from './componentes/notificacioens/notificacion-modal.component';
+import { NotificacionListaComponent } from './componentes/notificacioens/notificacion-lista.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +25,13 @@ import { BusquedaListaComponent } from './componentes/busqueda-lista/busqueda-li
         NopagefoundComponent,
         EncabezadoPaginaComponent,
         PaginacionComponent,
-        BusquedaListaComponent
+        BusquedaListaComponent,
+        FileUploadComponent,
+        ModalUploadComponent,
+        UploadDirective,
+        RequeridoDirective,
+        NotificacionModalComponent,
+        NotificacionListaComponent,
     ],
     exports: [
         SidebarComponent,
@@ -26,11 +40,21 @@ import { BusquedaListaComponent } from './componentes/busqueda-lista/busqueda-li
         NopagefoundComponent,
         EncabezadoPaginaComponent,
         PaginacionComponent,
-        BusquedaListaComponent
+        BusquedaListaComponent,
+        FileUploadComponent,
+        ModalUploadComponent,
+        UploadDirective,
+        RequeridoDirective,
+        NotificacionModalComponent,
+        NotificacionListaComponent,
     ],
     imports:[
         RouterModule,
-        CommonModule
-    ]
+        FormsModule,
+        CommonModule,
+        ReactiveFormsModule,
+        PaginationModule.forRoot(),
+    ],
+    entryComponents: [NotificacionModalComponent]
 })
 export class SharedModule {}

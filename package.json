@@ -33,6 +33,8 @@
     "ngx-summernote": "^0.6.5",
     "rxjs": "~6.3.3",
     "summernote": "^0.8.12",
+    "sweetalert": "^2.1.2",
+    "xlsx-populate": "^1.19.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

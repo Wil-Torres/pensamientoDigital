@@ -1,0 +1,63 @@
+<div class="fondo-negro animated fadeIn" [ngClass]="srvModal.oculto">
+  <div class="modal" style="display: block;" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Actualizacion</h5>
+          <button type="button" class="close" (click)="oculto='oculto'" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="codigo">Còdigo</label>
+                <input class="form-control" type="number" id="codigo" [(ngModel)]="srvModal.objeto.codigo" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="form-group">
+                <label for="nombre">Nombre de Planta</label>
+                <input class="form-control" type="text" id="nombre" [(ngModel)]="srvModal.objeto.nombre" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="descripcion">Descripcion</label>
+                <textarea class="form-control" id="descripcion" [(ngModel)]="srvModal.objeto.descripcion" [ngModelOptions]="{standalone: true}">
+                      </textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="precio">Precio</label>
+                <input class="form-control" type="number" id="precio" [(ngModel)]="srvModal.objeto.precio" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="descuento">Descuento</label>
+                <input class="form-control" type="number" id="descuento" [(ngModel)]="srvModal.objeto.descuento" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <img *ngIf="!imagenTemp" [src]="srvModal.objeto.url" style="width:100px; height:100px">
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="srvModal.ocultarModal()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" (click)="actualizarGaleria()" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

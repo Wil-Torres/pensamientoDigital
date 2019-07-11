@@ -1,77 +1,34 @@
-<form>
-  <div class="row">
-    <div class="col-md-2 col-sm-2 col-xs-4">
-      <div class="form-group">
-        <label for="codigo">Código</label>
-        <input type="number" class="form-control form-control-sm gt-spinner-off" id="codigo">
-      </div>
-    </div>
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <div class="form-group">
-        <label for="nombreCurso">Nombre de Curso</label>
-        <input type="text" class="form-control form-control-sm" id="nombreCurso">
-      </div>
-    </div>
-    <div class="col-md-1 col-sm-1 col-xs-6">
-      <div class="form-group">
-        <label for="cursoAvance">Avance</label>
-        <input type="number" class="form-control form-control-sm gt-spinner-off" id="cursoAvance">
-      </div>
-    </div>
-    <div class="col-md-1 col-sm-1 col-xs-6">
-      <div class="form-group">
-        <label for="cursoEstado">Estado</label>
-        <input type="number" class="form-control form-control-sm gt-spinner-off" id="cursoEstado">
-      </div>
-    </div>
-    <div class="col-md-4 col-sm-3 col-xs-12">
-      <div class="form-group">
-        <label for="cursoImagen">Imagen</label>
-        <input type="file" class="form-control form-control-sm" id="cursoImagen">
-      </div>
-    </div>
-    <!-- SEGUNDA FILA -->
-    <div class="col-md-2 col-sm-2 col-xs-12">
-      <div class="form-group">
-        <label for="cursoCategoria">Categoria</label>
-        <select name="cursos" class="form-control form-control-sm" id="cursosId">
-          <option value="">-- Sin Seleccionar --</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-2 col-xs-12">
-      <div class="form-group">
-        <label for="fechaInicio">Fecha Inicio</label>
-        <input type="date" class="form-control form-control-sm" id="fechaInicio">
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-2 col-xs-12">
-      <div class="form-group">
-        <label for="fechaFin">Fecha Fin</label>
-        <input type="Date" class="form-control form-control-sm" id="fechaFin">
-      </div>
-    </div>
-    <div class="col-md-2 col-sm-2 col-xs-12">
-      <div class="form-group">
-        <label for="cursoIdioma">Idioma</label>
-        <select name="idiomas" class="form-control form-control-sm" id="idiomasId">
-          <option value=""> -- Sin Seleccionar --</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-md-2 col-sm-2 col-xs-6">
-      <div class="form-group">
-        <label for="cursoCreditos">Creditos</label>
-        <input type="number" class="form-control form-control-sm gt-spinner-off" id="cursoCreditos">
-      </div>
-    </div>
+<form [formGroup]="forma" name="forma" (ngSubmit)="guardar()" novalidate>
+  <div class="d-flex justify-content-end gt-botones">
+    <button data-toggle="tooltip" type="button" class="btn btn-secondary btn-white text-whiteml-1" title="Regresar">
+      <i class="fa fa-arrow-left"></i>
+    </button>
+    <button data-toggle="tooltip" type="button" class="btn btn-secondary btn-white text-white ml-1" title="Actualizar">
+      <i class="fa fa-refresh"></i>
+    </button>
+    <button data-toggle="tooltip" type="button" class="btn btn-danger btn-white text-white  ml-1" title="Cancelar">
+      <i class="fa fa-ban"></i>
+    </button>
+    <button data-toggle="tooltip" type="button" class="btn btn-danger btn-white text-white  ml-1" title="Eliminar">
+      <i class="fa fa-trash"></i>
+    </button>
+    <button data-toggle="tooltip" type="submit" class="btn btn-primary btn-white text-white  ml-1" title="Guardar">
+      <i class="fa fa-save"></i>
+    </button>
+
   </div>
+
+
   <div class="row">
     <div class="col-12">
       <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+        <li class="nav-item float-right">
+          <a class="nav-link active" id="principal-tab" data-toggle="tab" href="#principal" role="tab"
+            aria-controls="principal" aria-selected="true">Principal</a>
+        </li>
         <li class="nav-item">
-          <a class="nav-link active" id="contenido-tab" data-toggle="tab" href="#contenido" role="tab"
-            aria-controls="contenido" aria-selected="true">Sub Temas</a>
+          <a class="nav-link" id="contenido-tab" data-toggle="tab" href="#contenido" role="tab"
+            aria-controls="contenido" aria-selected="false">Sub Temas</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="secciones-tab" data-toggle="tab" href="#secciones" role="tab"
@@ -103,17 +60,88 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="contenido" role="tabpanel" aria-labelledby="contenido-tab">
-          <app-contenido></app-contenido>
+        <div class="tab-pane fade show active" id="principal" role="tabpanel" aria-labelledby="principal-tab">
+          <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <label for="tituloLeccion">Nombre de Lección</label>
+                <input type="text" class="form-control form-control-sm" id="tituloLeccion" name="tituloLeccion"
+                  formControlName="titulo">
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6">
+              <div class="form-group">
+                <label for="avance">Avance</label>
+                <input type="number" class="form-control form-control-sm gt-spinner-off" id="avance"
+                  formControlName="avance">
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6">
+              <div class="form-group">
+                <label for="estado">Estado</label>
+                <input type="number" class="form-control form-control-sm gt-spinner-off" id="estado"
+                  formControlName="estado">
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-3 col-xs-12">
+              <div class="form-group">
+                <label for="cursoImagen">Imagen</label>
+                <input type="file" class="form-control form-control-sm" id="cursoImagen">
+              </div>
+            </div>
+            <!-- SEGUNDA FILA -->
+            <div class="col-md-2 col-sm-2 col-xs-12">
+              <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <select name="cursos" class="form-control form-control-sm" id="categoria" formControlName="categoria">
+                  <option value="">-- Sin Seleccionar --</option>
+                  <option value="">-- Computación --</option>
+                  <option value="">-- Ciencias --</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-2 col-xs-12">
+              <div class="form-group">
+                <label for="fechaInicio">Fecha Inicio</label>
+                <input type="date" class="form-control form-control-sm" id="fechaInicio" formControlName="fechaInicio">
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-2 col-xs-12">
+              <div class="form-group">
+                <label for="fechaFin">Fecha Fin</label>
+                <input type="Date" class="form-control form-control-sm" id="fechaFin" formControlName="fechaFin">
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-12">
+              <div class="form-group">
+                <label for="idioma">Idioma</label>
+                <select name="idiomas" class="form-control form-control-sm" id="idiomas" formControlName="idioma">
+                  <option value=""> -- Sin Seleccionar --</option>
+                  <option value="1"> -- Español --</option>
+                  <option value="1"> -- Ingles --</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-6">
+              <div class="form-group">
+                <label for="creditos">Creditos</label>
+                <input type="number" class="form-control form-control-sm gt-spinner-off" id="creditos"
+                  formControlName="creditos">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="contenido" role="tabpanel" aria-labelledby="contenido-tab">
+          <app-contenido [forma]="forma"></app-contenido>
         </div>
         <div class="tab-pane fade" id="secciones" role="tabpanel" aria-labelledby="secciones-tab">
           <app-secciones></app-secciones>
         </div>
         <div class="tab-pane fade" id="test" role="tabpanel" aria-labelledby="test-tab">
-          <app-test></app-test>
+          <app-test [forma]="forma"></app-test>
         </div>
         <div class="tab-pane fade" id="discuciones" role="tabpanel" aria-labelledby="discuciones-tab">
-          <app-discuciones></app-discuciones>
+          <app-discuciones [forma]="forma"></app-discuciones>
         </div>
         <div class="tab-pane fade" id="equipo" role="tabpanel" aria-labelledby="equipo-tab">
           <app-equipos></app-equipos>

@@ -31,7 +31,6 @@
             ],
             "scripts": [
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              
               "node_modules/summernote/dist/summernote-lite.js"
             ]
           },
@@ -95,7 +94,6 @@
             ],
             "scripts": [
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              
               "node_modules/summernote/dist/summernote-lite.js"
             ],
             "assets": [

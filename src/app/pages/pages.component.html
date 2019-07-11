@@ -15,42 +15,46 @@
     <!-- ============================================================== -->
     <div class="container-fluid">
       <app-breadcrumbs></app-breadcrumbs>
-      <div class="row container">
-        <div class="col-md-10 col-sm-10 col-xs-12" id="panelCentral">
-          <!-- ============================================================== -->
-          <!-- Start Page Content -->
-          <!-- ============================================================== -->
-          <router-outlet></router-outlet>
-          <!-- ============================================================== -->
-          <!-- End PAge Content -->
-          <!-- ============================================================== -->
-        </div>
-        <div class="col-md-2 col-sm-2 d-none d-sm-block" id="panelDerecho">
-          <div class="card" style="width: 18rem;">
-            <bs-datepicker-inline [bsValue]="bsInlineValue"></bs-datepicker-inline>
-          </div>
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Pendientes</h5>
-              <p class="card-text">Contenido de Pendientes.</p>
+      <div class="col-12">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-10 col-sm-10 col-xs-12" id="panelCentral">
+              <!-- ============================================================== -->
+              <!-- Start Page Content -->
+              <!-- ============================================================== -->
+              <router-outlet></router-outlet>
+              <!-- ============================================================== -->
+              <!-- End PAge Content -->
+              <!-- ============================================================== -->
             </div>
-          </div>
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Avisos</h5>
-              <p class="card-text">Contenido de Avisos.</p>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Anuncios</h5>
-              <p class="card-text">Contenido de Anuncios.</p>
-            </div>
-          </div>
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Hoy</h5>
-              <p class="card-text">Actividades del Dia.</p>
+            <div class="col-md-2 col-sm-2 d-none d-sm-block" id="panelDerecho">
+              <div class="card" style="width: 18rem;">
+                <bs-datepicker-inline [bsValue]="bsInlineValue"></bs-datepicker-inline>
+              </div>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Pendientes</h5>
+                  <p class="card-text">Contenido de Pendientes.</p>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Avisos</h5>
+                  <p class="card-text">Contenido de Avisos.</p>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Anuncios</h5>
+                  <p class="card-text">Contenido de Anuncios.</p>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Hoy</h5>
+                  <p class="card-text">Actividades del Dia.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

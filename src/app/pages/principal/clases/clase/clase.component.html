@@ -1,8 +1,11 @@
 <div class="row">
+  <button class="btn btn-primary bt-sm float-right" (click)="agregarDetalles()"><i class="fa fa-plus"></i></button>
+</div>
+<div class="row">
   <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let leccion of objeto; let i=index">
     <div class="card">
       <img class="card-img-top" [src]="leccion.imagen" alt="Card image cap">
-      <div class="card-body" (click)="mostrarLeccion()">
+      <div class="card-body" (click)="mostrarLeccion(leccion.id)">
         <h5 class="card-title">{{leccion.titulo}}</h5>
         <p class="card-text">{{leccion.descripcion}}</p>
         <div>

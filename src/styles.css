@@ -108,3 +108,25 @@ input[type=date].gt-dropdown-off::-webkit-calendar-picker-indicator {
 .noVisible{
     visibility: hidden !important;
   }
+
+  .gt-seleccionado {
+  font-weight: bold;
+  font-style: italic;
+  background: gray !important;
+}
+
+.gt-asterisco::after {
+    content:" *";
+    color: red;
+    font-weight: bolder;
+}
+
+
+.gt-asteriscod .gt-asteriscod::after{
+    content:" **";
+    color: red;
+    font-weight: bolder;
+}
+[required] {
+    background-color: beige;
+  }

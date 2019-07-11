@@ -184,6 +184,16 @@
               </li>
               <li>
                 <div class="message-center">
+                  <!-- Aviso -->
+                  <a *ngFor="let ntf of avisos" (click)="verNotificacion(ntf.id);">
+                    <div class="user-img"> <img [src]="ntf.usuario.photoURL" alt="user" class="img-circle"> <span
+                        class="profile-status online pull-right"></span>
+                    </div>
+                    <div class="mail-contnet">
+                      <h5>{{ntf.usuario.displayName}}</h5> <span class="mail-desc">{{ntf.mensaje}}</span> <span
+                        class="time">{{ntf.fecha}}</span>
+                    </div>
+                  </a>
                   <!-- Message -->
                   <a href="#">
                     <div class="user-img"> <img src="assets/images/users/1.jpg" alt="user" class="img-circle"> <span
@@ -228,7 +238,7 @@
                 </div>
               </li>
               <li>
-                <a class="nav-link text-center" href="javascript:void(0);"> <strong>Ver todos los avisos</strong> <i
+                <a class="nav-link text-center"  (click)="verTodasNotificaciones()"> <strong>Ver todos los avisos</strong> <i
                     class="fa fa-angle-right"></i>
                 </a>
               </li>

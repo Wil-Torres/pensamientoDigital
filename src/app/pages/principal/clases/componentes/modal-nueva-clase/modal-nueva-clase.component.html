@@ -1,0 +1,128 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Agregar nueva clase</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form novalidate (ngSubmit)="guardar()" [formGroup]="forma">
+    <tabset type="pills">
+      <tab heading="Descripción">
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="clase">Nombre</label>
+              <input type="text" class="form-control form-control-sm" id="clase" formControlName="clase">
+              <div [hidden]="forma.get('clase').valid">Required</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <label for="estiloCursoId">Estilo</label>
+              <select name="estiloCursoId" class="form-control form-control-sm" id="estiloCursoId" formControlName="estiloCursoId" required="required">
+                <option value="0">-- Instructor --</option>
+                <option value="1">-- Hibrido --</option>
+                <option value="2">-- A su propio ritmo --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="codigoAcceso">¿Código de acceso?</label>
+              <input type="text" class="form-control form-control-sm" id="codigoAcceso" formControlName="codigoAcceso">
+              <div [hidden]="forma.get('codigoAcceso').valid">Required</div>
+            </div>
+          </div>
+          <div class="col-4 bordes-tarea">
+            <div class="form-group">
+              <label for="fechaInicio">Comenzar </label>
+              <input type="text" class="form-control form-control-sm" id="fechaInicio" formControlName="fechaInicio">
+              <div [hidden]="forma.get('fechaInicio').valid">Required</div>
+            </div>
+            <div class="form-group">
+              <label for="fechaFin">Finaliza</label>
+              <input type="text" class="form-control form-control-sm" id="fechaFin" formControlName="fechaFin">
+              <div [hidden]="forma.get('fechaFin').valid">Required</div>
+            </div>
+          </div>
+          <div class="col-4 bordes-tarea">
+            <div class="form-group">
+              <label for="catedra">Materia</label>
+              <select name="catedra" class="form-control form-control-sm" id="materiaId" formControlName="catedra" required="required">
+                <option value="0">-- Seleccione Materia --</option>
+                <option value="1">-- Arte --</option>
+                <option value="2">-- Ciencias --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="grado">Grado</label>
+              <input type="text" class="form-control form-control-sm" id="grado" formControlName="grado">
+              <div [hidden]="forma.get('grado').valid">Required</div>
+            </div>
+          </div>
+        </div>
+        <div class="row"><br></div>
+      </tab>
+      <tab heading="Opciones">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="idioma">Idioma</label>
+              <input type="text" class="form-control form-control-sm" id="idioma" formControlName="idioma">
+              <div [hidden]="forma.get('idioma').valid">Required</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="zonaHoraria">Zona Horaria</label>
+              <input type="text" class="form-control form-control-sm" id="zonaHoraria" formControlName="zonaHoraria">
+              <div [hidden]="forma.get('zonaHoraria').valid">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="curso">Curso</label>
+            <input type="text" class="form-control form-control-sm" id="curso" formControlName="curso">
+            <div [hidden]="forma.get('curso').valid">Required</div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="seccion">Sección</label>
+              <input type="text" class="form-control form-control-sm" id="seccion" formControlName="seccion">
+              <div [hidden]="forma.get('seccion').valid">Required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="semestre">Semestre</label>
+            <input type="text" class="form-control form-control-sm" id="semestre" formControlName="semestre">
+            <div [hidden]="forma.get('semestre').valid">Required</div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="creditos">Creditos</label>
+              <input type="text" class="form-control form-control-sm" id="creditos" formControlName="creditos">
+              <div [hidden]="forma.get('creditos').valid">Required</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="escalaCalificacion">Escala de Calificación</label>
+              <input type="text" class="form-control form-control-sm" id="escalaCalificacion"
+                formControlName="escalaCalificacion">
+              <div [hidden]="forma.get('escalaCalificacion').valid">Required</div>
+            </div>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+    <div class="row justify-content-end">
+      <div class="col-3">
+        <button class="btn btn-outline-secondary btn-sm btn-block text-uppercase btn-rounded" type="button"
+          (click)="cancelar()">Cancelar</button>
+      </div>
+      <div class="col-3">
+        <button class="btn btn-primary btn-sm btn-block text-uppercase btn-rounded" type="submit"
+          [disabled]="!forma.valid">Agregar</button>
+      </div>
+    </div>
+  </form>
+</div>
