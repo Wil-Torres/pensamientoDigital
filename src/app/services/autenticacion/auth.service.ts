@@ -14,7 +14,7 @@ export class AuthService {
   user: Observable<User>;
   userInfo: Observable<UserInfo>;
 
-  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) { 
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
 
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -36,16 +36,42 @@ export class AuthService {
     )
   }
 
-  signUp (email: string, password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(resp => {
+  signUp(email: string, password: string, opciones: any) {
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(resp => {
+        this.updateUser(resp.user, opciones).then(resp => {
+          resolve(true);
+        });
+      }).catch(err => {
+        reject(false);
+        console.log('something went wrong:', err.message);
+      })
+    });
+  }
+
+  /*
+  signUp(email: string, password: string, opciones:any) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(resp => {
       console.log('success!', resp);
-      this.updateUser(resp.user)
+      this.updateUser(resp.user, opciones);
     }).catch(err => {
       console.log('something went wrong:', err.message);
     })
+  };
+  */
+
+  iniciarSesion(email: any, password: any) {
+    return new Promise<any>((resolve, reject) => {
+      let provider = new firebase.auth.EmailAuthProvider();
+      this.afAuth.auth.signInWithEmailAndPassword(email, password).then(res => {
+        resolve(res.user);
+      }, err => {
+        reject(err.message);
+      })
+    });
   }
 
-  login(email: string, password: string){
+  login(email: string, password: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, password).then(resp => {
       console.log(resp);
     }).catch(err => {
@@ -65,16 +91,16 @@ export class AuthService {
   }
 
   private oAuthLogin(provider) {
-    return new Promise ((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this.afAuth.auth.signInWithPopup(provider).then((credenciales) => {
         resolve(this.updateUser(credenciales.user));
         this.router.navigate(['/'])
       }).catch(err => {
         console.log(err);
       })
-    }) 
+    })
   }
-  private updateUser(authData) {
+  private updateUser(authData, rol: any = { reader: true }) {
     const user = new User(authData);
 
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
@@ -83,15 +109,15 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      roles: {reader: true},
+      roles: rol,
       phoneNumber: '12345678',
       password: ''
     }
 
     return userRef.set(data, { merge: true })
-    
+
     //const userRef: AngularFirestoreDocument<User> = this.afs.doc(`usuarios/${authData.uid}`);
-    
+
     /*var userRef = this.afs.collection('usuarios').doc(authData.uid);
     var getDoc = userRef.get().subscribe(doc => {
       if (!doc.exists) {
@@ -117,12 +143,12 @@ export class AuthService {
       }
       getDoc.unsubscribe()
     })*/
-    
+
     // userRef.update(userData);
     //return userRef.valueChanges();
   }
 
-  
+
   // Start listing users from the beginning, 1000 at a time.
-  
+
 }

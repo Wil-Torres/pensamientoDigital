@@ -40,7 +40,17 @@ export class SidebarService{
       submenu: [
         {titulo: 'Configurar Tienda', url: '/configuracion'},
       ]
-    },{
+    },
+    {
+      titulo: 'Caminos',
+      icono: 'fa fa-arrows',
+      url: '',
+      submenu: [
+        {titulo: 'Pendiente', url: '/'},
+      ]
+    }
+    
+    ,{
       titulo: 'Grupos',
       icono: 'fa fa-users',
       url: '/grupos/lista-grupos',
@@ -48,7 +58,7 @@ export class SidebarService{
         {titulo: 'Configurar Tienda', url: '/configuracion'},
       ]
     },{
-      titulo: 'Panel de Control',
+      titulo: 'Dashboard',
       icono: 'fa fa-tachometer',
       url: '/panel/panel-control',
       submenu: [
@@ -73,21 +83,35 @@ export class SidebarService{
       icono: 'fa fa-spinner',
       url: '/bienvenida',
       submenu: [
-        {titulo: 'Configurar Tienda', url: '/configuracion'},
+        {titulo: 'Bienvenida', url: '/bienvenida'},
       ]
     },{
       titulo: 'Usuarios',
       icono: 'fa fa-user',
-      url: '/usuarios',
+      url: '/panel-usuarios',
       submenu: [
-        {titulo: 'Configurar Tienda', url: '/configuracion'},
+        {titulo: 'Panel Usuarios', url: '/panel-usuarios'},
       ]
     },{
       titulo: 'Recursos',
       icono: 'fa fa-tasks',
       url: '/recursos',
       submenu: [
-        {titulo: 'Configurar Tienda', url: '/configuracion'},
+        {titulo: 'Panel de Recursos', url: '/configuracion'},
+      ]
+    },{
+      titulo: 'Reportes',
+      icono: 'fa fa-line-chart',
+      url: '/reportes',
+      submenu: [
+        {titulo: 'Reportes', url: '/reportes'},
+      ]
+    },{
+      titulo: 'Administracion',
+      icono: 'fa fa-cog',
+      url: '/administracion',
+      submenu: [
+        {titulo: 'Administracion', url: '/administracion'},
       ]
     }
 

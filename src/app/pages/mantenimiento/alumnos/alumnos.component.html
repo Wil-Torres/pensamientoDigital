@@ -8,6 +8,10 @@
       <a class="nav-link" id="responsable-tab" data-toggle="tab" href="#responsable" role="tab"
         aria-controls="responsable" aria-selected="false">Responsable</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" id="sistema-tab" data-toggle="tab" href="#sistema" role="tab" aria-controls="sistema"
+        aria-selected="false">Ingreso Sistema</a>
+    </li>
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
@@ -57,6 +61,32 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="text" name="telefono" id="telefono" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="facebook">Facebook</label>
+              <input type="text" name="facebook" id="facebook" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="email">Correo</label>
+              <input type="email" name="email" id="email" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="skype">Skype</label>
+              <input type="text" name="skype" id="skype" class="form-control">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="tab-pane fade" id="responsable" role="tabpanel" aria-labelledby="responsable-tab">
@@ -86,7 +116,16 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="parentesco">Parentesco</label>
-              <input type="text" name="parentesco" id="parentesco" class="form-control">
+              <select name="parentesco" id="parentesco" class="form-control">
+                <option value="padre">Padre</option>
+                <option value="madre">Madre</option>
+                <option value="madre">Hermano</option>
+                <option value="madre">Hermana</option>
+                <option value="madre">Tio</option>
+                <option value="madre">Tia</option>
+                <option value="madre">Abuelo</option>
+                <option value="madre">Abuela</option>
+              </select>
             </div>
           </div>
           <div class="col-md-3">
@@ -101,6 +140,25 @@
               <input type="text" name="movilResponsable" id="movilResponsable" class="form-control">
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="sistema" role="tabpanel" aria-labelledby="responsable-tab">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="userId">USER ID</label>
+              <input type="text" name="userId" id="userId" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" name="password" id="password" class="form-control">
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

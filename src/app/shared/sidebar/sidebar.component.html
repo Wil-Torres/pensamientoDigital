@@ -24,17 +24,18 @@
         <li class="nav-small-cap">PERSONAL</li>
 
         <li class="user-profile" *ngFor="let menu of srvSb.menu">
-          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false" 
-          routerLinkActive="active" [routerLink]="[menu.url]">
+          <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false" routerLinkActive="active"
+            [routerLink]="[menu.url]">
             <i class={{menu.icono}}>
-                <div style="font-size: 13px !important;">{{menu.titulo}}</div>
+              <div style="font-size: 13px !important;">{{menu.titulo}}</div>
 
             </i>
           </a>
-          <!--ul aria-expanded="false" class="collapse" *ngFor="let submenu of menu.submenu">
+          <ul aria-expanded="false" class="collapse" *ngFor="let submenu of menu.submenu">
             <li><a routerLinkActive="active" [routerLink]="[submenu.url]">{{submenu.titulo}} </a></li>
-          </ul-->
+          </ul>
         </li>
+        
       </ul>
     </nav>
     <!-- End Sidebar navigation -->

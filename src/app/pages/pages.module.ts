@@ -24,6 +24,8 @@ import { GradosComponent } from './mantenimiento/grados/grados.component';
 import { CarrerasComponent } from './mantenimiento/carreras/carreras.component';
 import { SeccionesComponent } from './mantenimiento/secciones/secciones.component';
 import { CiclosComponent } from './mantenimiento/ciclos/ciclos.component';
+import { AdministracionModule } from "./principal/administracion/administracion.module";
+import { ReportesModule } from "./principal/reportes/reportes.module";
 
 @NgModule({
     declarations: [
@@ -55,11 +57,13 @@ import { CiclosComponent } from './mantenimiento/ciclos/ciclos.component';
         NoticiasModule,
         PanelModule,
         RecursosModule,
-        UsuariosModule,      
+        UsuariosModule,
+        AdministracionModule,
+        ReportesModule,      
         PAGES_ROUTES,
         FormsModule,
         CommonModule,
-        BsDatepickerModule.forRoot()
+        BsDatepickerModule.forRoot(),
         
     ]
 })

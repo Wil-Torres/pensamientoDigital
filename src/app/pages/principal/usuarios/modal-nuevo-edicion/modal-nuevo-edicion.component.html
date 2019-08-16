@@ -1,0 +1,67 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Agregar Usuario</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form novalidate (ngSubmit)="guardarTarea()" [formGroup]="forma" ngNativeValidate>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group" gtRequerido>
+          <label for="nombre">Nombres</label>
+          <input type="text" class="form-control form-control-sm" id="nombre" formControlName="nombre" required required-err-type="faltaNit">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label for="apellido">Apellidos</label>
+          <input type="text" class="form-control form-control-sm" id="apellido" formControlName="apellido" required>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="tipoCuenta">Tipo de Cuenta</label>
+          <select class="form-control form-control-sm" id="tipoCuenta" formControlName="tipoCuenta" disabled>
+            <option value="0">Estudiante</option>
+            <option value="1">Padre</option>
+            <option value="2">Maestro</option>
+            <option value="3">Administrador</option>
+            <option value="4">Invitado</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="alias">Alias</label>
+          <input type="text" class="form-control form-control-sm" id="alias" formControlName="alias">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <h2>Log in</h2>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="userId">User ID</label>
+          <input type="text" class="form-control form-control-sm" id="userId" formControlName="userId">
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="password">Contreseña</label>
+          <input type="password" class="form-control form-control-sm" id="password" formControlName="password">
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-3">
+        <button class="btn btn-outline-secondary btn-sm btn-block text-uppercase btn-rounded" type="button"
+          (click)="cancelar()">Cancelar</button>
+      </div>
+      <div class="col-3">
+        <button class="btn btn-primary btn-sm btn-block text-uppercase btn-rounded" type="submit"
+          [disabled]="!forma.valid">Agregar</button>
+      </div>
+    </div>
+  </form>
+</div>

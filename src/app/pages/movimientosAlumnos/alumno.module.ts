@@ -11,7 +11,6 @@ import { AlumnoService } from './alumno.service';
   ],
   providers: [
     AlumnoService
-
   ]
 })
 export class AlumnoModule { }

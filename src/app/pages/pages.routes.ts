@@ -7,7 +7,6 @@ import { ListaClasesComponent } from "./principal/clases/lista-clases/lista-clas
 import { ListaGruposComponent } from "./principal/grupos/lista-grupos/lista-grupos.component";
 import { ListaPanelComponent } from "./principal/panel-control/lista-panel/lista-panel.component";
 import { ListaCatalogoComponent } from "./principal/catalogo/lista-catalogo/lista-catalogo.component";
-import { ListaBbienvenidaComponent } from "./principal/bienvenida/lista-bbienvenida/lista-bbienvenida.component";
 import { ListaNoticiasComponent } from "./principal/noticias/lista-noticias/lista-noticias.component";
 import { ListaRecursosComponent } from "./principal/recursos/lista-recursos/lista-recursos.component";
 import { ListaUsuariosComponent } from "./principal/usuarios/lista-usuarios/lista-usuarios.component";
@@ -22,6 +21,12 @@ import { TrabajosComponent } from "./movimientosAlumnos/trabajos/trabajos.compon
 import { AuthGuard } from "../services/autenticacion/auth.guard";
 import { NotificacionListaComponent } from "../shared/componentes/notificacioens/notificacion-lista.component";
 import { AlumnosComponent } from "./mantenimiento/alumnos/alumnos.component";
+import { AdministracionComponent } from "./principal/administracion/administracion.component";
+import { ReportesComponent } from "./principal/reportes/reportes/reportes.component";
+import { PanelComponent } from "./principal/usuarios/panel/panel.component";
+import { ListaBienvenidaComponent } from "./principal/bienvenida/lista-bienvenida/lista-bienvenida.component";
+import { NosotrosComponent } from "./principal/bienvenida/nosotros/nosotros.component";
+import { CuentasComponent } from "./principal/administracion/cuentas/cuentas.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -31,6 +36,13 @@ const pagesRoutes: Routes = [
             {path: 'account-settings', component: AccountSettingComponent, data:{titulo: 'Account Settings'}},
             {path: 'configuracion', component: TiendaComponent, data:{titulo: 'Configuración Tienda'}},
             {path: 'avisos', component: NotificacionListaComponent, data:{titulo: 'Avisos'}},
+
+            /* administacion */
+            {path: 'administracion', component: AdministracionComponent, data:{titulo: 'Adminsitracion'}, canActivate: [AuthGuard]},
+            {path: 'reportes', component: ReportesComponent, data:{titulo: 'Reportes'}, canActivate: [AuthGuard]},
+            {path: 'panel-usuarios', component: PanelComponent, data:{titulo: 'Panel de Usuarios'}, canActivate: [AuthGuard]},
+            {path: 'cuentas-usuarios', component: CuentasComponent, data:{titulo: 'Cuentas de Usuarios'}, canActivate: [AuthGuard]},
+
 
             /* Clases */
             {path: 'clases/lista-clases', component: ListaClasesComponent, data:{titulo: 'Clases'}, canActivate: [AuthGuard]},
@@ -59,7 +71,8 @@ const pagesRoutes: Routes = [
             {path: 'catalogo/lista-catalogo', component: ListaCatalogoComponent, data:{titulo: 'Catálogo'}},
 
             /* Bienvenida*/
-            {path: 'bienvenida', component: ListaBbienvenidaComponent, data:{titulo: 'Bienvenid@'}},
+            {path: 'bienvenida', component: ListaBienvenidaComponent, data:{titulo: 'Bienvenido'}},
+            {path: 'nosotros', component: NosotrosComponent, data:{titulo: 'Nosotros'}},
 
             /* Noticias*/
             {path: 'noticias', component: ListaNoticiasComponent, data:{titulo: 'Noticias'}},

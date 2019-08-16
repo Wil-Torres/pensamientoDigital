@@ -79,6 +79,36 @@
     color: #FFFFFF;
 }
 
+::-webkit-scrollbar {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: gray -300;
+    cursor: pointer;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  
+  input[formcontrolname].ng-valid:not(.ng-pristine) {
+    border-left: 0.25rem solid green;
+  }
+  
+  input[formcontrolname].ng-invalid:not(.ng-pristine) {
+    border-left: 0.25rem solid red;
+  }
+  
+  textarea[formcontrolname].ng-valid:not(.ng-pristine) {
+    border-left: 0.25rem solid green;
+  }
+  
+  textarea[formcontrolname].ng-invalid:not(.ng-pristine) {
+    border-left: 0.25rem solid red;
+  }
+
 input[type=number].gt-spinner-off::-webkit-inner-spin-button, 
 input[type=number].gt-spinner-off::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
@@ -115,7 +145,7 @@ input[type=date].gt-dropdown-off::-webkit-calendar-picker-indicator {
   background: gray !important;
 }
 
-.gt-asterisco::after {
+.gt-asterisco .gt-asterisco::after {
     content:" *";
     color: red;
     font-weight: bolder;

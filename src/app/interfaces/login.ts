@@ -4,6 +4,8 @@ export interface Roles {
     admin?: boolean;
     teacher?: boolean;
     student?: boolean;
+    parents?: boolean;
+    invited?: boolean;
 }
 
 export class UserInfo {

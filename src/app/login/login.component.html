@@ -5,20 +5,19 @@
     style="background-image:url(../assets/images/background/login-register.jpg);">
     <div class="login-box card">
         <div class="card-body">
-            <button class="btn btn-info btn-lg btn-block text-uppercase btn-rounded" type="button"
-                (click)="auth.signOut()">Sign Out</button>
-            <form class="form-horizontal form-material" id="loginform"
-                (ngSubmit)="ingresar('test@test.com', 'Petrox%123')">
+            <form ngNativeValidate class="form-horizontal form-material" id="loginform" (ngSubmit)="ingresar()">
                 <a href="javascript:void(0)" class="text-center db"><img src="../assets/images/logo-icon.png"
                         alt="Home" /><br /><img src="../assets/images/logo-text.png" alt="Home" /></a>
                 <div class="form-group m-t-40">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="ID de usuario">
+                        <input name="email" class="form-control" type="email" required placeholder="Nombre de usuario"
+                            [(ngModel)]="objeto.user" [ngModelOptions]="{standalone: true}">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <input class="form-control" type="password" required="" placeholder="Contraseña">
+                        <input name="password" class="form-control" type="password" required placeholder="Password"
+                            [(ngModel)]="objeto.password" [ngModelOptions]="{standalone: true}">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -80,35 +79,7 @@
             </form>
         </div>
     </div>
-    <div class="login-box card">
-        <div *ngIf="auth.user | async; then authenticated else guest">
-            <!-- template will replace this div -->
-        </div>
 
-
-        <!-- User NOT logged in -->
-        <ng-template #guest>
-            <h3>Howdy, GUEST</h3>
-            <p>Login to get started...</p>
-
-            <button (click)="auth.googleLogin()">
-                <i class="fa fa-google"></i> Connect Google
-            </button>
-
-        </ng-template>
-
-
-        <!-- User logged in -->
-        <ng-template #authenticated>
-            <div *ngIf="auth.user | async as user">
-                <h3>Howdy, {{ user.displayName }}</h3>
-                <img [src]="user.photoURL">
-                <p>UID: {{ user.uid }}</p>
-                <p>Favorite Color: {{ user?.favoriteColor }} </p>
-                <button (click)="auth.signOut()">Logout</button>
-            </div>
-        </ng-template>
-    </div>
 </section>
 <!-- ============================================================== -->
 <!-- End Wrapper -->
