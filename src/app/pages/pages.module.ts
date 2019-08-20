@@ -26,6 +26,7 @@ import { SeccionesComponent } from './mantenimiento/secciones/secciones.componen
 import { CiclosComponent } from './mantenimiento/ciclos/ciclos.component';
 import { AdministracionModule } from "./principal/administracion/administracion.module";
 import { ReportesModule } from "./principal/reportes/reportes.module";
+import { PerfilComponent } from './configuracion/perfil/perfil.component';
 
 @NgModule({
     declarations: [
@@ -39,12 +40,14 @@ import { ReportesModule } from "./principal/reportes/reportes.module";
         GradosComponent,
         CarrerasComponent,
         SeccionesComponent,
-        CiclosComponent
+        CiclosComponent,
+        PerfilComponent
     ],
     exports: [
         HomeComponent,
         PagesComponent,
         AccountSettingComponent,
+        PerfilComponent
     ],
     imports: [
         SharedModule,

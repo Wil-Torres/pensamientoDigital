@@ -27,6 +27,7 @@ import { PanelComponent } from "./principal/usuarios/panel/panel.component";
 import { ListaBienvenidaComponent } from "./principal/bienvenida/lista-bienvenida/lista-bienvenida.component";
 import { NosotrosComponent } from "./principal/bienvenida/nosotros/nosotros.component";
 import { CuentasComponent } from "./principal/administracion/cuentas/cuentas.component";
+import { PerfilComponent } from "./configuracion/perfil/perfil.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -82,6 +83,8 @@ const pagesRoutes: Routes = [
 
             /* Usuarios */
             {path: 'usuarios', component: ListaUsuariosComponent, data:{titulo: 'Usuarios'}},
+            {path: 'perfil', component: PerfilComponent, data:{titulo: 'Perfil'}},
+
             /* Calendario */
             {path: 'calendario', component: CalendarioComponent, data:{titulo: 'Calendario'}},
 
