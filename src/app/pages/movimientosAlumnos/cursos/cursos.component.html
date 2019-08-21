@@ -9,14 +9,14 @@
           <li class="breadcrumb-item">
             <a href="javascript:void(0)">{{objeto.nombreCurso}}</a>
           </li>
-          <li class="breadcrumb-item">{{objeto.contenido[1].nombreContenido}}</li>
-          <li class="breadcrumb-item active">{{objeto.contenido[1].subTemas[0].nombreContenido}}</li>
+          <li class="breadcrumb-item">{{objeto.contenido[unidad].nombreContenido}}</li>
+          <li class="breadcrumb-item active">{{objeto.contenido[unidad].subTemas[leccion].nombreContenido}}</li>
         </ol>
       </div>
       <div>
         <button
           class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i
-            class="ti-settings text-white"></i></button>
+            class="ti-settings text-white"></i>asdadsadsad</button>
       </div>
     </div>
     <div class="row">
@@ -24,30 +24,44 @@
         <!--ul class="list-group" *ngFor="let obj of objeto.contenido" data-toggle="collapse" aria-expanded="false" [attr.aria-controls]="obj.refNombre" [attr.data-target]="obj.refTarget"> {{obj.codigoContenido}} - {{obj.nombreContenido}}
           <li class="list-group-item collapse multi-collapse" *ngFor="let subObj of obj.subTemas" [id]="obj.refNombre">{{subObj.nombreContenido}}</li>
         </ul-->
-        <ul class="list-group" *ngFor="let obj of objeto.contenido"> <span class="font-weight-bold"><i
+        <ul class="list-group" *ngFor="let obj of objeto.contenido; let i = index"> <span class="font-weight-bold"><i
               class="fa fa-bookmark-o text-info font-weight-bold"></i> {{obj.codigoContenido}} -
             {{obj.nombreContenido}}</span>
-          <li class="list-group-item" *ngFor="let subObj of obj.subTemas" [id]="obj.refNombre">
-            {{subObj.nombreContenido}}</li>
+          <li class="list-group-item" *ngFor="let subObj of obj.subTemas; let j = index" [id]="obj.refNombre"
+            (click)="marcar(obj.refNombre,subObj.codigoContenido, obj, i, j)"
+            [ngClass]="{ 'list-group-item-primary' : (seleccionado == obj.refNombre + subObj.codigoContenido)}">
+            {{subObj.nombreContenido}}<span class="float-right"><i
+                [ngClass]="{'text-success fa fa-check' : subObj.visto}"></i></span></li>
         </ul>
       </div>
       <div class="col-md-9 col-sm-6">
         <nav class="nav nav-pills nav-fill">
-          <a class="nav-item nav-link"><button class="btn btn-default navbar-btn">
+          <a class="nav-item nav-link">
+            <button class="btn btn-default navbar-btn" (click)="anterior()">
               <span class="icon fa fa-chevron-left" aria-hidden="true">
                 <span class="">Anterior</span>
               </span>
-            </button></a>
-          <a class="nav-item nav-link" (click)="mostrar(3)">
-            <i class="fa fa-book"></i>
+            </button>
           </a>
-          <a class="nav-item nav-link" (click)="mostrar(1)">
-            <i class="fa fa-film"></i>
+          <a *ngFor="let cont of objeto.contenido[unidad].subTemas[leccion].detalle; let k = index"
+            class="nav-item nav-link" (click)="mostrar(k)"
+            [ngClass]="{ 'list-group-item-primary' : (seleccionContenido == k)}"
+            >
+            <span>
+              <i class="fa " [ngClass]="{'fa-film': cont.tipo == '0', 
+                          'fa-book': cont.tipo == '1', 
+                          'fa-link': cont.tipo == '2',
+                          'fa-picture-o': cont.tipo == '3'
+                        }"></i>
+            </span><span>
+                <i [ngClass]="{'text-success fa fa-check' : cont.visto}"></i>
+            </span>
           </a>
-          <a class="nav-item nav-link disabled" tabindex="-1" aria-disabled="true">
-            <button class="btn btn-default navbar-btn">
+          <a class="nav-item nav-link" tabindex="-1">
+            <button class="btn btn-default navbar-btn" (click)="siguiente()">
               <span class="">Siguiente</span>
-              <span class="icon fa fa-chevron-right" aria-hidden="true"></span>
+              <span class="icon fa fa-chevron-right" aria-hidden="true">
+              </span>
             </button>
           </a>
         </nav>
