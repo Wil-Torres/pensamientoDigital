@@ -54,7 +54,7 @@ const pagesRoutes: Routes = [
             {path: 'alumno', component: AlumnosComponent, data:{titulo: 'Mantenimiento Alumnos'}},
             {path: 'cursos/all-cursos', component: ListaCursosComponent, data:{titulo: 'Todos los Cursos'}},
             {path: 'alumno/mis-cursos', component: ListaCursosComponent, data:{titulo: 'Lista Cursos asignados'}},
-            {path: 'alumno/cursos', component: CursosComponent, data:{titulo: 'Curso'}},
+            {path: 'alumno/cursos/:id', component: CursosComponent, data:{titulo: 'Curso'}},
             {path: 'alumno/calificaciones', component: CalificacionesComponent, data:{titulo: 'Calificaciones'}},
             {path: 'alumno/tareas', component: TrabajosComponent, data:{titulo: 'Tareas'}},
             {path: 'alumno/historial', component: HistorialComponent, data:{titulo: 'Historial'}},

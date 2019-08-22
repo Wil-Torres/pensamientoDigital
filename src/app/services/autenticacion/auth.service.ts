@@ -48,18 +48,6 @@ export class AuthService {
       })
     });
   }
-
-  /*
-  signUp(email: string, password: string, opciones:any) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(resp => {
-      console.log('success!', resp);
-      this.updateUser(resp.user, opciones);
-    }).catch(err => {
-      console.log('something went wrong:', err.message);
-    })
-  };
-  */
-
   iniciarSesion(email: any, password: any) {
     return new Promise<any>((resolve, reject) => {
       let provider = new firebase.auth.EmailAuthProvider();
@@ -85,7 +73,6 @@ export class AuthService {
 
   // SignIn Google
   googleLogin() {
-    console.log('hola');
     const provider = new firebase.auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
   }
@@ -112,43 +99,7 @@ export class AuthService {
       roles: rol,
       phoneNumber: '12345678',
       password: ''
-    }
-
+    };
     return userRef.set(data, { merge: true })
-
-    //const userRef: AngularFirestoreDocument<User> = this.afs.doc(`usuarios/${authData.uid}`);
-
-    /*var userRef = this.afs.collection('usuarios').doc(authData.uid);
-    var getDoc = userRef.get().subscribe(doc => {
-      if (!doc.exists) {
-        this.afs.collection('usuarios').doc(userData.uid).set({
-          uid:userData.uid,
-          email: userData.email,
-          displayName: userData.displayName,
-          phoneNumber: userData.phoneNumber,
-          password: null,
-          photoURL: userData.photoURL,
-          roles: {reader: true}
-        })
-      } else {
-        this.afs.collection('usuarios').doc(userData.uid).set({
-          uid:userData.uid,
-          email: userData.email,
-          displayName: userData.displayName,
-          phoneNumber: userData.phoneNumber,
-          password: null,
-          photoURL: userData.photoURL,
-          roles: {reader: true}
-        })
-      }
-      getDoc.unsubscribe()
-    })*/
-
-    // userRef.update(userData);
-    //return userRef.valueChanges();
-  }
-
-
-  // Start listing users from the beginning, 1000 at a time.
-
+  };
 }

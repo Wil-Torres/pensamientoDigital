@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
       this.usuarioTemp = resp;
       this.notificacion.obtenerNotificaiones(this.usuarioTemp.uid).subscribe(resp => {
         this.avisos = resp; 
-        console.log(resp)
       });
     })
     
@@ -42,13 +41,11 @@ export class HeaderComponent implements OnInit {
   }
 
   verNotificacion(id:string) {
-    console.log(id)
     const initialState = { notificacionId: id};
     this.modalRef = this.modalService.show(NotificacionModalComponent, { class: 'modal-lg', initialState });
   }
 
   verTodasNotificaciones () {
-    console.log('resp')
     this.router.navigate(['/avisos']);
   }
 

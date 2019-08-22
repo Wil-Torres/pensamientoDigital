@@ -2,8 +2,8 @@ export interface ListaCursos {
   $key: string;
   cantidadEstudiantes: number;
   grado: string;
-  id: String; 
-  seleccion: boolean; 
+  id: String;
+  seleccion: boolean;
   clase: String;
   catedra: String;
   lecciones: any;
@@ -87,7 +87,7 @@ export class ListaClasesComponent implements OnInit {
   imagenTemp: string;
 
   path = 'imagenes';
-  objetos:any = {};
+  objetos: any = {};
   private _objeto: any[] = [];
   modalRef: BsModalRef | null;
   posts: {};
@@ -101,7 +101,7 @@ export class ListaClasesComponent implements OnInit {
 
   constructor(private router: Router, private postServices: PostService, private srvCurso: ClasesService,
     private storage: AngularFireStorage,
-    private afs: AngularFirestore, 
+    private afs: AngularFirestore,
     private modalService: BsModalService,
     @Inject(DOCUMENT) private _document) {
     postServices.getPosts().subscribe(resp => {
@@ -133,20 +133,19 @@ export class ListaClasesComponent implements OnInit {
     ]
   }
   edicion(item: any) {
-    this.router.navigate(['/clase/' + item+ '/lecciones/']);
+    this.router.navigate(['/clase/' + item + '/lecciones/']);
   }
 
-  nuevo(){
+  nuevo() {
     this.modalRef = this.modalService.show(ModalNuevaClaseComponent, { class: 'modal-lg' });
     let claseTemp = this.modalRef.content.clase.subscribe((clase: any) => {
-      console.log(clase)
       claseTemp.unsubscribe();
     });
   }
 
   buscar(offset: number = 0, limit: number = 10) {
-    this.srvCurso.getCursos(offset, limit).then(( resp ) => {
-      resp.subscribe(( res ) => {
+    this.srvCurso.getCursos(offset, limit).then((resp) => {
+      resp.subscribe((res) => {
         let x = [];
         res.forEach((elem: ListaCursos) => {
           x.push({
@@ -168,16 +167,8 @@ export class ListaClasesComponent implements OnInit {
 
   }
   verArchivo() {
-    console.log(this.objetos)
-    console.log(this.objetos)
     const file = this.objetos.img.target.files[0];
-
-    /*if (this.objeto.ancho !== 500 && this.objeto.alto !== 750) {
-      swal('Ocurrio un problema','Tamaño de imagen no permitido' , 'error');
-      return;
-    }*/
     if (file.type.split('/')[0] !== 'image') {
-      console.error('unsupported file type :( ');
       return;
     }
     const path = `imagenes/${new Date().getTime()}_${file.name}`;
@@ -204,7 +195,7 @@ export class ListaClasesComponent implements OnInit {
             swal('Agregar Galeria', 'Se ha creado la galeria  ' + this.objetos.nombre, 'success').then(() => {
               this.router.navigate(['/lista-galeria']);
             });
-            
+
           })
         })
       });
@@ -218,7 +209,5 @@ export class ListaClasesComponent implements OnInit {
         return this.downloadURL = fileRef.getDownloadURL()
       })
     );
-    
   }
-
 }

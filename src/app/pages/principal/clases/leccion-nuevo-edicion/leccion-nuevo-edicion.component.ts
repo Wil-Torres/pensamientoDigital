@@ -86,7 +86,6 @@ export class LeccionNuevoEdicionComponent implements OnInit {
   }
   obtenerLeccion(){
     let lesson = this.srvCurso.getLeccion(this._cursoId, this._objetoId).subscribe(leccion => {
-      console.log(leccion);
       this.forma.patchValue(leccion, {emitEvent:true});
       lesson.unsubscribe();
     })

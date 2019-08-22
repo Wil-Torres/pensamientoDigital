@@ -16,7 +16,6 @@ export class NotificacionesService {
     this.coleccionNotifiaciones = this.afs.collection<any>('users');
     try {
       const resp = await this.coleccionNotifiaciones.ref.get();
-      console.log(resp.docs);
       let batch = this.afs.firestore.batch();
       resp.docs.forEach(userDocRef => {
         candidatos.forEach(element => {

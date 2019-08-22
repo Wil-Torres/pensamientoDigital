@@ -2,6 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { SidebarService } from 'src/app/services/service.index';
 import { AlumnoService } from '../alumno.service';
+import { ActivatedRoute } from '@angular/router';
+import { isNil } from 'lodash';
+import { ClasesService } from '../../principal/clases/clases.service';
 
 @Component({
   selector: 'app-cursos',
@@ -9,6 +12,15 @@ import { AlumnoService } from '../alumno.service';
   styles: []
 })
 export class CursosComponent implements OnInit {
+  private _objetoId: string = this.aRoute.snapshot.paramMap.get('id');
+
+  public get objetoId(): string {
+    return this._objetoId;
+  }
+  public set objetoId(v: string) {
+    this._objetoId = v;
+  }
+
   seleccion: string = '';
   objeto: any = {};
   objBreadcrumb: any = {};
@@ -19,7 +31,8 @@ export class CursosComponent implements OnInit {
   seleccionContenido: any;
 
 
-  constructor(@Inject(DOCUMENT) private _document, private alumno: AlumnoService) {
+  constructor(@Inject(DOCUMENT) private _document, private alumno: AlumnoService, private aRoute: ActivatedRoute,
+    private srvCurso: ClasesService) {
     alumno.inicializar();
     this.unidad = 0;
     this.leccion = 0;
@@ -27,7 +40,9 @@ export class CursosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initObj();
+    if (!isNil(this.objetoId)) {
+      this.initObj();
+    }
   }
 
   marcar(raiz: any, marcado: any, obj: any, unidad: any, leccion: any) {
@@ -56,7 +71,6 @@ export class CursosComponent implements OnInit {
       if (((this.leccion + 1) === this.objeto.contenido[this.unidad].subTemas.length) && ((this.unidad + 1) === this.objeto.contenido.length)) {
         this.objeto.contenido[this.unidad].subTemas[this.leccion].visto = true;
         this.objeto.contenido[this.unidad].subTemas[this.leccion].detalle[this.contenido].visto = true;
-        console.log('llego al limite de cursos')
         return;
       }
       if (this.objeto.contenido[this.unidad].subTemas[this.leccion].detalle.length === (this.contenido + 1)) {
@@ -79,9 +93,8 @@ export class CursosComponent implements OnInit {
   anterior() {
     if (this.leccion === 0) {
       if (this.leccion === 0 && this.unidad === 0 && this.contenido === 0) {
-        console.log('llego al inicio de los cursos')
         return;
-      } else if (this.contenido !== 0){
+      } else if (this.contenido !== 0) {
         this.contenido = this.contenido - 1
         this.mostrar(this.contenido);
         return;
@@ -112,7 +125,7 @@ export class CursosComponent implements OnInit {
 
   leccionActual() {
     this.seleccionado = this.objeto.contenido[this.unidad].refNombre +
-      this.objeto.contenido[this.unidad].subTemas[this.leccion].codigoContenido
+      this.objeto.contenido[this.unidad].subTemas[this.leccion].codigoSubTema
     this.mostrar(this.contenido);
   }
 
@@ -130,7 +143,7 @@ export class CursosComponent implements OnInit {
   }
 
   initObj() {
-    this.objeto = {
+    /*this.objeto = {
       avanceCurso: 0,
       categoriaId: "2450",
       contenido: [{
@@ -313,9 +326,45 @@ export class CursosComponent implements OnInit {
       idiomaId: 1,
       nombreCurso: "Javascript Avanzado",
       $id: "-Ld9_yln2z7iF78EPqqr",
-    }
-    this.leccionActual();
+    }*/
+    this.obtenerCurso();
 
+
+  }
+
+  obtenerCurso() {
+
+    let curso = this.srvCurso.getLecciones(this.objetoId).subscribe(resp => {
+      let obj = []
+      resp.forEach((element, index) => {
+        element.visto = false
+        if (element.contenido.length > 0) {
+          element.contenido.forEach(elem => {
+            elem.detalle = []
+            elem.visto = false
+          });
+        } else {
+          element.contenido = [
+            {detalle: []}
+          ]
+        }
+      })
+      resp.forEach((element, index) => {
+        obj.push({
+          codigoContenido: (index + 1),
+          refTarget: '#tema' + index,
+          refNombre: 'tema' + index,
+          documento: "no hay",
+          nombreContenido: element.titulo,
+          videoUrlContenido: "",
+          subTemas: element.contenido
+        })
+      });
+      this.objeto = {
+        contenido: obj
+      }
+      this.leccionActual();
+    })
   }
 
 }

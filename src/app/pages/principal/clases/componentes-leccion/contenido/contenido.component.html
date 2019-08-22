@@ -10,8 +10,8 @@
   <div class="col-md-2 col-sm-2 col-3">
     <div class="form-group">
       <label for="codigoSubTema" class="font-weight-bold">Código</label>
-      <input type="number" class="form-control form-control-sm gt-spinner-off" id="codigoSubTema" [(ngModel)]="detalle.codigoSubTema"
-        [ngModelOptions]="{standalone: true}">
+      <input type="number" class="form-control form-control-sm gt-spinner-off" id="codigoSubTema"
+        [(ngModel)]="detalle.codigoSubTema" [ngModelOptions]="{standalone: true}">
     </div>
   </div>
   <div class="col-md-3 col-sm-3 col-9">
@@ -46,9 +46,69 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let tema of forma.value.contenido; let i = index">
+        <tr *ngFor="let tema of forma.value.contenido; let i = index" data-toggle="collapse"
+          data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" (click)="seleccionar(i)">
           <td>{{tema.codigo}}</td>
           <td>{{tema.descripcion}}</td>
+        </tr>
+        <tr class="collapse" id="collapseExample">
+          <td colspan="3">
+            <div>
+              <div class="card card-body">
+                <div class="row d-flex justify-content-end">
+                  <button type="button" class="btn btn-sm btn-danger" title="Cancelar Cambios" (click)="cancelar()">
+                    <i class="fa fa-ban"></i>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-primary ml-1" title="Agregar Detalle"
+                    (click)="agregarSubContendio()">
+                    <i class="fa fa-check"></i>
+                  </button>
+                </div>
+                <div class="row">
+                  <div class="col-md-2 col-sm-2 col-3">
+                    <div class="form-group">
+                      <label for="tipo" class="font-weight-bold">Tipo de Documentación</label>
+                      <select class="form-control form-control-sm gt-spinner-off" id="tipo"
+                        [(ngModel)]="subContenido.tipo" [ngModelOptions]="{standalone: true}">
+                        <option value="0">Video</option>
+                        <option value="1">Docto</option>
+                        <option value="2">Link</option>
+                        <option value="3">Imagen</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="tipoCarga" id="url"
+                        [value]="1" [(ngModel)]="tipoCargado" [ngModelOptions]="{standalone: true}">
+                      <label class="form-check-label" for="url">Cargar Archivo</label>
+                      <input class="form-check-input" type="radio" name="tipoCarga" id="archivo" 
+                        [value]="2" [(ngModel)]="tipoCargado" >
+                      <label class="form-check-label" for="archivo">URL</label>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-9">
+                    <div class="form-group">
+                      <label for="url" class="font-weight-bold">URL</label>
+                      <input type="text" class="form-control form-control-sm" id="url" [(ngModel)]="subContenido.url"
+                        [ngModelOptions]="{standalone: true}">
+                    </div>
+                  </div>
+                  <div class="col-md-4 col-sm-4 col-6">
+                    <div class="form-group">
+                      <label for="documento" class="font-weight-bold">Documento</label>
+                      <input type="file" name="files" id="files" (change)="cargarInfo( $event.target.files )">
+                      <!--input type="file" class="form-control form-control-sm" id="documento"
+                        [(ngModel)]="subContenido.documento" [ngModelOptions]="{standalone: true}"
+                        placeholder="Upload file" accept=".pdf,.doc,.docx"-->
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </td>
+
         </tr>
       </tbody>
     </table>

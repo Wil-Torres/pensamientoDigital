@@ -10,51 +10,82 @@ import { finalize } from 'rxjs/operators';
 export class RecursosService {
   objCollection: AngularFirestoreCollection<any>;
   recursos: Observable<any[]>
-  ubicacion: string
+  ubicacion: string = 'recursos'
   task: AngularFireUploadTask;
   snapshot: Observable<any>;
   arrayDownload: any = [];
   downloadURL: Observable<string>;
 
-  constructor(private afs: AngularFirestore, private storage: AngularFireStorage) {}
+  constructor(private afs: AngularFirestore, private storage: AngularFireStorage) { }
 
-  getAllRecursos(){
+  getAllRecursos() {
     return this.afs.collection('recursos').valueChanges();
   }
-
-  getByIdRecurso(id:string){
+  getByIdRecurso(id: string) {
     return this.afs.collection('recursos').doc(id).valueChanges();
   }
-  addRecurso(event: FileList){
+  addRecurso(event: FileList) {
     const files = event;
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      if (file.type.split('/')[0] !== 'image') {
-        console.error('unsupported file type :( ');
-        return;
-      }
       const path = `${this.ubicacion}/${new Date().getTime()}_${file.name}`;
       const customMetadata = { app: 'Pensamiento_Digital' };
       const fileRef = this.storage.ref(path);
       this.task = this.storage.upload(path, file, { customMetadata })
-      this.task.then(res => {
-        this.snapshot = this.task.snapshotChanges().pipe(
+      this.task.then(tk => {
+        let x = this.task.snapshotChanges().pipe(
           finalize(async () => {
             fileRef.getDownloadURL().toPromise().then(url => {
-              /*this.arrayDownload.push(url);
-              this.producto.imagenes = this.arrayDownload;
-              this.producto.img = event;
-              this.obj.emit(this.producto);*/
+              this.afs.collection('recursos').add({
+                id: null,
+                nombre: file.name,
+                fechaCreacion: new Date(),
+                tipoArchivo: file.type,
+                url,
+                fullPath: tk.ref.fullPath,
+                tamanio: file.size,
+                seleccionar: false
+              }).then((itemRec) => {
+                itemRec.update({ id: itemRec.id }).then(() => {
+                  x.unsubscribe();
+                });
+              });
             });
-            return this.downloadURL = fileRef.getDownloadURL()
           })
-        );
-      });
-
+        ).subscribe(resp => { });
+      })
     }
-    
   }
 
+  addRecursoCurso(curso: string, leccion: string, tipo: number = 0, event: FileList) {
+    return new Promise((resolve) => {
+      const files = event;
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const path = `cursos/${curso}/${leccion}/${!tipo ? 'contenido' : 'tarea'}/${new Date().getTime()}_${file.name}`;
+        const customMetadata = { app: 'Pensamiento_Digital' };
+        const fileRef = this.storage.ref(path);
+        this.task = this.storage.upload(path, file, { customMetadata })
+        this.task.then(tk => {
+          let x = this.task.snapshotChanges().pipe(
+            finalize(async () => {
+              fileRef.getDownloadURL().toPromise().then(url => {
+                resolve(url);
+              });
+            })
+          ).subscribe(resp => { });
+        })
+      }
 
+    });
 
+  }
+
+  removeRecurso(item: any) {
+    this.afs.collection('recursos').doc(item.id).delete().then(resp => {
+      let temp = this.storage.ref(item.fullPath).delete().subscribe(eliminado => {
+        temp.unsubscribe();
+      })
+    })
+  }
 }

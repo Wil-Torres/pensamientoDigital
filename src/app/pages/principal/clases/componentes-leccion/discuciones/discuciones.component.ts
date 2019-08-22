@@ -61,7 +61,6 @@ export class DiscucionesComponent implements OnInit {
   }
 
   enviarMensaje(item: any) {
-    console.log(item)
     this.srvCursos.addPosts(this._cursoId, this._objetoId, item.id, {
       comentario: this.envioMsn,
       usuario: this.usuario,
@@ -69,23 +68,16 @@ export class DiscucionesComponent implements OnInit {
     }).then(resp => {
       resp.update({ id: resp.id, $key: resp.id }).then(() => { console.log('creado') });
     })
-    /* this.forma.value.discuciones[item].discusion.push({
-      comentario: this.envioMsn,
-      usuario: this.usuario,
-      fecha: new Date()
-    });*/
   }
   agregarDicusion() {
-    console.log(this.forma.value);
     const initialState = { datoCurso: { curso: this._cursoId, leccion: this._objetoId } };
     this.modalRef = this.modalService.show(NuevaDiscucionModalComponent, { class: 'modal-sm', initialState });
     let discucionTemp = this.modalRef.content.discucion.subscribe((discucion: any) => {
       if (discucion.creado) {
         swal('Creacion de Registro', 'Nuevo tema de discución creado', 'success').then(() => {
           this.srvCursos.sendNotification([{id:'9KprCpB7DoRHtorFuKfRpNKH6Cn1'}], {usuario:this.usuario, fecha:new Date(), mensaje: 'Hola que hace', title:'Nuevo Foro', read:false}).then(resp => {
-            console.log(resp);
             discucionTemp.unsubscribe();
-          }).catch(err => {console.log(err)});
+          }).catch(err => {swal('Ocurrio un problema', err, 'error');});
           
         })
       }

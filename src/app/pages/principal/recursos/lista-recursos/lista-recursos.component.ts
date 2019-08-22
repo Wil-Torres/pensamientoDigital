@@ -1,5 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { RecursosService } from '../recursos.service';
+import { isThisSecond } from 'date-fns';
 
 @Component({
   selector: 'app-lista-recursos',
@@ -19,8 +21,10 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
             <th class="gt-wd-25"></th>
             <th class="gt-wd-25">#</th>
             <th>Recurso</th>
-            <th class="gt-wd-75">Tamaño</th>
+            <th class="gt-wd-75">Tipo Archivo</th>
+            <th class="gt-wd-100">Tamaño</th>
             <th class="gt-wd-100">Fecha de creación</th>
+            <th class="gt-wd-75">Descargar</th>
           </tr>
         </thead>
         <tbody>
@@ -29,9 +33,14 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
               <label class="form-check-label" [for]="'item' + item.id"></label>
             </td>
             <td>{{i+1}}</td>
-            <td>{{item.recurso}}</td>
-            <td>{{item.tamanio}}</td>
-            <td>{{item.fechaCreacion}}</td>
+            <td>{{item.nombre}}</td>
+            <td>{{item.tipoArchivo}}</td>
+            <td class="text-right">{{(item.tamanio ? (item.tamanio / 1000) : 0) | number:'0.2-2'}} KB</td>
+            <td>{{item.fechaCreacion.toDate() | date:'dd/MM/yyyy'}}</td>
+            <td class="text-center">
+              <a [href]="item.url" download><i class="fa fa-download text-success"></i>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -63,7 +72,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
           <div class="card" style="height: 150px;">
             <div class="form-control">
               <label for="cargaArchivo">Cargando Archivo</label>
-              <input type="file" name="cargaArchivo" id="cargaArchivo">
+              <input type="file" name="files" id="files" (change)="cargarInfo( $event.target.files )">
             </div>
           </div>
 
@@ -74,20 +83,29 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap';
               <thead class="bg-primary text-light">
                 <tr>
                   <th class="gt-wd-25"></th>
+                  <th class="gt-wd-25">#</th>
                   <th>Recurso</th>
-                  <th class="gt-wd-75">Tamaño</th>
+                  <th class="gt-wd-75">Tipo Archivo</th>
+                  <th class="gt-wd-100">Tamaño</th>
                   <th class="gt-wd-100">Fecha de creación</th>
+                  <th class="gt-wd-75">Descargar</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of recursoExistente">
+                <tr *ngFor="let item of recursos; let i = index">
                   <td><input type="radio" class="form-check-*" [(ngModel)]="seleccionaExistente" [value]="item"
                       [id]="'exist' + item.id">
                     <label class="form-check-label" [for]="'exist' + item.id"></label>
                   </td>
-                  <td>{{item.recurso}}</td>
-                  <td>{{item.tamanio}}</td>
-                  <td>{{item.fechaCreacion}}</td>
+                  <td>{{i+1}}</td>
+                  <td>{{item.nombre}}</td>
+                  <td>{{item.tipoArchivo}}</td>
+                  <td class="text-right">{{(item.tamanio ? (item.tamanio / 1000) : 0) | number:'0.2-2'}} KB</td>
+                  <td>{{item.fechaCreacion.toDate() | date:'dd/MM/yyyy'}}</td>
+                  <td class="text-center">
+                    <a [href]="item.url" download><i class="fa fa-download text-success"></i>
+                    </a>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -117,34 +135,31 @@ export class ListaRecursosComponent implements OnInit {
   }
 
 
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService, private srvRecurso: RecursosService) { }
 
   ngOnInit() {
     this.initObj();
   }
 
   initObj() {
-    this.recursos = [
-      { id: 1, seleccionar: false, recurso: 'Documentos Word', enlace: 'no tiene', fechaCreacion: '10/08/2019', tamanio: '1 MB' },
-      { id: 2, seleccionar: false, recurso: 'Documentos Excel', enlace: 'no tiene', fechaCreacion: '11/08/2019', tamanio: '1 MB' },
-      { id: 3, seleccionar: false, recurso: 'Ejecutable', enlace: 'no tiene', fechaCreacion: '12/08/2019', tamanio: '3 MB' },
-      { id: 4, seleccionar: false, recurso: 'Maquetaciones web', enlace: 'no tiene', fechaCreacion: '13/08/2019', tamanio: '5 MB' },
-      { id: 5, seleccionar: false, recurso: 'Otros', enlace: 'no tiene', fechaCreacion: '14/08/2019', tamanio: '15 MB' },
-    ]
-
-    this.recursoExistente = [
-      { id: 6, recurso: 'VS 2013', enlace: 'no tiene', fechaCreacion: '10/08/2019', tamanio: '1 MB' },
-      { id: 7, recurso: 'Android Studio', enlace: 'no tiene', fechaCreacion: '11/08/2019', tamanio: '1 MB' },
-      { id: 8, recurso: 'VS Code 10.8', enlace: 'no tiene', fechaCreacion: '12/08/2019', tamanio: '3 MB' },
-      { id: 9, recurso: 'Node.js', enlace: 'no tiene', fechaCreacion: '13/08/2019', tamanio: '5 MB' },
-      { id: 10, recurso: 'Git', enlace: 'no tiene', fechaCreacion: '14/08/2019', tamanio: '15 MB' }
-    ]
-
+    this.srvRecurso.getAllRecursos().subscribe(resp => {
+      this.recursos = resp;
+    })
   }
 
   agregarRecurso(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
   }
 
-  eliminarRecurso() { }
+  eliminarRecurso(item: any) {
+    this.recursos.forEach(element => {
+      if (element.seleccionar) {
+        this.srvRecurso.removeRecurso(element);
+      }
+    });
+  }
+
+  cargarInfo(archivo: FileList) {
+    this.srvRecurso.addRecurso(archivo);
+  }
 }

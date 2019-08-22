@@ -10,7 +10,7 @@
             <a href="javascript:void(0)">{{objeto.nombreCurso}}</a>
           </li>
           <li class="breadcrumb-item">{{objeto.contenido[unidad].nombreContenido}}</li>
-          <li class="breadcrumb-item active">{{objeto.contenido[unidad].subTemas[leccion].nombreContenido}}</li>
+          <li class="breadcrumb-item active">{{objeto.contenido[unidad].subTemas[leccion].descripcion}}</li>
         </ol>
       </div>
       <div>
@@ -28,9 +28,9 @@
               class="fa fa-bookmark-o text-info font-weight-bold"></i> {{obj.codigoContenido}} -
             {{obj.nombreContenido}}</span>
           <li class="list-group-item" *ngFor="let subObj of obj.subTemas; let j = index" [id]="obj.refNombre"
-            (click)="marcar(obj.refNombre,subObj.codigoContenido, obj, i, j)"
-            [ngClass]="{ 'list-group-item-primary' : (seleccionado == obj.refNombre + subObj.codigoContenido)}">
-            {{subObj.nombreContenido}}<span class="float-right"><i
+            (click)="marcar(obj.refNombre,subObj.codigoSubTema, obj, i, j)"
+            [ngClass]="{ 'list-group-item-primary' : (seleccionado == obj.refNombre + subObj.codigoSubTema)}">
+            {{subObj.descripcion}}<span class="float-right"><i
                 [ngClass]="{'text-success fa fa-check' : subObj.visto}"></i></span></li>
         </ul>
       </div>

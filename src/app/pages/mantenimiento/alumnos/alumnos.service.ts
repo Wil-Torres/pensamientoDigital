@@ -59,12 +59,10 @@ export class AlumnosService {
     this.coleccionAlumno = this.afs.collection<any>('alumnos');
     let x = this.coleccionAlumno.snapshotChanges();
     x.forEach(producto => {
-      console.log(producto)
       producto.forEach(prod => {
         let data = prod.payload.doc.data();
         let id = prod.payload.doc.id;
         data['id'] = id;
-        console.log("ID: ", id, " Data: ", data);
       });
     })
     return this.coleccionAlumno.doc(id).valueChanges();

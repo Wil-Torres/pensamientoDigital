@@ -47,9 +47,6 @@ export class TestComponent implements OnInit {
       this.modalRef = this.modalService.show(TareasComponent, opciones);
       let tareaTemp = this.modalRef.content.tarea.subscribe((tarea: any) => {
         let edicion = this.forma.value.test;
-        console.log(edicion.findIndex((elem:any) => {
-          return elem.id === tarea.tarea.id;
-        }))
         let x = edicion.findIndex((elem: any) => {
           return elem.id === tarea.tarea.id;
         })

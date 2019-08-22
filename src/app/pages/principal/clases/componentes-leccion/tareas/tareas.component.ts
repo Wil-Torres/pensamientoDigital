@@ -96,9 +96,7 @@ export class TareasComponent implements OnInit {
   disableEditor() {
     this.editorDisabled = true;
   }
-  onBlur() {
-    console.log('Blur');
-  }
+  onBlur() {}
   guardarTarea(tarea: any) {
     this.tarea.emit({ tarea: this.forma.getRawValue() });
     this.modalRef.hide();

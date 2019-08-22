@@ -270,7 +270,6 @@ export class ClaseComponent implements OnInit {
   }
 
   agregarDetalles() {
-    console.log(this.objetoId);
     const initialState = { objetoId: this.objetoId };
     this.modalRef = this.modalService.show(ModalNuevaLeccionComponent, { class: 'modal-sm', initialState });
     let leccionTemp = this.modalRef.content.leccion.subscribe((leccion: any) => {

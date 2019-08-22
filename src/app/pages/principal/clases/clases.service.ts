@@ -11,7 +11,7 @@ export interface Clase {
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
-
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -69,12 +69,10 @@ export class ClasesService {
     this.coleccionClases = this.afs.collection<any>('cursos');
     let x = this.coleccionClases.snapshotChanges();
     x.forEach(producto => {
-      console.log(producto)
       producto.forEach(prod => {
         let data = prod.payload.doc.data();
         let id = prod.payload.doc.id;
         data['id'] = id;
-        console.log("ID: ", id, " Data: ", data);
       });
     })
     return this.coleccionClases.doc(id).valueChanges();
@@ -181,7 +179,6 @@ export class ClasesService {
   sendNotification(candidatos: any = [{id:'9KprCpB7DoRHtorFuKfRpNKH6Cn1'}], obj:any): Promise<void> {
     this.coleccionClases = this.afs.collection<any>('users');
     return this.coleccionClases.ref.get().then(resp => {
-      console.log(resp.docs)
       let batch = this.afs.firestore.batch();
       resp.docs.forEach(userDocRef => {
         candidatos.forEach(element => {
@@ -192,7 +189,7 @@ export class ClasesService {
         //batch.update(userDocRef.ref, {'score':0, 'leadsWithSalesWin': 0, 'leadsReported': 0})
       });
       batch.commit().catch(err => {console.log(err)})
-    }).catch( error => console.error(error))
+    }).catch( error => swal('Ocurrio un problema', error, 'error'));
 
   }
 

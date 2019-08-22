@@ -40,12 +40,14 @@ export class FileUploadComponent implements OnInit {
     const files = event;
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      let tipoTemp = file.type.split('/')[0]
+      console.log(tipoTemp)
       if (file.type.split('/')[0] !== 'image') {
         console.error('unsupported file type :( ');
         return;
       }
       const path = `${this.ubicacion}/${new Date().getTime()}_${file.name}`;
-      const customMetadata = { app: 'My AngularFire-powered PWA!' };
+      const customMetadata = { app: 'Pensamiento Digital' };
       const fileRef = this.storage.ref(path);
       this.task = this.storage.upload(path, file, { customMetadata })
       this.task.then(res => {
