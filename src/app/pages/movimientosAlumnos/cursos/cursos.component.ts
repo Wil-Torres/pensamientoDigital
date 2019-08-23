@@ -338,16 +338,6 @@ export class CursosComponent implements OnInit {
       let obj = []
       resp.forEach((element, index) => {
         element.visto = false
-        if (element.contenido.length > 0) {
-          element.contenido.forEach(elem => {
-            elem.detalle = []
-            elem.visto = false
-          });
-        } else {
-          element.contenido = [
-            {detalle: []}
-          ]
-        }
       })
       resp.forEach((element, index) => {
         obj.push({

@@ -1,12 +1,37 @@
-<form novalidate [formGroup]="forma">
-  <div class="input-group mb-3">
-    <div class="custom-file">
-      <input type="file" class="custom-file-input" id="enviarTarea">
-      <label class="custom-file-label" for="enviarTarea" aria-describedby="enviandoTarea">Seleccionar archivo</label>
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <form class="form" ng-submit="seleccionar()" novalidate [formGroup]="forma">
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <ul class="list-group" *ngFor="let obj of objeto.contenido; let i = index"> <span class="font-weight-bold"><i
+              class="fa fa-bookmark-o text-info font-weight-bold"></i> {{obj.codigoContenido}} -
+            {{obj.nombreContenido}}</span>
+          <li class="list-group-item" *ngFor="let tarea of obj.test; let j = index" [id]="obj.refNombre"
+            (click)="marcar(obj.refNombre,tarea.codigoTarea, tarea, i, j)"
+            [ngClass]="{ 'list-group-item-primary' : (seleccionado == obj.refNombre + tarea.codigoTarea)}">
+            {{tarea.tareaTitulo}}<span class="float-right"><i
+                [ngClass]="{'text-success fa fa-check' : tarea.visto}"></i></span></li>
+        </ul>
+      </div>
+      <div class="col-md-9 col-sm-6">
+        <div class="card">
+          <div class="card-title">
+            <h4>TIEMPO RESTANTE: {{forma.value.tiempoRestante}}</h4>
+          </div>
+          <div class="card-body">
+            <div class="input-group mb-3">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="enviarTarea" [disabled]="vigente" (change)="cargarInfo( $event.target.files )">
+                <label class="custom-file-label" for="enviarTarea" aria-describedby="enviandoTarea">Seleccionar
+                  archivo</label>
+              </div>
+              <div class="input-group-append">
+                <button class="btn btn-success text-light" id="enviandoTarea" [disabled]="vigente" (click)="adjuntarTarea()">Enviar Tarea</button>
+              </div>
+            </div>
+            <div [ngxSummernoteView]="forma.get('descripcionTarea').value"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="input-group-append">
-      <span class="input-group-text bg-success text-light" id="enviandoTarea">Enviar Tarea</span>
-    </div>
-  </div>
-  <div [ngxSummernoteView]="forma.get('descripcionTarea').value"></div>
-</form>
+  </form>
+</div>

@@ -32,6 +32,7 @@ import { TabsModule } from 'ngx-bootstrap';
 import { ModalNuevaLeccionComponent } from './componentes/modal-nueva-leccion/modal-nueva-leccion.component';
 import { RequeridoDirective } from 'src/app/directivas/requerido.directive';
 import { NuevaDiscucionModalComponent } from './componentes-leccion/discuciones/nueva-discucion-modal.component';
+import { ModalDetalleSubtemaComponent } from './componentes-leccion/contenido/modal-detalle-subtema.component';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import { NuevaDiscucionModalComponent } from './componentes-leccion/discuciones/
     ContenidoComponent, SeccionesComponent, TestComponent, DiscucionesComponent, 
     EquiposComponent, BibliotecaComponent, EncuestaComponent, ArchivosComponent, 
     TareasComponent,  ListaCursosComponent, CursosComponent, CalificacionesComponent,
-    HistorialComponent, TrabajosComponent, ModalNuevaClaseComponent, ModalNuevaLeccionComponent, NuevaDiscucionModalComponent,
+    HistorialComponent, TrabajosComponent, ModalNuevaClaseComponent, ModalNuevaLeccionComponent, NuevaDiscucionModalComponent, ModalDetalleSubtemaComponent,
   ],
   exports: [ListaClasesComponent],
   imports: [
@@ -56,6 +57,7 @@ import { NuevaDiscucionModalComponent } from './componentes-leccion/discuciones/
     ServiceModule,
     SharedModule,
   ],
-  entryComponents:[TareasComponent, ModalNuevaClaseComponent, ModalNuevaLeccionComponent, NuevaDiscucionModalComponent]
+  entryComponents:[TareasComponent, ModalNuevaClaseComponent, ModalNuevaLeccionComponent, NuevaDiscucionModalComponent,
+    ModalDetalleSubtemaComponent]
 })
 export class ClasesModule { }

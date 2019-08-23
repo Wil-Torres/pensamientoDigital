@@ -3,6 +3,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { UsuariosService } from '../usuarios/usuarios.service';
+import { AuthService } from 'src/app/services/service.index';
+import { UserInfo } from 'src/app/interfaces/login';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +18,13 @@ export class RecursosService {
   snapshot: Observable<any>;
   arrayDownload: any = [];
   downloadURL: Observable<string>;
+  usuario: UserInfo;
 
-  constructor(private afs: AngularFirestore, private storage: AngularFireStorage) { }
+  constructor(private afs: AngularFirestore, private storage: AngularFireStorage, private srvUser: AuthService) {
+    this.srvUser.userInfo.subscribe(resp => {
+      this.usuario = resp
+    })
+   }
 
   getAllRecursos() {
     return this.afs.collection('recursos').valueChanges();
@@ -62,7 +70,8 @@ export class RecursosService {
       const files = event;
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const path = `cursos/${curso}/${leccion}/${!tipo ? 'contenido' : 'tarea'}/${new Date().getTime()}_${file.name}`;
+        console.log(this.usuario);
+        const path = `cursos/${curso}/${leccion}/${!tipo ? 'contenido' : 'tarea/' + this.usuario.uid}/${new Date().getTime()}_${file.name}`;
         const customMetadata = { app: 'Pensamiento_Digital' };
         const fileRef = this.storage.ref(path);
         this.task = this.storage.upload(path, file, { customMetadata })

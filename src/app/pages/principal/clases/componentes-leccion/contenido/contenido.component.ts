@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EmbedVideoService } from 'ngx-embed-video';
 import { FormGroup } from '@angular/forms';
 import { RecursosService } from '../../../recursos/recursos.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ModalDetalleSubtemaComponent } from './modal-detalle-subtema.component';
 
 @Component({
   selector: 'app-contenido',
@@ -10,10 +12,9 @@ import { RecursosService } from '../../../recursos/recursos.service';
 })
 export class ContenidoComponent implements OnInit {
   detalle :any = {};
-  subContenido: any = {};
-  tipoCargado: number = 1;
-  tDocto: FileList;
+  temContenido: [];
   lineaSeleccionada: number;
+  modalRef: BsModalRef | null;
 
   private _forma : FormGroup;
   public get forma() : FormGroup {
@@ -22,7 +23,7 @@ export class ContenidoComponent implements OnInit {
   @Input() public set forma(v : FormGroup) {
     this._forma = v;
   }
-   constructor(private srvRecurso: RecursosService ) { }
+   constructor(private srvRecurso: RecursosService, private modalService: BsModalService ) { }
 
   ngOnInit() {}
 
@@ -31,39 +32,25 @@ export class ContenidoComponent implements OnInit {
     this.detalle = {};
   }
   agregarDetalle() {
+    this.detalle.detalle = [];
     this.forma.value.contenido.push(this.detalle)
     this.cancelar();
   }
 
-  agregarSubContendio (item:number) {
-
-    if(this.tipoCargado === 1) {
-      this.srvRecurso.addRecursoCurso('JNRSpYOiJEOGjFGrQJdy','PDatBCfKSLQ3hAmQimgp',0,this.tDocto).then(resp => {
-        this.forma.value.contenido[this.lineaSeleccionada].detalle.push({
-          url: resp, 
-          tipo: this.subContenido.tipo, 
-          visto: false
-        })
-        this.tDocto = new FileList;
-      }).catch(err => {
-        this.tDocto = new FileList;
-      })
-    } else {
-      this.forma.value.contenido[this.lineaSeleccionada].detalle.push({
-        url: this.subContenido.url, 
-        tipo: this.subContenido.tipo, 
-        visto: false
-      })
-    }
-  }
-
-  cargarInfo(archivo: FileList){
-    this.tDocto = archivo;
-    
-  }
-
   seleccionar(item:number){
     this.lineaSeleccionada = item;
+  }
+
+  mostrarContenido(item: any) {
+    this.temContenido = item.detalle;
+  }
+
+  addDetalleContenido(id:number) {
+    this.modalRef = this.modalService.show(ModalDetalleSubtemaComponent, { class: 'modal-lg' });
+    let contenidoTemp = this.modalRef.content.addContenido.subscribe((content: any) => {
+      this.forma.value.contenido[id].detalle.push(content)
+      contenidoTemp.unsubscribe();
+    })
   }
 
 
