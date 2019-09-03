@@ -1,0 +1,99 @@
+<div class="card-deck">
+    <div class="card" *ngFor="let obj of objeto; let i = index">
+        <img [src]="obj.imagen" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">titulo</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                content. This content is a little bit longer.</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="card-deck">
+    <div class="col-md-3" *ngFor="let obj of objeto; let i = index">
+        <div class="card">
+            <div>
+                <a class="quick_edit_icon" data-toggle="collapse" href="#collapseExample" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    <i class="fa fa-cog inverted"></i>
+                    <span class="textOffScreen">Quick edit this lesson</span>
+                </a>
+
+            </div>
+            <div class="collapse quick_edit_box" id="collapseExample">
+                <div class="card card-body">
+                    <div>
+                        <label for="tile_name_lesson_6233670">Descripción</label>
+                        <input id="tile_name_lesson_6233670" type="text" value="Principios de Angular JS"
+                            maxlength="100" class="form-control">
+
+
+                        <label for="tile_color_lesson_6233670">Color</label>
+                        <input id="tile_color_lesson_6233670" class="jscolor {position:'top'}" autocomplete="off"
+                            style="background-image: none; background-color: rgb(95, 177, 170); color: rgb(0, 0, 0);"
+                            class="form-control">
+
+                        <div class="tile_colors">
+                            <a href="javascript:void(0)"
+                                onclick="update_tile_color_input('#tile_color_lesson_6233670', '#569a96');"
+                                style="background-color: #569a96"><span class="textOffScreen">Preset color 1</span></a>
+                            <a href="javascript:void(0)"
+                                onclick="update_tile_color_input('#tile_color_lesson_6233670', '#5fb1aa');"
+                                style="background-color: #5fb1aa"><span class="textOffScreen">Preset color 2</span></a>
+                            <a href="javascript:void(0)"
+                                onclick="update_tile_color_input('#tile_color_lesson_6233670', '#97abaf');"
+                                style="background-color: #97abaf"><span class="textOffScreen">Preset color 3</span></a>
+                            <a href="javascript:void(0)"
+                                onclick="update_tile_color_input('#tile_color_lesson_6233670', '#E47E78');"
+                                style="background-color: #E47E78"><span class="textOffScreen">Preset color 4</span></a>
+                        </div>
+                        <br>
+
+                        <div class="uploader-list" id="UploaderWrapperlesson_6233670" style=""></div>
+
+                        <a class="options_btn"
+                            onclick="init_quick_edit_box('#quick_edit_box_lesson_6233670');new_page('/uploader?data_json=%7B%22wrapper%22%3A%22UploaderWrapperlesson_6233670%22%2C%22only_file%22%3Atrue%2C%22single_file%22%3Atrue%2C%22custom_name%22%3A%22tile_picture_lesson_6233670%22%2C%22file_type%22%3A%22image%22%7D');"
+                            href="javascript:void(0)" style="display: none;">
+                            <i class="picture"></i>Change Picture
+                        </a>
+
+                        <div class="alignR">
+                            <button type="button" id="cancel_btn">
+                                Cancel
+                            </button>
+
+                            <button type="button" id="save_btn" class="ml5"
+                                onclick="submit_quick_tile_editor('lesson_6233670', 'teacher_lessons', 1404718, 6233670)">
+                                Save
+                            </button>
+                        </div>
+
+                        <script>
+                            function new_page(url) {
+                                $.facebox({ 'ajax': url });
+                                return false;
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <img [src]="obj.imagen" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{obj.descripcion}}</h5>
+                <p class="card-text">Curso</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">4 Cursos</small>
+            </div>
+        </div>
+    </div>
+</div>

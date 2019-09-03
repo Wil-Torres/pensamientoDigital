@@ -71,6 +71,13 @@ export class AuthService {
     return this.afAuth.auth.signOut();
   }
 
+  actualizarPerfil() {
+    let x = this.afAuth.auth.currentUser;
+    x.updateProfile({}).then(() => { });
+    x.updateEmail('').then(() => { });
+    x.sendEmailVerification().then(() => { });
+  }
+
   // SignIn Google
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider();

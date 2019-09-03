@@ -28,6 +28,7 @@ import { ListaBienvenidaComponent } from "./principal/bienvenida/lista-bienvenid
 import { NosotrosComponent } from "./principal/bienvenida/nosotros/nosotros.component";
 import { CuentasComponent } from "./principal/administracion/cuentas/cuentas.component";
 import { PerfilComponent } from "./configuracion/perfil/perfil.component";
+import { ListaDetalleCatalogoComponent } from "./principal/catalogo/lista-detalle-catalogo/lista-detalle-catalogo.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -70,6 +71,9 @@ const pagesRoutes: Routes = [
 
             /* Catalogo*/
             {path: 'catalogo/lista-catalogo', component: ListaCatalogoComponent, data:{titulo: 'Catálogo'}},
+            {path: 'catalogo/lista-catalogo/:id', component: ListaDetalleCatalogoComponent, data:{titulo: 'Catálogo'}},
+           // {path: 'catalogo/lista-catalogo/:id/detalle/:detalleId', component: ListaCatalogoComponent, data:{titulo: 'Catálogo'}},
+
 
             /* Bienvenida*/
             {path: 'bienvenida', component: ListaBienvenidaComponent, data:{titulo: 'Bienvenido'}},

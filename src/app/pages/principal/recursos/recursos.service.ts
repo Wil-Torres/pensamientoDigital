@@ -78,9 +78,10 @@ export class RecursosService {
         this.task.then(tk => {
           let x = this.task.snapshotChanges().pipe(
             finalize(async () => {
-              fileRef.getDownloadURL().toPromise().then(url => {
-                resolve(url);
-              });
+              Promise.all([fileRef.getMetadata().toPromise(), fileRef.getDownloadURL().toPromise()]).then(resp => {
+                resolve({fullPath:resp[0].fullPath, url:resp[1]})
+              })
+              
             })
           ).subscribe(resp => { });
         })

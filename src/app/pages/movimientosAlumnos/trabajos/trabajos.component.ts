@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { isNil } from 'lodash';
 import { RecursosService } from '../../principal/recursos/recursos.service';
 import swal from 'sweetalert';
+import { EntregaTrabajoService } from './entrega-trabajo.service';
 
 @Component({
   selector: 'app-trabajos',
@@ -41,7 +42,8 @@ export class TrabajosComponent implements OnInit {
   }
 
   constructor(private builder: FormBuilder, private alumno: AlumnoService, private srvCurso: ClasesService,
-    private aRoute: ActivatedRoute, private srvRecurso: RecursosService ) {
+    private aRoute: ActivatedRoute, private srvRecurso: RecursosService,
+    private srvTarea: EntregaTrabajoService) {
 
     alumno.inicializar();
     this.unidad = 0;
@@ -183,16 +185,46 @@ export class TrabajosComponent implements OnInit {
     }
   }
 
-  cargarInfo(docto:FileList){
+  cargarInfo(docto: FileList) {
     this.flTarea = docto;
   }
 
   adjuntarTarea() {
-    this.srvRecurso.addRecursoCurso('JNRSpYOiJEOGjFGrQJdy','PDatBCfKSLQ3hAmQimgp',1,this.flTarea).then(()=> {
-      swal('Operación Exitosa','Se ha subido la tarea No. 1','success').then(() => {});
+    this.srvRecurso.addRecursoCurso('JNRSpYOiJEOGjFGrQJdy', 'PDatBCfKSLQ3hAmQimgp', 1, this.flTarea).then((resp:any) => {
+      this.srvTarea.presentarTarea({
+        cursoId: 'JNRSpYOiJEOGjFGrQJdy',
+        tareaId: 'PDatBCfKSLQ3hAmQimgp'
+      }, {
+          fechaEntrega: new Date(),
+          id: "PDatBCfKSLQ3hAmQimgp",
+          numeroIntento: 1,
+          puntuacion: null,
+          urlTarea: resp.url,
+          fullPath: resp.fullPath
+        }).then(resp => {
+          resp.update({ id: resp.id }).then(re => {
+            swal('Operación Exitosa', 'Se ha subido la tarea No. 1', 'success').then(() => { });
+          })
+        })
+
     }).catch(() => {
-      swal('Operacion Abortada','Ha ocurrido un error al cargar la tarea No. 1','error').then(() => {});
+      swal('Operacion Abortada', 'Ha ocurrido un error al cargar la tarea No. 1', 'error').then(() => { });
     }).finally();
+  }
+
+  consultar() {
+    this.srvTarea.presentarTarea1({
+      cursoId: 'JNRSpYOiJEOGjFGrQJdy',
+      tareaId: 'PDatBCfKSLQ3hAmQimgp'
+    }, {
+        fechaEntrega: 'Timestamp {seconds: 1566972000, nanoseconds: 0}',
+        id: "PDatBCfKSLQ3hAmQimgp",
+        numeroIntento: 1,
+        puntuacion: "5",
+        urlTarea: "https://firebasestorage.googleapis.com/v0/b/prueba-1df69.appspot.com/o/cursos%2FJNRSpYOiJEOGjFGrQJdy%2FPDatBCfKSLQ3hAmQimgp%2Ftarea%2F9KprCpB7DoRHtorFuKfRpNKH6Cn1%2F1566596459899_Factura%20Cambiaria%20FC228.pdf?alt=media&token=d579f037-f8e8-4144-8b86-f647f425f72d",
+      }).subscribe(resp => {
+        console.log(resp);
+      });
   }
 
 }
