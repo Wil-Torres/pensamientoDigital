@@ -34,6 +34,12 @@ export class ClasesService {
   constructor(private afs: AngularFirestore) {
     this.getPaginacionCursos()
   }
+
+  generateKey() {
+    return this.afs.createId();
+  }
+
+
   getPaginacionCursos() {
     this.afs.collection('cursos').valueChanges().subscribe(resp => {
       this._paginacion = {

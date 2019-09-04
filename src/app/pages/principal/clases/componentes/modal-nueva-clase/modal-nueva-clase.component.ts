@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 import { BsModalRef } from 'ngx-bootstrap';
 import { ClasesService } from '../../clases.service';
 import swal from 'sweetalert'
 import { Router } from '@angular/router';
+import { CatalogoService } from '../../../catalogo/catalogo.service';
 
 @Component({
   selector: 'app-modal-nueva-clase',
@@ -15,6 +15,15 @@ export class ModalNuevaClaseComponent implements OnInit {
 
   private _forma: FormGroup;
   private _clase: EventEmitter<any>;
+  
+  private _categoria : any[] = [];
+  public get categoria() : any[] {
+    return this._categoria;
+  }
+  public set categoria(v : any[]) {
+    this._categoria = v;
+  }
+  
   public get clase(): EventEmitter<any> {
     return this._clase;
   }
@@ -29,26 +38,31 @@ export class ModalNuevaClaseComponent implements OnInit {
     this._forma = v;
   }
 
-  constructor(public modalRef: BsModalRef, private builder: FormBuilder, private srvClase: ClasesService,
+  constructor(public modalRef: BsModalRef, private builder: FormBuilder, 
+    private srvClase: ClasesService, private srvCatalogo: CatalogoService,
     private router: Router) {
     this.clase = new EventEmitter<any>();
     this.objInit()
   }
 
   ngOnInit() {
+    this.srvCatalogo.obtenerCategorias().then(resp => {
+      this.categoria = resp;
+      console.log(this.categoria);
+    });
   }
   objInit() {
     this._forma = this.builder.group({
       id: null,
       $key: null,
       clase: [null, [Validators.required]],
-      estiloCursoId: [null, [Validators.required]],
+      estiloCursoId: [0, [Validators.required]],
       codigoAcceso: [null, [Validators.required]],
-      fechaInicio: [null, [Validators.required]],
-      fechaFin: [null, [Validators.required]],
+      fechaInicio: [(new Date()).inicioMes(), [Validators.required]],
+      fechaFin: [(new Date()).finMes(), [Validators.required]],
       catedra: [null, [Validators.required]],
       grado: [null, [Validators.required]],
-      idioma: [null, [Validators.required]],
+      idioma: [0, [Validators.required]],
       zonaHoraria: [null, [Validators.required]],
       curso: null,
       seccion: null,
@@ -69,6 +83,9 @@ export class ModalNuevaClaseComponent implements OnInit {
         })
       });
     })
+  }
+  generarCodigo(){
+    this.forma.patchValue({codigoAcceso:this.srvClase.generateKey()});
   }
   cancelar() {
     this.modalRef.hide();

@@ -91,6 +91,31 @@ export class RecursosService {
 
   }
 
+  addGaleria(pathPrincipal: string, event: FileList) {
+    return new Promise((resolve) => {
+      const files = event;
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const path = `${pathPrincipal}/${new Date().getTime()}_${file.name}`;
+        const customMetadata = { app: 'Pensamiento_Digital' };
+        const fileRef = this.storage.ref(path);
+        this.task = this.storage.upload(path, file, { customMetadata })
+        this.task.then(tk => {
+          let x = this.task.snapshotChanges().pipe(
+            finalize(async () => {
+              Promise.all([fileRef.getMetadata().toPromise(), fileRef.getDownloadURL().toPromise()]).then(resp => {
+                resolve({fullPath:resp[0].fullPath, url:resp[1]})
+              })
+              
+            })
+          ).subscribe(resp => { });
+        })
+      }
+
+    });
+
+  }
+
   removeRecurso(item: any) {
     this.afs.collection('recursos').doc(item.id).delete().then(resp => {
       let temp = this.storage.ref(item.fullPath).delete().subscribe(eliminado => {

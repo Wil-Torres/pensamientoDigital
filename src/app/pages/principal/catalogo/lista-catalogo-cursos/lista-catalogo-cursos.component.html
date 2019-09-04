@@ -1,0 +1,17 @@
+<div *ngIf="!numeroRegistro" class="d-flex justify-content-center">
+  <h1>No hay datos <i class="fa fa-database text-danger"></i></h1>
+</div>
+<div class="card-deck" *ngIf="numeroRegistro">
+  <div class="col-md-4">
+    <div class="card" *ngFor="let obj of objeto; let i = index">
+      <img [src]="obj.imagen" class="card-img-top" alt="...">
+      <div class="card-body" (click)="irCurso(obj.id)">
+        <h5 class="card-title">{{obj.clase}}</h5>
+        <p class="card-text">Curso de {{obj.clase}}</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { RecursosService } from '../recursos/recursos.service';
+import { Observable, ObjectUnsubscribedError } from 'rxjs';
+import { UserInfo } from 'src/app/interfaces/login';
+import { AuthService } from 'src/app/services/service.index';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +12,20 @@ import { map } from 'rxjs/operators';
 export class CatalogoService {
 
   data: any[];
+  cursos: Observable<any[]>
+  coleccionCursos: AngularFirestoreCollection<any>;
+  next: AngularFirestoreCollection<any>;
+  infoUsuario: UserInfo
 
-  constructor(private afs: AngularFirestore) {
-    this.data = [{
+  constructor(private afs: AngularFirestore, private srvRecurso: RecursosService, private srvAuth: AuthService) {
+
+    this.srvAuth.userInfo.subscribe(resp => {
+      this.infoUsuario = resp;
+    })
+    this.obtenerCategorias().then(resp => {
+      console.log(resp);
+    })
+    /*this.data = [{
       descripcion: "Architecture",
       detalle: [
         { descripcion: "Architectural Studies" },
@@ -173,7 +188,7 @@ export class CatalogoService {
         { descripcion: "ICT" },
         { descripcion: "Industrial Technology" }]
     },
-    { descripcion: "Work Experience" }]
+    { descripcion: "Work Experience" }]*/
   }
 
   obtenerCatalogo() {
@@ -187,7 +202,6 @@ export class CatalogoService {
       })
     );
   }
-
   agregarCatalogos() {
     this.data.forEach((elem: any) => {
       this.afs.collection('catalogo').add({ descripcion: elem.descripcion }).then(cat => {
@@ -202,6 +216,53 @@ export class CatalogoService {
         });
       });
     })
+  }
+
+  actualizarCatalogo(obj: any) {
+    return this.afs.collection('catalogo').doc(obj.id).update(obj);
+  }
+  actualizarDetalleCatalogo(catalogo: string, obj: any) {
+    return this.afs.collection('catalogo').doc(catalogo).collection('subCategoria').doc(obj.id).update(obj);
+  }
+  cambiarImagen(path: string, imagen: FileList) {
+    return this.srvRecurso.addGaleria(path, imagen)
+  }
+
+  obtenerCursos(categoriaId: string) {
+    this.coleccionCursos = this.afs.collection('cursos')
+    return this.coleccionCursos.get().toPromise().then((snapshot) => {
+      var next = this.afs.collection('cursos', ref => ref.where('catedra', '==', categoriaId).where('creaId', '==', this.infoUsuario.uid));
+
+      // Use the query for pagination
+      // [START_EXCLUDE]
+      return next.valueChanges();
+      // [END_EXCLUDE]
+    });
+    // [END cursor_paginate]
+  }
+
+  obtenerCategorias() {
+    this.coleccionCursos = this.afs.collection('catalogo')
+    return this.coleccionCursos.get().toPromise().then((snapshot) => {
+      let objTemp: any = []
+      let obtTemp2: any = {}
+      snapshot.docs.forEach(elem => {
+        let x = elem.ref.collection('subCategoria')
+        objTemp.push(elem.data())
+        x.get().then(rt => {
+          obtTemp2 = objTemp.find(temp => { return temp.id === x.parent.id })
+          if (obtTemp2) {
+            obtTemp2.detalle = [];
+            rt.forEach(cat => {
+              obtTemp2.detalle.push(cat.data());
+            })
+            objTemp.push(obtTemp2);
+          }
+        });
+      })
+      return objTemp;
+    });
+
   }
 
 

@@ -28,7 +28,7 @@ import { TrabajosComponent } from '../../movimientosAlumnos/trabajos/trabajos.co
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FileUploadComponent } from 'src/app/shared/componentes/file-upload/file-upload.component';
 import { ModalNuevaClaseComponent } from './componentes/modal-nueva-clase/modal-nueva-clase.component';
-import { TabsModule } from 'ngx-bootstrap';
+import { TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { ModalNuevaLeccionComponent } from './componentes/modal-nueva-leccion/modal-nueva-leccion.component';
 import { RequeridoDirective } from 'src/app/directivas/requerido.directive';
 import { NuevaDiscucionModalComponent } from './componentes-leccion/discuciones/nueva-discucion-modal.component';
@@ -50,6 +50,7 @@ import { ModalDetalleSubtemaComponent } from './componentes-leccion/contenido/mo
     EmbedVideo.forRoot(),
     NgxSummernoteModule.forRoot(),
     TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     HttpClientModule,
     BrowserModule,
     ReactiveFormsModule,
