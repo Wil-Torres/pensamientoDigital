@@ -47,7 +47,7 @@ import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal
               </td>
               <td (click)="edicion(item.id)">{{item.clase}}</td>
               <td (click)="edicion(item.id)">{{item.catedra}}<p>{{item.grado}}</p></td>
-              <td (click)="edicion(item.id)">{{item.estudiantes}}</td>
+              <td (click)="edicion(item.id)">{{item.cantidadEstudiantes}}</td>
             </tr>
           </tbody>
         </table>
@@ -144,6 +144,7 @@ export class ListaClasesComponent implements OnInit {
   }
 
   buscar(offset: number = 0, limit: number = 10) {
+
     this.srvCurso.getCursos(offset, limit).then((resp) => {
       resp.subscribe((res) => {
         let x = [];

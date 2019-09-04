@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy, OnInit, Inject } from '@angular/core';
 import { SidebarService } from 'src/app/services/service.index';
 import { DOCUMENT } from '@angular/common';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ export class AlumnoService {
 
   private oldMenu: any;
 
-  constructor(@Inject(DOCUMENT) private _document, private _menu: SidebarService) {
+  constructor(@Inject(DOCUMENT) private _document, private _menu: SidebarService,
+    private afs: AngularFirestore) {
     this.oldMenu = _menu.menu;
   }
 
@@ -63,5 +65,30 @@ export class AlumnoService {
       }
     ]
 
+  }
+
+  obtenerAlumnoCursos() {
+    return new Promise((resolve) => {
+      let coleccionCursos = this.afs.collection('alumnos')
+      return coleccionCursos.get().toPromise().then((snapshot) => {
+        let objTemp: any = []
+        let obtTemp2: any = {}
+        snapshot.docs.forEach(elem => {
+          let x = elem.ref.collection('cursos')
+          objTemp.push({ alumnoId: elem.data().id })
+          x.get().then(rt => {
+            obtTemp2 = objTemp.find(temp => { return temp.alumnoId === x.parent.id })
+            if (obtTemp2) {
+              obtTemp2.cursos = [];
+              rt.forEach(cat => {
+                obtTemp2.cursos.push({ cursoId: cat.data().id });
+              })
+              objTemp.push(obtTemp2);
+            }
+          });
+        })
+        resolve(objTemp);
+      });
+    })
   }
 }

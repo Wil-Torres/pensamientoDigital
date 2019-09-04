@@ -145,14 +145,14 @@ input[type=date].gt-dropdown-off::-webkit-calendar-picker-indicator {
   background: gray !important;
 }
 
-.gt-asterisco .gt-asterisco::after {
+.gt-asterisco::after {
     content:" *";
     color: red;
     font-weight: bolder;
 }
 
 
-.gt-asteriscod .gt-asteriscod::after{
+.gt-asteriscod::after{
     content:" **";
     color: red;
     font-weight: bolder;

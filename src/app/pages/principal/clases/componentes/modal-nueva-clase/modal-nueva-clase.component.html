@@ -10,16 +10,16 @@
       <tab heading="Descripción">
         <div class="row">
           <div class="col-12">
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="clase">Nombre</label>
-              <input type="text" class="form-control form-control-sm" id="clase" formControlName="clase">
+              <input type="text" class="form-control form-control-sm" id="clase" formControlName="clase" required="required">
               <div [hidden]="forma.get('clase').valid">Requerido</div>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-4">
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="estiloCursoId">Estilo</label>
               <select name="estiloCursoId" class="form-control form-control-sm" id="estiloCursoId"
                 formControlName="estiloCursoId" required="required">
@@ -28,11 +28,11 @@
                 <option value="2">-- A su propio ritmo --</option>
               </select>
             </div>
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="codigoAcceso">¿Código de acceso?</label>
               <div class="input-group mb-3">
                 <input type="text" class="form-control form-control-sm" id="codigoAcceso" formControlName="codigoAcceso"
-                  aria-describedby="button-addon">
+                  aria-describedby="button-addon" disabled required="required">
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary btn-sm" type="button" id="button-addon"
                     (click)="generarCodigo()"><i class="fa fa-pencil"></i></button>
@@ -42,22 +42,22 @@
             </div>
           </div>
           <div class="col-4 bordes-tarea">
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="fechaInicio">Comenzar </label>
               <input id="fechaInicio" class="form-control" #datepickerYMD="bsDatepicker" bsDatepicker
-                formControlName="fechaInicio" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
+                formControlName="fechaInicio" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required="required">
               <div [hidden]="forma.get('fechaInicio').valid">Required</div>
             </div>
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="fechaFin">Finaliza</label>
 
               <input id="fechaFin" class="form-control" #datepickerYMD="bsDatepicker" bsDatepicker
-                formControlName="fechaFin" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
+                formControlName="fechaFin" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required="required">
               <div [hidden]="forma.get('fechaFin').valid">Required</div>
             </div>
           </div>
           <div class="col-4 bordes-tarea">
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="catedra">Materia</label>
               <select name="catedra" class="form-control form-control-sm" id="materiaId" formControlName="catedra"
                 required="required">
@@ -67,9 +67,9 @@
                 </optgroup>
               </select>
             </div>
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="grado">Grado</label>
-              <input type="text" class="form-control form-control-sm" id="grado" formControlName="grado">
+              <input type="text" class="form-control form-control-sm" id="grado" formControlName="grado" required="required">
               <div [hidden]="forma.get('grado').valid">Requerido</div>
             </div>
           </div>
@@ -79,9 +79,9 @@
       <tab heading="Opciones">
         <div class="row">
           <div class="col-6">
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="idioma">Idioma</label>
-              <select class="form-control form-control-sm" id="idioma" formControlName="idioma">
+              <select class="form-control form-control-sm" id="idioma" formControlName="idioma" required="required">
                 <option value="0">Español</option>
                 <option value="1">Ingles</option>
                 <option value="2">Aleman</option>
@@ -93,44 +93,44 @@
             </div>
           </div>
           <div class="col-6">
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="zonaHoraria">Zona Horaria</label>
-              <input type="text" class="form-control form-control-sm" id="zonaHoraria" formControlName="zonaHoraria">
+              <input type="text" class="form-control form-control-sm" id="zonaHoraria" formControlName="zonaHoraria" required="required">
               <div [hidden]="forma.get('zonaHoraria').valid">Requerido</div>
             </div>
           </div>
           <div class="col-4">
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="curso">Curso</label>
-              <input type="text" class="form-control form-control-sm" id="curso" formControlName="curso">
+              <input type="text" class="form-control form-control-sm" id="curso" formControlName="curso" required="required">
               <div [hidden]="forma.get('curso').valid">Requerido</div>
             </div>
           </div>
           <div class="col-4">
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="seccion">Sección</label>
-              <input type="text" class="form-control form-control-sm" id="seccion" formControlName="seccion">
+              <input type="text" class="form-control form-control-sm" id="seccion" formControlName="seccion" required="required">
               <div [hidden]="forma.get('seccion').valid">Requerido</div>
             </div>
           </div>
           <div class="col-4">
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="semestre">Semestre</label>
-              <input type="text" class="form-control form-control-sm" id="semestre" formControlName="semestre">
+              <input type="text" class="form-control form-control-sm" id="semestre" formControlName="semestre" required="required">
               <div [hidden]="forma.get('semestre').valid">Requerido</div>
             </div>
           </div>
           <div class="col-6">
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="creditos">Creditos</label>
-              <input type="text" class="form-control form-control-sm" id="creditos" formControlName="creditos">
+              <input type="text" class="form-control form-control-sm" id="creditos" formControlName="creditos" required="required">
               <div [hidden]="forma.get('creditos').valid">Requerido</div>
             </div>
           </div>
           <div class="col-6">
-            <div class="form-group">
+            <div class="form-group"  gtRequerido>
               <label for="escalaCalificacion">Escala de Calificación</label>
-              <select class="form-control form-control-sm" id="escalaCalificacion" formControlName="escalaCalificacion">
+              <select class="form-control form-control-sm" id="escalaCalificacion" formControlName="escalaCalificacion" required="required">
                 <option value="0">Escala de Calificacion Estandar</option>
                 <option value="1">Escala de Calificacion Aprobado / Repobado</option>
               </select>
