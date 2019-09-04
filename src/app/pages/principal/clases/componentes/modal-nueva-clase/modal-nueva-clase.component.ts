@@ -68,7 +68,7 @@ export class ModalNuevaClaseComponent implements OnInit {
       seccion: null,
       semestre: null,
       creditos: null,
-      escalaCalificacion: [null, [Validators.required]],
+      escalaCalificacion: [0, [Validators.required]],
       cantidadEstudiantes: 0,
       detalle_Lecciones: [[]],
     })
