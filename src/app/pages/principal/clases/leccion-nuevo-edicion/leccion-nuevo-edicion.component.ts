@@ -4,6 +4,8 @@ import { isNil, cloneDeep } from 'lodash'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClasesService } from '../clases.service';
 import swal from 'sweetalert';
+import { CoreService } from 'src/app/services/service.index';
+import { UserInfo } from 'src/app/interfaces/login';
 
 @Component({
   selector: 'app-leccion-nuevo-edicion',
@@ -17,7 +19,6 @@ import swal from 'sweetalert';
 export class LeccionNuevoEdicionComponent implements OnInit {
   private _objetoId: any = this.router.snapshot.paramMap.get('id');
   private _cursoId: any = this.router.snapshot.paramMap.get('curso');
-  
   private _forma : FormGroup;
 
   public get forma() : FormGroup {
@@ -30,7 +31,8 @@ export class LeccionNuevoEdicionComponent implements OnInit {
   }
   
 
-  constructor(private builder: FormBuilder, public router: ActivatedRoute, public srvCurso: ClasesService) { 
+  constructor(private builder: FormBuilder, public router: ActivatedRoute, public srvCurso: ClasesService,
+    public srvCore: CoreService) { 
     this._forma = this.builder.group({
       id: null,
       imagen: null,
@@ -76,17 +78,23 @@ export class LeccionNuevoEdicionComponent implements OnInit {
   }
 
   guardar () {
+    this.srvCore.lock()
     const enviar = cloneDeep(this._forma.getRawValue());
     const peticion = isNil(enviar.id) ? 'post' : 'nativePut';
     this.srvCurso.updateLeccion(this._cursoId, this.forma.getRawValue()).then(() => {
+      this.srvCore.unlock();
       swal('Actualización', 'Actualizacion exitosa', 'success').then(() => {});
     }).catch(err => {
-      console.log(err)
+      this.srvCore.unlock();
+      swal('Ocurrio un error', err, 'success').then(() => {});
+      
     })
   }
   obtenerLeccion(){
+    this.srvCore.lock();
     let lesson = this.srvCurso.getLeccion(this._cursoId, this._objetoId).subscribe(leccion => {
       this.forma.patchValue(leccion, {emitEvent:true});
+      this.srvCore.unlock();
       lesson.unsubscribe();
     })
     

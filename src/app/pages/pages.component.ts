@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoreService } from '../services/service.index';
 declare function init_plugins();
 
 @Component({
@@ -8,12 +9,10 @@ declare function init_plugins();
 })
 export class PagesComponent implements OnInit {
   bsInlineValue = new Date();
-
-  constructor() { }
+  constructor(private srvCore: CoreService) { }
 
   ngOnInit() {
     init_plugins();
-
   }
 
 }

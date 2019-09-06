@@ -68,6 +68,7 @@ import { PerfilComponent } from './configuracion/perfil/perfil.component';
         CommonModule,
         BsDatepickerModule.forRoot(),
         
+        
     ]
 })
 

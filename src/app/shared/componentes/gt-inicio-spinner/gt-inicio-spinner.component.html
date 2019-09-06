@@ -1,0 +1,14 @@
+<div *ngIf="visible">
+    <div class="spinner gt-cargando">
+        <ngx-spinner
+        bdOpacity = 0
+        bdColor = "rgba(51,51,51,0.32)"
+        size = "medium"
+        color = "#5f8bb6"
+        type = "ball-atom"
+        [fullScreen] = "true"
+        >
+        <p style="color: white" > {{mensaje}} </p>
+    </ngx-spinner>  
+    </div>
+  </div>

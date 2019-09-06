@@ -7,10 +7,11 @@ export interface ListaCursos {
   clase: String;
   catedra: String;
   lecciones: any;
+  url:string;
 }
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { PostService } from 'src/app/services/service.index';
+import { PostService, CoreService } from 'src/app/services/service.index';
 import { ClasesService } from '../clases.service';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
@@ -26,15 +27,17 @@ import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal
   template: `
 
     <div class="col-md-12 col-sm-12 col-xs-12">
+    <button class="btn btn-success bt-sm float-right" (click)="consultar()"><i class="fa fa-check"></i></button>
     <button class="btn btn-primary bt-sm float-right" (click)="nuevo()"><i class="fa fa-plus"></i></button>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th class="text-center"></th>
+              <th class="gt-wd-75 text-center"></th>
+              <th class="gt-wd-75 text-center"><i class="fa fa-picture-o"></i></th>
               <th>Clase</th>
-              <th>Catedra</th>
-              <th>Estudiantes</th>
+              <th class="gt-wd-200">Catedra</th>
+              <th class="gt-wd-100">Estudiantes</th>
             </tr>
           </thead>
           <tbody>
@@ -45,6 +48,7 @@ import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal
                   <label class="form-check-label" [for]="item.id"></label>
                 </div>
               </td>
+              <td><img [src]="item.url" alt="" class="img-thumbnail"></td>
               <td (click)="edicion(item.id)">{{item.clase}}</td>
               <td (click)="edicion(item.id)">{{item.catedra}}<p>{{item.grado}}</p></td>
               <td (click)="edicion(item.id)">{{item.cantidadEstudiantes}}</td>
@@ -54,43 +58,18 @@ import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal
       </div>
       <app-paginacion (paginacion)="buscar($event.offset, $event.limit)" [totalItems]="numeroRegistros"></app-paginacion>
     </div>
-
-Hola
-    <div *ngFor="let item of posts">
-      <h1>{{item.title}}</h1>
-      <p>{{item.contect}}</p>
-      <button class="btn btn-danger"  (click)="postServices.deletePost(item.$key)">Delete Post</button>
-      <button class="btn btn-primary" *ngIf="postServices.canEdit" (click)="postServices.editPost(item, item)">Edit Post</button>
-
-    </div>
-    <div class="row justify-content-md-center">
-      <div class="">
-        <button class="btn btn-primary" (click)="verArchivo()">view</button>
-        <app-file-upload [path]="path" [obj1]="objetos" (obj)="objetos"></app-file-upload>
-      </div>
-    </div>
-
   `,
-  styles: []
+  styles: [`
+  .img-thumbnail{
+    width: 70px !important;
+    height: 50px !important;
+  }
+  `]
 })
 export class ListaClasesComponent implements OnInit {
-
-  task: AngularFireUploadTask;
-  porcentaje: Observable<number>;
-  snapshot: Observable<any>;
-  productos: Observable<any>;
-  downloadURL: Observable<string>;
-  isHovering: boolean;
-  arrayDownload: any = [];
-
-  imagenSubir: File;
-  imagenTemp: string;
-
-  path = 'imagenes';
-  objetos: any = {};
   private _objeto: any[] = [];
   modalRef: BsModalRef | null;
-  posts: {};
+
   public get objeto(): any[] {
     return this._objeto;
   }
@@ -98,41 +77,18 @@ export class ListaClasesComponent implements OnInit {
     this._objeto = v;
   }
 
+  constructor(private router: Router, private srvCurso: ClasesService,
+    private modalService: BsModalService, private srvCore: CoreService) { }
 
-  constructor(private router: Router, private postServices: PostService, private srvCurso: ClasesService,
-    private storage: AngularFireStorage,
-    private afs: AngularFirestore,
-    private modalService: BsModalService,
-    @Inject(DOCUMENT) private _document) {
-    postServices.getPosts().subscribe(resp => {
-      this.posts = resp;
-
-    })
+  ngOnInit () {
+    this.objInit();
   }
 
-  ngOnInit() {
-    this.objInit();
+  objInit () {
     this.buscar();
   }
 
-  objInit() {
-    this.objeto = [
-      { id: 1, seleccion: false, clase: 'Javascript With Promises', catedra: 'Programación', grado: '2do', estudiantes: 29 },
-      { id: 2, seleccion: false, clase: 'Computación 1do Primaria', catedra: 'Computación', grado: '8do', estudiantes: 14 },
-      { id: 3, seleccion: true, clase: 'Computación 2do primaria', catedra: 'Computación', grado: '4do', estudiantes: 15 },
-      { id: 4, seleccion: false, clase: 'Computación 3do primaria', catedra: 'Computación', grado: '1do', estudiantes: 12 },
-      { id: 5, seleccion: false, clase: 'Computación 4do primaria', catedra: 'Computación', grado: '5do', estudiantes: 17 },
-      { id: 6, seleccion: true, clase: 'Computación 4do primaria', catedra: 'Computación', grado: '6do', estudiantes: 20 },
-      { id: 7, seleccion: false, clase: 'Computación 6do primaria', catedra: 'Computación', grado: '3do', estudiantes: 19 },
-      { id: 8, seleccion: false, clase: 'Computación 1do Basico', catedra: 'Computación', grado: '7do', estudiantes: 20 },
-      { id: 9, seleccion: false, clase: 'Computación 3do Basico', catedra: 'Computación', grado: '9do', estudiantes: 15 },
-      { id: 10, seleccion: false, clase: 'Computación 4do Bachider', catedra: 'Computación', grado: '10do', estudiantes: 14 },
-      { id: 11, seleccion: false, clase: 'Computación 5do Bachider', catedra: 'Computación', grado: 'K', estudiantes: 23 },
-      { id: 12, seleccion: false, clase: 'Computación 6do Perito Contador', catedra: 'Computación', grado: '11do', estudiantes: 14 },
-      { id: 13, seleccion: false, clase: 'Computación 5do Perito Contador', catedra: 'Computación', grado: '10do', estudiantes: '' }
-    ]
-  }
-  edicion(item: any) {
+  edicion (item: any) {
     this.router.navigate(['/clase/' + item + '/lecciones/']);
   }
 
@@ -141,10 +97,14 @@ export class ListaClasesComponent implements OnInit {
     let claseTemp = this.modalRef.content.clase.subscribe((clase: any) => {
       claseTemp.unsubscribe();
     });
+  };
+
+  consultar(){
+    this.buscar();
   }
 
-  buscar(offset: number = 0, limit: number = 10) {
-
+  buscar (offset: number = 0, limit: number = 10) {
+    this.srvCore.lock()
     this.srvCurso.getCursos(offset, limit).then((resp) => {
       resp.subscribe((res) => {
         let x = [];
@@ -157,58 +117,16 @@ export class ListaClasesComponent implements OnInit {
             seleccion: false,
             clase: elem.clase,
             catedra: elem.catedra,
-            lecciones: elem.lecciones
+            lecciones: elem.lecciones,
+            url: elem.url
           })
         })
         this.objeto = x;
+        this.srvCore.unlock();
       });
     }).catch(err => {
-      console.log(err.FirebaseError);
+      swal('Ocurrio un inconveniente',err.FirebaseError,'error')
+      this.srvCore.unlock();
     })
-
-  }
-  verArchivo() {
-    const file = this.objetos.img.target.files[0];
-    if (file.type.split('/')[0] !== 'image') {
-      return;
-    }
-    const path = `imagenes/${new Date().getTime()}_${file.name}`;
-    const customMetadata = { app: 'Mi portafolio' };
-    const fileRef = this.storage.ref(path);
-    this.task = this.storage.upload(path, file, { customMetadata })
-    this.task.then(res => {
-      fileRef.getDownloadURL().toPromise().then(resp => {
-        this.afs.collection('galeria').add(
-          {
-            path,
-            codigo: 1,
-            nombre: 'this.objetos.nombre',
-            descripcion: 'this.objetos.descripcion',
-            precio: 125,
-            descuento: 0,
-            alto: this.objetos.alto,
-            ancho: this.objetos.ancho,
-            url: resp
-          }
-        ).then((galeria: any) => {
-          galeria.update({ id: galeria.id }).then(actualizado => {
-            this.objetos = {};
-            swal('Agregar Galeria', 'Se ha creado la galeria  ' + this.objetos.nombre, 'success').then(() => {
-              this.router.navigate(['/lista-galeria']);
-            });
-
-          })
-        })
-      });
-    });
-    this.porcentaje = this.task.percentageChanges();
-    this.snapshot = this.task.snapshotChanges().pipe(
-      finalize(async () => {
-        fileRef.getDownloadURL().toPromise().then(url => {
-          this.arrayDownload.push(url);
-        });
-        return this.downloadURL = fileRef.getDownloadURL()
-      })
-    );
-  }
+  };
 }

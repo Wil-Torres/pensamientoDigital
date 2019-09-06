@@ -32,6 +32,7 @@
     "ng2-charts": "^2.3.0",
     "ngx-bootstrap": "^4.0.1",
     "ngx-embed-video": "^1.0.4",
+    "ngx-spinner": "^7.2.0",
     "ngx-summernote": "^0.6.5",
     "rxjs": "~6.3.3",
     "summernote": "^0.8.12",

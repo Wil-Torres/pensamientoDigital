@@ -95,7 +95,7 @@ const pagesRoutes: Routes = [
             {path: 'calendario', component: CalendarioComponent, data:{titulo: 'Calendario'}},
 
 
-            {path: '', redirectTo: '/clases/lista-clases', pathMatch: 'full'},
+            {path: '', redirectTo: '/panel/panel-control', pathMatch: 'full'},
         ]
     },
 ];

@@ -16,6 +16,8 @@ import { UploadDirective } from "../directivas/upload.directive";
 import { RequeridoDirective } from "../directivas/requerido.directive";
 import { NotificacionModalComponent } from './componentes/notificacioens/notificacion-modal.component';
 import { NotificacionListaComponent } from './componentes/notificacioens/notificacion-lista.component';
+import { GtInicioSpinnerComponent } from './componentes/gt-inicio-spinner/gt-inicio-spinner.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
     declarations: [
@@ -32,6 +34,7 @@ import { NotificacionListaComponent } from './componentes/notificacioens/notific
         RequeridoDirective,
         NotificacionModalComponent,
         NotificacionListaComponent,
+        GtInicioSpinnerComponent,
     ],
     exports: [
         SidebarComponent,
@@ -47,6 +50,7 @@ import { NotificacionListaComponent } from './componentes/notificacioens/notific
         RequeridoDirective,
         NotificacionModalComponent,
         NotificacionListaComponent,
+        GtInicioSpinnerComponent,
     ],
     imports:[
         RouterModule,
@@ -54,6 +58,7 @@ import { NotificacionListaComponent } from './componentes/notificacioens/notific
         CommonModule,
         ReactiveFormsModule,
         PaginationModule.forRoot(),
+        NgxSpinnerModule,
     ],
     entryComponents: [NotificacionModalComponent]
 })

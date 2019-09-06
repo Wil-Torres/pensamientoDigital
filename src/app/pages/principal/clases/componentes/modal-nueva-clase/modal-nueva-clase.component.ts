@@ -5,6 +5,7 @@ import { ClasesService } from '../../clases.service';
 import swal from 'sweetalert'
 import { Router } from '@angular/router';
 import { CatalogoService } from '../../../catalogo/catalogo.service';
+import { UserInfo } from 'src/app/interfaces/login';
 
 @Component({
   selector: 'app-modal-nueva-clase',
@@ -15,6 +16,7 @@ export class ModalNuevaClaseComponent implements OnInit {
 
   private _forma: FormGroup;
   private _clase: EventEmitter<any>;
+  private usuario: UserInfo = JSON.parse(localStorage.getItem('usuarioLogeado'));
   
   private _categoria : any[] = [];
   public get categoria() : any[] {
@@ -60,6 +62,7 @@ export class ModalNuevaClaseComponent implements OnInit {
       codigoAcceso: [null, [Validators.required]],
       fechaInicio: [(new Date()).inicioMes(), [Validators.required]],
       fechaFin: [(new Date()).finMes(), [Validators.required]],
+      creaId: this.usuario.uid,
       catedra: [null, [Validators.required]],
       grado: [null, [Validators.required]],
       idioma: [0, [Validators.required]],
@@ -68,6 +71,7 @@ export class ModalNuevaClaseComponent implements OnInit {
       seccion: null,
       semestre: null,
       creditos: null,
+      url: null,
       escalaCalificacion: [0, [Validators.required]],
       cantidadEstudiantes: 0,
       detalle_Lecciones: [[]],

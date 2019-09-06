@@ -7,5 +7,7 @@ import { SettingsService } from './services/service.index';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor ( public srvAjuste: SettingsService){}
+  constructor ( public srvAjuste: SettingsService){
+
+  }
 }

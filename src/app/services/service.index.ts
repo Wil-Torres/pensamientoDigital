@@ -3,3 +3,4 @@ export { SharedService } from "./shared/shared.service";
 export { SidebarService } from "./shared/sidebar.service";
 export { AuthService } from "./autenticacion/auth.service";
 export { PostService } from "./shared/post.service"
+export { CoreService } from "./shared/core.service"
