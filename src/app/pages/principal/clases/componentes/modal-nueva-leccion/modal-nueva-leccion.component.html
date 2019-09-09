@@ -22,13 +22,15 @@
       <div class="col-6" gtRequerido>
         <div class="form-group" >
           <label for="fechaInicio">Inicia</label>
-          <input type="text" class="form-control form-control-sm" id="fechaInicio" name="fechaInicio" formControlName="fechaInicio" required>
+          <input id="fechaInicio" class="form-control form-control-sm" #datepickerYMD="bsDatepicker" bsDatepicker
+                formControlName="fechaInicio" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required="required">
         </div>
       </div>
       <div class="col-6" gtRequerido>
         <div class="form-group">
           <label for="fechaFin">Finaliza</label>
-          <input type="text" class="form-control form-control-sm" id="fechaFin" name="fechaFin" formControlName="fechaFin" required>
+          <input id="fechaFin" class="form-control form-control-sm" #datepickerYMD="bsDatepicker" bsDatepicker
+                formControlName="fechaFin" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required="required">
         </div>
       </div>
     </div>

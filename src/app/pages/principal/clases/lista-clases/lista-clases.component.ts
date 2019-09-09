@@ -27,9 +27,12 @@ import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal
   template: `
 
     <div class="col-md-12 col-sm-12 col-xs-12">
-    <button class="btn btn-success bt-sm float-right" (click)="consultar()"><i class="fa fa-check"></i></button>
-    <button class="btn btn-primary bt-sm float-right" (click)="nuevo()"><i class="fa fa-plus"></i></button>
-      <div class="table-responsive">
+      <button class="btn btn-success bt-sm float-right" (click)="consultar()"><i class="fa fa-check"></i></button>
+      <button class="btn btn-primary bt-sm float-right" (click)="nuevo()"><i class="fa fa-plus"></i></button>
+      <div *ngIf="!numeroRegistro" class="d-flex justify-content-center">
+        <h1>No hay datos <i class="fa fa-database text-danger"></i></h1>
+      </div>
+      <div class="table-responsive" *ngIf="numeroRegistro">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
@@ -69,7 +72,7 @@ import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal
 export class ListaClasesComponent implements OnInit {
   private _objeto: any[] = [];
   modalRef: BsModalRef | null;
-
+  numeroRegistro: number;
   public get objeto(): any[] {
     return this._objeto;
   }
@@ -107,6 +110,7 @@ export class ListaClasesComponent implements OnInit {
     this.srvCore.lock()
     this.srvCurso.getCursos(offset, limit).then((resp) => {
       resp.subscribe((res) => {
+        this.numeroRegistro = res.length
         let x = [];
         res.forEach((elem: ListaCursos) => {
           x.push({

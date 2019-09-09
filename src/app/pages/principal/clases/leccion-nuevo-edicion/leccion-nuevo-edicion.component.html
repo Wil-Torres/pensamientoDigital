@@ -101,15 +101,17 @@
               </div>
             </div>
             <div class="col-md-3 col-sm-2 col-xs-12">
-              <div class="form-group">
+              <div class="form-group" gtRequerido>
                 <label for="fechaInicio">Fecha Inicio</label>
-                <input type="date" class="form-control form-control-sm" id="fechaInicio" formControlName="fechaInicio">
+                <input id="fechaInicio" class="form-control form-control-sm" #datepickerYMD="bsDatepicker" bsDatepicker
+                formControlName="fechaInicio" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required="required">
               </div>
             </div>
             <div class="col-md-3 col-sm-2 col-xs-12">
-              <div class="form-group">
+              <div class="form-group" gtRequerido>
                 <label for="fechaFin">Fecha Fin</label>
-                <input type="Date" class="form-control form-control-sm" id="fechaFin" formControlName="fechaFin">
+                <input id="fechaFin" class="form-control form-control-sm" #datepickerYMD="bsDatepicker" bsDatepicker
+                formControlName="fechaFin" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required="required">
               </div>
             </div>
             <div class="col-md-2 col-sm-2 col-xs-12">

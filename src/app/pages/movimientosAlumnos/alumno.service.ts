@@ -2,6 +2,7 @@ import { Injectable, OnDestroy, OnInit, Inject } from '@angular/core';
 import { SidebarService } from 'src/app/services/service.index';
 import { DOCUMENT } from '@angular/common';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AlumnoService {
   private oldMenu: any;
 
   constructor(@Inject(DOCUMENT) private _document, private _menu: SidebarService,
-    private afs: AngularFirestore) {
+    private afs: AngularFirestore, private arouter: ActivatedRoute) {
+      console.log(this.arouter);
     this.oldMenu = _menu.menu;
   }
 
@@ -42,7 +44,7 @@ export class AlumnoService {
       {
         titulo: 'Contenido',
         icono: 'fa fa-university',
-        url: '/alumno/cursos',
+        url: '/alumno/mis-cursos',
         submenu: []
       },
       {

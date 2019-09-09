@@ -13,7 +13,7 @@ import { ClasesService } from '../../principal/clases/clases.service';
 })
 export class CursosComponent implements OnInit {
   private _objetoId: string = this.aRoute.snapshot.paramMap.get('id');
-
+  numeroRegistro: number;
   public get objetoId(): string {
     return this._objetoId;
   }
@@ -353,6 +353,7 @@ export class CursosComponent implements OnInit {
       this.objeto = {
         contenido: obj
       }
+      this.numeroRegistro = obj[0].subTemas.length;
       this.leccionActual();
     })
   }

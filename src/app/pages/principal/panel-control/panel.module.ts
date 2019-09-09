@@ -6,9 +6,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceModule } from 'src/app/services/service.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ChartsModule } from 'ng2-charts';
+import { GraficoDonaComponent } from 'src/app/shared/componentes/grafico-dona/grafico-dona.component';
 
 @NgModule({
-  declarations: [ListaPanelComponent],
+  declarations: [ListaPanelComponent, GraficoDonaComponent],
   exports: [ListaPanelComponent],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     HttpClientModule,
     ServiceModule,
     SharedModule,
+    ChartsModule
   ]
 })
 export class PanelModule { }

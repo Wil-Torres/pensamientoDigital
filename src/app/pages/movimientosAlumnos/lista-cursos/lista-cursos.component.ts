@@ -12,6 +12,7 @@ import { ListaCursos } from '../../principal/clases/lista-clases/lista-clases.co
 export class ListaCursosComponent implements OnInit {
 
   private _objeto: any[] = [];
+  numeroRegistro: number;
   public get objeto(): any[] {
     return this._objeto;
   }
@@ -43,6 +44,7 @@ export class ListaCursosComponent implements OnInit {
   buscar(offset: number = 0, limit: number = 10) {
     this.srvCurso.getCursos(offset, limit).then((resp) => {
       resp.subscribe((res) => {
+        this.numeroRegistro = res.length;
         let x = [];
         res.forEach((elem: ListaCursos) => {
           x.push({

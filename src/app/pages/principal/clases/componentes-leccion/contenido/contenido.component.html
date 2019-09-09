@@ -21,7 +21,7 @@
         [ngModelOptions]="{standalone: true}">
     </div>
   </div>
-  <div class="col-md-3 col-sm-3 col-6">
+  <!--div class="col-md-3 col-sm-3 col-6">
     <div class="form-group">
       <label for="videoUrl" class="font-weight-bold">Video Url</label>
       <input type="text" class="form-control form-control-sm" id="videoUrl" [(ngModel)]="detalle.videoUrl"
@@ -34,7 +34,7 @@
       <input type="file" class="form-control form-control-sm" id="documento" [(ngModel)]="detalle.documento"
         [ngModelOptions]="{standalone: true}" placeholder="Upload file" accept=".pdf,.doc,.docx">
     </div>
-  </div>
+  </div-->
 </div>
 <div class="row">
   <div class="col-md-6">
@@ -71,7 +71,7 @@
         <tbody>
           <tr *ngFor="let cont of temContenido; let i = index">
             <td>{{i+1}}</td>
-            <td>{{cont.tipo}}</td>
+            <td>{{textoTipoContenido(cont.tipo)}}</td>
             <td>{{cont.url}}</td>
             <td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
           </tr>

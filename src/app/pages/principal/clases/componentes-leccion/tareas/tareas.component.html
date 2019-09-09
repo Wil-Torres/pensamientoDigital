@@ -24,31 +24,45 @@
         </div>
         <div class="form-group">
           <label for="intervaloMaximo">Intervalo Máx</label>
-          <input type="text" class="form-control form-control-sm" id="intervaloMaximo" formControlName="intervaloMaximo">
+          <input type="text" class="form-control form-control-sm" id="intervaloMaximo"
+            formControlName="intervaloMaximo">
           <div [hidden]="forma.get('intervaloMaximo').valid">Required</div>
         </div>
       </div>
       <div class="col-3 bordes-tarea">
         <div class="form-group">
           <label for="tareaCategoria">Categoria</label>
-          <input type="text" class="form-control form-control-sm" id="tareaCategoria" formControlName="tareaCategoria">
+          <select class="form-control form-control-sm" id="tareaCategoria" formControlName="tareaCategoria">
+            <option value="0">Ninguna</option>
+            <option value="1">Deberes</option>
+            <option value="2">Participación</option>
+            <option value="3">Examen</option>
+            <option value="4">Prueba</option>
+          </select>
           <div [hidden]="forma.get('tareaCategoria').valid">Required</div>
         </div>
         <div class="form-group">
           <label for="calificacionTarea">Calificación</label>
-          <input type="text" class="form-control form-control-sm" id="calificacionTarea" formControlName="calificacionTarea">
+          <select class="form-control form-control-sm" id="calificacionTarea" formControlName="calificacionTarea">
+            <option value="0">Normal</option>
+            <option value="1">Credito Adicional</option>
+            <option value="2">Ignorar</option>
+            <option value="3">No Graduado</option>
+          </select>
           <div [hidden]="forma.get('calificacionTarea').valid">Required</div>
         </div>
       </div>
       <div class="col-3 bordes-tarea">
         <div class="form-group">
           <label for="fechaInicioTarea">Comenzar </label>
-          <input type="text" class="form-control form-control-sm" id="fechaInicioTarea" formControlName="fechaInicioTarea">
+            <input id="fechaInicioTarea" class="form-control form-control-sm" #datepickerYMD="bsDatepicker" bsDatepicker
+            formControlName="fechaInicioTarea" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required="required">
           <div [hidden]="forma.get('fechaInicioTarea').valid">Required</div>
         </div>
         <div class="form-group">
           <label for="fechaFinTarea">Finaliza</label>
-          <input type="text" class="form-control form-control-sm" id="fechaFinTarea" formControlName="fechaFinTarea">
+          <input id="fechaFinTarea" class="form-control form-control-sm" #datepickerYMD="bsDatepicker" bsDatepicker
+            formControlName="fechaFinTarea" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required="required">
           <div [hidden]="forma.get('fechaFinTarea').valid">Required</div>
         </div>
       </div>
@@ -60,18 +74,15 @@
         </div>
         <div class="form-group">
           <label for="escalaCalificacion">Escala de Calificación</label>
-          <input type="text" class="form-control form-control-sm" id="escalaCalificacion" formControlName="escalaCalificacion">
+          <input type="text" class="form-control form-control-sm" id="escalaCalificacion"
+            formControlName="escalaCalificacion">
           <div [hidden]="forma.get('escalaCalificacion').valid">Required</div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
-        <div>
-          <button (click)="enableEditor()" [disabled]="!editorDisabled">Enable</button>
-          <button (click)="disableEditor()" [disabled]="editorDisabled">Disable</button>
-        </div>
-        <div>
+      <div class="col-12 bordes-tarea">
+        <div class="form-group">
           <div formControlName="descripcionTarea" [ngxSummernote]="config" [ngxSummernoteDisabled]="editorDisabled"
             (blur)="onBlur()">
           </div>
@@ -85,17 +96,8 @@
       </div>
       <div class="col-3">
         <button class="btn btn-primary btn-sm btn-block text-uppercase btn-rounded" type="submit"
-        [disabled]="!forma.valid">Agregar</button>
+          [disabled]="!forma.valid">Agregar</button>
       </div>
     </div>
-
-
-
-
   </form>
 </div>
-<!--h3>HTML</h3>
-<div [ngxSummernoteView]="form.get('html').value"></div>
-
-<h3>Code</h3>
-<pre>{{form.get('html').value}}</pre-->

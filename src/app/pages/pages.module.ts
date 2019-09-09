@@ -27,6 +27,7 @@ import { CiclosComponent } from './mantenimiento/ciclos/ciclos.component';
 import { AdministracionModule } from "./principal/administracion/administracion.module";
 import { ReportesModule } from "./principal/reportes/reportes.module";
 import { PerfilComponent } from './configuracion/perfil/perfil.component';
+import { ChartsModule } from "ng2-charts";
 
 @NgModule({
     declarations: [
@@ -41,13 +42,13 @@ import { PerfilComponent } from './configuracion/perfil/perfil.component';
         CarrerasComponent,
         SeccionesComponent,
         CiclosComponent,
-        PerfilComponent
+        PerfilComponent,
     ],
     exports: [
         HomeComponent,
         PagesComponent,
         AccountSettingComponent,
-        PerfilComponent
+        PerfilComponent,
     ],
     imports: [
         SharedModule,
@@ -67,7 +68,7 @@ import { PerfilComponent } from './configuracion/perfil/perfil.component';
         FormsModule,
         CommonModule,
         BsDatepickerModule.forRoot(),
-        
+        ChartsModule
         
     ]
 })

@@ -1,7 +1,10 @@
 <div class="row">
   <button class="btn btn-primary bt-sm float-right" (click)="agregarDetalles()"><i class="fa fa-plus"></i></button>
 </div>
-<div class="row">
+<div *ngIf="!numeroRegistro" class="d-flex justify-content-center">
+  <h1>No hay datos <i class="fa fa-database text-danger"></i></h1>
+</div>
+<div class="row" *ngIf="numeroRegistro">
   <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let leccion of objeto; let i=index">
     <div class="card">
       <img class="card-img-top" [src]="leccion.imagen" alt="Card image cap">

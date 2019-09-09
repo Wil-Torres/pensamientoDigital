@@ -1,4 +1,7 @@
-<div class="col-md-12 col-sm-12 col-xs-12">
+<div *ngIf="!numeroRegistro" class="d-flex justify-content-center">
+  <h1>No hay datos <i class="fa fa-database text-danger"></i></h1>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12" *ngIf="numeroRegistro">
   <form class="form" ng-submit="seleccionar()" novalidate>
     <div class="row page-titles">
       <div class="col-md-7 align-self-center">
@@ -45,8 +48,7 @@
           </a>
           <a *ngFor="let cont of objeto.contenido[unidad].subTemas[leccion].detalle; let k = index"
             class="nav-item nav-link" (click)="mostrar(k)"
-            [ngClass]="{ 'list-group-item-primary' : (seleccionContenido == k)}"
-            >
+            [ngClass]="{ 'list-group-item-primary' : (seleccionContenido == k)}">
             <span>
               <i class="fa " [ngClass]="{'fa-film': cont.tipo == '0', 
                           'fa-book': cont.tipo == '1', 
@@ -54,7 +56,7 @@
                           'fa-picture-o': cont.tipo == '3'
                         }"></i>
             </span><span>
-                <i [ngClass]="{'text-success fa fa-check' : cont.visto}"></i>
+              <i [ngClass]="{'text-success fa fa-check' : cont.visto}"></i>
             </span>
           </a>
           <a class="nav-item nav-link" tabindex="-1">

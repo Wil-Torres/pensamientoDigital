@@ -31,6 +31,7 @@ import { CoreService } from 'src/app/services/service.index';
 export class ClaseComponent implements OnInit {
 
   private _objeto: any[] = [];
+  numeroRegistro: number;
   curso: any;
   private _objetoId: string = this.aRoute.snapshot.paramMap.get('id');
   modalRef: BsModalRef | null;
@@ -67,6 +68,7 @@ export class ClaseComponent implements OnInit {
   obtenerCursos() {
     this.srvCore.lock();
     let y = this.srvCurso.getLecciones(this.objetoId).subscribe((lecciones: any) => {
+      this.numeroRegistro = lecciones.length
       this.objeto = lecciones
       this.srvCore.unlock();
       y.unsubscribe();
