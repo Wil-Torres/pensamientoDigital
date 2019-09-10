@@ -59,7 +59,6 @@ export class ClasesService {
   *********************************************************************/
   getCursos(offset: any, limit: any) {
     this.coleccionClases = this.afs.collection('cursos')
-    this.afs.collectionGroup('cursos').get().subscribe(resp => {console.log(resp)})
     return this.coleccionClases.get().toPromise().then((snapshot) => {
 
       var last = snapshot.docs[offset];

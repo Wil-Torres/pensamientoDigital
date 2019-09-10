@@ -2,7 +2,17 @@
   <div class="col-md-2 col-sm-2 col-3">
     <ul class="list-group list-group-s,">
       <h6>GRUPOS: </h6>
-      <li class="list-group-item list-group-item-sm" *ngFor="let item of grupo; let i = index" (click)="seleccionarDetalle(item.integrantes)">{{item.grupo}}</li>
+      <li class="list-group-item list-group-item-sm" *ngFor="let item of grupo; let i = index"
+        >{{item.grupo}}
+        <span class="float-right">
+          <button type="button" class="btn" (click)="seleccionarDetalle(item.integrantes)">
+            <i class="fa fa-eye"></i>
+          </button>
+          <button type="button" class="btn" (click)="agregarAlumno()">
+            <i class="fa fa-plus text-success"></i>
+          </button>
+        </span>
+      </li>
     </ul>
   </div>
   <div class="col-md-10 col-sm-10 col-9">
@@ -18,10 +28,11 @@
         <tr *ngFor="let item of detalleGrupo">
           <td>{{item.clave}}</td>
           <td>{{item.nombre}}</td>
-          <td><input type="number" class="form-control gt-wd-75 gt-spinner-off" name="punteo" id="punteo" [(ngModel)]="item.punteo"></td>
+          <td><input type="number" class="form-control gt-wd-75 gt-spinner-off" name="punteo" id="punteo"
+              [(ngModel)]="item.punteo"></td>
         </tr>
       </tbody>
     </table>
-    
+
   </div>
 </div>

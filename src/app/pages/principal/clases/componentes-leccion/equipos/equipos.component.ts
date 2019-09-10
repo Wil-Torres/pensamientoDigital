@@ -26,4 +26,8 @@ export class EquiposComponent implements OnInit {
     this.detalleGrupo = item;
   }
 
+  agregarAlumno(){
+    alert('hola');
+  }
+
 }

@@ -3,6 +3,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { TareasComponent } from '../tareas/tareas.component';
 import { FormGroup } from '@angular/forms';
 import { isNil } from 'lodash';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -21,7 +22,7 @@ export class TestComponent implements OnInit {
     this._forma = v;
   }
   
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService, private arouter: ActivatedRoute) { }
 
   ngOnInit() {
     this.objInit()
@@ -29,7 +30,13 @@ export class TestComponent implements OnInit {
 
   objInit() {}
   agregarTarea() {
-    this.modalRef = this.modalService.show(TareasComponent, { class: 'modal-lg' });
+    const opciones = {
+      initialState: {
+        leccion:this.arouter.snapshot.paramMap.get('id')
+      },
+      class: 'modal-lg'
+    }
+    this.modalRef = this.modalService.show(TareasComponent, opciones);
     let tareaTemp = this.modalRef.content.tarea.subscribe((tarea: any) => {
       this.forma.value.test.push(tarea.tarea)
       tareaTemp.unsubscribe();

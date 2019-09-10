@@ -2,6 +2,8 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BsModalRef } from 'ngx-bootstrap';
+import { ActivatedRoute } from '@angular/router';
+import { PARAMETERS } from '@angular/core/src/util/decorators';
 declare var $;
 
 @Component({
@@ -19,6 +21,7 @@ declare var $;
 })
 export class TareasComponent implements OnInit {
   private _forma: FormGroup;
+  leccion: string;
   edicion: any;
 
   private _tarea: EventEmitter<any>;
@@ -35,15 +38,9 @@ export class TareasComponent implements OnInit {
   public set forma(v: FormGroup) {
     this._forma = v;
   }
-
-  form: FormGroup;
-  prueba: any = '<p>Hola que tal</p><p>qw</p><p>qwe</p>'
-  constructor(private sanitizer: DomSanitizer, public modalRef: BsModalRef, private builder: FormBuilder) {
+  constructor(public modalRef: BsModalRef, private builder: FormBuilder) {
     this.tarea = new EventEmitter<any>();
     this.objInit()
-    /*this.form = new FormGroup({
-      html: new FormControl('<p>Hola que tal</p><p>qw</p><p>qwe</p>')
-    });*/
   }
 
   ngOnInit() {
@@ -61,13 +58,13 @@ export class TareasComponent implements OnInit {
       id: null,
       tareaTitulo: [null, [Validators.required]],
       puntajeMaximo: [null, [Validators.required]],
-      intervaloMaximo: [null, [Validators.required]],
-      tareaCategoria: [null, [Validators.required]],
-      calificacionTarea: [null, [Validators.required]],
-      fechaInicioTarea: [null, [Validators.required]],
-      fechaFinTarea: [null, [Validators.required]],
-      leccion: [null, [Validators.required]],
-      escalaCalificacion: [null, [Validators.required]],
+      intentosMaximo: [1, [Validators.required]],
+      tareaCategoria: [0, [Validators.required]],
+      calificacionTarea: [0, [Validators.required]],
+      fechaInicioTarea: [(new Date()).inicioMes(), [Validators.required]],
+      fechaFinTarea: [(new Date()).finMes(), [Validators.required]],
+      leccion: [this.leccion, [Validators.required]],
+      escalaCalificacion: [0, [Validators.required]],
       descripcionTarea: new FormControl(),
     })
   }
@@ -83,20 +80,6 @@ export class TareasComponent implements OnInit {
     ]
   };
 
-  editorDisabled = false;
-
-  get sanitizedHtml() {
-    return this.sanitizer.bypassSecurityTrustHtml(this.form.get('html').value);
-  }
-
-  enableEditor() {
-    this.editorDisabled = false;
-  }
-
-  disableEditor() {
-    this.editorDisabled = true;
-  }
-  onBlur() {}
   guardarTarea(tarea: any) {
     this.tarea.emit({ tarea: this.forma.getRawValue() });
     this.modalRef.hide();

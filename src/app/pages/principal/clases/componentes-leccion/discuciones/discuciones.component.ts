@@ -61,13 +61,21 @@ export class DiscucionesComponent implements OnInit {
   }
 
   enviarMensaje(item: any) {
+    if( this.envioMsn.length === 0){
+      return;
+    }
     this.srvCursos.addPosts(this._cursoId, this._objetoId, item.id, {
       comentario: this.envioMsn,
       usuario: this.usuario,
       fecha: new Date()
     }).then(resp => {
-      resp.update({ id: resp.id, $key: resp.id }).then(() => { console.log('creado') });
+      resp.update({ id: resp.id, $key: resp.id }).then(() => { 
+        this.limpiar();
+       });
     })
+  }
+  limpiar() {
+    this.envioMsn = '';
   }
   agregarDicusion() {
     const initialState = { datoCurso: { curso: this._cursoId, leccion: this._objetoId } };

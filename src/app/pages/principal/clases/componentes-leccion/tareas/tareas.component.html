@@ -8,7 +8,7 @@
   <form novalidate (ngSubmit)="guardarTarea()" [formGroup]="forma">
     <div class="row">
       <div class="col-12">
-        <div class="form-group">
+        <div class="form-group" gtRequerido>
           <label for="tareaTitulo">Titulo de tarea</label>
           <input type="text" class="form-control form-control-sm" id="tareaTitulo" formControlName="tareaTitulo">
           <div [hidden]="forma.get('tareaTitulo').valid">Required</div>
@@ -17,20 +17,25 @@
     </div>
     <div class="row">
       <div class="col-3">
-        <div class="form-group">
+        <div class="form-group" gtRequerido>
           <label for="puntajeMaximo">Puntaje Màximo</label>
           <input type="text" class="form-control form-control-sm" id="puntajeMaximo" formControlName="puntajeMaximo">
           <div [hidden]="forma.get('puntajeMaximo').valid">Required</div>
         </div>
-        <div class="form-group">
-          <label for="intervaloMaximo">Intervalo Máx</label>
-          <input type="text" class="form-control form-control-sm" id="intervaloMaximo"
-            formControlName="intervaloMaximo">
-          <div [hidden]="forma.get('intervaloMaximo').valid">Required</div>
+        <div class="form-group" gtRequerido>
+          <label for="intentosMaximo">Intervalo Máx</label>
+          <select class="form-control form-control-sm" id="intentosMaximo"
+            formControlName="intentosMaximo">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          <div [hidden]="forma.get('intentosMaximo').valid">Required</div>
         </div>
       </div>
       <div class="col-3 bordes-tarea">
-        <div class="form-group">
+        <div class="form-group" gtRequerido>
           <label for="tareaCategoria">Categoria</label>
           <select class="form-control form-control-sm" id="tareaCategoria" formControlName="tareaCategoria">
             <option value="0">Ninguna</option>
@@ -41,7 +46,7 @@
           </select>
           <div [hidden]="forma.get('tareaCategoria').valid">Required</div>
         </div>
-        <div class="form-group">
+        <div class="form-group" gtRequerido>
           <label for="calificacionTarea">Calificación</label>
           <select class="form-control form-control-sm" id="calificacionTarea" formControlName="calificacionTarea">
             <option value="0">Normal</option>
@@ -53,13 +58,13 @@
         </div>
       </div>
       <div class="col-3 bordes-tarea">
-        <div class="form-group">
+        <div class="form-group" gtRequerido>
           <label for="fechaInicioTarea">Comenzar </label>
-            <input id="fechaInicioTarea" class="form-control form-control-sm" #datepickerYMD="bsDatepicker" bsDatepicker
+          <input id="fechaInicioTarea" class="form-control form-control-sm" #datepickerYMD="bsDatepicker" bsDatepicker
             formControlName="fechaInicioTarea" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required="required">
           <div [hidden]="forma.get('fechaInicioTarea').valid">Required</div>
         </div>
-        <div class="form-group">
+        <div class="form-group" gtRequerido>
           <label for="fechaFinTarea">Finaliza</label>
           <input id="fechaFinTarea" class="form-control form-control-sm" #datepickerYMD="bsDatepicker" bsDatepicker
             formControlName="fechaFinTarea" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required="required">
@@ -67,22 +72,26 @@
         </div>
       </div>
       <div class="col-3 bordes-tarea">
-        <div class="form-group">
+        <div class="form-group" gtRequerido>
           <label for="leccion">Lección </label>
-          <input type="text" class="form-control form-control-sm" id="leccion" formControlName="leccion">
+          <input type="text" class="form-control form-control-sm" id="leccion" formControlName="leccion" disabled>
           <div [hidden]="forma.get('leccion').valid">Required</div>
         </div>
-        <div class="form-group">
+        <div class="form-group" gtRequerido>
           <label for="escalaCalificacion">Escala de Calificación</label>
-          <input type="text" class="form-control form-control-sm" id="escalaCalificacion"
+          <select class="form-control form-control-sm" id="escalaCalificacion"
             formControlName="escalaCalificacion">
+            <option value="0">Defecto</option>
+            <option value="1" data-points="">Escala estándar de calificación de aprobado / reprobado</option>
+            <option value="2" data-points="">Escala de calificación regular estándar</option>
+          </select>
           <div [hidden]="forma.get('escalaCalificacion').valid">Required</div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-12 bordes-tarea">
-        <div class="form-group">
+        <div class="form-group" gtRequerido>
           <div formControlName="descripcionTarea" [ngxSummernote]="config" [ngxSummernoteDisabled]="editorDisabled"
             (blur)="onBlur()">
           </div>

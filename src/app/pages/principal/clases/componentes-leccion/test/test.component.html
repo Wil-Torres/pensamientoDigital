@@ -28,8 +28,8 @@
             <label class="form-check-label" [for]="'ck_' + item.trabajoId"></label>
           </td>
           <td>{{item.tareaTitulo}}</td>
-          <td class="text-center">{{item.fechaInicioTarea}}</td>
-          <td class="text-center">{{item.fechaFinTarea}}</td>
+          <td class="text-center">{{item.fechaInicioTarea.toDate() | date:'dd/MM/yyyy'}}</td>
+          <td class="text-center">{{item.fechaFinTarea.toDate() | date:'dd/MM/yyyy'}}</td>
           <td class="text-center">
             <input type="checkbox" class="form-check-*" [(ngModel)]="item.asignado" disabled>
             <label class="form-check-label"></label>
