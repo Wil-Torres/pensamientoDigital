@@ -18,6 +18,7 @@ import { NotificacionModalComponent } from './componentes/notificacioens/notific
 import { NotificacionListaComponent } from './componentes/notificacioens/notificacion-lista.component';
 import { GtInicioSpinnerComponent } from './componentes/gt-inicio-spinner/gt-inicio-spinner.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { BusquedaModalComponent } from './componentes/busqueda-modal/busqueda-modal.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
         NotificacionModalComponent,
         NotificacionListaComponent,
         GtInicioSpinnerComponent,
+        BusquedaModalComponent,
     ],
     exports: [
         SidebarComponent,
@@ -51,6 +53,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
         NotificacionModalComponent,
         NotificacionListaComponent,
         GtInicioSpinnerComponent,
+        BusquedaModalComponent,
     ],
     imports:[
         RouterModule,
@@ -60,6 +63,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
         PaginationModule.forRoot(),
         NgxSpinnerModule,
     ],
-    entryComponents: [NotificacionModalComponent]
+    entryComponents: [NotificacionModalComponent, BusquedaModalComponent]
 })
 export class SharedModule {}

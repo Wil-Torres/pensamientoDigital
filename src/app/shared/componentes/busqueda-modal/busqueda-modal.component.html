@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-around">
+  <div class="card" class="{{registros.length ? 'w-65' : 'w-100'}}">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white d-flex justify-content-left">
+        <h4 class="modal-title flex-grow-1 text-center">Búsqueda de {{titulo}}</h4>
+        <button type="button" class="btn btn-sm float-right" title="Cerrar" (click)="cancelar()">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--gt-filtro-busqueda *ngIf="filtros?.length > 0" [filtros]="filtros" [recurso]="recurso" (busqueda)="buscar()"></gt-filtro-busqueda-->
+        <app-busqueda-lista></app-busqueda-lista>
+        <div class="table-responsive">
+          <table *ngIf="!tipoVario" class="table table-hover">
+            <thead>
+              <tr class="bg-primary text-white">
+                <th *ngFor="let campo of campos" class="{{campo.clase}}">{{campo.titulo}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let registro of registros" (click)="selecccionar(registro)">
+                <td *ngFor="let campo of campos" class="{{campo.clase}}">{{registro[campo.nombre]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <app-paginacion *ngIf="totalItems" (paginacion)="buscar($event.offset, $event.limit)" [totalItems]="totalItems">
+        </app-paginacion>
+      </div>
+    </div>
+  </div>
+  <div class="card w-35" *ngIf="registros.length">
+    <div class="card-header text-center">
+      <button class="btn btn-primary btn-lg btn-block" (click)="agregar()">Agregar</button>
+    </div>
+    <div class="card-body">
+      <table class="table table-hover">
+        <tr *ngFor="let item of seleccionados, let index = index">
+          <td><button (click)="eliminar(index)" title="Borrar" class="btn btn-danger btn-sm"><i
+                class="fas fa-trash-alt"></i></button></td>
+          <td *ngIf="!tipoVario" class="text-muted small text-uppercase">
+            {{item?.desc | slice : 1 : 50}}{{item?.desc?.length > 50 ? '...' : ''}}
+          </td>
+          <td *ngIf="tipoVario" class="text-muted small text-uppercase">
+            {{item?.descripcion}}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
