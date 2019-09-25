@@ -1,0 +1,51 @@
+<form>
+  <div class="d-flex justify-content-center">
+    <div class="col-md-6">
+      <div class="text-center">GESTION DE CICLOS</div>
+      <table class="table table-striped table-sm">
+        <thead class="bg-primary text-light">
+          <tr>
+            <th class="gt-wd-50"></th>
+            <th class="gt-wd-50"></th>
+            <th class="gt-wd-75">Ciclo</th>
+            <th class="gt-wd-75">Año</th>
+            <th class="gt-wd-25"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ciclo of objCiclos; let i = index">
+            <td><button type="button" class="btn btn-warning">Elegir</button></td>
+            <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+            <td>{{ciclo.estado == 'A' ? 'Activo' : 'Inactivo'}}</td>
+            <td>{{ciclo.ciclo}}</td>
+            <td *ngIf="objCiclos.length == (i + 1)"><button class="btn btn-primary" (click)="agregar(template)"><i
+                  class="fa fa-plus text-light"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Agregar Ciclo</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="cicloEscolar">Año</label>
+      <input type="number" name="cicloEscolar" id="cicloEscolar" class="form-control" [(ngModel)]="cicloEscolar"
+        [ngModelOptions]="{standalone: true}">
+    </div>
+  </div>
+
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary"
+          (click)="agregarCiclo()">
+          OK
+      </button>
+  </div>
+</ng-template>

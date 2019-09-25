@@ -1,0 +1,51 @@
+<form>
+  <div class="d-flex justify-content-center">
+    <div class="col-md-6">
+      <div class="text-center">GESTION DE CARRERAS</div>
+      <table class="table table-striped table-sm">
+        <thead class="bg-primary text-light">
+          <tr>
+            <th class="gt-wd-50">Código</th>
+            <th class="gt-wd-50">Descripcion</th>
+            <th class="gt-wd-25"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let carrera of objCarrera; let i = index">
+            <td>{{carrera.codigo}}</td>
+            <td>{{carrera.descripcion}}</td>
+            <td *ngIf="objCarrera.length == (i + 1)"><button class="btn btn-primary" (click)="agregar(template)"><i
+                  class="fa fa-plus text-light"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Agregar Carrera</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="codigoCarrera">Codigo</label>
+      <input type="number" name="codigoCarrera" id="codigoCarrera" class="form-control" [(ngModel)]="carreraEscolar.codigo"
+        [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label for="descripcionCarrera">Descripción</label>
+      <input type="text" name="descripcionCarrera" id="descripcionCarrera" class="form-control" [(ngModel)]="carreraEscolar.descripcion"
+        [ngModelOptions]="{standalone: true}">
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="agregarCarrera()">
+      OK
+    </button>
+  </div>
+</ng-template>

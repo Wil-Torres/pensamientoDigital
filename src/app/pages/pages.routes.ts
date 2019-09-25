@@ -30,6 +30,10 @@ import { CuentasComponent } from "./principal/administracion/cuentas/cuentas.com
 import { PerfilComponent } from "./configuracion/perfil/perfil.component";
 import { ListaDetalleCatalogoComponent } from "./principal/catalogo/lista-detalle-catalogo/lista-detalle-catalogo.component";
 import { ListaCatalogoCursosComponent } from "./principal/catalogo/lista-catalogo-cursos/lista-catalogo-cursos.component";
+import { InscripcionComponent } from "./principal/administracion/inscripcion/inscripcion.component";
+import { CiclosComponent } from "./principal/administracion/ciclos/ciclos.component";
+import { GradosSeccionesComponent } from "./principal/administracion/grados-secciones/grados-secciones.component";
+import { CarrerasComponent } from "./principal/administracion/carreras/carreras.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -45,6 +49,10 @@ const pagesRoutes: Routes = [
             {path: 'reportes', component: ReportesComponent, data:{titulo: 'Reportes'}, canActivate: [AuthGuard]},
             {path: 'panel-usuarios', component: PanelComponent, data:{titulo: 'Panel de Usuarios'}, canActivate: [AuthGuard]},
             {path: 'cuentas-usuarios', component: CuentasComponent, data:{titulo: 'Cuentas de Usuarios'}, canActivate: [AuthGuard]},
+            {path: 'nuevos-ingresos', component: InscripcionComponent, data:{titulo: 'Inscripción de Alumnos'}, canActivate: [AuthGuard]},
+            {path: 'ciclos', component: CiclosComponent, data:{titulo: 'Ciclos Escolares'}, canActivate: [AuthGuard]},
+            {path: 'ciclos/:id/grados-secciones', component: GradosSeccionesComponent, data:{titulo: 'Grados - Secciones'}, canActivate: [AuthGuard]},
+            {path: 'carreras', component: CarrerasComponent, data:{titulo: 'Carreras'}, canActivate: [AuthGuard]},
 
 
             /* Clases */
