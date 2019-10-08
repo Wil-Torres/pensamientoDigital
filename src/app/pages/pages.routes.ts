@@ -34,6 +34,9 @@ import { InscripcionComponent } from "./principal/administracion/inscripcion/ins
 import { CiclosComponent } from "./principal/administracion/ciclos/ciclos.component";
 import { GradosSeccionesComponent } from "./principal/administracion/grados-secciones/grados-secciones.component";
 import { CarrerasComponent } from "./principal/administracion/carreras/carreras.component";
+import { GradosCursosComponent } from "./principal/administracion/grados-cursos/grados-cursos.component";
+import { GradosMaestrosComponent } from "./principal/administracion/grados-maestros/grados-maestros.component";
+import { ProfesoresComponent } from "./mantenimiento/profesores/profesores.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -53,6 +56,8 @@ const pagesRoutes: Routes = [
             {path: 'ciclos', component: CiclosComponent, data:{titulo: 'Ciclos Escolares'}, canActivate: [AuthGuard]},
             {path: 'ciclos/:id/grados-secciones', component: GradosSeccionesComponent, data:{titulo: 'Grados - Secciones'}, canActivate: [AuthGuard]},
             {path: 'carreras', component: CarrerasComponent, data:{titulo: 'Carreras'}, canActivate: [AuthGuard]},
+            {path: 'asignar-cursos-grado', component: GradosCursosComponent, data:{titulo: 'Asignacion de cursos para grados'}, canActivate: [AuthGuard]},
+            {path: 'asignar-maestros-grado', component: GradosMaestrosComponent, data:{titulo: 'Asignacion de maestros para grado'}, canActivate: [AuthGuard]},
 
 
             /* Clases */
@@ -68,6 +73,9 @@ const pagesRoutes: Routes = [
             {path: 'alumno/calificaciones', component: CalificacionesComponent, data:{titulo: 'Calificaciones'}},
             {path: 'alumno/tareas', component: TrabajosComponent, data:{titulo: 'Tareas'}},
             {path: 'alumno/historial', component: HistorialComponent, data:{titulo: 'Historial'}},
+
+            /* Profesores */
+            {path: 'profesores', component: ProfesoresComponent, data:{titulo: 'Mantenimiento Profesores'}},
 
             
 

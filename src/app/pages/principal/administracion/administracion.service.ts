@@ -40,6 +40,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/services/service.index';
 import { UserInfo } from 'src/app/interfaces/login';
+import { inscripcion } from 'src/app/interfaces/alumno';
 
 @Injectable({
   providedIn: 'root'
@@ -49,9 +50,16 @@ export class AdministracionService {
   usuarioInfo: UserInfo;
   private _ciclos: AngularFirestoreCollection<Ciclo>;
   private _carreras: AngularFirestoreCollection<Carrera>;
-
   private _grados: AngularFirestoreCollection<gradoSeccion>;
-
+  private _inscripciones : AngularFirestoreCollection<inscripcion>;
+  
+  public get inscripciones() : AngularFirestoreCollection<inscripcion> {
+    return this._inscripciones;
+  }
+  public set inscripciones(v : AngularFirestoreCollection<inscripcion>) {
+    this._inscripciones = v;
+  }
+  
   public get grados(): AngularFirestoreCollection<gradoSeccion> {
     return this._grados;
   }
@@ -144,8 +152,25 @@ export class AdministracionService {
   }
 
   /* ****************************************************************************
-  **********************************  *************************************
+  **************************** INSCRIPCIONES ************************************
   *******************************************************************************
   */
+
+  getInscripciones(filtros:any) {
+    this.inscripciones = this.afs.collection('inscripciones', ref => ref.where('cicloId','==',filtros.cicloId).where('gradoId','==',filtros.gradoId))
+    return this.inscripciones.valueChanges();
+  }
+  getInscripcion(id: string) {
+    return this.afs.collection('inscripciones').doc(id).valueChanges();
+  }
+  postInscripcion(obj: inscripcion) {
+    return this.afs.collection('inscripciones').add(obj)
+  }
+  putInscripcion(obj: inscripcion) {
+    return this.afs.collection('inscripciones').doc(obj.id).update(obj)
+  }
+  deleteInscripcion(obj: inscripcion) {
+    return this.afs.collection('grainscripcionesdos').doc(obj.id).delete();
+  }
 
 }

@@ -6,7 +6,7 @@
         <label for="carreraId">Carrera</label>
         <select class="form-control custom-select" name="carreraId" id="carreraId" [(ngModel)]="gradoEscolar.carreraId" [ngModelOptions]="{standalone: true}" (ngModelChange)="seleccionarCarrera(gradoEscolar.carreraId)">
           <option selected>Seleccionar...</option>
-          <option *ngFor="let car of objCarreras; let i = index">{{car.descripcion}}</option>
+          <option *ngFor="let car of objCarreras; let i = index" [value]="car.id">{{car.descripcion}}</option>
         </select>
       </div>
       <div class="">
@@ -47,7 +47,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let grado of objGrados; let i = index">
-            <td>{{grado.gradoId}}</td>
+            <td>{{grado.gradoId + ' - '  +  grado.carrera.descripcion}}</td>
             <td>{{grado.seccion}}</td>
             <td *ngIf="objGrados.length == (i + 1)"><button class="btn btn-primary" (click)="agregar(template)"><i
                   class="fa fa-plus text-light"></i></button></td>

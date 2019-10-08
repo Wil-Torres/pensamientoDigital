@@ -1,3 +1,486 @@
-<p>
-  inscripcion works!
-</p>
+<form [formGroup]="forma" name="forma" (ngSubmit)="inscribir()" novalidate>
+  <div class="d-flex justify-content-center">
+    <div class="col-md-6">
+      <div class="font-weight-bold row">
+        <label class="w-40 pl-3">Ciclo</label>
+        <label class="w-40 pl-3">Grado y Sección</label>
+      </div>
+      <div class="input-group mb-3">
+        <select class="custom-select" id="ciclo" name="ciclo" formControlName="cicloId"
+          (ngModelChange)="seleccionarCiclo(forma.value.cicloId)">
+          <option selected>Seleccionar...</option>
+          <option *ngFor="let ciclo of objCiclo" [value]="ciclo.id">{{ciclo.ciclo}}</option>
+        </select>
+        <select class="custom-select" id="gradoSeccion" name="gradoSeccion" formControlName="gradoId"
+          (ngModelChange)="seleccionarGrado(forma.value.gradoId)">
+          <option selected>Seleccionar...</option>
+          <option *ngFor="let grado of objCarrera" [value]="grado.id">{{grado.gradoId}} - {{grado.carrera.descripcion}}
+          </option>
+        </select>
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit" id="inscribir">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="estudiante_registrado-tab" data-toggle="tab" href="#estudiante_registrado"
+        role="tab" aria-controls="estudiante_registrado" aria-selected="true">Estudiante Registrado</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="nuevo-tab" data-toggle="tab" href="#nuevo" role="tab" aria-controls="nuevo"
+        aria-selected="false">Nuevo Estudiante</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="estudiante_registrado" role="tabpanel"
+      aria-labelledby="estudiante_registrado-tab">
+      <!--INICIALIZA SECCION DE ALUMNO REGISTRADO -->
+      <div class="d-flex justify-content-center">
+        <div class="col-md-6">
+          <div class="text-center">
+            <h4>Estudiantes de ciclos anteriores</h4>
+          </div>
+          <div class="font-weight-bold row">
+            <label class="w-40 pl-3">Ciclo</label>
+            <label class="w-40 pl-3">Grado y Sección</label>
+          </div>
+          <div class="input-group mb-3">
+            <select class="custom-select" id="ciclo" name="ciclo" [(ngModel)]="cicloAnterior.cicloId"
+              [ngModelOptions]="{standalone: true}">
+              <option selected>Seleccionar...</option>
+              <option *ngFor="let ciclo of objCiclo" [value]="ciclo.id">{{ciclo.ciclo}}</option>
+            </select>
+            <select class="custom-select" id="gradoSeccion" name="gradoSeccion" [(ngModel)]="cicloAnterior.gradoId"
+              [ngModelOptions]="{standalone: true}">
+              <option selected>Seleccionar...</option>
+              <option *ngFor="let grado of objCarrera" [value]="grado.id">{{grado.gradoId}} -
+                {{grado.carrera.descripcion}}
+              </option>
+            </select>
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="button" id="buscar" (click)="mostrarAnteriores()">Buscar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-fixed">
+          <thead class="bg-primary text-light">
+            <tr>
+              <th class="gt-wd-100">CODIGO PERSONAL</th>
+              <th>APELLIDOS</th>
+              <th>NOMBRES</th>
+              <th class="gt-wd-100">DPI</th>
+              <th class="gt-wd-100">FECHA DE NACIMIENTO</th>
+              <th class="gt-wd-100">RESULTADO</th>
+              <th class="gt-wd-75">CICLO ACTUAL</th>
+              <th class="gt-wd-25"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ant of alumnosAnteriores; let i = index">
+              <td>{{'Pendiente'}}</td>
+              <td>{{ant.alumno.primerApellido}}</td>
+              <td>{{ant.alumno.primerNombre}}</td>
+              <td>{{ant.alumno.cui}}</td>
+              <td>{{ant.alumno.fechaNacimiento | date:'dd/MM/yyyy'}}</td>
+              <td>{{'Aprobado'}}</td>
+              <td>{{'inscrito'}}</td>
+              <td><button type="button" value="seleccionar" class="btn btn-success"
+                  (click)="seleccionarAnterior(ant)"><i class="fa fa-check"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <!-- FINALIZA SECIOION DE ALUMNNO REGISTRADO-->
+    </div>
+    <div class="tab-pane fade in fade" id="nuevo" role="tabpanel" aria-labelledby="nuevo-tab">
+      <br>
+      <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab"
+            aria-controls="general" aria-selected="true">Información General</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="responsable-tab" data-toggle="tab" href="#responsable" role="tab"
+            aria-controls="responsable" aria-selected="false">Responsable</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="sistema-tab" data-toggle="tab" href="#sistema" role="tab" aria-controls="sistema"
+            aria-selected="false">Ingreso Sistema</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+          <div class="col-md-12" formGroupName="alumno">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="identificacionAlumno">Identificación</label>
+                  <input type="text" name="identificacionAlumno" id="identificacionAlumno"
+                    class="form-control form-control-sm" formControlName="cui">
+                </div>
+              </div>
+            </div>
+            <span class="text-primary">
+              <h4>Estudiante</h4>
+              <hr class="divider">
+            </span>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="primerNombre">Primer nombre</label>
+                  <input type="text" name="primerNombre" id="primerNombre" class="form-control form-control-sm"
+                    formControlName="primerNombre">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="segundoNombre">Segundo nombre</label>
+                  <input type="text" name="segundoNombre" id="segundoNombre" class="form-control form-control-sm"
+                    formControlName="segundoNombre">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="otrosNombres">Otros nombres</label>
+                  <input type="text" name="otrosNombres" id="otrosNombres" class="form-control form-control-sm"
+                    formControlName="otrosNombres">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="primerApellido">Primer Apellido</label>
+                  <input type="text" name="primerApellido" id="primerApellido" class="form-control form-control-sm"
+                    formControlName="primerApellido">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="segundoApellido">Segundo Apellido</label>
+                  <input type="text" name="segundoApellido" id="segundoApellido" class="form-control form-control-sm"
+                    formControlName="segundoApellido">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="tercerApellido">Apellido de Casada</label>
+                  <input type="text" name="tercerApellido" id="tercerApellido" class="form-control form-control-sm"
+                    formControlName="otrosApellidos">
+                </div>
+              </div>
+            </div>
+            <span class="text-primary">
+              <h4>Nacimiento</h4>
+              <hr class="divider">
+            </span>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="fechaNacimiento">Fecha de nacimiento</label>
+                  <input type="date" name="fechaNacimiento" id="fechaNacimiento" class="form-control form-control-sm"
+                    formControlName="fechaNacimiento">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="deptoNacimiento">Departamento de Nacimiento</label>
+                  <select name="deptoNacimiento" id="deptoNacimiento" class="form-control form-control-sm"
+                    formaControlName="departamenoNacimientoId">
+                    <option value="0">--Seleccionar</option>
+                    <option value="1">Guatemala</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="municipioNacimiento">Municipio de nacimiento</label>
+                  <select name="municipioNacimiento" id="municipioNacimiento" class="form-control form-control-sm"
+                    formaControlName="municipioNacimientoId">
+                    <option value="0">--Seleccionar</option>
+                    <option value="1">Guatemala</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="direccionNacimiento">Dirección de nacimiento</label>
+                  <input type="text" name="direccionNacimiento" id="direccionNacimiento"
+                    class="form-control form-control-sm" formaControlName="direccionNacimiento">
+                </div>
+              </div>
+            </div>
+            <span class="text-primary">
+              <h4>Residencia</h4>
+              <hr class="divider">
+            </span>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="deptoResidencia">Departamento de residencia</label>
+                  <select name="deptoResidencia" id="deptoResidencia" class="form-control form-control-sm"
+                    formaControlName="departamentoResidenciaId">
+                    <option value="0">--Seleccionar</option>
+                    <option value="1">Guatemala</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="municipioResidencia">Municipio de residencia</label>
+                  <select name="municipioResidencia" id="municipioResidencia" class="form-control form-control-sm"
+                    formaControlName="municipioResidenciaId">
+                    <option value="0">--Seleccionar</option>
+                    <option value="1">Guatemala</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="direccionAlumno">Dirección de residencia</label>
+                  <input type="text" name="direccionAlumno" id="direccionAlumno" class="form-control form-control-sm"
+                    formControlName="direccionResidencia">
+                </div>
+              </div>
+            </div>
+            <span class="text-primary">
+              <h4>Otra Información</h4>
+              <hr class="divider">
+            </span>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="genero">Genero</label>
+                  <select name="genero" class="form-control form-control-sm" id="genero" formControlName="generoId">
+                    <option value="0">-- Masculino --</option>
+                    <option value="1">-- Femenino --</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="nacionalidad">Nacionalidad</label>
+                  <select name="nacionalidad" class="form-control form-control-sm" id="nacionalidad"
+                    formControlName="nacionalidadId">
+                    <option value="0">-- Guatemalteco --</option>
+                    <option value="1">-- Extranjero --</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="lateralidad">Lateralidad</label>
+                  <select name="lateralidad" class="form-control form-control-sm" id="lateralidad"
+                    formControlName="lateralidadId">
+                    <option value="0">-- Derecho --</option>
+                    <option value="1">-- Zurdo --</option>
+                    <option value="1">-- Ambidiestro --</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="estadoCivil">Estado civil</label>
+                  <select name="estadoCivil" class="form-control form-control-sm" id="estadoCivil"
+                    formControlName="estadoCivil">
+                    <option value="0">-- Soltero --</option>
+                    <option value="1">-- Casado --</option>
+                    <option value="1">-- Divorsiado --</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <span class="text-primary">
+              <h4>Otra Información</h4>
+              <hr class="divider">
+            </span>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="telefono">Teléfono</label>
+                  <input type="text" name="telefono" id="telefono" class="form-control form-control-sm"
+                    formControlName="telefono">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="facebook">Facebook</label>
+                  <input type="text" name="facebook" id="facebook" class="form-control form-control-sm"
+                    formControlName="facebook">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="email">Correo</label>
+                  <input type="email" name="email" id="email" class="form-control form-control-sm"
+                    formControlName="email">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="skype">Skype</label>
+                  <input type="text" name="skype" id="skype" class="form-control form-control-sm"
+                    formControlName="skype">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="responsable" role="tabpanel" aria-labelledby="responsable-tab">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header bg-primary text-light">Madre</div>
+                  <div class="card-body" formGroupName="alumno">
+                    <div class="row" formGroupName="datosMadre">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="nombresResponsable1">Nombres</label>
+                          <input type="text" name="nombresResponsable1" id="nombresResponsable1"
+                            class="form-control form-control-sm" formControlName="nombres">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="apellidosResponsable1">Apellidos</label>
+                          <input type="text" name="apellidosResponsable1" id="apellidosResponsable1"
+                            class="form-control form-control-sm" formControlName="apellidos">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="identificacionResponsable1">Identificación</label>
+                          <input type="text" name="identificacionResponsable1" id="identificacionResponsable1"
+                            class="form-control form-control-sm" formControlName="identificacion">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="parentesco">Parentesco</label>
+                          <select name="parentesco1" id="parentesco1" class="form-control form-control-sm"
+                            formControlName="parentescoId">
+                            <option value="padre">Padre</option>
+                            <option value="madre">Madre</option>
+                            <option value="madre">Hermano</option>
+                            <option value="madre">Hermana</option>
+                            <option value="madre">Tio</option>
+                            <option value="madre">Tia</option>
+                            <option value="madre">Abuelo</option>
+                            <option value="madre">Abuela</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="telefonoResponsable1">Teléfono Casa</label>
+                          <input type="text" name="telefonoResponsable1" id="telefonoResponsable1"
+                            class="form-control form-control-sm" formControlName="telefonoCasa">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="movilResponsable1">Teléfono Movil</label>
+                          <input type="text" name="movilResponsable1" id="movilResponsable1"
+                            class="form-control form-control-sm" formControlName="telefonoMovil">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-header bg-primary text-light">Padre</div>
+                  <div class="card-body" formGroupName="alumno">
+                    <div class="row" formGroupName="datosPadre">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="nombresResponsable">Nombres</label>
+                          <input type="text" name="nombresResponsable" id="nombresResponsable"
+                            class="form-control form-control-sm" formControlName="nombres">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="apellidosResponsable">Apellidos</label>
+                          <input type="text" name="apellidosResponsable" id="apellidosResponsable"
+                            class="form-control form-control-sm" formControlName="apellidos">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="identificacionResponsable">Identificación</label>
+                          <input type="text" name="identificacionResponsable" id="identificacionResponsable"
+                            class="form-control form-control-sm" formControlName="identificacion">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="parentesco">Parentesco</label>
+                          <select name="parentesco" id="parentesco" class="form-control form-control-sm"
+                            formControlName="parentescoId">
+                            <option value="padre">Padre</option>
+                            <option value="madre">Madre</option>
+                            <option value="madre">Hermano</option>
+                            <option value="madre">Hermana</option>
+                            <option value="madre">Tio</option>
+                            <option value="madre">Tia</option>
+                            <option value="madre">Abuelo</option>
+                            <option value="madre">Abuela</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="telefonoResponsable">Teléfono Casa</label>
+                          <input type="text" name="telefonoResponsable" id="telefonoResponsable"
+                            class="form-control form-control-sm" formControlName="telefonoCasa">
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="movilResponsable">Teléfono Movil</label>
+                          <input type="text" name="movilResponsable" id="movilResponsable"
+                            class="form-control form-control-sm" formControlName="telefonoMovil">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="sistema" role="tabpanel" aria-labelledby="responsable-tab">
+          <div class="col-md-12" formGroupName="alumno">
+            <div class="row" formGroupName="datosUsuario">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="userId">USER ID</label>
+                  <input type="text" name="userId" id="userId" class="form-control form-control-sm"
+                    formControlName="userId">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" name="password" id="password" class="form-control form-control-sm"
+                    formControlName="password">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

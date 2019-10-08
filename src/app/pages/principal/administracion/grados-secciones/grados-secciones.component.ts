@@ -33,6 +33,7 @@ export class GradosSeccionesComponent implements OnInit {
 
   ngOnInit() {
     this.srvAdmin.getGradosSecciones().subscribe(grados => {
+      console.log(grados)
       this.objGrados = grados;
     })
     this.srvAdmin.getCarreras().subscribe(carreras => {
@@ -117,7 +118,6 @@ export class GradosSeccionesComponent implements OnInit {
   }
 
   seleccionarCarrera(id: string) {
-    console.log(id)
     let x = this.objCarreras.find(elem => {
       return id === elem.id
     })

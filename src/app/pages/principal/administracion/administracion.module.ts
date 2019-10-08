@@ -9,9 +9,11 @@ import { CarrerasComponent } from './carreras/carreras.component';
 import { CiclosComponent } from './ciclos/ciclos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap';
+import { GradosCursosComponent } from './grados-cursos/grados-cursos.component';
+import { GradosMaestrosComponent } from './grados-maestros/grados-maestros.component';
 
 @NgModule({
-  declarations: [AdministracionComponent, CuentasComponent, InscripcionComponent, GradosSeccionesComponent, CarrerasComponent, CiclosComponent],
+  declarations: [AdministracionComponent, CuentasComponent, InscripcionComponent, GradosSeccionesComponent, CarrerasComponent, CiclosComponent, GradosCursosComponent, GradosMaestrosComponent],
   imports: [
     CommonModule,
     FormsModule,
