@@ -37,6 +37,7 @@ import { CarrerasComponent } from "./principal/administracion/carreras/carreras.
 import { GradosCursosComponent } from "./principal/administracion/grados-cursos/grados-cursos.component";
 import { GradosMaestrosComponent } from "./principal/administracion/grados-maestros/grados-maestros.component";
 import { ProfesoresComponent } from "./mantenimiento/profesores/profesores.component";
+import { ListaProfesoresComponent } from "./mantenimiento/profesores/lista-profesores.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -75,7 +76,7 @@ const pagesRoutes: Routes = [
             {path: 'alumno/historial', component: HistorialComponent, data:{titulo: 'Historial'}},
 
             /* Profesores */
-            {path: 'profesores', component: ProfesoresComponent, data:{titulo: 'Mantenimiento Profesores'}},
+            {path: 'profesores', component: ListaProfesoresComponent, data:{titulo: 'Mantenimiento Profesores'}},
 
             
 

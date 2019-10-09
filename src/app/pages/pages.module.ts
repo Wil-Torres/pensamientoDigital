@@ -28,6 +28,7 @@ import { AdministracionModule } from "./principal/administracion/administracion.
 import { ReportesModule } from "./principal/reportes/reportes.module";
 import { PerfilComponent } from './configuracion/perfil/perfil.component';
 import { ChartsModule } from "ng2-charts";
+import { ListaProfesoresComponent } from "./mantenimiento/profesores/lista-profesores.component";
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { ChartsModule } from "ng2-charts";
         AlumnosComponent,
         EncargadoAlumnoComponent,
         ProfesoresComponent,
+        ListaProfesoresComponent, 
         GradosComponent,
         CarrerasComponent,
         SeccionesComponent,

@@ -1,0 +1,30 @@
+<form>
+  <div class="d-flex justify-content-end">
+    <button data-toggle="tooltip" type="button" class="btn btn-secondary btn-white text-white ml-1" (click)="nuevo()"
+      title="Nuevo Profesor">
+      <i class="fa fa-refresh"></i>
+    </button>
+  </div>
+
+  <div *ngIf="!numeroRegistro" class="d-flex justify-content-center">
+    <h1>No hay datos <i class="fa fa-database text-danger"></i></h1>
+  </div>
+  <div class="row" *ngIf="numeroRegistro">
+    <table class="table table-striped">
+      <thead class="bg-primary text-white">
+        <tr>
+          <th>Nombre</th>
+          <th class="gt-wd-150">Inicio de Labores</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lst of listaProfesor; let i = index">
+          <td>{{lst.primerNombre}} - {{lst.primerApellido}}</td>
+          <td>{{lst.establecimiento.fechaInicio}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</form>
