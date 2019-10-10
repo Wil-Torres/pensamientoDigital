@@ -6,6 +6,7 @@ import { pais, departamento, municipio } from 'src/app/interfaces/alumno';
 import { isNil } from 'lodash';
 import swal from 'sweetalert';
 import { ProfesoresService } from './profesores.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profesores',
@@ -16,6 +17,7 @@ export class ProfesoresComponent implements OnInit {
 
   private _forma: FormGroup;
   private usuarioLog: UserInfo;
+  private objetoId = this.aRouter.snapshot.paramMap.get('id');
   private _objPais: pais[] = [];
   private _objDepartamento: departamento[] = [];
   private _objMunicipio: municipio[] = [];
@@ -45,11 +47,15 @@ export class ProfesoresComponent implements OnInit {
     this._forma = v;
   }
 
-  constructor(private srvProfesor: ProfesoresService, private builder: FormBuilder, private srvAuth: AuthService) {
+  constructor(private srvProfesor: ProfesoresService, private builder: FormBuilder, 
+    private srvAuth: AuthService, private aRouter: ActivatedRoute) {
     this.srvAuth.userInfo.subscribe((usuario:UserInfo) => {
       this.usuarioLog = usuario;
-      
     })
+
+    if ( !isNil(this.objetoId) ) {
+      this.buscar();
+    }
 
   }
 
@@ -61,7 +67,7 @@ export class ProfesoresComponent implements OnInit {
     if (isNil(this.forma.value.id)) {
       this.srvProfesor.addProfesor(this.forma.value).then(rProfe => {
         rProfe.update({ id: rProfe.id }).then(uProfe => {
-          swal('Actualización', 'Se ha acutalizado exitosamene', 'success')
+          swal('Nuevo Registro', 'Se ha creado exitosamene', 'success')
         }).catch(err => {
           swal('Ocurrio un problema', err, 'error')
         })
@@ -148,4 +154,12 @@ export class ProfesoresComponent implements OnInit {
       })
     })
   };
+
+  buscar() {
+
+    this.srvProfesor.getProfesor(this.objetoId).subscribe(profe => {
+      this.forma.patchValue(profe, {emitEvent:false});
+    })
+
+  }
 }

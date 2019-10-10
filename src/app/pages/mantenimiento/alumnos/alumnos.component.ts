@@ -8,6 +8,7 @@ import { AdministracionService } from '../../principal/administracion/administra
 import { pais, departamento, municipio } from 'src/app/interfaces/alumno';
 import { isNil } from 'lodash';
 import swal from 'sweetalert';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-alumnos',
@@ -25,6 +26,7 @@ export class AlumnosComponent implements OnInit {
   private _objPais: pais[] = [];
   private _objDepartamento: departamento[] = [];
   private _objMunicipio: municipio[] = [];
+  private objetoId = this.aRouter.snapshot.paramMap.get('id');
 
   public get objMunicipio(): municipio[] {
     return this._objMunicipio;
@@ -51,10 +53,15 @@ export class AlumnosComponent implements OnInit {
     this._forma = v;
   }
 
-  constructor(private srvAlumno: AlumnosService, private builder: FormBuilder, private srvAuth: AuthService) {
+  constructor(private srvAlumno: AlumnosService, private builder: FormBuilder, 
+    private srvAuth: AuthService, private aRouter: ActivatedRoute) {
     this.srvAuth.userInfo.subscribe(usuario => {
       this.usuarioLog = usuario;
     })
+
+    if ( this.objetoId ){
+      this.buscar();
+    }
 
   }
 
@@ -157,4 +164,12 @@ export class AlumnosComponent implements OnInit {
       jornada: [null, Validators.required],
     })
   };
+
+  buscar() {
+
+    this.srvAlumno.getAlumno(this.objetoId).subscribe(alumno => {
+      this.forma.patchValue(alumno, {emitEvent:false});
+    })
+
+  }
 }

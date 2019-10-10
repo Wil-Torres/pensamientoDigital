@@ -29,6 +29,9 @@ import { ReportesModule } from "./principal/reportes/reportes.module";
 import { PerfilComponent } from './configuracion/perfil/perfil.component';
 import { ChartsModule } from "ng2-charts";
 import { ListaProfesoresComponent } from "./mantenimiento/profesores/lista-profesores.component";
+import { SpeechRecognitionModule } from "@kamiazya/ngx-speech-recognition";
+import { SpeechSynthesisModule, } from '@kamiazya/ngx-speech-synthesis';
+import { ListaAlumnosComponent } from "./mantenimiento/alumnos/lista-alumnos.component";
 
 @NgModule({
     declarations: [
@@ -37,9 +40,10 @@ import { ListaProfesoresComponent } from "./mantenimiento/profesores/lista-profe
         AccountSettingComponent,
         TiendaComponent,
         AlumnosComponent,
+        ListaAlumnosComponent,
         EncargadoAlumnoComponent,
         ProfesoresComponent,
-        ListaProfesoresComponent, 
+        ListaProfesoresComponent,
         GradosComponent,
         CarrerasComponent,
         SeccionesComponent,
@@ -65,14 +69,25 @@ import { ListaProfesoresComponent } from "./mantenimiento/profesores/lista-profe
         RecursosModule,
         UsuariosModule,
         AdministracionModule,
-        ReportesModule,      
+        ReportesModule,
         PAGES_ROUTES,
         FormsModule,
         CommonModule,
         BsDatepickerModule.forRoot(),
-        ChartsModule
-        
+        ChartsModule,
+        SpeechRecognitionModule.withConfig({
+            lang: 'es-ES',
+            interimResults: true,
+            maxAlternatives: 10,
+        }),
+        SpeechSynthesisModule.forRoot({
+            lang: 'en',
+            volume: 1.0,
+            pitch: 1.0,
+            rate: 1.0,
+          }),
+
     ]
 })
 
-export class PagesModule {}
+export class PagesModule { }

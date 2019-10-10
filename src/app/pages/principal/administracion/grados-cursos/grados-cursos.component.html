@@ -1,3 +1,63 @@
-<p>
-  grados-cursos works!
-</p>
+<form>
+  <div class="d-flex justify-content-center">
+    <div class="col-md-12">
+      <div class="text-center">ASIGNACION DE CURSOS POR GRADO</div>
+      <div class="form-group" gtRequerido>
+        <label for="carreraId">Grado</label>
+        <select class="form-control custom-select" name="carreraId" id="carreraId">
+          <option selected>Seleccionar...</option>
+          <option *ngFor="let grado of objGrados; let i = index" [value]="grado.id">
+            {{grado.gradoId + ' - '  +  grado.carrera.descripcion}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary text-white" (click)="asignar()"><i class="fa fa-check"></i></button>
+    <div class="col-md-6">
+      <div class="form-group" gtRequerido>
+        <label for="catedra">Categoria</label>
+        <select name="catedra" class="form-control form-control-sm" id="materiaId" [(ngModel)]="categoriaId"
+          required="required" (ngModelChange)="seleccionarCurso(categoriaId)">
+          <option value="">{{'-- Sin Seleccionar --'}}</option>
+          <optgroup *ngFor="let cat of categoria; let i = index" label="{{cat.descripcion}}">
+            <option *ngFor="let dCate of cat.detalle" [value]="dCate.id">{{dCate.descripcion}}</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" gtRequerido>
+        <label for="curso">Curso</label>
+        <select name="curso" class="form-control form-control-sm" id="materiaId" [(ngModel)]="cursoId"
+          required="required">
+          <option value="">{{'-- Sin Seleccionar --'}}</option>
+          <option *ngFor="let dCate of cursos" [value]="dCate.id">{{dCate.clase}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="card-deck">
+      <div class="col-md-3 mb-2 pl-0 pr-0" *ngFor="let asigna of tempCursosAsignados; let i = index">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{asigna.curso.clase}}</h5>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="cursoObligatorio">
+              <label class="form-check-label" for="cursoObligatorio">Obligatorio</label>
+            </div>
+            <div class="form-group">
+              <label for="docente">Docente:</label>
+              <input type="text" class="form-control form-control-sm" id="docente">
+            </div>
+            <div class="form-group">
+              <label for="idioma">Imparte Clases en:</label>
+              <input type="text" class="form-control form-control-sm" id="idioma">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

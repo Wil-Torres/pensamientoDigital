@@ -1,7 +1,7 @@
 <form>
   <div class="d-flex justify-content-end">
     <button data-toggle="tooltip" type="button" class="btn btn-primary btn-white text-white ml-1" (click)="nuevo()"
-      title="Nuevo Profesor">
+      title="Nuevo Alumno">
       <i class="fa fa-plus"></i>
     </button>
   </div>
@@ -18,43 +18,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let lst of listaProfesor; let i = index" (click)="edicion(lst.id)">
+        <tr *ngFor="let lst of listaAlumnos; let i = index" (click)="edicion(lst.id)">
           <td>{{lst.primerNombre}} - {{lst.primerApellido}}</td>
-          <td>{{lst.establecimiento.fechaInicio}}</td>
+          <td></td>
         </tr>
       </tbody>
     </table>
   </div>
-
-
-  aqui empieza
-
-  <p>RxCompoent.message: {{message}}</p>
-  <button
-    [disabled]="service.started$ | async"
-    (click)="listen()"
-  >listen</button>
-  <p>lang: es-ES</p>
-  <p>grammars: none</p>
-
-
-  siguiente aqui empieza
-  <div>
-    <p *ngFor="let text of contents">{{text}}</p>
-  </div>
-  <div>
-    <button (click)="speech()">
-      speech
-    </button>
-    <button (click)="resume()">
-      resume
-    </button>
-    <button (click)="pause()">
-      pause
-    </button>
-    <button (click)="cancel()">
-      cancel
-    </button>
-  </div>
-
 </form>

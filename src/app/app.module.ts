@@ -15,6 +15,7 @@ import { ServiceModule } from './services/service.module';
 import { CommonModule } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { SpeechRecognitionModule } from '@kamiazya/ngx-speech-recognition';
 
 
 
@@ -34,6 +35,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ServiceModule,
     BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
+    SpeechRecognitionModule.forRoot({ lang: 'en-US' }),
   ],
   providers: [],
   bootstrap: [AppComponent]

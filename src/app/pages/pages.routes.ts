@@ -38,6 +38,7 @@ import { GradosCursosComponent } from "./principal/administracion/grados-cursos/
 import { GradosMaestrosComponent } from "./principal/administracion/grados-maestros/grados-maestros.component";
 import { ProfesoresComponent } from "./mantenimiento/profesores/profesores.component";
 import { ListaProfesoresComponent } from "./mantenimiento/profesores/lista-profesores.component";
+import { ListaAlumnosComponent } from "./mantenimiento/alumnos/lista-alumnos.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -67,7 +68,9 @@ const pagesRoutes: Routes = [
             {path: 'clase/:curso/leccion/:id', component: LeccionNuevoEdicionComponent, data:{titulo: 'Lección'}, canActivate: [AuthGuard]},
 
             /* Alumnos */
-            {path: 'alumno', component: AlumnosComponent, data:{titulo: 'Mantenimiento Alumnos'}},
+            {path: 'alumnos', component: ListaAlumnosComponent, data:{titulo: 'Mantenimiento Alumnos'}, canActivate: [AuthGuard]},
+            {path: 'alumno/nuevo', component: AlumnosComponent, data:{titulo: 'Mantenimiento Alumnos'}, canActivate: [AuthGuard]},
+            {path: 'alumno/:id', component: AlumnosComponent, data:{titulo: 'Mantenimiento Alumnos'}, canActivate: [AuthGuard]},
             {path: 'cursos/all-cursos', component: ListaCursosComponent, data:{titulo: 'Todos los Cursos'}},
             {path: 'alumno/mis-cursos', component: ListaCursosComponent, data:{titulo: 'Lista Cursos asignados'}},
             {path: 'alumno/cursos/:id', component: CursosComponent, data:{titulo: 'Curso'}},
@@ -76,10 +79,9 @@ const pagesRoutes: Routes = [
             {path: 'alumno/historial', component: HistorialComponent, data:{titulo: 'Historial'}},
 
             /* Profesores */
-            {path: 'profesores', component: ListaProfesoresComponent, data:{titulo: 'Mantenimiento Profesores'}},
-
-            
-
+            {path: 'profesores', component: ListaProfesoresComponent, data:{titulo: 'Mantenimiento Profesores'}, canActivate: [AuthGuard]},
+            {path: 'profesores/nuevo', component: ProfesoresComponent, data:{titulo: 'Mantenimiento Profesores'}, canActivate: [AuthGuard]},
+            {path: 'profesores/:id', component: ProfesoresComponent, data:{titulo: 'Mantenimiento Profesores'}, canActivate: [AuthGuard]},
 
             /* Grupos */
             {path: 'grupos/lista-grupos', component: ListaGruposComponent, data:{titulo: 'Grupos'}},

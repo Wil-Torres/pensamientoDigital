@@ -62,7 +62,7 @@ export class ModalNuevaClaseComponent implements OnInit {
       codigoAcceso: [null, [Validators.required]],
       fechaInicio: [(new Date()).inicioMes(), [Validators.required]],
       fechaFin: [(new Date()).finMes(), [Validators.required]],
-      creaId: this.usuario.uid,
+      creaId: null,
       catedra: [null, [Validators.required]],
       grado: [null, [Validators.required]],
       idioma: [0, [Validators.required]],
@@ -78,6 +78,7 @@ export class ModalNuevaClaseComponent implements OnInit {
     })
   }
   guardar() {
+    this.forma.patchValue({creaId: this.usuario.uid});
     this.srvClase.addCursos(this.forma.getRawValue()).then(curso => {
       curso.update({ id: curso.id, $key: curso.id }).then(actualizado => {
         swal('Creacion de Curso', 'Se ha creado el curso  ' + this.forma.value.clase, 'success').then(() => {
