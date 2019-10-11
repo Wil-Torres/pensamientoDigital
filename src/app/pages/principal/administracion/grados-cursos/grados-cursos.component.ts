@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AdministracionService } from '../administracion.service';
 import { CatalogoService } from '../../catalogo/catalogo.service';
-import { element } from '@angular/core/src/render3';
+import { isNil } from 'lodash';
+import swal from 'sweetalert';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-grados-cursos',
@@ -14,28 +16,70 @@ export class GradosCursosComponent implements OnInit {
   cursos: any = [];
   categoriaId: string;
   cursoId: string;
-  tempCursosAsignados: any[] = [];
+  tempCursosAsignados: any = {};
+  tempCursosAsignados2: any[] = [];
+  private gradoId: string = this.Aroute.snapshot.paramMap.get('id');
 
-  constructor(private srvAdmin: AdministracionService, private srvCatalogo: CatalogoService) {
+  constructor(private srvAdmin: AdministracionService, private srvCatalogo: CatalogoService,
+    private router: Router, private Aroute: ActivatedRoute) {
     this.srvAdmin.getGradosSecciones().subscribe(grados => {
       this.objGrados = grados;
     })
 
     this.srvCatalogo.obtenerCategorias().then(resp => {
       this.categoria = resp;
-      console.log(this.categoria);
     });
 
   }
 
   ngOnInit() {
+    if ( !isNil(this.gradoId)) {
+      this.srvAdmin.getCursosGrado(this.gradoId).subscribe(grado => {
+        this.tempCursosAsignados2 = grado;
+      })
+    }
+  }
+
+  validar() {
+    if ( isNil(this.cursoId)) {
+      return {error: true, mensaje: 'Falta seleccionar curso'};
+    } 
+    if ( isNil(this.categoriaId)) {
+      return {error: true, mensaje: 'Falta seleccionar la categoria del curso'};
+    } 
+    if ( isNil(this.gradoId)) {
+      return {error: true, mensaje: 'Seleccionar grado:'};
+    } 
+    return {error: false, mensaje: ''};
   }
 
   asignar() {
     let curso = this.cursos.find((element:any) => this.cursoId === element.id);
-    let catalogo = this.categoria.find((element:any) => this.categoriaId === element.id);
+    let xy = null
+    let catalogo = this.categoria.find((element:any) => { 
+      let x = element.detalle.find(sElement => {
+        return this.categoriaId === sElement.id
+      })
+      xy = x;
+      return x;
+    });
+    catalogo = xy;
+    let valida = this.validar();
+    if( valida.error){
+      swal('Ocurrio un error',valida.mensaje,'error');
+      return;
+    }
+    this.tempCursosAsignados = {curso, catalogo, cursoId: curso.id, catalogoId: catalogo.id, obligatorio: true, docente: 'Wilson Torres', idioma: 'Español', id:null};
 
-    this.tempCursosAsignados.push({curso, catalogo, obligatorio: true, docente: 'Wilson Torres', idioma: 'Español'});
+    this.srvAdmin.postCursoGrado(this.gradoId, this.tempCursosAsignados).then(asignado => {
+      asignado.update({id: asignado.id}).then(resp => {
+        swal('Nuevo registro','Agregado exitosamente', 'success')
+      });
+    }).catch(err => {
+      swal('Ocurrio un error',err, 'error')
+    })
+
+    
   }
 
   seleccionarCurso(id: string){

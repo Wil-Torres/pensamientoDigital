@@ -66,6 +66,13 @@ export class GradosSeccionesComponent implements OnInit {
 
   }
 
+  asignarCursos(id: string) {
+    this.router.navigate(['asignar-cursos-grado',id]);
+  }
+  asignarMaestro (id: string) {
+    this.router.navigate(['asignar-maestros-grado',id]);
+  }
+
   validarGrado() {
     let respuesta = { error: false, mensaje: '' }
     let existeGrado = this.objGrados.find(elem => {

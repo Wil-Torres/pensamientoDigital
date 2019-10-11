@@ -3,8 +3,8 @@
     <div class="col-md-12">
       <div class="text-center">ASIGNACION DE CURSOS POR GRADO</div>
       <div class="form-group" gtRequerido>
-        <label for="carreraId">Grado</label>
-        <select class="form-control custom-select" name="carreraId" id="carreraId">
+        <label for="gradoId">Grado</label>
+        <select class="form-control custom-select" name="gradoId" id="gradoId" [(ngModel)]="gradoId" disabled>
           <option selected>Seleccionar...</option>
           <option *ngFor="let grado of objGrados; let i = index" [value]="grado.id">
             {{grado.gradoId + ' - '  +  grado.carrera.descripcion}}</option>
@@ -39,7 +39,7 @@
   </div>
   <div class="d-flex justify-content-center">
     <div class="card-deck">
-      <div class="col-md-3 mb-2 pl-0 pr-0" *ngFor="let asigna of tempCursosAsignados; let i = index">
+      <div class="col-md-3 mb-2 pl-0 pr-0" *ngFor="let asigna of tempCursosAsignados2; let i = index">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{asigna.curso.clase}}</h5>

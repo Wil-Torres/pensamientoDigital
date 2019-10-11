@@ -4,7 +4,8 @@
       <div class="text-center">GESTION DE GRADOS Y SECCIONES</div>
       <div class="form-group">
         <label for="carreraId">Carrera</label>
-        <select class="form-control custom-select" name="carreraId" id="carreraId" [(ngModel)]="gradoEscolar.carreraId" [ngModelOptions]="{standalone: true}" (ngModelChange)="seleccionarCarrera(gradoEscolar.carreraId)">
+        <select class="form-control custom-select" name="carreraId" id="carreraId" [(ngModel)]="gradoEscolar.carreraId"
+          [ngModelOptions]="{standalone: true}" (ngModelChange)="seleccionarCarrera(gradoEscolar.carreraId)">
           <option selected>Seleccionar...</option>
           <option *ngFor="let car of objCarreras; let i = index" [value]="car.id">{{car.descripcion}}</option>
         </select>
@@ -15,7 +16,8 @@
           <label class="w-40 pl-3">Sección</label>
         </div>
         <div class="input-group mb-3">
-          <select class="custom-select" id="gradoId" [(ngModel)]="gradoEscolar.gradoId" [ngModelOptions]="{standalone: true}">
+          <select class="custom-select" id="gradoId" [(ngModel)]="gradoEscolar.gradoId"
+            [ngModelOptions]="{standalone: true}">
             <option selected>Seleccionar...</option>
             <option value="1">Primero</option>
             <option value="2">Segundo</option>
@@ -31,7 +33,8 @@
             <option value="12">Decimo Segundo</option>
             <option value="13">Otros</option>
           </select>
-          <input type="text" class="form-control" id="seccion" [(ngModel)]="gradoEscolar.seccion" [ngModelOptions]="{standalone: true}">
+          <input type="text" class="form-control" id="seccion" [(ngModel)]="gradoEscolar.seccion"
+            [ngModelOptions]="{standalone: true}">
           <div class="input-group-append">
             <button class="btn btn-primary" type="button" id="button-addon2" (click)="agregarGrado()">Agregar</button>
           </div>
@@ -49,8 +52,12 @@
           <tr *ngFor="let grado of objGrados; let i = index">
             <td>{{grado.gradoId + ' - '  +  grado.carrera.descripcion}}</td>
             <td>{{grado.seccion}}</td>
-            <td *ngIf="objGrados.length == (i + 1)"><button class="btn btn-primary" (click)="agregar(template)"><i
-                  class="fa fa-plus text-light"></i></button></td>
+            <td>
+              <button class="btn btn-secondary" (click)="asignarCursos(grado.id)"><i
+                  class="fa fa-check text-light"></i></button>
+              <button class="btn btn-secondary" (click)="asignarMaestro(grado.id)"><i
+                  class="fa fa-users text-light"></i></button>
+            </td>
           </tr>
         </tbody>
       </table>

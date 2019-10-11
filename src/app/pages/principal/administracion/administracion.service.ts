@@ -151,6 +151,28 @@ export class AdministracionService {
     return this.afs.collection('grados').doc(obj.id).delete();
   }
 
+    /* ****************************************************************************
+  **************************** GRADOS SECICIONES ********************************
+  *******************************************************************************
+  */
+ getCursosGrado(gradoId: string) {
+  this.grados = this.afs.collection('grados').doc(gradoId).collection('asignacion')
+  return this.grados.valueChanges();
+}
+getCursoGrado(gradoId: string, id: string) {
+  return this.afs.collection('grados').doc(gradoId).collection('asignacion').doc(id)
+  .valueChanges();
+}
+postCursoGrado(gradoId: string, obj: any) {
+  return this.afs.collection('grados').doc(gradoId).collection('asignacion').add(obj)
+}
+putCursoGrado(gradoId:string,  obj: any) {
+  return this.afs.collection('grados').doc(gradoId).collection('asignacion').doc(obj.id).update(obj)
+}
+deleteCursoGrado(gradoId: string, obj: any) {
+  return this.afs.collection('grados').doc(gradoId).collection('asignacion').doc(obj.id).delete();
+}
+
   /* ****************************************************************************
   **************************** INSCRIPCIONES ************************************
   *******************************************************************************

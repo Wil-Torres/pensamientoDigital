@@ -58,8 +58,8 @@ const pagesRoutes: Routes = [
             {path: 'ciclos', component: CiclosComponent, data:{titulo: 'Ciclos Escolares'}, canActivate: [AuthGuard]},
             {path: 'ciclos/:id/grados-secciones', component: GradosSeccionesComponent, data:{titulo: 'Grados - Secciones'}, canActivate: [AuthGuard]},
             {path: 'carreras', component: CarrerasComponent, data:{titulo: 'Carreras'}, canActivate: [AuthGuard]},
-            {path: 'asignar-cursos-grado', component: GradosCursosComponent, data:{titulo: 'Asignacion de cursos para grados'}, canActivate: [AuthGuard]},
-            {path: 'asignar-maestros-grado', component: GradosMaestrosComponent, data:{titulo: 'Asignacion de maestros para grado'}, canActivate: [AuthGuard]},
+            {path: 'asignar-cursos-grado/:id', component: GradosCursosComponent, data:{titulo: 'Asignacion de cursos para grados'}, canActivate: [AuthGuard]},
+            {path: 'asignar-maestros-grado/:id', component: GradosMaestrosComponent, data:{titulo: 'Asignacion de maestros para grado'}, canActivate: [AuthGuard]},
 
 
             /* Clases */
