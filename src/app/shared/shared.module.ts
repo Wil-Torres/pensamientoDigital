@@ -19,6 +19,7 @@ import { NotificacionListaComponent } from './componentes/notificacioens/notific
 import { GtInicioSpinnerComponent } from './componentes/gt-inicio-spinner/gt-inicio-spinner.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BusquedaModalComponent } from './componentes/busqueda-modal/busqueda-modal.component';
+import { QuizzesComponent } from './componentes/quizzes/quizzes.component';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import { BusquedaModalComponent } from './componentes/busqueda-modal/busqueda-mo
         NotificacionListaComponent,
         GtInicioSpinnerComponent,
         BusquedaModalComponent,
+        QuizzesComponent,
     ],
     exports: [
         SidebarComponent,
@@ -54,6 +56,7 @@ import { BusquedaModalComponent } from './componentes/busqueda-modal/busqueda-mo
         NotificacionListaComponent,
         GtInicioSpinnerComponent,
         BusquedaModalComponent,
+        QuizzesComponent
     ],
     imports:[
         RouterModule,

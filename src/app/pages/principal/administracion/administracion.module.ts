@@ -11,13 +11,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap';
 import { GradosCursosComponent } from './grados-cursos/grados-cursos.component';
 import { GradosMaestrosComponent } from './grados-maestros/grados-maestros.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [AdministracionComponent, CuentasComponent, InscripcionComponent, GradosSeccionesComponent, CarrerasComponent, CiclosComponent, GradosCursosComponent, GradosMaestrosComponent],
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
+
   ],
   exports: [
     AdministracionComponent,
