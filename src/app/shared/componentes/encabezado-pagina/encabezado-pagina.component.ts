@@ -33,6 +33,7 @@ export class EncabezadoPaginaComponent implements OnInit {
   borrar() {
     alert('borrando registro')
   }
+  ejecutarReporte(){}
 
 
 }

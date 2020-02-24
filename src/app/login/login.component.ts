@@ -13,7 +13,18 @@ declare function init_plugins();
 export class LoginComponent implements OnInit {
   usr: any;
   objeto: any = {};
-  constructor(public router: Router, private auth: AuthService) { }
+  
+  private _auth : AuthService;
+  public get auth() : AuthService {
+    return this._auth;
+  }
+  public set auth(v : AuthService) {
+    this._auth = v;
+  }
+  
+  constructor(public router: Router, private auth1: AuthService) { 
+    this._auth = auth1
+  }
 
   ngOnInit() {
     init_plugins();

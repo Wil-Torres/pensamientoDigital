@@ -162,4 +162,8 @@ export class ProfesoresComponent implements OnInit {
     })
 
   }
+
+  actualizar(){}
+  limpiar(){}
+  eliminar(){}
 }

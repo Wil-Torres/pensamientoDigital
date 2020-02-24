@@ -22,10 +22,13 @@ export class ModalDetalleSubtemaComponent implements OnInit {
   public set addContenido(v: EventEmitter<any>) {
     this._addContenido = v;
   }
-
-  constructor(private srvRecurso: RecursosService, private modalRef: BsModalRef) {
+  modalRef: BsModalRef;
+  constructor(private srvRecurso: RecursosService) {
     this.addContenido = new EventEmitter<any>();
   }
+
+  cancelar(){}
+
 
   ngOnInit() {
   }
@@ -54,7 +57,7 @@ export class ModalDetalleSubtemaComponent implements OnInit {
     return respuesta;
   }
 
-  agregarSubContendio(item: number) {
+  agregarSubContendio() {
 
     let valida = this.validar();
     if (valida.error) {

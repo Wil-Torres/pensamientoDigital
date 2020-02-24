@@ -1,0 +1,12 @@
+{
+  "rules": {
+    ".read": "true",
+    ".write": "true",
+    "posts": {
+   		".read": "root.child('users').child(auth.uid).child('roles/reader').exists() === true",
+			".write": "(newData.exists() && root.child('users').child(auth.uid).child('roles/author').val() === true)
+              ||
+              (root.child('users').child(auth.uid).child('roles/admin').val() === true)"
+			}
+	  }
+}

@@ -44,7 +44,6 @@ export class TrabajosComponent implements OnInit {
   constructor(private builder: FormBuilder, private alumno: AlumnoService, private srvCurso: ClasesService,
     private aRoute: ActivatedRoute, private srvRecurso: RecursosService,
     private srvTarea: EntregaTrabajoService) {
-
     alumno.inicializar();
     this.unidad = 0;
     this.leccion = 0;

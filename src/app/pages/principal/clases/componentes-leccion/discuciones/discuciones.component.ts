@@ -93,4 +93,9 @@ export class DiscucionesComponent implements OnInit {
 
   }
 
+  deshacerSeleccion() {}
+  editarTarea(){}
+  borrarTarea(){}
+  
+
 }

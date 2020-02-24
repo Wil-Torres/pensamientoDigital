@@ -72,11 +72,11 @@ const pagesRoutes: Routes = [
             {path: 'alumno/nuevo', component: AlumnosComponent, data:{titulo: 'Mantenimiento Alumnos'}, canActivate: [AuthGuard]},
             {path: 'alumno/:id', component: AlumnosComponent, data:{titulo: 'Mantenimiento Alumnos'}, canActivate: [AuthGuard]},
             {path: 'cursos/all-cursos', component: ListaCursosComponent, data:{titulo: 'Todos los Cursos'}},
-            {path: 'alumno/mis-cursos', component: ListaCursosComponent, data:{titulo: 'Lista Cursos asignados'}},
+            {path: 'alumno-mis-cursos', component: ListaCursosComponent, data:{titulo: 'Lista Cursos asignados'}},
             {path: 'alumno/cursos/:id', component: CursosComponent, data:{titulo: 'Curso'}},
-            {path: 'alumno/calificaciones', component: CalificacionesComponent, data:{titulo: 'Calificaciones'}},
-            {path: 'alumno/tareas', component: TrabajosComponent, data:{titulo: 'Tareas'}},
-            {path: 'alumno/historial', component: HistorialComponent, data:{titulo: 'Historial'}},
+            {path: 'alumno-calificaciones', component: CalificacionesComponent, data:{titulo: 'Calificaciones'}},
+            {path: 'alumno-tareas', component: TrabajosComponent, data:{titulo: 'Tareas'}},
+            {path: 'alumno-historial', component: HistorialComponent, data:{titulo: 'Historial'}},
 
             /* Profesores */
             {path: 'profesores', component: ListaProfesoresComponent, data:{titulo: 'Mantenimiento Profesores'}, canActivate: [AuthGuard]},

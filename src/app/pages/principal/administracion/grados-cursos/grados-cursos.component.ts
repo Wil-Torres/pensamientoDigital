@@ -18,7 +18,7 @@ export class GradosCursosComponent implements OnInit {
   cursoId: string;
   tempCursosAsignados: any = {};
   tempCursosAsignados2: any[] = [];
-  private gradoId: string = this.Aroute.snapshot.paramMap.get('id');
+  gradoId: string = this.Aroute.snapshot.paramMap.get('id');
 
   constructor(private srvAdmin: AdministracionService, private srvCatalogo: CatalogoService,
     private router: Router, private Aroute: ActivatedRoute) {

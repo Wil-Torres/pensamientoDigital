@@ -9,7 +9,18 @@ declare function init_plugins();
 })
 export class PagesComponent implements OnInit {
   bsInlineValue = new Date();
-  constructor(private srvCore: CoreService) { }
+  
+  private _srvCore : CoreService;
+  public get srvCore() : CoreService {
+    return this._srvCore;
+  }
+  public set srvCore(v : CoreService) {
+    this._srvCore = v;
+  }
+  
+  constructor(private srvCore1: CoreService) { 
+    this._srvCore = srvCore1;
+  }
 
   ngOnInit() {
     init_plugins();

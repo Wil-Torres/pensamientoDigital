@@ -59,7 +59,7 @@ import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal
           </tbody>
         </table>
       </div>
-      <app-paginacion (paginacion)="buscar($event.offset, $event.limit)" [totalItems]="numeroRegistros"></app-paginacion>
+      <app-paginacion (paginacion)="buscar($event.offset, $event.limit)" [totalItems]="numeroRegistro"></app-paginacion>
     </div>
   `,
   styles: [`

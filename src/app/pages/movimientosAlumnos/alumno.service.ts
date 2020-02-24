@@ -44,25 +44,25 @@ export class AlumnoService {
       {
         titulo: 'Contenido',
         icono: 'fa fa-university',
-        url: '/alumno/mis-cursos',
+        url: '/alumno-mis-cursos',
         submenu: []
       },
       {
         titulo: 'Tareas',
         icono: 'fa fa-pencil-square-o',
-        url: '/alumno/tareas',
+        url: '/alumno-tareas',
         submenu: []
       },
       {
         titulo: 'Calificaciones',
         icono: 'fa fa-bookmark-o',
-        url: '/alumno/calificaciones',
+        url: '/alumno-calificaciones',
         submenu: []
       },
       {
         titulo: 'Anuncios',
         icono: 'fa fa-newspaper-o',
-        url: '/alumno/historial',
+        url: '/alumno-historial',
         submenu: []
       }
     ]

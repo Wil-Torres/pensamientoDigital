@@ -23,6 +23,7 @@ export class TareasComponent implements OnInit {
   private _forma: FormGroup;
   leccion: string;
   edicion: any;
+  editorDisabled: any;
 
   private _tarea: EventEmitter<any>;
   public get tarea(): EventEmitter<any> {
@@ -80,13 +81,14 @@ export class TareasComponent implements OnInit {
     ]
   };
 
-  guardarTarea(tarea: any) {
+  guardarTarea() {
     this.tarea.emit({ tarea: this.forma.getRawValue() });
     this.modalRef.hide();
   }
-  cancelar(tarea: any) {
+  cancelar() {
     this.modalRef.hide();
   }
+  onBlur(){}
 
 
 

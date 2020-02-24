@@ -76,7 +76,7 @@ import { ListaAlumnosComponent } from "./mantenimiento/alumnos/lista-alumnos.com
         BsDatepickerModule.forRoot(),
         ChartsModule,
         SpeechRecognitionModule.withConfig({
-            lang: 'es-ES',
+            lang: 'en-EN',
             interimResults: true,
             maxAlternatives: 10,
         }),

@@ -25,7 +25,7 @@ export class ListaProfesoresComponent implements OnInit {
     // servicio para escuchar, reproducir
     public f: SpeechSynthesisUtteranceFactoryService,
     public svc: SpeechSynthesisService) {
-    service.lang = 'es-ES'
+    service.lang = 'en-EN'
   }
 
   ngOnInit() {

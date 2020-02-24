@@ -63,7 +63,7 @@ export class NuevaDiscucionModalComponent implements OnInit {
     });
   }
 
-  guardar(discucion: any) {
+  guardar() {
     this.srvCurso.addDiscucion(this.datoCurso.curso, this.datoCurso.leccion, this.forma.getRawValue()).then( res => {
       res.update({id:res.id, $key: res.id}).then( resp => {
         this.discucion.emit({ creado: true});
@@ -75,7 +75,7 @@ export class NuevaDiscucionModalComponent implements OnInit {
       console.log(err);
     })
   }
-  cancelar(discucion: any) {
+  cancelar() {
     this.modalRef.hide();
   }
 

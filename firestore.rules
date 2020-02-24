@@ -1,0 +1,126 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+    //match /{document=**} {
+    //  allow read, write: if request.auth.uid != null;
+    //}
+    // match /posts/testPost {
+   //   function getRole(role) {
+   //   	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+   //   }
+   //   allow read: if getRole('reader') == true;
+   //   allow update: if getRole('author') == true;
+   //   allow create, delete: if getRole('admin') == true;
+   // }
+   // match /users/{document} {
+   //   function getRole(role) {
+   //   	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.roles[role]
+   //   }
+   //   allow read;
+   //   allow create: if request.resource.data.roles.keys().hasAny(['admin', 'author']) == false;
+   //   allow update: if getRole('admin') == true;
+   // }
+   match /users/{document} {
+   	allow read: if request.auth.uid != null;
+    allow create: if true;
+    allow write: if true;
+    match /notificaciones/{notificacionId} {
+    	allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    	allow create: if request.auth.uid != null
+    }
+   }
+   match /posts/{document} {
+		allow read: if true;
+    allow delete: if true;
+    allow write: if true;
+    allow create: if true
+   }
+   
+   match /ciclos/{cicloId} {
+   		allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    	allow create: if request.auth.uid != null
+   }
+   match /carreras/{carreraId} {
+   		allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    	allow create: if request.auth.uid != null
+   }
+   
+   match /grados/{gradoId} {
+   		allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    	allow create: if request.auth.uid != null
+   }
+   
+   match /{document=**} {
+   	allow read, write: if request.auth.uid != null;
+   }
+   match /alumnos/{alumnoId}{
+   		allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    	allow create: if request.auth.uid != null
+      match /cursos/{cursoId}{
+        allow read: if request.auth.uid != null;
+        allow write: if request.auth.uid != null;
+        allow create: if request.auth.uid != null
+        match /tareas/{tareaId}{
+          allow read: if request.auth.uid != null;
+          allow write: if request.auth.uid != null;
+          allow create: if request.auth.uid != null
+        }
+      }
+   }
+   
+   match /recursos/{recursoId}{
+   		allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    	allow create: if request.auth.uid != null
+   }
+   match /cursos/{cursoId}{
+   		allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    	allow create: if request.auth.uid != null
+      
+      match /lecciones/{leccionId}{
+        allow read: if request.auth.uid != null;
+        allow write: if request.auth.uid != null;
+        allow create: if request.auth.uid != null     
+        
+        match /discuciones/{discucionId}{
+          allow read: if request.auth.uid != null;
+          allow write: if request.auth.uid != null;
+          allow create: if request.auth.uid != null     
+
+					match /posts/{postId}{
+            allow read: if request.auth.uid != null;
+            allow write: if request.auth.uid != null;
+            allow create: if request.auth.uid != null     
+          }
+
+        }
+        
+
+   		}
+            
+   }
+   match /catalogo/{catalogoId}{
+   	  allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    	allow create: if request.auth.uid != null;
+   	match /subCategoria/{subCategoriaId}{
+    	allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    	allow create: if request.auth.uid != null;
+    }
+   }
+   
+		match /galeria/{galeriaId}{
+   		allow read: if request.auth.uid != null;
+      allow write: if request.auth.uid != null;
+    	allow create: if request.auth.uid != null
+      
+   }
+  }
+}

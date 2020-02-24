@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { RecursosService } from '../recursos.service';
-import { isThisSecond } from 'date-fns';
 
 @Component({
   selector: 'app-lista-recursos',
@@ -151,7 +150,7 @@ export class ListaRecursosComponent implements OnInit {
     this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
   }
 
-  eliminarRecurso(item: any) {
+  eliminarRecurso(item: any = '') {
     this.recursos.forEach(element => {
       if (element.seleccionar) {
         this.srvRecurso.removeRecurso(element);

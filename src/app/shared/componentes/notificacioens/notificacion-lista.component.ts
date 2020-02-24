@@ -10,6 +10,7 @@ import { NotificacionesService } from 'src/app/services/shared/notificaciones.se
 export class NotificacionListaComponent implements OnInit {
   private usuario;
   private _objetos: any[] = [];
+  numeroRegistros: number;
   public get objetos(): any[] {
     return this._objetos;
   }
@@ -33,7 +34,7 @@ export class NotificacionListaComponent implements OnInit {
   ngOnInit() {
   }
 
-  buscar() {
+  buscar(offset: number = 0, limit: number = 10) {
     this.srvNtf.obtenerNotificaiones(this.usuario.uid).subscribe(notificacion => {
       console.log(notificacion);
       this.objetos = notificacion;

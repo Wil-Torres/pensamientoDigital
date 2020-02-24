@@ -86,7 +86,7 @@ export class ModalNuevoEdicionComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  cancelar(tarea: any) {
+  cancelar() {
     this.modalRef.hide();
   }
 

@@ -43,7 +43,7 @@ export class TestComponent implements OnInit {
     })
   }
 
-  editarTarea(indice:number) {
+  editarTarea(indice:number = 0) {
     if (this.seleccion) {
       const opciones = {
         initialState: {

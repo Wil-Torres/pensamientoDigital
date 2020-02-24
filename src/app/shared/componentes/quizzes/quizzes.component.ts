@@ -12,7 +12,7 @@ export class QuizzesComponent implements OnInit {
   private activeQuestion = 0;
   private numQuestionAnswered = 0;
   private error = false;
-  private finalise = false;
+  finalise = false;
   quizes = {
     quizQuestion: []
   }
