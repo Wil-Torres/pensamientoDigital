@@ -20,6 +20,7 @@ import { GtInicioSpinnerComponent } from './componentes/gt-inicio-spinner/gt-ini
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BusquedaModalComponent } from './componentes/busqueda-modal/busqueda-modal.component';
 import { QuizzesComponent } from './componentes/quizzes/quizzes.component';
+import { MenuPensamientoDigitalComponent } from './menu-pensamiento-digital/menu-pensamiento-digital.component';
 
 @NgModule({
     declarations: [
@@ -39,10 +40,12 @@ import { QuizzesComponent } from './componentes/quizzes/quizzes.component';
         GtInicioSpinnerComponent,
         BusquedaModalComponent,
         QuizzesComponent,
+        MenuPensamientoDigitalComponent,
     ],
     exports: [
         SidebarComponent,
         HeaderComponent,
+        MenuPensamientoDigitalComponent,
         BreadcrumbsComponent,
         NopagefoundComponent,
         EncabezadoPaginaComponent,

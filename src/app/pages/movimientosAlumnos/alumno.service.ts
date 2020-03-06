@@ -14,11 +14,11 @@ export class AlumnoService {
   constructor(@Inject(DOCUMENT) private _document, private _menu: SidebarService,
     private afs: AngularFirestore, private arouter: ActivatedRoute) {
       console.log(this.arouter);
-    this.oldMenu = _menu.menu;
+    // this.oldMenu = _menu.menu;
   }
 
   destruir() {
-    this._menu.menu = this.oldMenu;
+    // this._menu.menu = this.oldMenu;
     let panelDerecho: any = document.getElementById('panelDerecho');
     panelDerecho.classList.remove('noVisible');
 
@@ -39,7 +39,7 @@ export class AlumnoService {
     //panelDerecho.parentNode.removeChild(panelDerecho);
 
 
-
+/*
     this._menu.menu = [
       {
         titulo: 'Contenido',
@@ -65,7 +65,7 @@ export class AlumnoService {
         url: '/alumno-historial',
         submenu: []
       }
-    ]
+    ]*/
 
   }
 

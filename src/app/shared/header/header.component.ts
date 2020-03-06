@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { AuthService } from 'src/app/services/service.index';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/interfaces/Login';
@@ -6,30 +6,46 @@ import { Router } from '@angular/router';
 import { NotificacionesService } from 'src/app/services/shared/notificaciones.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { NotificacionModalComponent } from '../componentes/notificacioens/notificacion-modal.component';
+import { Menu } from '../interfaces/menu';
+import { PermisosMenuService } from 'src/app/security/permisos-menu.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styles: []
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   usuarioTemp: User;
   avisos: any;
   modalRef: BsModalRef | null;
   
+  private _menuCtrl : Menu;
+  public get menuCtrl() : Menu {
+    return this._menuCtrl;
+  }
+  @Input()  public set menuCtrl(v : Menu) {
+    this._menuCtrl = v;
+  }
+  
+  
   constructor(private modalService: BsModalService, private auth: AuthService, 
-    private router: Router, private notificacion: NotificacionesService) {
+    private router: Router, private notificacion: NotificacionesService, private _menuSeg: PermisosMenuService) {
     this.auth.user.subscribe(resp => { 
       this.usuarioTemp = resp;
       this.notificacion.obtenerNotificaiones(this.usuarioTemp.uid).subscribe(resp => {
         this.avisos = resp; 
       });
+
     })
     
   }
 
   ngOnInit() {
 
+  }
+  ngAfterViewInit() {
+    this._menuSeg.menuCtrl = this._menuCtrl;
+    this._menuSeg.accesosMenu();
   }
 
   cerrarSesion() {

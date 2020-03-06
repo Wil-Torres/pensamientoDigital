@@ -50,7 +50,7 @@ const pagesRoutes: Routes = [
             {path: 'avisos', component: NotificacionListaComponent, data:{titulo: 'Avisos'}},
 
             /* administacion */
-            {path: 'administracion', component: AdministracionComponent, data:{titulo: 'Adminsitracion'}, canActivate: [AuthGuard]},
+            {path: 'administracion', component: AdministracionComponent, data:{titulo: 'Adminsitracion', roles:['reader']}, canActivate: [AuthGuard]},
             {path: 'reportes', component: ReportesComponent, data:{titulo: 'Reportes'}, canActivate: [AuthGuard]},
             {path: 'panel-usuarios', component: PanelComponent, data:{titulo: 'Panel de Usuarios'}, canActivate: [AuthGuard]},
             {path: 'cuentas-usuarios', component: CuentasComponent, data:{titulo: 'Cuentas de Usuarios'}, canActivate: [AuthGuard]},

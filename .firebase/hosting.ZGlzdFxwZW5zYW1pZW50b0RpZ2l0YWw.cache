@@ -466,7 +466,7 @@ assets/scss/icons/flag-icon-css/flags/za.svg,1582301315685,2a53180a6028899339ba4
 assets/scss/icons/flag-icon-css/flags/zm.svg,1582301315685,5e40507e7eee941b16522100ff67e3934b8c2e16eee88edbe74f6eace69619e1
 assets/scss/icons/flag-icon-css/flags/zw.svg,1582301315685,2d6f93bca56c86d00fec95df22fbbb93c113d48e5cd872ac7330766b7bc3f8fc
 assets/scss/icons/font-awesome/css/font-awesome.css,1582301315492,4e4e322e9d58fc68685478448404a7764bb6cb93adfe50caf254b5639380b21f
-assets/scss/icons/font-awesome/css/font-awesome.min.css,1582301315686,a50ed6e32ae5d83ecbf4d0e91ae4d2881e7dbf0e4e2c274b9f4ce95843a9b562
+assets/scss/icons/font-awesome/css/fontawesome.min.css,1582301315686,a50ed6e32ae5d83ecbf4d0e91ae4d2881e7dbf0e4e2c274b9f4ce95843a9b562
 assets/scss/icons/font-awesome/less/animated.less,1582301315577,beafeea59ebe66346f7b3a3dec4dcb4156ac49f9d9392386f239d24763525c8c
 assets/scss/icons/flag-icon-css/flags/vg.svg,1582301315683,f509f3b61e9969526cabc26dad033261778196ce8b29117fbace46a66a4f044e
 assets/scss/icons/font-awesome/less/bordered-pulled.less,1582301315687,c17c39efc57dd841d75fdd7df110b0f9f56115d0f3bc578c9f9d94e6e954bd87
@@ -485,7 +485,7 @@ assets/scss/icons/font-awesome/less/stacked.less,1582301315687,88a05148d0fa3e6e7
 assets/scss/icons/font-awesome/less/variables.less,1582301315687,5cead09090d34196a4c9737fd191f8f2d5f0a6653d09a64f8e1d69e851484ed5
 assets/scss/icons/font-awesome/old/bower.json,1582301315688,6b0dd9c90f8ad6f75192616917b7980a38f82631fcd306675b60c3ff0683dcef
 assets/scss/icons/font-awesome/old/HELP-US-OUT.txt,1582301315688,480a44248025a29a6d93419745982aee77bc621e9c936d2aded917e44bc16071
-assets/scss/icons/font-awesome/old/css/font-awesome.min.css,1582301315688,d6d924b5181266da9e3d5d6e0516c10d4890fccd76945f29ad7097690cf5e7a7
+assets/scss/icons/font-awesome/old/css/fontawesome.min.css,1582301315688,d6d924b5181266da9e3d5d6e0516c10d4890fccd76945f29ad7097690cf5e7a7
 assets/scss/icons/font-awesome/old/less/animated.less,1582301315579,beafeea59ebe66346f7b3a3dec4dcb4156ac49f9d9392386f239d24763525c8c
 assets/scss/icons/flag-icon-css/flags/va.svg,1582301315683,d4f38b1e8d3d219345033c2e95332d7545e0053cbc4c1798e2ad6239115f1cb1
 assets/scss/icons/font-awesome/old/less/bordered-pulled.less,1582301315689,c17c39efc57dd841d75fdd7df110b0f9f56115d0f3bc578c9f9d94e6e954bd87
