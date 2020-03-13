@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <nav id="sidebar" [ngClass]="menuCtrl.mostrar ? '' : 'active'">
+    <ul class="list-unstyled components">
+      <li class="active" *ngFor="let modulo of menuCtrl.modulos">
+        <app-modulo [menuCtrl]="menuCtrl" [modulo]="modulo"></app-modulo>
+      </li>
+    </ul>
+  </nav>
+  <div id="content">
+    <ng-content></ng-content>
+  </div>
+</div>

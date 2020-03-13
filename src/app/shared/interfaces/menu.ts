@@ -3,6 +3,9 @@ export interface MenuBase {
     nombre: string;
     icono: string;
     url: string;
+    dataIcon?: string;
+    pIcon?: string;
+
   }
   
   export interface Item extends MenuBase {

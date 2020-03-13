@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { SpeechRecognitionModule } from '@kamiazya/ngx-speech-recognition';
+import { ListaOperacionesComponent } from './security/lista-operaciones/lista-operaciones.component';
 
 
 
@@ -24,6 +25,7 @@ import { SpeechRecognitionModule } from '@kamiazya/ngx-speech-recognition';
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    ListaOperacionesComponent,
  ],
   imports: [
     BrowserModule,

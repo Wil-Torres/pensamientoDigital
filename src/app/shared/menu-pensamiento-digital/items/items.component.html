@@ -1,0 +1,5 @@
+<ul class="collapse list-unstyled" [id]="id">
+  <li *ngFor="let item of items">
+    <app-item [item]="item" [id]="id" [nivel]="nivel + 1"></app-item>
+  </li>
+</ul>

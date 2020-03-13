@@ -62,14 +62,13 @@ export class PermisosMenuService {
 
   }
 
-  cargarMenu() {
+  async cargarMenu() {
     // establecer servicio que devuelva los accessos
-    this.afs.collection('roles_accesos', ref => ref.where('rol', '==', 'teacher')).valueChanges().subscribe((resp:any) => {
-      console.log('hola menu');
-      this._menuCtrl.modulos = cloneDeep(this.modulo);
-      const modulos = this._menuCtrl.modulos;
-      const accesoPermitido = resp[0];
-      console.log(accesoPermitido)
+    this._menuCtrl.modulos = cloneDeep(this.modulo);
+    console.log(this._menuCtrl)
+    const modulos = this._menuCtrl.modulos;
+    this.afs.collection('roles_accesos', ref => ref.where('rol', '==', 'teacher')).valueChanges().subscribe((resp: any) => {
+      const accesoPermitido = resp;
       const MenuReservado = [];
 
       modulos.forEach(elem => {
@@ -81,9 +80,7 @@ export class PermisosMenuService {
       MenuReservado.forEach(elem => {
         modulos.splice(modulos.indexOf(elem), 1);
       });
+      console.log(this._menuCtrl)
     })
-
-
-
   }
 }

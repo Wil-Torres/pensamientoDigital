@@ -21,6 +21,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BusquedaModalComponent } from './componentes/busqueda-modal/busqueda-modal.component';
 import { QuizzesComponent } from './componentes/quizzes/quizzes.component';
 import { MenuPensamientoDigitalComponent } from './menu-pensamiento-digital/menu-pensamiento-digital.component';
+import { ItemComponent } from './menu-pensamiento-digital/item/item.component';
+import { ItemsComponent } from './menu-pensamiento-digital/items/items.component';
+import { ModuloComponent } from './menu-pensamiento-digital/modulo/modulo.component';
+import { MenuModule } from "./menu-pensamiento-digital/menu.module";
 
 @NgModule({
     declarations: [
@@ -40,7 +44,7 @@ import { MenuPensamientoDigitalComponent } from './menu-pensamiento-digital/menu
         GtInicioSpinnerComponent,
         BusquedaModalComponent,
         QuizzesComponent,
-        MenuPensamientoDigitalComponent,
+        MenuPensamientoDigitalComponent
     ],
     exports: [
         SidebarComponent,
@@ -59,9 +63,11 @@ import { MenuPensamientoDigitalComponent } from './menu-pensamiento-digital/menu
         NotificacionListaComponent,
         GtInicioSpinnerComponent,
         BusquedaModalComponent,
-        QuizzesComponent
+        QuizzesComponent,
+        MenuPensamientoDigitalComponent
     ],
     imports:[
+        //MenuModule,
         RouterModule,
         FormsModule,
         CommonModule,

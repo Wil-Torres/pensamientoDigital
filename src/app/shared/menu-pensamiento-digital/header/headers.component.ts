@@ -1,20 +1,19 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { AuthService } from 'src/app/services/service.index';
-import { Observable } from 'rxjs';
 import { User } from 'src/app/interfaces/Login';
 import { Router } from '@angular/router';
 import { NotificacionesService } from 'src/app/services/shared/notificaciones.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
-import { NotificacionModalComponent } from '../componentes/notificacioens/notificacion-modal.component';
-import { Menu } from '../interfaces/menu';
 import { PermisosMenuService } from 'src/app/security/permisos-menu.service';
+import { Menu } from '../../interfaces/menu';
+import { NotificacionModalComponent } from '../../componentes/notificacioens/notificacion-modal.component';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
+  selector: 'app-headers',
+  templateUrl: './headers.component.html',
   styles: []
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
+export class HeadersComponent implements OnInit, AfterViewInit {
   usuarioTemp: User;
   avisos: any;
   modalRef: BsModalRef | null;

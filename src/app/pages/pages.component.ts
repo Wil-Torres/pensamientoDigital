@@ -10,26 +10,26 @@ declare function init_plugins();
 })
 export class PagesComponent implements OnInit {
   bsInlineValue = new Date();
-  
-  private _srvCore : CoreService;
-  
-  private _menu : Menu;
-  public get menu() : Menu {
+
+  private _srvCore: CoreService;
+
+  private _menu: Menu;
+  public get menu(): Menu {
     return this._menu;
   }
-  public set menu(v : Menu) {
+  public set menu(v: Menu) {
     this._menu = v;
   }
-  
 
-  public get srvCore() : CoreService {
+
+  public get srvCore(): CoreService {
     return this._srvCore;
   }
-  public set srvCore(v : CoreService) {
+  public set srvCore(v: CoreService) {
     this._srvCore = v;
   }
-  
-  constructor(private srvCore1: CoreService) { 
+
+  constructor(private srvCore1: CoreService) {
     this._srvCore = srvCore1;
   }
 
@@ -38,157 +38,201 @@ export class PagesComponent implements OnInit {
     this.initMenu();
   }
 
-  initMenu(){
+  initMenu() {
     this._menu = {
       modulos: [
         {
-          id:'', 
-          tag:10,
+          id: '',
+          tag: 0,
           nombre: 'Clases',
           icono: 'fa fa-book',
           url: '/clases/lista-clases',
+          dataIcon: "book",
+          pIcon: "M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z",
           subMenu: [
-            {id:'', 
-            icono: '',
-            subMenu: [],
-            tag:101,
-            nombre: 'Configurar Tienda', url: '/configuracion'},
+            {
+              id: '',
+              icono: '',
+              subMenu: [],
+              tag: 10,
+              nombre: 'Configurar Tienda', url: '/configuracion'
+            },
           ]
         },
         {
-          id:'', 
-          tag:20,
+          id: '',
+          tag: 0,
           nombre: 'Caminos',
           icono: 'fa fa-arrows',
           url: '',
+          dataIcon: "arrows",
+          pIcon: "M352.201 425.775l-79.196 79.196c-9.373 9.373-24.568 9.373-33.941 0l-79.196-79.196c-15.119-15.119-4.411-40.971 16.971-40.97h51.162L228 284H127.196v51.162c0 21.382-25.851 32.09-40.971 16.971L7.029 272.937c-9.373-9.373-9.373-24.569 0-33.941L86.225 159.8c15.119-15.119 40.971-4.411 40.971 16.971V228H228V127.196h-51.23c-21.382 0-32.09-25.851-16.971-40.971l79.196-79.196c9.373-9.373 24.568-9.373 33.941 0l79.196 79.196c15.119 15.119 4.411 40.971-16.971 40.971h-51.162V228h100.804v-51.162c0-21.382 25.851-32.09 40.97-16.971l79.196 79.196c9.373 9.373 9.373 24.569 0 33.941L425.773 352.2c-15.119 15.119-40.971 4.411-40.97-16.971V284H284v100.804h51.23c21.382 0 32.09 25.851 16.971 40.971z",
           subMenu: [
-            {id:'', 
-            icono: '',
-            subMenu: [],
-            tag:201,
-            nombre: 'Pendiente', url: '/'},
+            {
+              id: '',
+              icono: '',
+              subMenu: [],
+              tag: 201,
+              nombre: 'Pendiente', url: '/'
+            },
           ]
         }
-        
-        ,{
-          id:'', 
-          tag:30,
+
+        , {
+          id: '',
+          tag: 30,
           nombre: 'Grupos',
           icono: 'fa fa-users',
           url: '/grupos/lista-grupos',
+          pIcon: "M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm32 32h-64c-17.6 0-33.5 7.1-45.1 18.6 40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64zm-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32 208 82.1 208 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zm-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z",
+          dataIcon: 'users',
           subMenu: [
-            {id:'', 
-            icono: '',
-            subMenu: [],
-            tag:301,
-            nombre: 'Configurar Tienda', url: '/configuracion'},
+            {
+              id: '',
+              icono: '',
+              subMenu: [],
+              tag: 301,
+              nombre: 'Configurar Tienda', url: '/configuracion'
+            },
           ]
-        },{
-          id:'', 
-          tag:40,
+        }, {
+          id: '',
+          tag: 40,
           nombre: 'Dashboard',
           icono: 'fa fa-tachometer',
           url: '/panel/panel-control',
+          pIcon: "M288 32C128.94 32 0 160.94 0 320c0 52.8 14.25 102.26 39.06 144.8 5.61 9.62 16.3 15.2 27.44 15.2h443c11.14 0 21.83-5.58 27.44-15.2C561.75 422.26 576 372.8 576 320c0-159.06-128.94-288-288-288zm0 64c14.71 0 26.58 10.13 30.32 23.65-1.11 2.26-2.64 4.23-3.45 6.67l-9.22 27.67c-5.13 3.49-10.97 6.01-17.64 6.01-17.67 0-32-14.33-32-32S270.33 96 288 96zM96 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm48-160c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm246.77-72.41l-61.33 184C343.13 347.33 352 364.54 352 384c0 11.72-3.38 22.55-8.88 32H232.88c-5.5-9.45-8.88-20.28-8.88-32 0-33.94 26.5-61.43 59.9-63.59l61.34-184.01c4.17-12.56 17.73-19.45 30.36-15.17 12.57 4.19 19.35 17.79 15.17 30.36zm14.66 57.2l15.52-46.55c3.47-1.29 7.13-2.23 11.05-2.23 17.67 0 32 14.33 32 32s-14.33 32-32 32c-11.38-.01-20.89-6.28-26.57-15.22zM480 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z",
+          dataIcon: 'tachometer',
           subMenu: [
-            {id:'', 
-            icono: '',
-            subMenu: [],
-            tag:401,
-            nombre: 'Configurar Tienda', url: '/configuracion'},
+            {
+              id: '',
+              icono: '',
+              subMenu: [],
+              tag: 401,
+              nombre: 'Configurar Tienda', url: '/configuracion'
+            },
           ]
-        },{
-          id:'', 
-          tag:50,
+        }, {
+          id: '',
+          tag: 50,
           nombre: 'Noticias',
           icono: 'fa fa-newspaper-o',
           url: '/noticias',
+          pIcon: "M552 64H88c-13.255 0-24 10.745-24 24v8H24c-13.255 0-24 10.745-24 24v272c0 30.928 25.072 56 56 56h472c26.51 0 48-21.49 48-48V88c0-13.255-10.745-24-24-24zM56 400a8 8 0 0 1-8-8V144h16v248a8 8 0 0 1-8 8zm236-16H140c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h152c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12zm208 0H348c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h152c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12zm-208-96H140c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h152c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12zm208 0H348c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h152c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12zm0-96H140c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h360c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12z",
+          dataIcon: 'newspaper-o',
           subMenu: [
-            {id:'', 
-            icono: '',
-            subMenu: [],
-            tag:501,
-            nombre: 'Configurar Tienda', url: '/configuracion'},
+            {
+              id: '',
+              icono: '',
+              subMenu: [],
+              tag: 501,
+              nombre: 'Configurar Tienda', url: '/configuracion'
+            },
           ]
-        },{
-          id:'', 
-          tag:60,
+        }, {
+          id: '',
+          tag: 60,
           nombre: 'Catalogo',
           icono: 'fa fa-windows',
           url: '/catalogo/lista-catalogo',
+          pIcon: "M512 48v288c0 26.5-21.5 48-48 48h-48V176c0-44.1-35.9-80-80-80H128V48c0-26.5 21.5-48 48-48h288c26.5 0 48 21.5 48 48zM384 176v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48h288c26.5 0 48 21.5 48 48zm-68 28c0-6.6-5.4-12-12-12H76c-6.6 0-12 5.4-12 12v52h252v-52z",
+          dataIcon: 'windows',
           subMenu: [
-            {id:'', 
-            icono: '',
-            subMenu: [],
-            tag:601,
-            nombre: 'Configurar Tienda', url: '/configuracion'},
+            {
+              id: '',
+              icono: '',
+              subMenu: [],
+              tag: 601,
+              nombre: 'Configurar Tienda', url: '/configuracion'
+            },
           ]
-        },{
-          id:'', 
-          tag:70,
+        }, {
+          id: '',
+          tag: 70,
           nombre: 'Bienvenido/a',
           icono: 'fa fa-spinner',
           url: '/bienvenida',
+          pIcon: "M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z",
+          dataIcon: 'spinner',
           subMenu: [
-            {id:'', 
-            icono: '',
-            subMenu: [],
-            tag:701,
-            nombre: 'Bienvenida', url: '/bienvenida'},
+            {
+              id: '',
+              icono: '',
+              subMenu: [],
+              tag: 701,
+              nombre: 'Bienvenida', url: '/bienvenida'
+            },
           ]
-        },{
-          id:'', 
-          tag:80,
+        }, {
+          id: '',
+          tag: 80,
           nombre: 'Usuarios',
           icono: 'fa fa-user',
           url: '/panel-usuarios',
+          pIcon: "M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z",
+          dataIcon: 'user',
           subMenu: [
-            {id:'', 
-            icono: '',
-            subMenu: [],
-            tag:801,
-            nombre: 'Panel Usuarios', url: '/panel-usuarios'},
+            {
+              id: '',
+              icono: '',
+              subMenu: [],
+              tag: 801,
+              nombre: 'Panel Usuarios', url: '/panel-usuarios'
+            },
           ]
-        },{
-          id:'', 
-          tag:90,
+        }, {
+          id: '',
+          tag: 90,
           nombre: 'Recursos',
           icono: 'fa fa-tasks',
           url: '/recursos',
+          pIcon: "M139.61 35.5a12 12 0 0 0-17 0L58.93 98.81l-22.7-22.12a12 12 0 0 0-17 0L3.53 92.41a12 12 0 0 0 0 17l47.59 47.4a12.78 12.78 0 0 0 17.61 0l15.59-15.62L156.52 69a12.09 12.09 0 0 0 .09-17zm0 159.19a12 12 0 0 0-17 0l-63.68 63.72-22.7-22.1a12 12 0 0 0-17 0L3.53 252a12 12 0 0 0 0 17L51 316.5a12.77 12.77 0 0 0 17.6 0l15.7-15.69 72.2-72.22a12 12 0 0 0 .09-16.9zM64 368c-26.49 0-48.59 21.5-48.59 48S37.53 464 64 464a48 48 0 0 0 0-96zm432 16H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H208a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h288a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z",
+          dataIcon: 'tasks',
           subMenu: [
-            {id:'', 
-            icono: '',
-            subMenu: [],
-            tag:901,
-            nombre: 'Panel de Recursos', url: '/configuracion'},
+            {
+              id: '',
+              icono: '',
+              subMenu: [],
+              tag: 901,
+              nombre: 'Panel de Recursos', url: '/configuracion'
+            },
           ]
-        },{
-          id:'', 
-          tag:100,
+        }, {
+          id: '',
+          tag: 100,
           nombre: 'Reportes',
           icono: 'fa fa-line-chart',
           url: '/reportes',
+          pIcon: "M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM464 96H345.94c-21.38 0-32.09 25.85-16.97 40.97l32.4 32.4L288 242.75l-73.37-73.37c-12.5-12.5-32.76-12.5-45.25 0l-68.69 68.69c-6.25 6.25-6.25 16.38 0 22.63l22.62 22.62c6.25 6.25 16.38 6.25 22.63 0L192 237.25l73.37 73.37c12.5 12.5 32.76 12.5 45.25 0l96-96 32.4 32.4c15.12 15.12 40.97 4.41 40.97-16.97V112c.01-8.84-7.15-16-15.99-16z",
+          dataIcon: 'line-chart',
           subMenu: [
-            {id:'', 
-            icono: '',
-            subMenu: [],
-            tag:1001,
-            nombre: 'Reportes', url: '/reportes'},
+            {
+              id: '',
+              icono: '',
+              subMenu: [],
+              tag: 1001,
+              nombre: 'Reportes', url: '/reportes'
+            },
           ]
-        },{
-          id:'', 
-          tag:101,
+        }, {
+          id: '',
+          tag: 101,
           nombre: 'Administracion',
           icono: 'fa fa-cog',
           url: '/administracion',
+          pIcon: "M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z",
+          dataIcon: 'cog',
           subMenu: [
-            {id:'', 
-            icono: '',
-            subMenu: [],
-            tag:1011,
-            nombre: 'Administracion', url: '/administracion'},
+            {
+              id: '',
+              icono: '',
+              subMenu: [],
+              tag: 1011,
+              nombre: 'Administracion', url: '/administracion'
+            },
           ]
         }
-    
+
       ],
       mostrar: true,
       alternar() {

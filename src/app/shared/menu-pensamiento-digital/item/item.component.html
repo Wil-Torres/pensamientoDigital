@@ -1,0 +1,9 @@
+<a *ngIf="tieneSubMenu" href="#{{item.id}}" data-toggle="collapse" class="item-menu dropdown-toggle">
+  <i class="fas fa-{{item.icono}} iml-{{nivel}}"></i> <span class="ml-3">{{item.nombre}}</span> <span
+    class="ml-3">{{item.tag}}</span>
+</a>
+<a *ngIf="!tieneSubMenu" class="item-menu" [routerLink]="[item.url]">
+  <i class="fas fa-{{item.icono}} iml-{{nivel}}"></i> <span class="ml-3">{{item.nombre}}</span> <span
+    class="ml-3">{{item.tag}}</span>
+</a>
+<app-items *ngIf="tieneSubMenu" [items]="item.subMenu" [id]="item.id" [nivel]="nivel"></app-items>

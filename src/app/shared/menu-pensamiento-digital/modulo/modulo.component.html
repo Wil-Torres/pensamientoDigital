@@ -1,0 +1,4 @@
+<a href="#{{modulo.id}}" data-toggle="collapse" aria-expanded="false" [ngClass]="{'dropdown-toggle': (modulo.subMenu && (modulo.subMenu?.length > 0))}">
+  <i class="fa fa-{{modulo.icono}}"></i> <span *ngIf="menuCtrl.mostrar" class="ml-3">{{modulo.nombre}}</span>
+</a>
+<app-items [items]="modulo.subMenu" [id]="modulo.id" [nivel]="0"></app-items>

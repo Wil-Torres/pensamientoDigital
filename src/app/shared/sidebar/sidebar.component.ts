@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
     return this._menuCtrl;
   }
   @Input()  public set menuCtrl(v : Menu) {
+    console.log(v)
     this._menuCtrl = v;
   }
   
