@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <body>
+    <tr>
+      <td>
+        <p class="video-description">Local:</p>
+        <video #local_video [autoplay]="true" [muted]="true"> </video>
+      </td>
+      <td>
+        <p class="video-description">Remote:</p>
+        <video #received_video [autoplay]="true"> </video>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  </body>
+</table>
+<button class="btn btn-primary" (click)="startLocalVideo()">start local</button>
+<button class="btn btn-info" (click)="pauseLocalVideo()">stop local</button>
+<button class="btn btn-danger" (click)="call()">call</button>
+<button class="btn btn-secondary" (click)="hangup()">hangup</button>

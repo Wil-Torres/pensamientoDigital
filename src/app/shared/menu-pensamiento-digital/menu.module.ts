@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuPensamientoDigitalComponent } from './menu-pensamiento-digital.component';
+//import { MenuPensamientoDigitalComponent } from './menu-pensamiento-digital.component';
 import { HeadersComponent } from './header/headers.component';
 import { SidebarsComponent } from './sidebar/sidebars.component';
 import { ItemComponent } from './item/item.component';
 import { ItemsComponent } from './items/items.component';
 import { ModuloComponent } from './modulo/modulo.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    MenuPensamientoDigitalComponent,
+    //MenuPensamientoDigitalComponent,
     HeadersComponent,
     SidebarsComponent,
     ItemComponent,
@@ -17,10 +18,11 @@ import { ModuloComponent } from './modulo/modulo.component';
     ModuloComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
-    MenuPensamientoDigitalComponent,
+    //MenuPensamientoDigitalComponent,
     HeadersComponent,
     SidebarsComponent,
     ItemComponent,

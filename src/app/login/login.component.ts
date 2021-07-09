@@ -13,16 +13,16 @@ declare function init_plugins();
 export class LoginComponent implements OnInit {
   usr: any;
   objeto: any = {};
-  
-  private _auth : AuthService;
-  public get auth() : AuthService {
+
+  private _auth: AuthService;
+  public get auth(): AuthService {
     return this._auth;
   }
-  public set auth(v : AuthService) {
+  public set auth(v: AuthService) {
     this._auth = v;
   }
-  
-  constructor(public router: Router, private auth1: AuthService) { 
+
+  constructor(public router: Router, private auth1: AuthService) {
     this._auth = auth1
   }
 
@@ -34,13 +34,13 @@ export class LoginComponent implements OnInit {
   }
   /*ingresar(email: string, password: string){
     // this.router.navigate(['/home']);
-    this.auth.login(email, password)
+    this.auth.login(this.objeto.user, this.objeto.password)
     console.log(this.auth.user)
   }*/
 
-  ingresar () {
-    this.auth.iniciarSesion(this.objeto.user, this.objeto.password).then( usuario => {
-      if (usuario){
+  ingresar() {
+    this.auth.iniciarSesion(this.objeto.user, this.objeto.password).then(usuario => {
+      if (usuario) {
         let user = {
           email: usuario.email,
           displayName: usuario.displayName,
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  signUp (email: string, password: string) {
+  signUp(email: string, password: string) {
     this.auth.signUp(email, password, {});
   }
 

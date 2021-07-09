@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { isNil } from 'lodash';
+import { Router } from '@angular/router';
 import { Item } from '../../interfaces/menu';
 
 @Component({

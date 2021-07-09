@@ -8,9 +8,10 @@ import { ServiceModule } from 'src/app/services/service.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ChartsModule } from 'ng2-charts';
 import { GraficoDonaComponent } from 'src/app/shared/componentes/grafico-dona/grafico-dona.component';
+import { GraficoLineaComponent } from 'src/app/shared/componentes/grafico-linea/grafico-linea.component';
 
 @NgModule({
-  declarations: [ListaPanelComponent, GraficoDonaComponent],
+  declarations: [ListaPanelComponent, GraficoDonaComponent, GraficoLineaComponent],
   exports: [ListaPanelComponent],
   imports: [
     CommonModule,

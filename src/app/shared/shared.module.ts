@@ -44,7 +44,7 @@ import { MenuModule } from "./menu-pensamiento-digital/menu.module";
         GtInicioSpinnerComponent,
         BusquedaModalComponent,
         QuizzesComponent,
-        MenuPensamientoDigitalComponent
+        MenuPensamientoDigitalComponent,
     ],
     exports: [
         SidebarComponent,

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { AuthService } from 'src/app/services/service.index';
-import { User } from 'src/app/interfaces/Login';
+import { User, UserInfo } from 'src/app/interfaces/Login';
 import { Router } from '@angular/router';
 import { NotificacionesService } from 'src/app/services/shared/notificaciones.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
@@ -17,6 +17,7 @@ export class HeadersComponent implements OnInit, AfterViewInit {
   usuarioTemp: User;
   avisos: any;
   modalRef: BsModalRef | null;
+  private usuario: UserInfo = JSON.parse(localStorage.getItem('usuarioLogeado'));
   
   private _menuCtrl : Menu;
   public get menuCtrl() : Menu {
@@ -30,6 +31,7 @@ export class HeadersComponent implements OnInit, AfterViewInit {
   constructor(private modalService: BsModalService, private auth: AuthService, 
     private router: Router, private notificacion: NotificacionesService, private _menuSeg: PermisosMenuService) {
     this.auth.user.subscribe(resp => { 
+      console.log(resp)
       this.usuarioTemp = resp;
       this.notificacion.obtenerNotificaiones(this.usuarioTemp.uid).subscribe(resp => {
         this.avisos = resp; 
@@ -44,11 +46,11 @@ export class HeadersComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     this._menuSeg.menuCtrl = this._menuCtrl;
-    this._menuSeg.accesosMenu();
+    this._menuSeg.accesosMenu(this.usuario.uid);
   }
 
   refrescar() {
-    this.menuSeg.accesosMenu();
+    this.menuSeg.accesosMenu(this.usuario.uid);
   }
 
   cerrarSesion() {
