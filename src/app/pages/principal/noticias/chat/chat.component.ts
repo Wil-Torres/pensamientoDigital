@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { environment } from 'src/environments/environment.prod';
 import { Message } from '../message';
 import { NoticiasService } from '../noticias.service';
 
-
+export const ENV_RTCPeerConfiguration = environment.RTCPeerConfiguration;
 const mediaConstraint = {
   audio: true,
   video: {
@@ -32,16 +33,17 @@ export class ChatComponent implements AfterViewInit {
 
   constructor(private srv: NoticiasService) { }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.addIncominMessageHandler();
     this.requestMediaDevices();
   }
 
   private async requestMediaDevices(): Promise<void> {
-    
+
     try {
       this.localStream = await navigator.mediaDevices.getUserMedia(mediaConstraint);
-      this.localVideo.nativeElement.srcObject = this.localStream
+      // pause all tracks
+      this.pauseLocalVideo();
     } catch (error) {
       console.log(error);
       alert(`GetUserMedia() error: ${error.name}`)
@@ -49,10 +51,12 @@ export class ChatComponent implements AfterViewInit {
   }
 
   pauseLocalVideo() {
+    console.log('pause local stream');
     this.localStream.getTracks().forEach(track => {
       track.enabled = false;
     });
     this.localVideo.nativeElement.srcObject = undefined;
+    this.localVideoActive = false
   }
 
   startLocalVideo() {
@@ -60,14 +64,14 @@ export class ChatComponent implements AfterViewInit {
       track.enabled = true;
     });
     this.localVideo.nativeElement.srcObject = this.localStream;
+    this.localVideoActive = true;
   }
 
-  async call() {
+  async call(): Promise<void> {
     this.createPeerConnection();
 
-    this.localStream.getTracks().forEach(track => {
-      this.peerConnection.addTrack(track, this.localStream);
-    });
+    this.localStream.getTracks().forEach(track => this.peerConnection.addTrack(track, this.localStream)
+    );
 
     try {
       const offer: RTCSessionDescriptionInit = await this.peerConnection.createOffer(offerOptions);
@@ -82,12 +86,12 @@ export class ChatComponent implements AfterViewInit {
 
   }
 
-  hangup() {
+  hangup(): void {
     this.srv.sendMessage({ type: 'hangup', data: '' });
     this.closeVideoCall();
   }
 
-  handleGetUserMediaError(err: Error) {
+  private handleGetUserMediaError(err: Error): void {
     switch (err.name) {
       case 'NotFoundError':
         alert('unable to open your call because no camera and/or microphone were found')
@@ -108,36 +112,45 @@ export class ChatComponent implements AfterViewInit {
     }
     this.closeVideoCall();
   }
-  createPeerConnection() {
-    this.peerConnection = new RTCPeerConnection({
+  private createPeerConnection(): void {
+    console.log('creating PeerConnection...');
+    this.peerConnection = new RTCPeerConnection(ENV_RTCPeerConfiguration);
+    /*this.peerConnection = new RTCPeerConnection({
       iceServers: [
         { urls: ['stun:stun.kunderserver.de:3478'] }
       ]
-    });
+    });*/
 
-    this.peerConnection.onicecandidate = this.handleICECendidateEvent;
-    this.peerConnection.onicegatheringstatechange = this.handleIceConnectionStateChangeEvent;
-    this.peerConnection.onsignalingstatechange = this.handleSignalingStateEvent;
+    this.peerConnection.onicecandidate = this.handleICECandidateEvent;
+    this.peerConnection.oniceconnectionstatechange = this.handleIceConnectionStateChangeEvent;
+    this.peerConnection.onsignalingstatechange = this.handleSignalingStateChangeEvent;
     this.peerConnection.ontrack = this.handleTrackEvent
 
+
+
   }
 
-  private closeVideoCall() {
+  private closeVideoCall(): void {
+    console.log('Closing call');
     if (this.peerConnection) {
       this.peerConnection.onicecandidate = null;
-      this.peerConnection.onicegatheringstatechange = null;
+      this.peerConnection.oniceconnectionstatechange = null;
       this.peerConnection.onsignalingstatechange = null;
       this.peerConnection.ontrack = null;
-    }
 
-    this.peerConnection.getTransceivers().forEach(transceiver => {
-      transceiver.stop();
-    })
-    this.peerConnection.close();
-    this.peerConnection = null
+
+      this.peerConnection.getTransceivers().forEach(transceiver => {
+        transceiver.stop();
+      })
+      this.peerConnection.close();
+      this.peerConnection = null
+      this.inCall = false;
+
+    }
   }
 
-  private handleICECendidateEvent = (event: RTCPeerConnectionIceEvent) => {
+  
+  private handleICECandidateEvent = (event: RTCPeerConnectionIceEvent) => {
     console.log(event);
     if (event.candidate) {
       this.srv.sendMessage({
@@ -150,20 +163,14 @@ export class ChatComponent implements AfterViewInit {
     console.log(event);
     switch (this.peerConnection.iceConnectionState) {
       case 'closed':
-        this.closeVideoCall();
-        break;
       case 'failed':
-        this.closeVideoCall();
-        break;
       case 'disconnected':
         this.closeVideoCall();
         break;
-
-      default:
-        break;
     }
   };
-  private handleSignalingStateEvent = (event: Event) => {
+  
+  private handleSignalingStateChangeEvent = (event: Event) => {
     console.log(event);
     switch (this.peerConnection.signalingState) {
       case 'closed':
@@ -176,7 +183,7 @@ export class ChatComponent implements AfterViewInit {
     this.remoteVideo.nativeElement.srcObject = event.streams[0]
   }
 
-  private addIncominMessageHandler() {
+  private addIncominMessageHandler(): void {
     this.srv.connect();
     this.srv.messages$.subscribe(msg => {
       switch (msg.type) {
@@ -197,24 +204,23 @@ export class ChatComponent implements AfterViewInit {
           console.log('unknown message of type ' + msg.type)
           break;
       }
-    }, error => {
-      console.log(error);
-    })
+    }, error => console.log(error)
+    )
   }
 
-  private handleofferMessage(msg: RTCSessionDescriptionInit) {
+  private handleofferMessage(msg: RTCSessionDescriptionInit): void {
+    console.log('handle incoming offer');
     if (!this.peerConnection) {
       this.createPeerConnection();
     }
     if (!this.localStream) {
       this.startLocalVideo();
     }
+    
     this.peerConnection.setRemoteDescription(new RTCSessionDescription(msg)).then(() => {
       this.localVideo.nativeElement.srcObject = this.localStream;
-      this.localStream.getTracks().forEach(track => {
-        this.peerConnection.addTrack(track, this.localStream);
-
-      });
+      this.localStream.getTracks().forEach(track => this.peerConnection.addTrack(track, this.localStream)
+      );
     }).then(() => {
       return this.peerConnection.createAnswer();
     }).then((answer) => {
@@ -222,18 +228,22 @@ export class ChatComponent implements AfterViewInit {
     }).then(() => {
       this.srv.sendMessage({ type: 'answer', data: this.peerConnection.localDescription });
       this.inCall = true;
-    }).catch(() => {
+    }).catch(
       this.handleGetUserMediaError
-    })
+    )
   }
-  private handleAnswerMessage(data: any) {
+  private handleAnswerMessage(data: any): void {
+    console.log('handle incoming answer');
     this.peerConnection.setRemoteDescription(data);
   }
-  private handleHangupMessage(msg: Message) {
+  private handleHangupMessage(msg: Message): void {
+    console.log(msg);
     this.closeVideoCall();
   }
-  private handleIceCandidateMessage(data: any) {
-    this.peerConnection.addIceCandidate(data).catch(this.reportError);
+
+  private handleIceCandidateMessage(data: RTCIceCandidate): void {
+    const candidate = new RTCIceCandidate(data)
+    this.peerConnection.addIceCandidate(candidate).catch(this.reportError);
   }
 
   private reportError(e: Error) {
