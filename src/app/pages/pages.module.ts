@@ -32,6 +32,7 @@ import { ListaProfesoresComponent } from "./mantenimiento/profesores/lista-profe
 import { SpeechRecognitionModule } from "@kamiazya/ngx-speech-recognition";
 import { SpeechSynthesisModule, } from '@kamiazya/ngx-speech-synthesis';
 import { ListaAlumnosComponent } from "./mantenimiento/alumnos/lista-alumnos.component";
+import { SalaModule } from "./principal/sala/sala.module";
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { ListaAlumnosComponent } from "./mantenimiento/alumnos/lista-alumnos.com
         SeccionesComponent,
         CiclosComponent,
         PerfilComponent,
+        
     ],
     exports: [
         HomeComponent,
@@ -70,6 +72,7 @@ import { ListaAlumnosComponent } from "./mantenimiento/alumnos/lista-alumnos.com
         UsuariosModule,
         AdministracionModule,
         ReportesModule,
+        SalaModule,
         PAGES_ROUTES,
         FormsModule,
         CommonModule,

@@ -24,12 +24,21 @@ export class ChatComponent implements AfterViewInit {
 
   @ViewChild('local_video') localVideo: ElementRef
   @ViewChild('received_video') remoteVideo: ElementRef
+  /* CHAT */
+  @ViewChild('msgInput') msgInput: ElementRef
+  @ViewChild('chatarea') chatarea: ElementRef
 
   private localStream: MediaStream;
   private peerConnection: RTCPeerConnection;
+  private dataChannel: RTCDataChannel;
+  private receiveChannel: RTCRtpReceiver;
+
 
   inCall = false;
   localVideoActive = false;
+
+  
+  
 
   constructor(private srv: NoticiasService) { }
 
@@ -38,10 +47,13 @@ export class ChatComponent implements AfterViewInit {
     this.requestMediaDevices();
   }
 
+
   private async requestMediaDevices(): Promise<void> {
 
     try {
       this.localStream = await navigator.mediaDevices.getUserMedia(mediaConstraint);
+
+
       // pause all tracks
       this.pauseLocalVideo();
     } catch (error) {
@@ -65,6 +77,15 @@ export class ChatComponent implements AfterViewInit {
     });
     this.localVideo.nativeElement.srcObject = this.localStream;
     this.localVideoActive = true;
+  }
+
+  enviarMensaje() {
+    var val = this.msgInput.nativeElement.value;
+    this.chatarea.nativeElement.innerHTML += name + ": " + val + "<br />";
+
+    //sending a message to a connected peer 
+    this.dataChannel.send(val);
+    this.msgInput.nativeElement.value = "";
   }
 
   async call(): Promise<void> {
@@ -125,10 +146,45 @@ export class ChatComponent implements AfterViewInit {
     this.peerConnection.oniceconnectionstatechange = this.handleIceConnectionStateChangeEvent;
     this.peerConnection.onsignalingstatechange = this.handleSignalingStateChangeEvent;
     this.peerConnection.ontrack = this.handleTrackEvent
+    this.peerConnection.ondatachannel = this.handleDataChannelCallBack;
+
+    /* Creamos un canal de comunicacion para enviar textos */
+
+     // Let's make a data channel!
+  const dataChannelParams = {ordered: false};
+  
+  
+
+    this.dataChannel = this.peerConnection.createDataChannel('channel1', dataChannelParams);
+
+    this.dataChannel.onerror = (error) => {
+      console.log('Ooops----Error: ', error)
+    }
+    this.dataChannel.onopen = (event) => {
+      console.log('Esbleciendo conexion de data chanel')
+      if (this.dataChannel) {
+        var state = this.dataChannel.readyState;
+
+        if (state === "open") {
+          console.log('Canal conectado')
+        } else {
+          console.log('Canal desconecado')
+        }
+      }
+
+    }
+    this.dataChannel.onmessage = (event) => {
+      console.log(": " + event.data)
+    }
+    this.dataChannel.onclose = function () {
+      console.log("data channel is closed");
+    };
 
 
 
   }
+
+
 
   private closeVideoCall(): void {
     console.log('Closing call');
@@ -149,7 +205,7 @@ export class ChatComponent implements AfterViewInit {
     }
   }
 
-  
+
   private handleICECandidateEvent = (event: RTCPeerConnectionIceEvent) => {
     console.log(event);
     if (event.candidate) {
@@ -169,7 +225,7 @@ export class ChatComponent implements AfterViewInit {
         break;
     }
   };
-  
+
   private handleSignalingStateChangeEvent = (event: Event) => {
     console.log(event);
     switch (this.peerConnection.signalingState) {
@@ -180,7 +236,14 @@ export class ChatComponent implements AfterViewInit {
   };
   private handleTrackEvent = (event: RTCTrackEvent) => {
     console.log(event);
-    this.remoteVideo.nativeElement.srcObject = event.streams[0]
+    this.remoteVideo.nativeElement.srcObject = event.streams[0]   
+  }
+
+  private handleDataChannelCallBack = (event: RTCDataChannelEvent) => {
+    this.dataChannel = event.channel;
+    this.dataChannel.binaryType = 'arraybuffer';
+    this.dataChannel.onclose = this.onReceiveChannelClosed;
+    this.dataChannel.onmessage = this.onReceiveMessageCallback;
   }
 
   private addIncominMessageHandler(): void {
@@ -216,7 +279,7 @@ export class ChatComponent implements AfterViewInit {
     if (!this.localStream) {
       this.startLocalVideo();
     }
-    
+
     this.peerConnection.setRemoteDescription(new RTCSessionDescription(msg)).then(() => {
       this.localVideo.nativeElement.srcObject = this.localStream;
       this.localStream.getTracks().forEach(track => this.peerConnection.addTrack(track, this.localStream)
@@ -251,6 +314,14 @@ export class ChatComponent implements AfterViewInit {
     console.log(e);
 
   }
+
+  private onReceiveChannelClosed (this: RTCDataChannel, ev: Event) {
+
+  };
+  private onReceiveMessageCallback (this: RTCDataChannel, ev: MessageEvent<any>): any {
+    console.log(ev.data.length)    
+    
+  };
 
 
 

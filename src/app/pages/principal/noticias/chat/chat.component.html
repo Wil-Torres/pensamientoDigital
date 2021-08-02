@@ -1,4 +1,5 @@
 <table class="table table-striped">
+
   <body>
     <tr>
       <td>
@@ -14,9 +15,26 @@
       <td></td>
       <td></td>
     </tr>
+
+    <div class="row text-center">
+      <div class="col-md-12">
+        <input #msgInput id="msgInput" type="text" placeholder="message" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4 text-center">
+        <div class="panel panel-primary">
+          <div class="panel-heading">Text chat</div>
+          <div #chatarea id="chatarea" class="panel-body text-left"></div>
+        </div>
+      </div>
+    </div>
+
+
   </body>
 </table>
 <button class="btn btn-primary" (click)="startLocalVideo()" [disabled]="localVideoActive">start local</button>
 <button class="btn btn-info" (click)="pauseLocalVideo()" [disabled]="!localVideoActive">stop local</button>
 <button class="btn btn-danger" (click)="call()" [disabled]="inCall || !localVideoActive">call</button>
 <button class="btn btn-secondary" (click)="hangup()" [disabled]="!inCall">hangup</button>
+<button class="btn btn-success" (click)="enviarMensaje()" [disabled]="inCall || !localVideoActive">Send Message</button>

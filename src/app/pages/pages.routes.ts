@@ -39,6 +39,7 @@ import { GradosMaestrosComponent } from "./principal/administracion/grados-maest
 import { ProfesoresComponent } from "./mantenimiento/profesores/profesores.component";
 import { ListaProfesoresComponent } from "./mantenimiento/profesores/lista-profesores.component";
 import { ListaAlumnosComponent } from "./mantenimiento/alumnos/lista-alumnos.component";
+import { ReunionComponent } from "./principal/sala/reuniones/reunion.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -103,7 +104,7 @@ const pagesRoutes: Routes = [
             /* Noticias*/
             {path: 'noticias', component: ListaNoticiasComponent, data:{titulo: 'Noticias'}},
 
-            /* Noticias */
+            /* Recursps */
             {path: 'recursos', component: ListaRecursosComponent, data:{titulo: 'Recursos'}},
 
             /* Usuarios */
@@ -112,6 +113,9 @@ const pagesRoutes: Routes = [
 
             /* Calendario */
             {path: 'calendario', component: CalendarioComponent, data:{titulo: 'Calendario'}},
+
+            /* Reuniones */
+            {path: 'reunion', component: ReunionComponent, data:{titulo: 'Reunion'}},
 
 
             {path: '', redirectTo: '/panel/panel-control', pathMatch: 'full'},
