@@ -17,46 +17,52 @@
     <div class="container-fluid">
       <app-breadcrumbs></app-breadcrumbs>
       <div class="col-12">
-        <div class="container-fluid">
+        <div class="content">
           <div class="row">
-            <div class="col-md-10 col-sm-10 col-xs-12" id="panelCentral">
+            <div class="col-md-12 col-sm-10 col-xs-12" id="panelCentral">
               <!-- ============================================================== -->
-              <!-- Start Page Content -->
+              <!-- Inicia conenido de pagina principal -->
               <!-- ============================================================== -->
               <gt-inicio-spinner [visible]="srvCore.locked"></gt-inicio-spinner>
               <router-outlet></router-outlet>
               <!-- ============================================================== -->
-              <!-- End PAge Content -->
+              <!-- Finaliza conenido de pagina principal -->
               <!-- ============================================================== -->
             </div>
             <div class="col-md-2 col-sm-2 d-none d-sm-block" id="panelDerecho">
-              <div class="card" style="width: 18rem;">
+              <!-- ============================================================== -->
+              <!-- Inicia conenido de barra lateral Derecha -->
+              <!-- ============================================================== -->
+              <!--div class="card" >
                 <bs-datepicker-inline [bsValue]="bsInlineValue"></bs-datepicker-inline>
               </div>
-              <div class="card" style="width: 18rem;">
+              <div class="card" >
                 <div class="card-body">
                   <h5 class="card-title">Pendientes</h5>
                   <p class="card-text">Contenido de Pendientes.</p>
                 </div>
               </div>
-              <div class="card" style="width: 18rem;">
+              <div class="card" >
                 <div class="card-body">
                   <h5 class="card-title">Avisos</h5>
                   <p class="card-text">Contenido de Avisos.</p>
                 </div>
               </div>
-              <div class="card" style="width: 18rem;">
+              <div class="card" >
                 <div class="card-body">
                   <h5 class="card-title">Anuncios</h5>
                   <p class="card-text">Contenido de Anuncios.</p>
                 </div>
               </div>
-              <div class="card" style="width: 18rem;">
+              <div class="card" >
                 <div class="card-body">
                   <h5 class="card-title">Hoy</h5>
                   <p class="card-text">Actividades del Dia.</p>
                 </div>
-              </div>
+              </div!-->
+              <!-- ============================================================== -->
+              <!-- Finaliza conenido de barra lateral Derecha -->
+              <!-- ============================================================== -->
             </div>
           </div>
         </div>

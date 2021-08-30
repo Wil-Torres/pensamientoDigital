@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Empresa } from '@wt/core';
 import { environment } from 'src/environments/environment.prod';
 import { Message } from '../message';
 import { NoticiasService } from '../noticias.service';
@@ -32,8 +33,7 @@ export class ChatComponent implements AfterViewInit {
   private peerConnection: RTCPeerConnection;
   private dataChannel: RTCDataChannel;
   private receiveChannel: RTCRtpReceiver;
-
-
+  
   inCall = false;
   localVideoActive = false;
 
@@ -82,9 +82,11 @@ export class ChatComponent implements AfterViewInit {
   enviarMensaje() {
     var val = this.msgInput.nativeElement.value;
     this.chatarea.nativeElement.innerHTML += name + ": " + val + "<br />";
+    this.srv.sendMessage({ type: 'offer', data: val })
 
     //sending a message to a connected peer 
     this.dataChannel.send(val);
+    console.log('Sent Data: ' + val);
     this.msgInput.nativeElement.value = "";
   }
 
@@ -109,7 +111,7 @@ export class ChatComponent implements AfterViewInit {
 
   hangup(): void {
     this.srv.sendMessage({ type: 'hangup', data: '' });
-    this.closeVideoCall();
+    //this.closeVideoCall();
   }
 
   private handleGetUserMediaError(err: Error): void {
@@ -146,16 +148,16 @@ export class ChatComponent implements AfterViewInit {
     this.peerConnection.oniceconnectionstatechange = this.handleIceConnectionStateChangeEvent;
     this.peerConnection.onsignalingstatechange = this.handleSignalingStateChangeEvent;
     this.peerConnection.ontrack = this.handleTrackEvent
-    this.peerConnection.ondatachannel = this.handleDataChannelCallBack;
+    
 
     /* Creamos un canal de comunicacion para enviar textos */
+     this.peerConnection.ondatachannel = (event) => { console.log(`Wilson received message from channel`); };
 
      // Let's make a data channel!
-  const dataChannelParams = {ordered: false};
-  
-  
-
+    const dataChannelParams = {ordered: false};
     this.dataChannel = this.peerConnection.createDataChannel('channel1', dataChannelParams);
+    this.peerConnection.ondatachannel = this.handleDataChannelCallBack;
+    
 
     this.dataChannel.onerror = (error) => {
       console.log('Ooops----Error: ', error)
@@ -205,7 +207,6 @@ export class ChatComponent implements AfterViewInit {
     }
   }
 
-
   private handleICECandidateEvent = (event: RTCPeerConnectionIceEvent) => {
     console.log(event);
     if (event.candidate) {
@@ -238,12 +239,13 @@ export class ChatComponent implements AfterViewInit {
     console.log(event);
     this.remoteVideo.nativeElement.srcObject = event.streams[0]   
   }
-
+  
   private handleDataChannelCallBack = (event: RTCDataChannelEvent) => {
     this.dataChannel = event.channel;
     this.dataChannel.binaryType = 'arraybuffer';
+    //this.dataChannel.onopen = this.onReceiveChannelOpened;
     this.dataChannel.onclose = this.onReceiveChannelClosed;
-    this.dataChannel.onmessage = this.onReceiveMessageCallback;
+    this.dataChannel.onmessage = this.ReceiveMessageCallback;
   }
 
   private addIncominMessageHandler(): void {
@@ -315,14 +317,42 @@ export class ChatComponent implements AfterViewInit {
 
   }
 
+  private onReceiveChannelOpened ():void {
+    const readyState = this['readyState'];
+  console.log('Send channel state is: ' + readyState);
+  if (readyState === 'open') {
+    this.msgInput.nativeElement.disabled = false;
+    this.msgInput.nativeElement.focus();
+    
+  } else {
+    this.msgInput.nativeElement.disabled = true;
+  }
+
+  }
+
   private onReceiveChannelClosed (this: RTCDataChannel, ev: Event) {
 
+    
   };
-  private onReceiveMessageCallback (this: RTCDataChannel, ev: MessageEvent<any>): any {
-    console.log(ev.data.length)    
+  private ReceiveMessageCallback (event) {
+    console.log(event)    
+    console.log('Receive Channel Callback');
+    this.dataChannel = event.channel;
+    this.dataChannel.onmessage = this.onReceiveMessageCallback;
+    this.dataChannel.onopen = this.onReceiveChannelStateChange;
+    this.dataChannel.onclose = this.onReceiveChannelStateChange;
+    
     
   };
 
+  private onReceiveMessageCallback(ev: any) {
+    console.log('Received Message');
+    //this.chatarea.nativeElement.value = ev.data;
+  }
+  private onReceiveChannelStateChange(event: Event) {
+    const readyState = this.dataChannel.readyState;
+    console.log(`Receive channel state is: ${readyState}`);
+  }
 
 
 

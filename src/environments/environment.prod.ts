@@ -8,8 +8,8 @@ export const environment = {
     storageBucket: "prueba-1df69.appspot.com",
     messagingSenderId: "609979743111"
   },
-  wsEndpoint: 'wss://fast-spire-23171.herokuapp.com/',
-  //wsEndpoint: 'ws://localhost:3000/',
+  //wsEndpoint: 'wss://fast-spire-23171.herokuapp.com/',
+  wsEndpoint: 'ws://localhost:3000/',
   RTCPeerConfiguration: {
     iceServers: [
       {

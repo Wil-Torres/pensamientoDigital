@@ -1,0 +1,53 @@
+<div class="card-deck">
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-title text-center">{{grafico.grafico1.leyenda}}</div>
+            <app-grafico-dona [chartLabels]="grafico.grafico1.labels" [chartData]="grafico.grafico1.data"
+                [chartType]="grafico.grafico1.type"></app-grafico-dona>
+            <div class="card-body">
+                <h4 class="card-title">GRAFICA # 1</h4>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-title text-center">{{grafico.grafico2.leyenda}}</div>
+            <app-grafico-dona [chartLabels]="grafico.grafico2.labels" [chartData]="grafico.grafico2.data"
+                [chartType]="grafico.grafico2.type"></app-grafico-dona>
+            <div class="card-body">
+                <h5 class="card-title">GRAFICA # 2</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-title text-center">{{grafico.grafico3.leyenda}}</div>
+            <app-grafico-dona [chartLabels]="grafico.grafico3.labels" [chartData]="grafico.grafico3.data"
+                [chartType]="grafico.grafico3.type"></app-grafico-dona>
+            <div class="card-body">
+                <h5 class="card-title">GRAFICA # 3</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-title text-center">{{grafico.grafico4.leyenda}}</div>
+            <app-grafico-dona [chartLabels]="grafico.grafico4.labels" [chartData]="grafico.grafico4.data"
+                [chartType]="grafico.grafico4.type"></app-grafico-dona>
+            <div class="card-body">
+                <h5 class="card-title">GRAFICA # 4</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+</div>
+<button type="button" (click)="mostrar()">mostrar</button>

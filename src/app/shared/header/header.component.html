@@ -292,18 +292,15 @@
                   <div class="u-img"><img [src]="usuarioTemp?.photoURL" alt="user"></div>
                   <div class="u-text">
                     <h4>{{usuarioTemp?.displayName}}</h4>
-                    <p class="text-muted">{{usuarioTemp?.email}}</p><a href="/#/perfil"
-                      class="btn btn-rounded btn-danger btn-sm">Ver
-                      Perfil</a>
+                    <p class="text-muted">{{usuarioTemp?.email}}</p>
+                    <a routerLinkActive="active" routerLink="/perfil" class="btn btn-rounded btn-danger btn-sm"> Ver Perfil</a>
                   </div>
                 </div>
               </li>
               <li role="separator" class="divider"></li>
-              <li><a href="/#/perfil"><i class="ti-user"></i> Mi Perfil</a></li>
-              <li><a href="#"><i class="ti-wallet"></i> Mi Balance</a></li>
               <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#"><i class="ti-settings"></i> Configuración de cuenta</a></li>
+              <li><a routerLinkActive="active" routerLink="/account-settings"> Configuración de cuenta</a></li>
               <li role="separator" class="divider"></li>
               <li><a (click)="cerrarSesion()"><i class="fa fa-power-off"></i> Cerrar sesión</a></li>
             </ul>

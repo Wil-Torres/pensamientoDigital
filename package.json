@@ -23,6 +23,7 @@
     "@angular/router": "~7.0.0",
     "@kamiazya/ngx-speech-recognition": "^0.4.3",
     "@kamiazya/ngx-speech-synthesis": "0.0.4",
+    "@wt/core": "file:../gt-library/dist/wt/core/wt-core-0.0.1.tgz",
     "angular-calendar": "^0.27.7",
     "bootstrap": "4.2.1",
     "chart.js": "^2.7.2",
