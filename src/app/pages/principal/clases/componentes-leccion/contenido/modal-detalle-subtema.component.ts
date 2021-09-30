@@ -1,18 +1,36 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { RecursosService } from '../../../recursos/recursos.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import swal from 'sweetalert';
-import { isNil} from 'lodash';
+import { isNil } from 'lodash';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-modal-detalle-subtema',
   templateUrl: './modal-detalle-subtema.component.html',
-  styles: []
+  styles: [
+    `.tamañoModal { width: 1000px; }`
+  ]
 })
 export class ModalDetalleSubtemaComponent implements OnInit {
   subContenido: any = {};
   tipoCargado: number = 1;
   tDocto: FileList;
+  private _cursoId: string;
+  private _leccionId: string;
+  get leccionId(): string {
+    return this._leccionId;
+  }
+  get cursoId(): string {
+    return this._cursoId;
+  }
+  @Input('leccionId') set leccionId(v: string) {
+    this._leccionId = v;
+  }
+  @Input('cursoId') set cursoId(v: string) {
+    this._cursoId = v;
+  }
+
 
   private _addContenido: EventEmitter<any>;
 
@@ -22,12 +40,14 @@ export class ModalDetalleSubtemaComponent implements OnInit {
   public set addContenido(v: EventEmitter<any>) {
     this._addContenido = v;
   }
-  modalRef: BsModalRef;
-  constructor(private srvRecurso: RecursosService) {
+
+  constructor(private srvRecurso: RecursosService, public modalRef: BsModalRef, private router: ActivatedRoute) {
     this.addContenido = new EventEmitter<any>();
   }
 
-  cancelar(){}
+  cancelar() {
+    this.modalRef.hide();
+  }
 
 
   ngOnInit() {
@@ -66,9 +86,10 @@ export class ModalDetalleSubtemaComponent implements OnInit {
     }
 
     if (this.tipoCargado === 1) {
-      this.srvRecurso.addRecursoCurso('JNRSpYOiJEOGjFGrQJdy', 'PDatBCfKSLQ3hAmQimgp', 0, this.tDocto).then(resp => {
+      this.srvRecurso.addRecursoCurso(this._cursoId, this._leccionId, 0, this.tDocto).then((resp: any) => {
         this.addContenido.emit({
-          url: resp,
+          url: resp.url,
+          path: resp.fullPath,
           tipo: this.subContenido.tipo,
           visto: false
         });

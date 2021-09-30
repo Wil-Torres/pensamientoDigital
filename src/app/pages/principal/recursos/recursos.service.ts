@@ -24,7 +24,7 @@ export class RecursosService {
     this.srvUser.userInfo.subscribe(resp => {
       this.usuario = resp
     })
-   }
+  }
 
   getAllRecursos() {
     return this.afs.collection('recursos').valueChanges();
@@ -79,9 +79,9 @@ export class RecursosService {
           let x = this.task.snapshotChanges().pipe(
             finalize(async () => {
               Promise.all([fileRef.getMetadata().toPromise(), fileRef.getDownloadURL().toPromise()]).then(resp => {
-                resolve({fullPath:resp[0].fullPath, url:resp[1]})
+                resolve({ fullPath: resp[0].fullPath, url: resp[1] })
               })
-              
+
             })
           ).subscribe(resp => { });
         })
@@ -89,6 +89,13 @@ export class RecursosService {
 
     });
 
+  }
+  removeRecursoCurso(curso: string, leccion: string, tipo: number = 0,url: any) {
+    
+    let urlRef2 = this.storage.storage.ref(url);
+    return urlRef2.delete()
+
+    
   }
 
   addGaleria(pathPrincipal: string, event: FileList) {
@@ -104,9 +111,9 @@ export class RecursosService {
           let x = this.task.snapshotChanges().pipe(
             finalize(async () => {
               Promise.all([fileRef.getMetadata().toPromise(), fileRef.getDownloadURL().toPromise()]).then(resp => {
-                resolve({fullPath:resp[0].fullPath, url:resp[1]})
+                resolve({ fullPath: resp[0].fullPath, url: resp[1] })
               })
-              
+
             })
           ).subscribe(resp => { });
         })

@@ -58,7 +58,4 @@ export class LoginComponent implements OnInit {
   signUp(email: string, password: string) {
     this.auth.signUp(email, password, {});
   }
-
-
-
 }

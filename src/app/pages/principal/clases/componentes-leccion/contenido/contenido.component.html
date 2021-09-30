@@ -48,7 +48,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let tema of forma.value.contenido; let i = index" (click)="mostrarContenido(tema)">
+          <tr *ngFor="let tema of forma.value.contenido; let i = index" (click)="mostrarContenido(tema, i)">
             <td>{{tema.codigoSubTema}}</td>
             <td>{{tema.descripcion}}</td>
             <td><button type="button" class="btn btn-primary" (click)="addDetalleContenido(i)"><i class="fa fa-plus"></i></button></td>
@@ -73,7 +73,7 @@
             <td>{{i+1}}</td>
             <td>{{textoTipoContenido(cont.tipo)}}</td>
             <td>{{cont.url}}</td>
-            <td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+            <td><button type="button"  (click)="eliminarDetalleContenido(cont, i)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
           </tr>
         </tbody>
       </table>

@@ -6,7 +6,7 @@ import { pais, departamento, municipio } from 'src/app/interfaces/alumno';
 import { isNil } from 'lodash';
 import swal from 'sweetalert';
 import { ProfesoresService } from './profesores.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profesores',
@@ -47,16 +47,15 @@ export class ProfesoresComponent implements OnInit {
     this._forma = v;
   }
 
-  constructor(private srvProfesor: ProfesoresService, private builder: FormBuilder, 
-    private srvAuth: AuthService, private aRouter: ActivatedRoute) {
-    this.srvAuth.userInfo.subscribe((usuario:UserInfo) => {
+  constructor(private srvProfesor: ProfesoresService, private builder: FormBuilder,
+    private srvAuth: AuthService, private aRouter: ActivatedRoute, private router: Router) {
+    this.srvAuth.userInfo.subscribe((usuario: UserInfo) => {
       this.usuarioLog = usuario;
     })
 
-    if ( !isNil(this.objetoId) ) {
+    if (!isNil(this.objetoId)) {
       this.buscar();
     }
-
   }
 
   ngOnInit() {
@@ -66,11 +65,19 @@ export class ProfesoresComponent implements OnInit {
   guardar(): void {
     if (isNil(this.forma.value.id)) {
       this.srvProfesor.addProfesor(this.forma.value).then(rProfe => {
-        rProfe.update({ id: rProfe.id }).then(uProfe => {
-          swal('Nuevo Registro', 'Se ha creado exitosamene', 'success')
+        this.srvAuth.signUp(this.forma.get('datosUsuario.userId').value, this._forma.get('datosUsuario.password').value, {}).then(newUser => {
+          this._forma.patchValue({ id: rProfe.id, datosUsuario: { id: rProfe.id } });
+          rProfe.update({ id: rProfe.id, datosUsuario: { id: rProfe.id } }).then((uProfe) => {
+            swal('Nuevo Registro', 'Se ha creado exitosamene', 'success').then(() => {
+              this.router.navigate(['profesores', rProfe.id]);
+            })
+          }).catch(err => {
+            swal('Ocurrio un problema', err, 'error')
+          })
         }).catch(err => {
-          swal('Ocurrio un problema', err, 'error')
+          swal('Ocurrio un problema al crear el usuario para la plataforma', err, 'error')
         })
+
       }).catch(err => {
         swal('Ocurrio un problema', err, 'error')
       });
@@ -156,14 +163,24 @@ export class ProfesoresComponent implements OnInit {
   };
 
   buscar() {
-
     this.srvProfesor.getProfesor(this.objetoId).subscribe(profe => {
-      this.forma.patchValue(profe, {emitEvent:false});
+      this.forma.patchValue(profe, { emitEvent: false });
     })
-
   }
 
-  actualizar(){}
-  limpiar(){}
-  eliminar(){}
+  actualizar() {
+    this.buscar();
+  }
+
+  limpiar() {
+    this._forma.reset();
+  }
+
+  eliminar() {
+    this.srvProfesor.removeProfesor(this._forma.getRawValue()).then(() => {
+      this.router.navigate(['profesores']);
+    }).catch(err => {
+      swal('Ocurrio un problema', err, 'error')
+    });
+  }
 }

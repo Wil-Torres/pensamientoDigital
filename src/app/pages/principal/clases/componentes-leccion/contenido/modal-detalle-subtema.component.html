@@ -1,56 +1,60 @@
-<div class="modal-header">
-  <h4 class="modal-title pull-left">Agregar Detalle</h4>
-  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <div class="card card-body">
-    <div class="row d-flex justify-content-end">
-      <button type="button" class="btn btn-sm btn-danger" title="Cancelar Cambios" (click)="cancelar()">
-        <i class="fa fa-ban"></i>
-      </button>
-      <button type="button" class="btn btn-sm btn-primary ml-1" title="Agregar Detalle" (click)="agregarSubContendio()">
-        <i class="fa fa-check"></i>
-      </button>
-    </div>
-    <div class="row">
-      <div class="col-md-3 col-sm-2 col-3">
-        <div class="form-group">
-          <label for="tipo" class="font-weight-bold">Tipo de Docto.</label>
-          <select class="form-control form-control-sm gt-spinner-off" id="tipo" [(ngModel)]="subContenido.tipo"
-            [ngModelOptions]="{standalone: true}">
-            <option value="0">Video</option>
-            <option value="1">Docto</option>
-            <option value="2">Link</option>
-            <option value="3">Imagen</option>
-          </select>
+<div class="modal-content tamañoModal">
+  <div class="modal-header bg-primary text-white d-flex justify-content-left">
+    <h4 class="modal-title flex-grow-1 text-center">Agregar Detalle</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="cancelar()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal"name="forma" novalidate>
+      <div class="row modal-group">
+        <div class="col-md-3 col-sm-2 col-3" gt-requerido="">
+          <div class="form-group">
+            <label for="tipo" class="font-weight-bold">Tipo de Docto.</label>
+            <select class="form-control form-control-sm gt-spinner-off" id="tipo" [(ngModel)]="subContenido.tipo"
+              [ngModelOptions]="{standalone: true}">
+              <option value="0">Video</option>
+              <option value="1">Docto</option>
+              <option value="2">Link</option>
+              <option value="3">Imagen</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="tipoCarga" class="font-weight-bold">Tipo de Carga</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="tipoCarga" id="url" [value]="1"
+                [(ngModel)]="tipoCargado" [ngModelOptions]="{standalone: true}">
+              <label class="form-check-label" for="url">Cargar Archivo</label>
+              <input class="form-check-input" type="radio" name="tipoCarga" id="archivo" [value]="2"
+                [(ngModel)]="tipoCargado">
+              <label class="form-check-label" for="archivo">URL</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 col-sm-3 col-9" *ngIf="tipoCargado === 2">
+          <div class="form-group">
+            <label for="url" class="font-weight-bold">URL</label>
+            <input type="text" class="form-control form-control-sm" id="url" [(ngModel)]="subContenido.url"
+              [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+        <div class="col-md-5 col-sm-4 col-6" *ngIf="tipoCargado === 1">
+          <div class="form-group">
+            <label for="documento" class="font-weight-bold">Documento</label>
+            <input type="file" name="files" id="files" (change)="cargarInfo( $event.target.files )">
+          </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <label for="tipoCarga" class="font-weight-bold">Tipo de Carga</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="tipoCarga" id="url" [value]="1" [(ngModel)]="tipoCargado"
-            [ngModelOptions]="{standalone: true}">
-          <label class="form-check-label" for="url">Cargar Archivo</label>
-          <input class="form-check-input" type="radio" name="tipoCarga" id="archivo" [value]="2"
-            [(ngModel)]="tipoCargado">
-          <label class="form-check-label" for="archivo">URL</label>
-        </div>
-      </div>
-      <div class="col-md-5 col-sm-3 col-9" *ngIf="tipoCargado === 2">
-        <div class="form-group">
-          <label for="url" class="font-weight-bold">URL</label>
-          <input type="text" class="form-control form-control-sm" id="url" [(ngModel)]="subContenido.url"
-            [ngModelOptions]="{standalone: true}">
-        </div>
-      </div>
-      <div class="col-md-5 col-sm-4 col-6" *ngIf="tipoCargado === 1">
-        <div class="form-group">
-          <label for="documento" class="font-weight-bold">Documento</label>
-          <input type="file" name="files" id="files" (change)="cargarInfo( $event.target.files )">
-        </div>
-      </div>
-    </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-danger" title="Cancelar Cambios" (click)="cancelar()">
+      <i class="fa fa-ban"></i>
+    </button>
+    <button type="button" class="btn btn-sm btn-primary ml-1" title="Agregar Detalle" (click)="agregarSubContendio()">
+      <i class="fa fa-check"></i>
+    </button>
   </div>
 </div>

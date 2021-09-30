@@ -8,7 +8,7 @@ import { CatalogoService } from '../catalogo.service';
   styleUrls: ['./lista-catalogo-cursos.component.css']
 })
 export class ListaCatalogoCursosComponent implements OnInit {
-  private _objetoId: string = this.aRouter  .snapshot.paramMap.get('id');;
+  private _objetoId: string = this.aRouter.snapshot.paramMap.get('id');;
   private _objeto: any = [];
   flDocto: FileList;
   numeroRegistro: number;

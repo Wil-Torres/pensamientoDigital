@@ -1,21 +1,21 @@
 <form [formGroup]="forma" name="forma" (ngSubmit)="guardar()" novalidate>
-  <div class="d-flex justify-content-end">
-    <button data-toggle="tooltip" type="button" class="btn btn-secondary btn-white text-whiteml-1" title="Regresar">
+  <div class="d-flex justify-content-end  gt-botones">
+    <button data-toggle="tooltip" type="button" class="btn btn-secondary btn-white btn-sm text-white ml-1" [routerLink]="['/profesores']" title="Regresar">
       <i class="fa fa-arrow-left"></i>
     </button>
-    <button data-toggle="tooltip" type="button" class="btn btn-secondary btn-white text-white ml-1"
+    <button data-toggle="tooltip" type="button" class="btn btn-secondary btn-white btn-sm text-white ml-1"
       (click)="actualizar()" title="Actualizar">
-      <i class="fa fa-refresh"></i>
+      <i class="fa fa-retweet" aria-hidden="true"></i>
     </button>
-    <button data-toggle="tooltip" type="button" class="btn btn-danger btn-white text-white  ml-1" (click)="limpiar()"
+    <button *ngIf="!objetoId" data-toggle="tooltip" type="button" class="btn btn-danger btn-white btn-sm text-white  ml-1" (click)="limpiar()"
       title="Cancelar">
       <i class="fa fa-ban"></i>
     </button>
-    <button data-toggle="tooltip" type="button" class="btn btn-danger btn-white text-white  ml-1" (click)="eliminar()"
+    <button *ngIf="objetoId" data-toggle="tooltip" type="button" class="btn btn-danger btn-white btn-sm text-white  ml-1" (click)="eliminar()"
       title="Eliminar">
       <i class="fa fa-trash"></i>
     </button>
-    <button data-toggle="tooltip" type="submit" class="btn btn-primary btn-white text-white  ml-1" title="Guardar">
+    <button data-toggle="tooltip" type="submit" class="btn btn-primary btn-white btn-sm text-white  ml-1" title="Guardar">
       <i class="fa fa-save"></i>
     </button>
 

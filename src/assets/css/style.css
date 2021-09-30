@@ -5900,3 +5900,8 @@ File: scss
     text-align: center;
     margin-top: 10px;
     overflow: hidden; } }
+/* Para botonos sobre listas */
+.gt-botones {
+  position: relative !important;
+  top: -1rem !important;
+}
