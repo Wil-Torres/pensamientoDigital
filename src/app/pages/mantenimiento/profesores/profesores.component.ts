@@ -17,7 +17,7 @@ export class ProfesoresComponent implements OnInit {
 
   private _forma: FormGroup;
   private usuarioLog: UserInfo;
-  private objetoId = this.aRouter.snapshot.paramMap.get('id');
+  objetoId = this.aRouter.snapshot.paramMap.get('id');
   private _objPais: pais[] = [];
   private _objDepartamento: departamento[] = [];
   private _objMunicipio: municipio[] = [];

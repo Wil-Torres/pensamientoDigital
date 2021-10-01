@@ -37,7 +37,7 @@ export class ListaCursosComponent implements OnInit {
     this.buscar();
   }
 
-  mostrarCurso(id:string) {
+  mostrarCurso(id: string) {
     this.router.navigate(['/alumno/cursos', id]);
   }
 
@@ -66,9 +66,5 @@ export class ListaCursosComponent implements OnInit {
     }).catch(err => {
       console.log(err.FirebaseError);
     })
-
   }
-
-
-
 }

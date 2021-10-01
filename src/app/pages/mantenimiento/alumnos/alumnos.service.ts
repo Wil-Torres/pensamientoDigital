@@ -33,7 +33,7 @@ export class AlumnosService {
     });
   }
   /* *******************************************************************
-  **********************RESOURCE CURSOS ********************************
+  **********************RECURSO DE CURSOS ******************************
   *********************************************************************/
   getAlumnos(offset: any, limit: any) {
     this.coleccionAlumno = this.afs.collection('alumnos')
