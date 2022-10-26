@@ -15,7 +15,6 @@ export class ServicioModalService {
     this.oculto = 'oculto';
   }
   mostrarModal(id: string) {
-    console.log(id);
     // obtener imagen;
   }
   

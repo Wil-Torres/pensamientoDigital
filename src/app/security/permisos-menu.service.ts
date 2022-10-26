@@ -40,7 +40,6 @@ export class PermisosMenuService {
 
   accesosMenu(usuarioId: string) {
     this.afs.collection('users').doc(usuarioId).valueChanges().subscribe((resp: any) => {
-      console.log(resp.roles);
       this.cargarMenu(resp.roles);
     })
   }
@@ -70,11 +69,9 @@ export class PermisosMenuService {
   async cargarMenu(listaRoles: any) {
     // establecer servicio que devuelva los accessos
     this._menuCtrl.modulos = cloneDeep(this.modulo);
-    console.log(this._menuCtrl)
     const modulos = this._menuCtrl.modulos;
 
     Object.keys(listaRoles).forEach((elem, index, listaRoles2) => {
-      console.log(listaRoles[elem]);
       if (listaRoles[elem]) {
         this.afs.collection('roles_accesos', ref => ref.where('rol', '==', elem)).valueChanges().subscribe((resp: any) => {
           const accesoPermitido = resp;
@@ -89,7 +86,7 @@ export class PermisosMenuService {
           MenuReservado.forEach(elem => {
             modulos.splice(modulos.indexOf(elem), 1);
           });
-          console.log(this._menuCtrl)
+          
         })
 
       }

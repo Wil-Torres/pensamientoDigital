@@ -33,6 +33,7 @@ import { SpeechRecognitionModule } from "@kamiazya/ngx-speech-recognition";
 import { SpeechSynthesisModule, } from '@kamiazya/ngx-speech-synthesis';
 import { ListaAlumnosComponent } from "./mantenimiento/alumnos/lista-alumnos.component";
 import { SalaModule } from "./principal/sala/sala.module";
+import { CursosTrabajosComponent } from './movimientosAlumnos/trabajos/cursos-trabajos/cursos-trabajos.component';
 
 @NgModule({
     declarations: [
@@ -50,6 +51,7 @@ import { SalaModule } from "./principal/sala/sala.module";
         SeccionesComponent,
         CiclosComponent,
         PerfilComponent,
+        CursosTrabajosComponent,
         
     ],
     exports: [

@@ -36,7 +36,6 @@ export class ContenidoComponent implements OnInit {
     this.detalle = {};
   }
   agregarDetalle() {
-    console.log('detalle');
     let valida = this.validarDetalle();
     if (valida.error) {
       swal('Verificar Información', valida.mensaje, 'error');
@@ -75,7 +74,8 @@ export class ContenidoComponent implements OnInit {
         leccionId: this._leccionId,
         cursoId: this._cursoId,
       },
-      class: 'modal-lg'
+      class: 'modal-lg',
+      ignoreBackdropClick: true,
     };
 
 
@@ -109,7 +109,6 @@ export class ContenidoComponent implements OnInit {
     this.srvRecurso.removeRecursoCurso(this._cursoId, this._leccionId, 0, item.path).then(() => {
       this._forma.value.contenido[this.lineaSeleccionada].detalle.splice(linea, 1);
     }).catch(err => {
-      console.log(err);
     });
 
   }

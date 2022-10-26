@@ -33,14 +33,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private router: Router, private notificacion: NotificacionesService, private _menuSeg: PermisosMenuService) {
     this.auth.user.subscribe(resp => {
       this.usuarioTemp = resp;
-      console.log(resp)
       if (this.usuarioTemp != null) {
-        this.notificacion.obtenerNotificaiones(this.usuarioTemp.uid).subscribe(resp => {
+        this.notificacion.obtenerNotificaiones(this.notificacion.y).subscribe(resp => {
           this.avisos = resp;
         });
       }
 
     })
+    
 
   }
 
@@ -58,15 +58,15 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   cerrarSesion() {
     this.auth.signOut().then(resp => {
+      localStorage.removeItem('usuarioLogeado')
       this.router.navigate(['/login']);
     }).catch(err => {
-      console.log(err);
     });
   }
 
-  verNotificacion(id: string) {
+  verNotificacion(id: string, objeto:any) {
     const initialState = { notificacionId: id };
-    this.modalRef = this.modalService.show(NotificacionModalComponent, { class: 'modal-lg', initialState });
+    this.modalRef = this.modalService.show(NotificacionModalComponent, { class: 'modal-lg',ignoreBackdropClick: true, initialState });
   }
 
   verTodasNotificaciones() {

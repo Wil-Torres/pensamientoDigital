@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Ciclo,  Carrera, AdministracionService } from '../administracion.service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
+import { sortBy } from 'lodash';
 
 @Component({
   selector: 'app-carreras',
@@ -26,13 +27,12 @@ export class CarrerasComponent implements OnInit {
 
   ngOnInit() {
     this.srvAdmin.getCarreras().subscribe(carrera => {
-      console.log(carrera);
-      this.objCarrera = carrera;
+      this.objCarrera = sortBy(carrera,  ['codigo']);
     })
   }
 
   agregar(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm',ignoreBackdropClick: true, });
 
 
   }

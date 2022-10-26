@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ListaProfesoresComponent implements OnInit {
   listaProfesor: any = [];
-  numeroRegistro: number;
+  private _numeroRegistros = 0;
   message = '';
   contents = [
     'AngularJS is a superheroic JavaScript MVC framework for the Web. We call it superheroic because AngularJS does so much for us that we only have to focus on our core application and let AngularJS take care of everything else. It allows us to apply standard, tried-and-tested software engineering practices traditionally used on the server side in client-side programming to accelerate frontend development. It provides a consistent scalable structure that makes it a breeze to develop large, complex applications as part of a team.',
@@ -32,13 +32,11 @@ export class ListaProfesoresComponent implements OnInit {
     this.buscar();
   }
 
-  buscar(offset: number = 0, limit: number = 10) {
+  buscar(offset: number = 0, limit: number = 5) {
     this.srvProfesor.getProfesores(offset, limit).then(prof => {
       prof.subscribe(resp => {
-        this.listaProfesor = resp
-        this.numeroRegistro = this.srvProfesor.paginacion.totalRegistros;
-        console.log(resp)
-        console.log(this.srvProfesor.paginacion.totalRegistros)
+        this.listaProfesor = resp;
+        this._numeroRegistros = this.srvProfesor.paginacion.totalRegistros;
       })
     })
 
@@ -50,7 +48,9 @@ export class ListaProfesoresComponent implements OnInit {
     this.router.navigate(['profesores', id]);
   }
 
-
+  get numeroRegistros(): number {
+    return this._numeroRegistros;
+  }
 
   listen() {
     this.service
@@ -58,7 +58,6 @@ export class ListaProfesoresComponent implements OnInit {
       .pipe(resultList)
       .subscribe((list: SpeechRecognitionResultList) => {
         this.message = list.item(0).item(0).transcript;
-        console.log('RxComponent:onresult', this.message, list);
       });
   }
 

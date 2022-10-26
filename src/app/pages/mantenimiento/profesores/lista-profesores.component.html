@@ -1,39 +1,42 @@
 <form>
   <div class="d-flex justify-content-end gt-botones">
-    <button data-toggle="tooltip" type="button" class="btn btn-primary btn-white btn-sm text-white ml-1" (click)="nuevo()"
-      title="Nuevo Profesor">
+    <button data-toggle="tooltip" type="button" class="btn btn-primary btn-white btn-sm text-white ml-1"
+      (click)="nuevo()" title="Nuevo Profesor">
       <i class="fa fa-plus"></i>
     </button>
   </div>
 
-  <div *ngIf="!numeroRegistro" class="d-flex justify-content-center">
+  <div *ngIf="!numeroRegistros" class="d-flex justify-content-center">
     <h1>No hay datos <i class="fa fa-database text-danger"></i></h1>
   </div>
-  <div class="row" *ngIf="numeroRegistro">
-    <table class="table table-striped">
-      <thead class="bg-primary text-white">
-        <tr>
-          <th>Nombre</th>
-          <th class="gt-wd-150">Inicio de Labores</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let lst of listaProfesor; let i = index" (click)="edicion(lst.id)">
-          <td>{{lst.primerNombre}} - {{lst.primerApellido}}</td>
-          <td>{{lst.establecimiento.fechaInicio}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="table-responsive" *ngIf="numeroRegistros">
+    <div class="row" *ngIf="numeroRegistros">
+      <table class="table table-striped">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th>Nombre</th>
+            <th class="gt-wd-100">Teléfono</th>
+            <th class="gt-wd-100">Email</th>
+            <th class="gt-wd-150">Inicio de Labores</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let lst of listaProfesor; let i = index" (click)="edicion(lst.id)">
+            <td>{{lst.primerNombre}} {{lst.segundoNombre}} - {{lst.primerApellido}} {{lst.segundoApellido}}</td>
+            <td>{{lst.telefono}}</td>
+            <td>{{lst.email}}</td>
+            <td>{{lst.establecimiento.fechaInicio}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <app-paginacion (paginacion)="buscar($event.offset, $event.limit)" [totalItems]="numeroRegistros"></app-paginacion>
   </div>
 
-
-  aqui empieza
+ <!-- aqui empieza
 
   <p>RxCompoent.message: {{message}}</p>
-  <button
-    [disabled]="service.started$ | async"
-    (click)="listen()"
-  >listen</button>
+  <button [disabled]="service.started$ | async" (click)="listen()">listen</button>
   <p>lang: en-EN</p>
   <p>grammars: none</p>
 
@@ -56,5 +59,5 @@
       cancel
     </button>
   </div>
-
+-->
 </form>

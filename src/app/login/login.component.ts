@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
   /*ingresar(email: string, password: string){
     // this.router.navigate(['/home']);
     this.auth.login(this.objeto.user, this.objeto.password)
-    console.log(this.auth.user)
   }*/
 
   ingresar() {

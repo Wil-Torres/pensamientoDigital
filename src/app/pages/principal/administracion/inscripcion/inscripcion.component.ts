@@ -88,8 +88,8 @@ export class InscripcionComponent implements OnInit {
 
   }
 
-  mostrarAnteriores(){
-    if ( isNil(this.cicloAnterior.cicloId) || isNil(this.cicloAnterior.gradoId) ){
+  mostrarAnteriores() {
+    if (isNil(this.cicloAnterior.cicloId) || isNil(this.cicloAnterior.gradoId)) {
       return
     }
     this.srvAdmin.getInscripciones(this.cicloAnterior).subscribe(resp => {
@@ -97,25 +97,25 @@ export class InscripcionComponent implements OnInit {
     })
   }
 
-  seleccionarAnterior(anterior: inscripcion){
+  seleccionarAnterior(anterior: inscripcion) {
     if (isNil(this.forma.value.cicloId) || isNil(this.forma.value.gradoId)) {
-      swal('Verificar datos','Debe seleccionar un ciclo, un grado y una seccion','warning').then(() => {
+      swal('Verificar datos', 'Debe seleccionar un ciclo, un grado y una seccion', 'warning').then(() => {
         return;
       })
       return;
     }
-    if ( (anterior.cicloId === this.forma.value.cicloId) ||
-          (anterior.ciclo.ciclo > this.forma.value.ciclo.ciclo) ||
-          (anterior.ciclo.ciclo < (this.forma.value.ciclo.ciclo - 1)) ){
-      swal('Verificar datos','El ciclo debe ser el anterior al de la nueva inscripcion, no puede ser igual, y tampoco mayor','warning').then(() => {
+    if ((anterior.cicloId === this.forma.value.cicloId) ||
+      (anterior.ciclo.ciclo > this.forma.value.ciclo.ciclo) ||
+      (anterior.ciclo.ciclo < (this.forma.value.ciclo.ciclo - 1))) {
+      swal('Verificar datos', 'El ciclo debe ser el anterior al de la nueva inscripcion, no puede ser igual, y tampoco mayor', 'warning').then(() => {
         return;
       })
       return;
     }
-    if ( (anterior.gradoId === this.forma.value.gradoId) ||
-          (Number(anterior.grado.gradoId) > Number(this.forma.value.grado.gradoId)) ||
-          (Number(anterior.grado.gradoId) < (Number(this.forma.value.grado.gradoId) - 1)) ){
-      swal('Verificar datos','El grado debe ser el anterior al de la nueva inscripcion, no puede ser igual, y tampoco mayor','warning').then(() => {
+    if ((anterior.gradoId === this.forma.value.gradoId) ||
+      (Number(anterior.grado.gradoId) > Number(this.forma.value.grado.gradoId)) ||
+      (Number(anterior.grado.gradoId) < (Number(this.forma.value.grado.gradoId) - 1))) {
+      swal('Verificar datos', 'El grado debe ser el anterior al de la nueva inscripcion, no puede ser igual, y tampoco mayor', 'warning').then(() => {
         return;
       })
       return;
@@ -127,45 +127,73 @@ export class InscripcionComponent implements OnInit {
     temp.grado = this.forma.value.grado;
     temp.fechaCreacion = new Date();
     temp.id = null;
-    this._forma.patchValue(temp, {emitEvent:false});
+    this._forma.patchValue(temp, { emitEvent: false });
     this.inscribir();
 
 
   }
 
   inscribir(): void {
-    if ( isNil(this.forma.value.alumnoId) ){
+    if (isNil(this.forma.value.alumnoId)) {
       this.srvAlumno.addAlumno(this.forma.value.alumno).then(rAlumno => {
-        this._forma.patchValue({alumnoId: rAlumno.id});
-        rAlumno.update({id: rAlumno.id}).then(uAlumno => {
-          this.srvAdmin.postInscripcion(this.forma.value).then(rInscripcion => {
-            rInscripcion.update({id:rInscripcion.id}).then(() => {
-              this._forma.reset();
-              swal('Inscripción','Se ha registrado exitosamene','success')
+        this._forma.patchValue({ alumnoId: rAlumno.id });
+        this.srvAuth.signUp(this.forma.get('alumno.datosUsuario.userId').value, this._forma.get('alumno.datosUsuario.password').value, {
+          student: true,
+        }).then((newUser) => {
+          this._forma.patchValue({
+            id: rAlumno.id,
+          });
+          rAlumno.update({
+            id: rAlumno.id, datosUsuario: {
+              id: rAlumno.id,
+              userId: this.forma.get('alumno.datosUsuario.userId').value,
+              password: this._forma.get('alumno.datosUsuario.password').value
+            }
+          }).then(uAlumno => {
+            // verificar que el limite de alumnos por seccion. 
+            this.srvAdmin.postInscripcion(this.forma.value).then(rInscripcion => {
+              this._forma.patchValue({ id: rInscripcion.id });
+              rInscripcion.update({ id: rInscripcion.id }).then(async () => {
+
+                swal('Inscripción', 'Se ha registrado exitosamene', 'success')
+                // aqui se debe agregar la asignacion de cursos al alumno
+                // obtener los cursos que estan asociados al grado y seccion.
+                let asignado = await this.srvAdmin.obtenerCursosGracdo(this._forma.getRawValue(), this._forma.value.gradoId)
+                if (asignado) {
+                  this._forma.reset();
+                  swal('Asinacion de cursos', 'Se han asignado los cursos al usuario', 'success')
+                } else {
+                  swal('Ocurrio un problema', 'Error en la asignacion de cursos', 'error')
+                }
+              }).catch(err => {
+                swal('Ocurrio un problema', err, 'error')
+              });
             }).catch(err => {
-              swal('Ocurrio un problema',err ,'error')
-            });
+              swal('Ocurrio un problema', err, 'error')
+            })
           }).catch(err => {
-            swal('Ocurrio un problema',err ,'error')
+            swal('Ocurrio un problema', err, 'error')
           })
-        }).catch(err => {
-          swal('Ocurrio un problema',err ,'error')
+
+        }).catch(() => {
+          swal('Ocurrio un error', 'Ocurrio un error al momento de crear el usuario virtual', 'error');
         })
+
       }).catch(err => {
-        swal('Ocurrio un problema',err ,'error')
+        swal('Ocurrio un problema', err, 'error')
       });
     } else {
       this.srvAdmin.postInscripcion(this.forma.value).then(rInscripcion => {
-        rInscripcion.update({id:rInscripcion.id}).then(() => {
+        rInscripcion.update({ id: rInscripcion.id }).then(() => {
           this._forma.reset();
           this.cicloAnterior = {};
-          swal('Inscripción','Se ha registrado exitosamene','success')
+          swal('Inscripción', 'Se ha registrado exitosamene', 'success')
         });
       }).catch(err => {
-        swal('Ocurrio un problema',err ,'error')
+        swal('Ocurrio un problema', err, 'error')
       });
     }
-    
+
   }
 
   objInit() {
@@ -289,22 +317,22 @@ export class InscripcionComponent implements OnInit {
     })
   }
 
-  seleccionarCiclo(id:string){
+  seleccionarCiclo(id: string) {
     let cicloTemp = this.objCiclo.find(elem => {
       return id === elem.id
     })
 
     if (cicloTemp) {
-      this._forma.patchValue({ciclo: cicloTemp})
+      this._forma.patchValue({ ciclo: cicloTemp })
     }
   }
-  seleccionarGrado(id: string){
+  seleccionarGrado(id: string) {
     let gradoTemp = this.objCarrera.find(elem => {
       return id === elem.id
     })
 
     if (gradoTemp) {
-      this._forma.patchValue({grado: gradoTemp});
+      this._forma.patchValue({ grado: gradoTemp });
     }
   }
 

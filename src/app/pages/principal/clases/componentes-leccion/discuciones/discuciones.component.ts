@@ -29,6 +29,15 @@ export class DiscucionesComponent implements OnInit {
 
   private _forma: FormGroup;
   private usuario: any = {}
+
+  private _listaAlumnos: any[];
+  public get listaAlumnos(): any[] {
+    return this._listaAlumnos;
+  }
+  public set listaAlumnos(v: any[]) {
+    this._listaAlumnos = v;
+  }
+
   public get forma(): FormGroup {
     return this._forma;
   }
@@ -42,6 +51,9 @@ export class DiscucionesComponent implements OnInit {
       this.usuario.email = resp.email;
       this.usuario.photoURL = resp.photoURL;
       this.usuario.uid = resp.uid;
+    })
+    this.srvCursos.obtenerAlumnosNotificar(this._cursoId).subscribe((resp) => {
+      this.listaAlumnos = resp
     })
   }
 
@@ -61,7 +73,7 @@ export class DiscucionesComponent implements OnInit {
   }
 
   enviarMensaje(item: any) {
-    if( this.envioMsn.length === 0){
+    if (this.envioMsn.length === 0) {
       return;
     }
     this.srvCursos.addPosts(this._cursoId, this._objetoId, item.id, {
@@ -69,9 +81,9 @@ export class DiscucionesComponent implements OnInit {
       usuario: this.usuario,
       fecha: new Date()
     }).then(resp => {
-      resp.update({ id: resp.id, $key: resp.id }).then(() => { 
+      resp.update({ id: resp.id, $key: resp.id }).then(() => {
         this.limpiar();
-       });
+      });
     })
   }
   limpiar() {
@@ -79,23 +91,24 @@ export class DiscucionesComponent implements OnInit {
   }
   agregarDicusion() {
     const initialState = { datoCurso: { curso: this._cursoId, leccion: this._objetoId } };
-    this.modalRef = this.modalService.show(NuevaDiscucionModalComponent, { class: 'modal-sm', initialState });
+    this.modalRef = this.modalService.show(NuevaDiscucionModalComponent, { class: 'modal-sm', ignoreBackdropClick: true, initialState });
     let discucionTemp = this.modalRef.content.discucion.subscribe((discucion: any) => {
       if (discucion.creado) {
+        console.log(discucion);
         swal('Creacion de Registro', 'Nuevo tema de discución creado', 'success').then(() => {
-          this.srvCursos.sendNotification([{id:'9KprCpB7DoRHtorFuKfRpNKH6Cn1'}], {usuario:this.usuario, fecha:new Date(), mensaje: 'Hola que hace', title:'Nuevo Foro', read:false}).then(resp => {
+          this.srvCursos.sendNotification(this.listaAlumnos, { usuario: this.usuario, fecha: new Date(), mensaje: discucion.noti.asunto, title: 'Nuevo Foro', read: false, origenId:discucion.noti.id }).then(resp => {
             discucionTemp.unsubscribe();
-          }).catch(err => {swal('Ocurrio un problema', err, 'error');});
-          
+          }).catch(err => { swal('Ocurrio un problema', err, 'error'); });
+
         })
       }
     })
 
   }
 
-  deshacerSeleccion() {}
-  editarTarea(){}
-  borrarTarea(){}
-  
+  deshacerSeleccion() { }
+  editarTarea() { }
+  borrarTarea() { }
+
 
 }

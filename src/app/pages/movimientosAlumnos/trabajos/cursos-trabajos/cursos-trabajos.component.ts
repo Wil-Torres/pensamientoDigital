@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlumnoService } from '../alumno.service';
-import { ClasesService } from '../../principal/clases/clases.service';
-import { ListaCursos } from '../../principal/clases/lista-clases/lista-clases.component';
+import { ClasesService } from 'src/app/pages/principal/clases/clases.service';
+import { ListaCursos } from 'src/app/pages/principal/clases/lista-clases/lista-clases.component';
+import { AlumnoService } from '../../alumno.service';
+
 
 @Component({
-  selector: 'app-lista-cursos',
-  templateUrl: './lista-cursos.component.html',
+  selector: 'app-cursos-trabajos',
+  templateUrl: './cursos-trabajos.component.html',
   styles: []
 })
-export class ListaCursosComponent implements OnInit {
+export class CursosTrabajosComponent implements OnInit {
 
   private _objeto: any[] = [];
   numeroRegistro: number;
@@ -38,7 +39,7 @@ export class ListaCursosComponent implements OnInit {
   }
 
   mostrarCurso(id: string) {
-    this.router.navigate(['/alumno/cursos', id]);
+    this.router.navigate(['/alumno-cursos-tareas', id]);
   }
 
   buscar(offset: number = 0, limit: number = 10) {
@@ -48,7 +49,7 @@ export class ListaCursosComponent implements OnInit {
       res.forEach((element: any) => {
         let elem = element.curso;
         x.push({
-          $key: elem.curso.$key,
+          $key: elem.$key,
           cantidadEstudiantes: elem.cantidadEstudiantes,
           grado: elem.grado,
           id: elem.$key,
@@ -62,6 +63,5 @@ export class ListaCursosComponent implements OnInit {
       })
       this.objeto = x;
     });
-
   }
 }

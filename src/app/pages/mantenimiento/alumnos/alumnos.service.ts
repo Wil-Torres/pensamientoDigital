@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { Alumno } from 'src/app/interfaces/alumno';
+import { resolve } from 'url';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,11 @@ export class AlumnosService {
   getAlumnos(offset: any, limit: any) {
     this.coleccionAlumno = this.afs.collection('alumnos')
     return this.coleccionAlumno.get().toPromise().then((snapshot) => {
-      var last = snapshot.docs[offset];
+      if (offset > 0) {
+        var last = snapshot.docs[(offset - 1)];
+      } else {
+        var last = snapshot.docs[offset];
+      }
       // Construct a new query starting at this document.
       // Note: this will not have the desired effect if multiple
       // marcas have the exact same population value.
@@ -77,4 +82,19 @@ export class AlumnosService {
   updateAlumno(clase: Alumno) {
     return this.afs.collection('alumnos').doc(clase.id).update(clase)
   }
+  asignacionCursos (inscripcion: any, curso: any[]) {
+    return  new Promise((resolve) => {
+      curso.forEach(async (cursos) => {
+        Promise.all([
+        
+          this.afs.collection('alumnos').doc(inscripcion.alumnoId).collection('cursos').add(cursos),
+          this.afs.collection('inscripciones').doc(inscripcion.id).collection('cursos').add(cursos)])
+      })
+      return true
+    })
+    
+    
+  }
+
+
 }

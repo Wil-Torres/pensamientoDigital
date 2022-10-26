@@ -96,7 +96,7 @@ export class TrabajosComponent implements OnInit {
 
   obtenerCurso() {
 
-    let curso = this.srvCurso.getLecciones('JNRSpYOiJEOGjFGrQJdy').subscribe(resp => {
+    let curso = this.srvCurso.getLecciones(this._objetoId).subscribe(resp => {
       let obj = []
       resp.forEach((element, index) => {
         element.visto = false
@@ -189,9 +189,9 @@ export class TrabajosComponent implements OnInit {
   }
 
   adjuntarTarea() {
-    this.srvRecurso.addRecursoCurso('JNRSpYOiJEOGjFGrQJdy', 'PDatBCfKSLQ3hAmQimgp', 1, this.flTarea).then((resp:any) => {
+    this.srvRecurso.addRecursoCurso('EV94TBUKqvfuEjIM4rTM', 'Bihhh126qM8HXJV1saam', 1, this.flTarea).then((resp:any) => {
       this.srvTarea.presentarTarea({
-        cursoId: 'JNRSpYOiJEOGjFGrQJdy',
+        cursoId: 'EV94TBUKqvfuEjIM4rTM',
         tareaId: 'PDatBCfKSLQ3hAmQimgp'
       }, {
           fechaEntrega: new Date(),
@@ -222,7 +222,6 @@ export class TrabajosComponent implements OnInit {
         puntuacion: "5",
         urlTarea: "https://firebasestorage.googleapis.com/v0/b/prueba-1df69.appspot.com/o/cursos%2FJNRSpYOiJEOGjFGrQJdy%2FPDatBCfKSLQ3hAmQimgp%2Ftarea%2F9KprCpB7DoRHtorFuKfRpNKH6Cn1%2F1566596459899_Factura%20Cambiaria%20FC228.pdf?alt=media&token=d579f037-f8e8-4144-8b86-f647f425f72d",
       }).subscribe(resp => {
-        console.log(resp);
       });
   }
 

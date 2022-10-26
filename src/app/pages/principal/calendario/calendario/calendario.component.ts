@@ -60,7 +60,7 @@ export class CalendarioComponent implements OnInit {
     {
       start: subDays (startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
-      title: 'A 3 day event',
+      title: '',
       color: colors.red,
       actions: this.actions,
       allDay: true,
@@ -72,21 +72,21 @@ export class CalendarioComponent implements OnInit {
     },
     {
       start: startOfDay(new Date()),
-      title: 'An event with no end date',
+      title: '',
       color: colors.yellow,
       actions: this.actions
     },
     {
       start: subDays(endOfMonth(new Date()), 3),
       end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
+      title: '',
       color: colors.blue,
       allDay: true
     },
     {
       start: addHours(startOfDay(new Date()), 2),
       end: new Date(),
-      title: 'A draggable and resizable event',
+      title: '',
       color: colors.yellow,
       actions: this.actions,
       resizable: {
@@ -149,7 +149,7 @@ export class CalendarioComponent implements OnInit {
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.modalRef = this.modalService.show(this.modalContent, { class: 'modal-lg' });
+    this.modalRef = this.modalService.show(this.modalContent, { class: 'modal-lg',ignoreBackdropClick: true, });
   }
 
   addEvent(): void {

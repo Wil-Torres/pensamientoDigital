@@ -23,7 +23,6 @@ export class NotificacionModalComponent implements OnInit {
       this.usuario.uid = resp.uid;
       this.objInit();
     })
-    console.log('ha iniciado')
   }
 
   ngOnInit() { 
@@ -31,9 +30,9 @@ export class NotificacionModalComponent implements OnInit {
   }
 
   objInit() {
-    this.srvNtf.obtenerNotificaion(this.usuario.uid, this.notificacionId).subscribe((aviso:any)=>{
+    this.srvNtf.obtenerNotificaion(this.srvNtf.y, this.notificacionId).subscribe((aviso:any)=>{
       if(!aviso.read){
-        this.srvNtf.marcarLeido(this.usuario.uid, aviso.id).then(() => {});
+        this.srvNtf.marcarLeido(this.srvNtf.y, aviso.id).then(() => {});
       }
       this.notificacion = aviso;
     })

@@ -37,6 +37,7 @@ export class NuevaDiscucionModalComponent implements OnInit {
       this.usuario.photoURL = resp.photoURL;
       this.usuario.uid = resp.uid;
     })
+    
   }
 
   ngOnInit() { }
@@ -65,14 +66,13 @@ export class NuevaDiscucionModalComponent implements OnInit {
 
   guardar() {
     this.srvCurso.addDiscucion(this.datoCurso.curso, this.datoCurso.leccion, this.forma.getRawValue()).then( res => {
+      this._forma.patchValue({id:res.id})
       res.update({id:res.id, $key: res.id}).then( resp => {
-        this.discucion.emit({ creado: true});
+        this.discucion.emit({ creado: true, noti: this.forma.getRawValue()});
         this.modalRef.hide();
       }).catch(err => {
-        console.log(err);
       })
     }).catch(err => {
-      console.log(err);
     })
   }
   cancelar() {

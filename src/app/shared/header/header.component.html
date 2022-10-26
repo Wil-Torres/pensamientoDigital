@@ -3,29 +3,7 @@
 <!-- ============================================================== -->
 <header class="topbar">
   <nav class="navbar top-navbar navbar-expand-md navbar-light">
-    <!-- ============================================================== -->
-    <!-- Logo -->
-    <!-- ============================================================== -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href="index.html">
-        <!-- Logo icon --><b>
-          <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-          <!-- Dark Logo icon -->
-          <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" style="height: 70px;" />
-          <!-- Light Logo icon -->
-          <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" style="height: 70px;" />
-        </b>
-        <!--End Logo icon -->
-        <!-- Logo text --><span>
-          <!-- dark Logo text -->
-          <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" style="height: 70px;" />
-          <!-- Light Logo text -->
-          <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" style="height: 70px;" /></span>
-      </a>
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Logo -->
-    <!-- ============================================================== -->
+
     <div class="navbar-collapse">
       <!-- ============================================================== -->
       <!-- toggle and nav items -->
@@ -53,121 +31,7 @@
           </form>
         </li>
 
-        <!-- ============================================================== -->
-        <!-- BEGIN OPCIONES ALUMNOS -->
-        <!-- ============================================================== -->
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <i class="mdi mdi-book-multiple"></i>
-            <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-          </a>
-          <div class="dropdown-menu mailbox dropdown-menu-right animated fadeIn" aria-labelledby="2">
-            <ul>
-              <li>
-                <div class="message-center">
-                  <!-- Message -->
-                  <a routerLinkActive="active" routerLink="/alumno/mis-cursos">
-                    <div class="mail-contnet">
-                      <span class="mail-desc">Mis Cursos</span>
-                    </div>
-                  </a>
-                  <a routerLinkActive="active" routerLink="/cursos/all-cursos">
-                    <div class="mail-contnet">
-                      <span class="mail-desc">Buscar Cursos</span>
-                    </div>
-                  </a>
-                  <a routerLinkActive="active" routerLink="/alumno/calificaciones">
-                    <div class="mail-contnet">
-                      <span class="mail-desc">Mis Notas</span>
-                    </div>
-                  </a>
-                  <a routerLinkActive="active" routerLink="/alumno/historial">
-                    <div class="mail-contnet">
-                      <span class="mail-desc">Historial de Compras</span>
-                    </div>
-                  </a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <!-- ============================================================== -->
-        <!-- END OPCIONES ALUMNOS  -->
-        <!-- ============================================================== -->
-
-
-        <!-- ============================================================== -->
-        <!-- Messages -->
-        <!-- ============================================================== -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <i class="mdi mdi-email"></i>
-            <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-          </a>
-          <div class="dropdown-menu mailbox dropdown-menu-right animated fadeIn" aria-labelledby="2">
-            <ul>
-              <li>
-                <div class="drop-title">Tienes 4 mensajes nuevos</div>
-              </li>
-              <li>
-                <div class="message-center">
-                  <!-- Message -->
-                  <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/1.jpg" alt="user" class="img-circle"> <span
-                        class="profile-status online pull-right"></span>
-                    </div>
-                    <div class="mail-contnet">
-                      <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30
-                        AM</span>
-                    </div>
-                  </a>
-                  <!-- Message -->
-                  <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/2.jpg" alt="user" class="img-circle"> <span
-                        class="profile-status busy pull-right"></span>
-                    </div>
-                    <div class="mail-contnet">
-                      <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span
-                        class="time">9:10
-                        AM</span>
-                    </div>
-                  </a>
-                  <!-- Message -->
-                  <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/3.jpg" alt="user" class="img-circle"> <span
-                        class="profile-status away pull-right"></span>
-                    </div>
-                    <div class="mail-contnet">
-                      <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08
-                        AM</span>
-                    </div>
-                  </a>
-                  <!-- Message -->
-                  <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/4.jpg" alt="user" class="img-circle"> <span
-                        class="profile-status offline pull-right"></span>
-                    </div>
-                    <div class="mail-contnet">
-                      <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02
-                        AM</span>
-                    </div>
-                  </a>
-                </div>
-              </li>
-              <li>
-                <a class="nav-link text-center" href="javascript:void(0);"> <strong>Ver todos los correos</strong> <i
-                    class="fa fa-angle-right"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <!-- ============================================================== -->
-        <!-- End Messages -->
-        <!-- ============================================================== -->
+        
         <!-- ============================================================== -->
         <!-- Notificaciones -->
         <!-- ============================================================== -->
@@ -185,54 +49,13 @@
               <li>
                 <div class="message-center">
                   <!-- Aviso -->
-                  <a *ngFor="let ntf of avisos" (click)="verNotificacion(ntf.id);">
+                  <a *ngFor="let ntf of avisos" (click)="verNotificacion(ntf.id, ntf);">
                     <div class="user-img"> <img [src]="ntf.usuario.photoURL" alt="user" class="img-circle"> <span
                         class="profile-status online pull-right"></span>
                     </div>
                     <div class="mail-contnet">
                       <h5>{{ntf.usuario.displayName}}</h5> <span class="mail-desc">{{ntf.mensaje}}</span> <span
                         class="time">{{ntf.fecha}}</span>
-                    </div>
-                  </a>
-                  <!-- Message -->
-                  <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/1.jpg" alt="user" class="img-circle"> <span
-                        class="profile-status online pull-right"></span>
-                    </div>
-                    <div class="mail-contnet">
-                      <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30
-                        AM</span>
-                    </div>
-                  </a>
-                  <!-- Message -->
-                  <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/2.jpg" alt="user" class="img-circle"> <span
-                        class="profile-status busy pull-right"></span>
-                    </div>
-                    <div class="mail-contnet">
-                      <h5>Sonu Nigam</h5> <span class="mail-desc">I've sung a song! See you at</span> <span
-                        class="time">9:10
-                        AM</span>
-                    </div>
-                  </a>
-                  <!-- Message -->
-                  <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/3.jpg" alt="user" class="img-circle"> <span
-                        class="profile-status away pull-right"></span>
-                    </div>
-                    <div class="mail-contnet">
-                      <h5>Arijit Sinh</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08
-                        AM</span>
-                    </div>
-                  </a>
-                  <!-- Message -->
-                  <a href="#">
-                    <div class="user-img"> <img src="assets/images/users/4.jpg" alt="user" class="img-circle"> <span
-                        class="profile-status offline pull-right"></span>
-                    </div>
-                    <div class="mail-contnet">
-                      <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02
-                        AM</span>
                     </div>
                   </a>
                 </div>
@@ -256,18 +79,11 @@
             routerLink="/calendario">
             <i class="mdi mdi-calendar"></i></a>
         </li>
-        <!-- ============================================================== -->
-        <!-- trash -->
-        <!-- ============================================================== -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-trash"></i></a>
-        </li>
+  
         <!-- ============================================================== -->
         <!-- Language -->
         <!-- ============================================================== -->
-        <li class="nav-item dropdown">
+        <!--li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="flag-icon flag-icon-us"></i></a>
@@ -277,7 +93,7 @@
               class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item"
               href="#"><i class="flag-icon flag-icon-de"></i>
               Dutch</a> </div>
-        </li>
+        </li-->
         <!-- ============================================================== -->
         <!-- Profile -->
         <!-- ============================================================== -->
@@ -293,7 +109,7 @@
                   <div class="u-text">
                     <h4>{{usuarioTemp?.displayName}}</h4>
                     <p class="text-muted">{{usuarioTemp?.email}}</p>
-                    <a routerLinkActive="active" routerLink="/perfil" class="btn btn-rounded btn-danger btn-sm"> Ver Perfil</a>
+                    <a routerLinkActive="active" class="btn btn-rounded btn-danger btn-sm"> Ver Perfil</a>
                   </div>
                 </div>
               </li>

@@ -65,9 +65,18 @@ export class ProfesoresComponent implements OnInit {
   guardar(): void {
     if (isNil(this.forma.value.id)) {
       this.srvProfesor.addProfesor(this.forma.value).then(rProfe => {
-        this.srvAuth.signUp(this.forma.get('datosUsuario.userId').value, this._forma.get('datosUsuario.password').value, {}).then(newUser => {
+        this.srvAuth.signUp(this.forma.get('datosUsuario.userId').value, this._forma.get('datosUsuario.password').value, {
+          teacher: true
+        }).then(newUser => {
           this._forma.patchValue({ id: rProfe.id, datosUsuario: { id: rProfe.id } });
-          rProfe.update({ id: rProfe.id, datosUsuario: { id: rProfe.id } }).then((uProfe) => {
+          rProfe.update({ 
+              id: rProfe.id, 
+              datosUsuario: { 
+                id: rProfe.id ,
+                userId: this.forma.get('datosUsuario.userId').value,
+                password: this._forma.get('datosUsuario.password').value
+              }
+            }).then((uProfe) => {
             swal('Nuevo Registro', 'Se ha creado exitosamene', 'success').then(() => {
               this.router.navigate(['profesores', rProfe.id]);
             })

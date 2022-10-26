@@ -27,16 +27,16 @@ export class NotificacionListaComponent implements OnInit {
         photoURL: usuario.photoURL,
         uid: usuario.uid,
       }
-      this.buscar();
+
     })
   }
 
   ngOnInit() {
+    this.buscar();
   }
 
   buscar(offset: number = 0, limit: number = 10) {
-    this.srvNtf.obtenerNotificaiones(this.usuario.uid).subscribe(notificacion => {
-      console.log(notificacion);
+    this.srvNtf.obtenerNotificaiones(this.srvNtf.y).subscribe(notificacion => {
       this.objetos = notificacion;
     });
   }

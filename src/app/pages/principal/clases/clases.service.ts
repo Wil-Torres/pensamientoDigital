@@ -13,6 +13,8 @@ import { Observable } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import swal from 'sweetalert';
 import { AlumnoService } from '../../movimientosAlumnos/alumno.service';
+import { UserInfo } from 'src/app/interfaces/login';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -24,7 +26,7 @@ export class ClasesService {
   coleccionClases: AngularFirestoreCollection<Clase>;
   coleccionNotifiaciones: AngularFirestoreCollection<any>;
   next: AngularFirestoreCollection<Clase>;
-
+  private usuario: UserInfo = JSON.parse(localStorage.getItem('usuarioLogeado'));
   private _paginacion: any = {};
   public get paginacion(): any {
     return this._paginacion;
@@ -32,6 +34,7 @@ export class ClasesService {
   public set paginacion(v: any) {
     this._paginacion = v;
   }
+  public y: any;
 
 
   constructor(private afs: AngularFirestore, private srvAlumno: AlumnoService) {
@@ -39,6 +42,12 @@ export class ClasesService {
     this.srvAlumno.obtenerAlumnoCursos().then((resp: any) => {
       this.listaAlumnos = resp;
     })
+    let x = this.obtenerAlumnoUsuario().then((resp) => {
+      resp.forEach(elem => {
+        this.y = elem.id;
+      })
+    });
+
   }
 
   generateKey() {
@@ -61,7 +70,12 @@ export class ClasesService {
     this.coleccionClases = this.afs.collection('cursos')
     return this.coleccionClases.get().toPromise().then((snapshot) => {
 
-      var last = snapshot.docs[offset];
+      if (offset > 0) {
+        var last = snapshot.docs[(offset - 1)];
+      } else {
+        var last = snapshot.docs[offset];
+      }
+
       // Construct a new query starting at this document.
       // Note: this will not have the desired effect if multiple
       // marcas have the exact same population value.
@@ -84,6 +98,7 @@ export class ClasesService {
               });
             }
           })
+          this.srvAlumno.obtenerAlumnosCursos(elmens.data().id);
           elmens.data().cantidadEstudiantes = cantidad;
         })
       })
@@ -94,6 +109,33 @@ export class ClasesService {
     });
     // [END cursor_paginate]
 
+  }
+
+  getCursosSimple(offset: any, limit: any) {
+    this.coleccionClases = this.afs.collection('cursos')
+    return this.coleccionClases.get().toPromise().then((snapshot) => {
+      if (offset > 0) {
+        var last = snapshot.docs[(offset - 1)];
+      } else {
+        var last = snapshot.docs[offset];
+      }
+      // Construct a new query starting at this document.
+      // Note: this will not have the desired effect if multiple
+      // marcas have the exact same population value.
+      if (offset) {
+        var next = this.afs.collection('cursos', ref => ref.startAfter(last).limit(limit))
+      } else {
+        var next = this.afs.collection('cursos', ref => ref.limit(limit));
+      }
+      next.snapshotChanges().pipe(map(item => {
+        console.log(item)
+      }))
+      // Use the query for pagination
+      // [START_EXCLUDE]
+      return next.valueChanges();
+      // [END_EXCLUDE]
+    });
+    // [END cursor_paginate]
   }
 
   getCurso(id: string) {
@@ -207,21 +249,36 @@ export class ClasesService {
       .delete();
   }
 
-  sendNotification(candidatos: any = [{ id: '9KprCpB7DoRHtorFuKfRpNKH6Cn1' }], obj: any): Promise<void> {
-    this.coleccionClases = this.afs.collection<any>('users');
+  sendNotification(candidatos: any = [], obj: any): Promise<void> {
+    this.coleccionClases = this.afs.collection<any>('alumnos');
     return this.coleccionClases.ref.get().then(resp => {
       let batch = this.afs.firestore.batch();
       resp.docs.forEach(userDocRef => {
         candidatos.forEach(element => {
           if (element.id === userDocRef.id) {
-            userDocRef.ref.collection('notificaciones').add(obj);
+            userDocRef.ref.collection('notificaciones').add(obj).then((nNoti) => {
+              nNoti.update({id:nNoti.id})
+            });
           }
         });
         //batch.update(userDocRef.ref, {'score':0, 'leadsWithSalesWin': 0, 'leadsReported': 0})
       });
-      batch.commit().catch(err => { console.log(err) })
+      batch.commit().catch(err => { })
     }).catch(error => swal('Ocurrio un problema', error, 'error'));
 
+  }
+
+  async obtenerAlumnoUsuario() {
+
+    return await this.afs.collection('alumnos').ref.where("email", "==", this.usuario.email).get();
+
+  }
+  ObtenerCursoUsuario(alumno: string) {
+    return this.afs.collection('alumnos').doc(alumno).collection('cursos').valueChanges();
+  }
+
+  obtenerAlumnosNotificar(curso: string) {
+    return this.afs.collection('cursos').doc(curso).collection('estudiantes').valueChanges();
   }
 
 

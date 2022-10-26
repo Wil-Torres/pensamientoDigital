@@ -70,7 +70,6 @@ export class RecursosService {
       const files = event;
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        console.log(this.usuario);
         const path = `cursos/${curso}/${leccion}/${!tipo ? 'contenido' : 'tarea/' + this.usuario.uid}/${new Date().getTime()}_${file.name}`;
         const customMetadata = { app: 'Pensamiento_Digital' };
         const fileRef = this.storage.ref(path);

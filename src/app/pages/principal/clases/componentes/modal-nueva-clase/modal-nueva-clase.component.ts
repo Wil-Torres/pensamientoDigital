@@ -50,7 +50,6 @@ export class ModalNuevaClaseComponent implements OnInit {
   ngOnInit() {
     this.srvCatalogo.obtenerCategorias().then(resp => {
       this.categoria = resp;
-      console.log(this.categoria);
     });
   }
   objInit() {

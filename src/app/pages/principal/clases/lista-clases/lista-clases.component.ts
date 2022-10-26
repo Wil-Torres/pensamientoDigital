@@ -7,7 +7,7 @@ export interface ListaCursos {
   clase: String;
   catedra: String;
   lecciones: any;
-  url:string;
+  url: string;
 }
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
@@ -29,15 +29,15 @@ import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal
     <div class="col-md-12 col-sm-12 col-xs-12">
       <button class="btn btn-success bt-sm float-right" (click)="consultar()"><i class="fa fa-check"></i></button>
       <button class="btn btn-primary bt-sm float-right" (click)="nuevo()"><i class="fa fa-plus"></i></button>
-      <div *ngIf="!numeroRegistro" class="d-flex justify-content-center">
+      <div *ngIf="!numeroRegistros" class="d-flex justify-content-center">
         <h1>No hay datos <i class="fa fa-database text-danger"></i></h1>
       </div>
-      <div class="table-responsive" *ngIf="numeroRegistro">
+      <div class="table-responsive" *ngIf="numeroRegistros">
         <table class="table table-striped table-sm">
-          <thead>
+          <thead class="bg-primary text-white">
             <tr>
-              <th class="gt-wd-75 text-center"></th>
-              <th class="gt-wd-75 text-center"><i class="fa fa-picture-o"></i></th>
+              <!--th class="gt-wd-75 text-center"></th-->
+              <!--th class="gt-wd-75 text-center"><i class="fa fa-picture-o"></i></th-->
               <th>Clase</th>
               <th class="gt-wd-200">Catedra</th>
               <th class="gt-wd-100">Estudiantes</th>
@@ -45,13 +45,13 @@ import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal
           </thead>
           <tbody>
             <tr *ngFor="let item of objeto">
-              <td class="text-center">
+              <!--td class="text-center">
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" [name]="item.id" [id]="item.id" [(ngModel)]="item.seleccion">
                   <label class="form-check-label" [for]="item.id"></label>
                 </div>
-              </td>
-              <td><img [src]="item.url" alt="" class="img-thumbnail"></td>
+              </td-->
+              <!--td><img [src]="item.url" alt="" class="img-thumbnail"></td-->
               <td (click)="edicion(item.id)">{{item.clase}}</td>
               <td (click)="edicion(item.id)">{{item.catedra}}<p>{{item.grado}}</p></td>
               <td (click)="edicion(item.id)">{{item.cantidadEstudiantes}}</td>
@@ -59,7 +59,7 @@ import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal
           </tbody>
         </table>
       </div>
-      <app-paginacion (paginacion)="buscar($event.offset, $event.limit)" [totalItems]="numeroRegistro"></app-paginacion>
+      <app-paginacion (paginacion)="buscar($event.offset, $event.limit)" [totalItems]="numeroRegistros"></app-paginacion>
     </div>
   `,
   styles: [`
@@ -72,7 +72,7 @@ import { ModalNuevaClaseComponent } from '../componentes/modal-nueva-clase/modal
 export class ListaClasesComponent implements OnInit {
   private _objeto: any[] = [];
   modalRef: BsModalRef | null;
-  numeroRegistro: number;
+  private _numeroRegistros;
   public get objeto(): any[] {
     return this._objeto;
   }
@@ -83,34 +83,34 @@ export class ListaClasesComponent implements OnInit {
   constructor(private router: Router, private srvCurso: ClasesService,
     private modalService: BsModalService, private srvCore: CoreService) { }
 
-  ngOnInit () {
+  ngOnInit() {
     this.objInit();
   }
 
-  objInit () {
+  objInit() {
     this.buscar();
   }
 
-  edicion (item: any) {
+  edicion(item: any) {
     this.router.navigate(['/clase/' + item + '/lecciones/']);
   }
 
   nuevo() {
-    this.modalRef = this.modalService.show(ModalNuevaClaseComponent, { class: 'modal-lg' });
+    this.modalRef = this.modalService.show(ModalNuevaClaseComponent, { class: 'modal-lg',ignoreBackdropClick: true, });
     let claseTemp = this.modalRef.content.clase.subscribe((clase: any) => {
       claseTemp.unsubscribe();
     });
   };
 
-  consultar(){
+  consultar() {
     this.buscar();
   }
 
-  buscar (offset: number = 0, limit: number = 10) {
+  buscar(offset: number = 0, limit: number = 5) {
     this.srvCore.lock()
     this.srvCurso.getCursos(offset, limit).then((resp) => {
       resp.subscribe((res) => {
-        this.numeroRegistro = res.length
+        this._numeroRegistros = this.srvCurso.paginacion.totalRegistros;
         let x = [];
         res.forEach((elem: ListaCursos) => {
           x.push({
@@ -129,8 +129,12 @@ export class ListaClasesComponent implements OnInit {
         this.srvCore.unlock();
       });
     }).catch(err => {
-      swal('Ocurrio un inconveniente',err.FirebaseError,'error')
+      swal('Ocurrio un inconveniente', err.FirebaseError, 'error')
       this.srvCore.unlock();
     })
   };
+
+  get numeroRegistros(): number {
+    return this._numeroRegistros;
+  }
 }

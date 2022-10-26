@@ -40,7 +40,12 @@ export class ProfesoresService {
   getProfesores(offset: any, limit: any) {
     this.coleccionProfesor = this.afs.collection('profesores')
     return this.coleccionProfesor.get().toPromise().then((snapshot) => {
-      var last = snapshot.docs[offset];
+      if (offset > 0){
+        var last = snapshot.docs[(offset - 1) ];
+      } else {
+        var last = snapshot.docs[offset];
+      }
+
       // Construct a new query starting at this document.
       // Note: this will not have the desired effect if multiple
       // marcas have the exact same population value.

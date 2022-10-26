@@ -13,7 +13,6 @@ export class AlumnoService {
 
   constructor(@Inject(DOCUMENT) private _document, private _menu: SidebarService,
     private afs: AngularFirestore, private arouter: ActivatedRoute) {
-      console.log(this.arouter);
     // this.oldMenu = _menu.menu;
   }
 
@@ -92,5 +91,8 @@ export class AlumnoService {
         resolve(objTemp);
       });
     })
+  }
+  obtenerAlumnosCursos(doc:string) {
+    this.afs.collection('cursos').doc(doc).collection('estudiante').valueChanges().subscribe(result => {console.log(result.length)});
   }
 }

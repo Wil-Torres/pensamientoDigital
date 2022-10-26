@@ -3,7 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { gradoSeccion, AdministracionService, Carrera } from '../administracion.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert';
-import { isNil } from 'lodash';
+import { isNil, sortBy } from 'lodash';
 
 @Component({
   selector: 'app-grados-secciones',
@@ -33,11 +33,10 @@ export class GradosSeccionesComponent implements OnInit {
 
   ngOnInit() {
     this.srvAdmin.getGradosSecciones().subscribe(grados => {
-      console.log(grados)
-      this.objGrados = grados;
+      this.objGrados = sortBy(grados, ['gradoId']);
     })
     this.srvAdmin.getCarreras().subscribe(carreras => {
-      this.objCarreras = carreras;
+      this.objCarreras = sortBy(carreras, ['codigo']);
     })
   }
 
@@ -57,7 +56,9 @@ export class GradosSeccionesComponent implements OnInit {
         })
       } else {
         this.srvAdmin.putGradoSeccion(nuevaGrado).then(resp => {
-          swal("Grado y Seccion Actualizado", 'exitosamente', 'success');
+          swal("Grado y Seccion Actualizado", 'exitosamente', 'success').then(() => {
+            this.gradoEscolar = {};
+          });
         })
       }
 

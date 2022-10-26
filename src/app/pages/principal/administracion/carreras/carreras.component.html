@@ -14,7 +14,7 @@
           <tr *ngFor="let carrera of objCarrera; let i = index">
             <td>{{carrera.codigo}}</td>
             <td>{{carrera.descripcion}}</td>
-            <td *ngIf="objCarrera.length == (i + 1)"><button class="btn btn-primary" (click)="agregar(template)"><i
+            <td *ngIf="objCarrera.length == (i + 1)" class="gt-wd-25"><button class="btn btn-primary" (click)="agregar(template)"><i
                   class="fa fa-plus text-light"></i></button></td>
           </tr>
         </tbody>

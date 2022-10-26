@@ -21,7 +21,6 @@ export class QuizzesComponent implements OnInit {
   constructor(private srv1: QuizDataServicesService, private srv2: QuizMetricsService) {
     this.quizes = this.srv1.dataObject;
     this.metricas = this.srv2.quizObj;
-    console.log('construyendo')
   }
 
   ngOnInit() {
@@ -73,8 +72,6 @@ export class QuizzesComponent implements OnInit {
       let breakOut = false;
       let tamañoPregunta = this.quizes.quizQuestion.length - 1;
       while (!breakOut) {
-        console.log('ya paso por aqui');
-        console.log(this.activeQuestion);
         this.activeQuestion = this.activeQuestion < tamañoPregunta ? ++this.activeQuestion : 0;
         if (this.activeQuestion === 0) {
           this.error = true;

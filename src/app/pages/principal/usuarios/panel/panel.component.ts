@@ -22,7 +22,8 @@ export class PanelComponent implements OnInit {
         tipoUsuario: tipo,
         edicion: edicion
       },
-      class: 'modal-lg'
+      class: 'modal-lg',
+      ignoreBackdropClick: true,
     };
     this.modalRef = this.modalService.show(ModalNuevoEdicionComponent, opciones);
   }

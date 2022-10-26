@@ -81,7 +81,7 @@ export class ClaseComponent implements OnInit {
 
   agregarDetalles() {
     const initialState = { objetoId: this.objetoId };
-    this.modalRef = this.modalService.show(ModalNuevaLeccionComponent, { class: 'modal-sm', initialState });
+    this.modalRef = this.modalService.show(ModalNuevaLeccionComponent, { class: 'modal-sm',ignoreBackdropClick: true, initialState });
     let leccionTemp = this.modalRef.content.leccion.subscribe((leccion: any) => {
       if (leccion.actualizado) {
         swal('Creacion de Lección', 'Se ha creado la lección ' + leccion.leccion.titulo, 'success').then(() => {

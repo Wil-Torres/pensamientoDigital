@@ -45,7 +45,7 @@ export class BibliotecaComponent implements OnInit {
   }
 
   agregarRecurso(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+    this.modalRef = this.modalService.show(template, { class: 'modal-lg',ignoreBackdropClick: true, });
   }
 
   eliminarRecurso(){}

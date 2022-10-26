@@ -34,7 +34,8 @@ export class TestComponent implements OnInit {
       initialState: {
         leccion:this.arouter.snapshot.paramMap.get('id')
       },
-      class: 'modal-lg'
+      class: 'modal-lg',
+      ignoreBackdropClick: true,
     }
     this.modalRef = this.modalService.show(TareasComponent, opciones);
     let tareaTemp = this.modalRef.content.tarea.subscribe((tarea: any) => {
@@ -49,7 +50,8 @@ export class TestComponent implements OnInit {
         initialState: {
           edicion: this.seleccion
         },
-        class: 'modal-lg'
+        class: 'modal-lg',
+        ignoreBackdropClick: true,
       };
       this.modalRef = this.modalService.show(TareasComponent, opciones);
       let tareaTemp = this.modalRef.content.tarea.subscribe((tarea: any) => {

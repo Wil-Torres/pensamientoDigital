@@ -40,6 +40,8 @@ import { ProfesoresComponent } from "./mantenimiento/profesores/profesores.compo
 import { ListaProfesoresComponent } from "./mantenimiento/profesores/lista-profesores.component";
 import { ListaAlumnosComponent } from "./mantenimiento/alumnos/lista-alumnos.component";
 import { ReunionComponent } from "./principal/sala/reuniones/reunion.component";
+import { CursosTrabajosComponent } from "./movimientosAlumnos/trabajos/cursos-trabajos/cursos-trabajos.component";
+import { ChatComponent } from "./principal/noticias/chat/chat.component";
 const pagesRoutes: Routes = [
     {
         path: '',
@@ -51,14 +53,14 @@ const pagesRoutes: Routes = [
             {path: 'avisos', component: NotificacionListaComponent, data:{titulo: 'Avisos'}},
 
             /* administacion */
-            {path: 'administracion', component: AdministracionComponent, data:{titulo: 'Adminsitracion', roles:['reader']}, canActivate: [AuthGuard]},
+            {path: 'administracion', component: AdministracionComponent, data:{titulo: 'Adminsitración', roles:['reader']}, canActivate: [AuthGuard]},
             {path: 'reportes', component: ReportesComponent, data:{titulo: 'Reportes'}, canActivate: [AuthGuard]},
             {path: 'panel-usuarios', component: PanelComponent, data:{titulo: 'Panel de Usuarios'}, canActivate: [AuthGuard]},
             {path: 'cuentas-usuarios', component: CuentasComponent, data:{titulo: 'Cuentas de Usuarios'}, canActivate: [AuthGuard]},
             {path: 'nuevos-ingresos', component: InscripcionComponent, data:{titulo: 'Inscripción de Alumnos'}, canActivate: [AuthGuard]},
             {path: 'ciclos', component: CiclosComponent, data:{titulo: 'Ciclos Escolares'}, canActivate: [AuthGuard]},
             {path: 'ciclos/:id/grados-secciones', component: GradosSeccionesComponent, data:{titulo: 'Grados - Secciones'}, canActivate: [AuthGuard]},
-            {path: 'carreras', component: CarrerasComponent, data:{titulo: 'Carreras'}, canActivate: [AuthGuard]},
+            {path: 'carreras', component: CarrerasComponent, data:{titulo: 'Carreras'}},
             {path: 'asignar-cursos-grado/:id', component: GradosCursosComponent, data:{titulo: 'Asignacion de cursos para grados'}, canActivate: [AuthGuard]},
             {path: 'asignar-maestros-grado/:id', component: GradosMaestrosComponent, data:{titulo: 'Asignacion de maestros para grado'}, canActivate: [AuthGuard]},
 
@@ -76,7 +78,8 @@ const pagesRoutes: Routes = [
             {path: 'alumno-mis-cursos', component: ListaCursosComponent, data:{titulo: 'Lista Cursos asignados'}},
             {path: 'alumno/cursos/:id', component: CursosComponent, data:{titulo: 'Curso'}},
             {path: 'alumno-calificaciones', component: CalificacionesComponent, data:{titulo: 'Calificaciones'}},
-            {path: 'alumno-tareas', component: TrabajosComponent, data:{titulo: 'Tareas'}},
+            {path: 'alumno-cursos-tareas', component: CursosTrabajosComponent, data:{titulo: 'Tareas de cursos asignados'}},
+            {path: 'alumno-cursos-tareas/:id', component: TrabajosComponent, data:{titulo: 'Tareas de cursos asignados'}},
             {path: 'alumno-historial', component: HistorialComponent, data:{titulo: 'Historial'}},
 
             /* Profesores */
@@ -117,8 +120,10 @@ const pagesRoutes: Routes = [
             /* Reuniones */
             {path: 'reunion', component: ReunionComponent, data:{titulo: 'Reunion'}},
 
+            {path: 'reuniones', component: ChatComponent, data:{titulo: 'Reuniones'}},
 
-            {path: '', redirectTo: '/panel/panel-control', pathMatch: 'full'},
+
+            {path: '', redirectTo: '/administracion', pathMatch: 'full'},
         ]
     },
 ];

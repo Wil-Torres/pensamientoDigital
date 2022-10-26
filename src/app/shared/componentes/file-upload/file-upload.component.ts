@@ -41,7 +41,6 @@ export class FileUploadComponent implements OnInit {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       let tipoTemp = file.type.split('/')[0]
-      console.log(tipoTemp)
       if (file.type.split('/')[0] !== 'image') {
         console.error('unsupported file type :( ');
         return;
@@ -87,7 +86,6 @@ export class FileUploadComponent implements OnInit {
   }
 
   onLoad() {
-    console.log('lectura de imagen');
     this.producto.ancho = (this.logo.nativeElement as HTMLImageElement).naturalWidth;
     this.producto.alto = (this.logo.nativeElement as HTMLImageElement).naturalHeight;
     this.obj.emit(this.producto);

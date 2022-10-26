@@ -18,7 +18,6 @@ export class PostService {
     private auth: AuthService, private afs: AngularFirestore
   ) { 
     auth.user.pipe(map(user => {
-      console.log(user.roles)
       this.usuario = user;
       return this.userRoles = keys(get(user, 'roles'))
     })

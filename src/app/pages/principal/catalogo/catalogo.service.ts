@@ -23,7 +23,6 @@ export class CatalogoService {
       this.infoUsuario = resp;
     })
     this.obtenerCategorias().then(resp => {
-      console.log(resp);
     })
     /*this.data = [{
       descripcion: "Architecture",
@@ -231,8 +230,8 @@ export class CatalogoService {
   obtenerCursos(categoriaId: string) {
     this.coleccionCursos = this.afs.collection('cursos')
     return this.coleccionCursos.get().toPromise().then((snapshot) => {
-      var next = this.afs.collection('cursos', ref => ref.where('catedra', '==', categoriaId).where('creaId', '==', this.infoUsuario.uid));
-
+      var next = this.afs.collection('cursos', ref => ref.where('catedra', '==', categoriaId));
+      //.where('creaId', '==', this.infoUsuario.uid)
       // Use the query for pagination
       // [START_EXCLUDE]
       return next.valueChanges();

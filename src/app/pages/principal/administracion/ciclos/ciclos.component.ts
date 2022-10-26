@@ -3,6 +3,7 @@ import { Ciclo, AdministracionService } from '../administracion.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import swal from 'sweetalert';
 import { Router } from '@angular/router';
+import { sortBy } from 'lodash'
 
 @Component({
   selector: 'app-ciclos',
@@ -26,13 +27,12 @@ export class CiclosComponent implements OnInit {
 
   ngOnInit() {
     this.srvAdmin.getCiclos().subscribe(ciclos => {
-      console.log(ciclos);
-      this.objCiclos = ciclos;
+      this.objCiclos =  sortBy(ciclos,  ['ciclo']);;
     })
   }
 
   agregar(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm',ignoreBackdropClick: true, });
 
 
   }
@@ -52,8 +52,25 @@ export class CiclosComponent implements OnInit {
       })
     })
   }
+
   seleccionarCiclo(item: Ciclo){
     this.router.navigate([`ciclos/${item.id}/grados-secciones`])
   }
+  borrarCiclo(item: Ciclo){
+    this.srvAdmin.deleteCiclo(item).then(() => {
+      swal("Ciclo Eliminado", "Exitosamente", "success")
+    })
+  }
+
+  cerrarCiclo(item:Ciclo){
+    if (item.estado == 'A') {
+      item.estado = 'I'
+      this.srvAdmin.putCiclo(item).then(()=> {
+        swal("Ciclo Cerrado", "Exitosamente", "success")
+      });      
+    }
+    
+  }
+
 
 }

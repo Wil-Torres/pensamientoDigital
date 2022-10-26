@@ -93,7 +93,6 @@ export class LeccionNuevoEdicionComponent implements OnInit {
   obtenerLeccion(){
     this.srvCore.lock();
     let lesson = this.srvCurso.getLeccion(this._cursoId, this._objetoId).subscribe((leccion:any) => {
-      console.log(leccion);
       leccion.fechaFin = leccion.fechaFin.toDate();
       leccion.fechaInicio = leccion.fechaInicio.toDate();
       this.forma.patchValue(leccion, {emitEvent:true});

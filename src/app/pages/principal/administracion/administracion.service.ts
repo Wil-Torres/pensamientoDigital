@@ -51,15 +51,15 @@ export class AdministracionService {
   private _ciclos: AngularFirestoreCollection<Ciclo>;
   private _carreras: AngularFirestoreCollection<Carrera>;
   private _grados: AngularFirestoreCollection<gradoSeccion>;
-  private _inscripciones : AngularFirestoreCollection<inscripcion>;
-  
-  public get inscripciones() : AngularFirestoreCollection<inscripcion> {
+  private _inscripciones: AngularFirestoreCollection<inscripcion>;
+
+  public get inscripciones(): AngularFirestoreCollection<inscripcion> {
     return this._inscripciones;
   }
-  public set inscripciones(v : AngularFirestoreCollection<inscripcion>) {
+  public set inscripciones(v: AngularFirestoreCollection<inscripcion>) {
     this._inscripciones = v;
   }
-  
+
   public get grados(): AngularFirestoreCollection<gradoSeccion> {
     return this._grados;
   }
@@ -151,35 +151,35 @@ export class AdministracionService {
     return this.afs.collection('grados').doc(obj.id).delete();
   }
 
-    /* ****************************************************************************
-  **************************** GRADOS SECICIONES ********************************
-  *******************************************************************************
-  */
- getCursosGrado(gradoId: string) {
-  this.grados = this.afs.collection('grados').doc(gradoId).collection('asignacion')
-  return this.grados.valueChanges();
-}
-getCursoGrado(gradoId: string, id: string) {
-  return this.afs.collection('grados').doc(gradoId).collection('asignacion').doc(id)
-  .valueChanges();
-}
-postCursoGrado(gradoId: string, obj: any) {
-  return this.afs.collection('grados').doc(gradoId).collection('asignacion').add(obj)
-}
-putCursoGrado(gradoId:string,  obj: any) {
-  return this.afs.collection('grados').doc(gradoId).collection('asignacion').doc(obj.id).update(obj)
-}
-deleteCursoGrado(gradoId: string, obj: any) {
-  return this.afs.collection('grados').doc(gradoId).collection('asignacion').doc(obj.id).delete();
-}
+  /* ****************************************************************************
+**************************** GRADOS SECICIONES ********************************
+*******************************************************************************
+*/
+  getCursosGrado(gradoId: string) {
+    this.grados = this.afs.collection('grados').doc(gradoId).collection('asignacion')
+    return this.grados.valueChanges();
+  }
+  getCursoGrado(gradoId: string, id: string) {
+    return this.afs.collection('grados').doc(gradoId).collection('asignacion').doc(id)
+      .valueChanges();
+  }
+  postCursoGrado(gradoId: string, obj: any) {
+    return this.afs.collection('grados').doc(gradoId).collection('asignacion').add(obj)
+  }
+  putCursoGrado(gradoId: string, obj: any) {
+    return this.afs.collection('grados').doc(gradoId).collection('asignacion').doc(obj.id).update(obj)
+  }
+  deleteCursoGrado(gradoId: string, obj: any) {
+    return this.afs.collection('grados').doc(gradoId).collection('asignacion').doc(obj.id).delete();
+  }
 
   /* ****************************************************************************
   **************************** INSCRIPCIONES ************************************
   *******************************************************************************
   */
 
-  getInscripciones(filtros:any) {
-    this.inscripciones = this.afs.collection('inscripciones', ref => ref.where('cicloId','==',filtros.cicloId).where('gradoId','==',filtros.gradoId))
+  getInscripciones(filtros: any) {
+    this.inscripciones = this.afs.collection('inscripciones', ref => ref.where('cicloId', '==', filtros.cicloId).where('gradoId', '==', filtros.gradoId))
     return this.inscripciones.valueChanges();
   }
   getInscripcion(id: string) {
@@ -193,6 +193,21 @@ deleteCursoGrado(gradoId: string, obj: any) {
   }
   deleteInscripcion(obj: inscripcion) {
     return this.afs.collection('grainscripcionesdos').doc(obj.id).delete();
+  }
+  obtenerCursosGracdo(inscripcion: any, gradoId: string) {
+    return new Promise((resolve) => {
+      let curso = [];
+      this.afs.collection('grados').doc(gradoId).collection('asignacion').valueChanges().subscribe((cursos) => {
+        curso = cursos
+        cursos.forEach(elem => {
+          this.afs.collection('alumnos').doc(inscripcion.alumnoId).collection('cursos').add(elem);
+          this.afs.collection('inscripciones').doc(inscripcion.id).collection('cursos').add(elem);
+          this.afs.collection('cursos').doc(elem.cursoId).collection('estudiantes').add({id: inscripcion.alumnoId, alumno:inscripcion.alumno});
+        })
+      })
+      return curso
+
+    })
   }
 
 }

@@ -44,7 +44,7 @@ export class AuthService {
         });
       }).catch(err => {
         reject(false);
-        console.log('something went wrong:', err.message);
+
       })
     });
   }
@@ -61,9 +61,9 @@ export class AuthService {
 
   login(email: string, password: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, password).then(resp => {
-      console.log(resp);
+
     }).catch(err => {
-      console.log(err.message)
+
     })
   }
 
@@ -88,9 +88,9 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.afAuth.auth.signInWithPopup(provider).then((credenciales) => {
         resolve(this.updateUser(credenciales.user));
+        localStorage.setItem('usuarioLogeado', JSON.stringify(credenciales.user));
         this.router.navigate(['/'])
       }).catch(err => {
-        console.log(err);
       })
     })
   }
@@ -104,7 +104,7 @@ export class AuthService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       roles: rol,
-      phoneNumber: '12345678',
+      phoneNumber: '',
       password: ''
     };
     return userRef.set(data, { merge: true })

@@ -59,7 +59,7 @@ export class PagesComponent implements OnInit {
             },
           ]
         },
-        {
+        /*{
           id: '',
           tag: 0,
           nombre: 'Caminos',
@@ -95,7 +95,7 @@ export class PagesComponent implements OnInit {
               nombre: 'Configurar Tienda', url: '/configuracion'
             },
           ]
-        }, {
+        },*/ {
           id: '',
           tag: 40,
           nombre: 'Dashboard',
@@ -129,7 +129,7 @@ export class PagesComponent implements OnInit {
               nombre: 'Configurar Tienda', url: '/configuracion'
             },
           ]
-        }, {
+        }/*, {
           id: '',
           tag: 50,
           nombre: 'Reunion',
@@ -147,7 +147,7 @@ export class PagesComponent implements OnInit {
             },
           ]
         }
-        , {
+        ,*/, {
           id: '',
           tag: 60,
           nombre: 'Catalogo',
@@ -164,7 +164,7 @@ export class PagesComponent implements OnInit {
               nombre: 'Configurar Tienda', url: '/configuracion'
             },
           ]
-        }, {
+        },/* {
           id: '',
           tag: 70,
           nombre: 'Bienvenido/a',
@@ -198,7 +198,7 @@ export class PagesComponent implements OnInit {
               nombre: 'Panel Usuarios', url: '/panel-usuarios'
             },
           ]
-        }, {
+        },*/ {
           id: '',
           tag: 90,
           nombre: 'Recursos',
@@ -215,7 +215,7 @@ export class PagesComponent implements OnInit {
               nombre: 'Panel de Recursos', url: '/configuracion'
             },
           ]
-        }, {
+        }/*, {
           id: '',
           tag: 100,
           nombre: 'Reportes',
@@ -232,7 +232,7 @@ export class PagesComponent implements OnInit {
               nombre: 'Reportes', url: '/reportes'
             },
           ]
-        }, {
+        }*/, {
           id: '',
           tag: 101,
           nombre: 'Administracion',
@@ -249,8 +249,48 @@ export class PagesComponent implements OnInit {
               nombre: 'Administracion', url: '/administracion'
             },
           ]
+        },
+        /* Menu para Estudiantes */
+        {
+          id: '',
+          tag: 825,
+          nombre: 'Contenido',
+          icono: 'fa fa-university',
+          url: '/alumno-mis-cursos',
+          dataIcon: "university",
+          pIcon: "M496 128v16a8 8 0 0 1-8 8h-24v12c0 6.627-5.373 12-12 12H60c-6.627 0-12-5.373-12-12v-12H24a8 8 0 0 1-8-8v-16a8 8 0 0 1 4.941-7.392l232-88a7.996 7.996 0 0 1 6.118 0l232 88A8 8 0 0 1 496 128zm-24 304H40c-13.255 0-24 10.745-24 24v16a8 8 0 0 0 8 8h464a8 8 0 0 0 8-8v-16c0-13.255-10.745-24-24-24zM96 192v192H60c-6.627 0-12 5.373-12 12v20h416v-20c0-6.627-5.373-12-12-12h-36V192h-64v192h-64V192h-64v192h-64V192H96z",
+          subMenu: []
+        },
+        {
+          id: '',
+          tag: 826,
+          nombre: 'Tareas',
+          icono: 'fa fa-pencil-square-o',
+          url: '/alumno-cursos-tareas',
+          dataIcon: "pencil-alt",
+          pIcon: "M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z",
+          subMenu: []
+        },
+        {
+          id: '',
+          tag: 827,
+          nombre: 'Calificaciones',
+          icono: 'fa fa-bookmark-o',
+          url: '/alumno-calificaciones',
+          dataIcon: "bookmark",
+          pIcon: "M336 0H48C21.49 0 0 21.49 0 48v464l192-112 192 112V48c0-26.51-21.49-48-48-48zm0 428.43l-144-84-144 84V54a6 6 0 0 1 6-6h276c3.314 0 6 2.683 6 5.996V428.43z",
+          subMenu: []
+        },
+        {
+          id: '',
+          tag: 828,
+          nombre: 'Anuncios',
+          icono: 'fa fa-newspaper-o',
+          url: '/alumno-historial',
+          dataIcon: "newspaper",
+          pIcon: "M552 64H112c-20.858 0-38.643 13.377-45.248 32H24c-13.255 0-24 10.745-24 24v272c0 30.928 25.072 56 56 56h496c13.255 0 24-10.745 24-24V88c0-13.255-10.745-24-24-24zM48 392V144h16v248c0 4.411-3.589 8-8 8s-8-3.589-8-8zm480 8H111.422c.374-2.614.578-5.283.578-8V112h416v288zM172 280h136c6.627 0 12-5.373 12-12v-96c0-6.627-5.373-12-12-12H172c-6.627 0-12 5.373-12 12v96c0 6.627 5.373 12 12 12zm28-80h80v40h-80v-40zm-40 140v-24c0-6.627 5.373-12 12-12h136c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H172c-6.627 0-12-5.373-12-12zm192 0v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0-144v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12zm0 72v-24c0-6.627 5.373-12 12-12h104c6.627 0 12 5.373 12 12v24c0 6.627-5.373 12-12 12H364c-6.627 0-12-5.373-12-12z",
+          subMenu: []
         }
-
       ],
       mostrar: true,
       alternar() {

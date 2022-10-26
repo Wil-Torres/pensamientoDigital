@@ -83,7 +83,6 @@ export class GradosCursosComponent implements OnInit {
   }
 
   seleccionarCurso(id: string){
-    console.log(id)
     this.srvCatalogo.obtenerCursos(id).then(resp => {
       resp.subscribe(lista => {
         this.cursos = lista

@@ -15,10 +15,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let ciclo of objCiclos; let i = index">
-            <td><button type="button" class="btn btn-warning">Elegir</button></td>
-            <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+            <td><button type="button" [disabled]="ciclo.estado == 'I'" (click)="seleccionarCiclo(ciclo)" class="btn btn-warning">Elegir</button></td>
+            <td><button type="button" [disabled]="ciclo.estado == 'I'" (click)="borrarCiclo(ciclo)"  class="btn btn-danger">Eliminar</button></td>
             <!-- Aparece cuando almenos exista un cuadro final de notas-->
-            <td><button type="button" class="btn btn-success">Cerrar</button></td>
+            <td><button type="button" *ngIf="ciclo.estado == 'A'" (click)="cerrarCiclo(ciclo)" class="btn btn-success">Cerrar</button></td>
             <td>{{ciclo.estado == 'A' ? 'Activo' : 'Inactivo'}}</td>
             <td>{{ciclo.ciclo}}</td>
             <td *ngIf="objCiclos.length == (i + 1)"><button class="btn btn-primary" (click)="agregar(template)"><i

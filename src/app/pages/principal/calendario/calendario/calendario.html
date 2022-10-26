@@ -93,7 +93,7 @@
                     <div class="form-group">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" #dp1="bsDatepicker" bsDatepicker
-                                [(ngModel)]="event.start" (ngModelChange)="refresh.next()">
+                                [(ngModel)]="event.start" ()="refresh.next()">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" (click)="dp1.toggle()" [attr.aria-expanded]="dp.isOpen">
                                     <i class="fa fa-calendar" aria-hidden="true"></i>

@@ -31,14 +31,17 @@ export class ChatComponent implements AfterViewInit {
 
   private localStream: MediaStream;
   private peerConnection: RTCPeerConnection;
+  private aPeerConnection: RTCPeerConnection[];
+
+
   private dataChannel: RTCDataChannel;
   private receiveChannel: RTCRtpReceiver;
-  
+
   inCall = false;
   localVideoActive = false;
 
-  
-  
+
+
 
   constructor(private srv: NoticiasService) { }
 
@@ -57,13 +60,11 @@ export class ChatComponent implements AfterViewInit {
       // pause all tracks
       this.pauseLocalVideo();
     } catch (error) {
-      console.log(error);
       alert(`GetUserMedia() error: ${error.name}`)
     }
   }
 
   pauseLocalVideo() {
-    console.log('pause local stream');
     this.localStream.getTracks().forEach(track => {
       track.enabled = false;
     });
@@ -86,7 +87,6 @@ export class ChatComponent implements AfterViewInit {
 
     //sending a message to a connected peer 
     this.dataChannel.send(val);
-    console.log('Sent Data: ' + val);
     this.msgInput.nativeElement.value = "";
   }
 
@@ -148,16 +148,18 @@ export class ChatComponent implements AfterViewInit {
     this.peerConnection.oniceconnectionstatechange = this.handleIceConnectionStateChangeEvent;
     this.peerConnection.onsignalingstatechange = this.handleSignalingStateChangeEvent;
     this.peerConnection.ontrack = this.handleTrackEvent
-    
+
 
     /* Creamos un canal de comunicacion para enviar textos */
-     this.peerConnection.ondatachannel = (event) => { console.log(`Wilson received message from channel`); };
+    this.peerConnection.ondatachannel = (event) => { console.log(`Wilson received message from channel`); };
+    this.aPeerConnection.push(this.peerConnection);
+    console.log(this.aPeerConnection.length)
 
-     // Let's make a data channel!
-    const dataChannelParams = {ordered: false};
+    // Let's make a data channel!
+    const dataChannelParams = { ordered: false };
     this.dataChannel = this.peerConnection.createDataChannel('channel1', dataChannelParams);
     this.peerConnection.ondatachannel = this.handleDataChannelCallBack;
-    
+
 
     this.dataChannel.onerror = (error) => {
       console.log('Ooops----Error: ', error)
@@ -181,9 +183,6 @@ export class ChatComponent implements AfterViewInit {
     this.dataChannel.onclose = function () {
       console.log("data channel is closed");
     };
-
-
-
   }
 
 
@@ -237,9 +236,9 @@ export class ChatComponent implements AfterViewInit {
   };
   private handleTrackEvent = (event: RTCTrackEvent) => {
     console.log(event);
-    this.remoteVideo.nativeElement.srcObject = event.streams[0]   
+    this.remoteVideo.nativeElement.srcObject = event.streams[0]
   }
-  
+
   private handleDataChannelCallBack = (event: RTCDataChannelEvent) => {
     this.dataChannel = event.channel;
     this.dataChannel.binaryType = 'arraybuffer';
@@ -317,32 +316,32 @@ export class ChatComponent implements AfterViewInit {
 
   }
 
-  private onReceiveChannelOpened ():void {
+  private onReceiveChannelOpened(): void {
     const readyState = this['readyState'];
-  console.log('Send channel state is: ' + readyState);
-  if (readyState === 'open') {
-    this.msgInput.nativeElement.disabled = false;
-    this.msgInput.nativeElement.focus();
-    
-  } else {
-    this.msgInput.nativeElement.disabled = true;
-  }
+    console.log('Send channel state is: ' + readyState);
+    if (readyState === 'open') {
+      this.msgInput.nativeElement.disabled = false;
+      this.msgInput.nativeElement.focus();
+
+    } else {
+      this.msgInput.nativeElement.disabled = true;
+    }
 
   }
 
-  private onReceiveChannelClosed (this: RTCDataChannel, ev: Event) {
+  private onReceiveChannelClosed(this: RTCDataChannel, ev: Event) {
 
-    
+
   };
-  private ReceiveMessageCallback (event) {
-    console.log(event)    
+  private ReceiveMessageCallback(event) {
+    console.log(event)
     console.log('Receive Channel Callback');
     this.dataChannel = event.channel;
     this.dataChannel.onmessage = this.onReceiveMessageCallback;
     this.dataChannel.onopen = this.onReceiveChannelStateChange;
     this.dataChannel.onclose = this.onReceiveChannelStateChange;
-    
-    
+
+
   };
 
   private onReceiveMessageCallback(ev: any) {
