@@ -25,7 +25,7 @@
     "@kamiazya/ngx-speech-synthesis": "0.0.4",
     "@wt/core": "file:../gt-library/dist/wt/core/wt-core-0.0.1.tgz",
     "angular-calendar": "^0.27.7",
-    "bootstrap": "4.2.1",
+    "bootstrap": "4.3.1",
     "chart.js": "^2.7.2",
     "core-js": "^2.5.4",
     "date-fns": "^1.30.1",
